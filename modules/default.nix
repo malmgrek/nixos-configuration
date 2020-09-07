@@ -34,6 +34,9 @@ in {
 
     users.users.${config.my.username} = mkAliasDefinitions options.my.user;
     my.user.packages = config.my.packages;
+    # NOTE The <...> notation is related to
+    # the -I option on CLI.
+    # my.env.PATH = [ <bin> "$PATH" ];
 
   };
 
