@@ -9,13 +9,13 @@
   ];
 
   modules = {
-    # desktop = {
-    #   bspwm.enable = true;
-    #   apps.rofi.enable = true;
-    #   term.st.enable = true;
-    #   browsers.default = "firefox";
-    #   browsers.firefox.enable = true;
-    # };
+     desktop = {
+       bspwm.enable = true;
+       apps.rofi.enable = true;
+       term.st.enable = true;
+       browsers.default = "firefox";
+       browsers.firefox.enable = true;
+     };
     editors = {
       default = "nvim";
       emacs.enable = true;

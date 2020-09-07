@@ -6,11 +6,14 @@ with lib;
     ./common.nix
   ];
 
-  options.module.desktop.bspwm = {
-    enable = mkOption { type = types.bool; default = false; };
+  options.modules.desktop.bspwm = {
+    enable = mkOption {
+      type = types.bool;
+      default = false;
+    };
   };
 
-  config = mkIF config.modules.desktop.bspwm.enable {
+  config = mkIf config.modules.desktop.bspwm.enable {
     environment.systemPackages = with pkgs; [
       lightdm
       dunst
@@ -22,7 +25,7 @@ with lib;
     ];
     services = {
       picom.enable = true;
-      # redshift.enable = true
+      # redshift.enable = true;
       xserver = {
         enable = true;
         displayManager.defaultSession = "none+bspwm";

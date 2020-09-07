@@ -10,5 +10,15 @@ with lib;
   };
 
   # TODO Add config
+  config = {
+    my = {
+      packages = with pkgs; [
+        (writeScriptBin "rofi" ''
+          #!${stdenv.shell}
+          exec ${rofi}/bin/rofi -terminal xst -m -l "$@"
+          '')
+      ];
+    };
+  };
 
 }

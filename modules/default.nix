@@ -6,6 +6,7 @@ let mkOptionStr = value: mkOption
 in {
 
   imports = [
+    ./desktop
     ./editors
   ];
 
