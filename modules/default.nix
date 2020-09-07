@@ -5,7 +5,9 @@ let mkOptionStr = value: mkOption
     default = value; };
 in {
 
-  imports = [];
+  imports = [
+    ./editors
+  ];
 
   options = {
 
@@ -25,7 +27,7 @@ in {
       };
       alias = mkOption {
         type = with types; nullOr (attrsOf (nullOr (either str path)));
-      }
+      };
     };
 
   };
