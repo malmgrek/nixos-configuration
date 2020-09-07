@@ -5,7 +5,7 @@ Learning NixOS configuration. I am mimicking the config
 it's modular structure.
 
 ## Next
-- Adopt home manager
+- Adopt home manager, otherwise end up in a configuration hell
 
 ## Project general loop
 - Include modules one by one
