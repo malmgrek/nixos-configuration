@@ -10,7 +10,7 @@
 
   # Nothing in /tmp shall survive a reboot
   boot.tmpOnTmpfs = true;
-  
+
   boot.loader = {
     grub = {
       enable = true;

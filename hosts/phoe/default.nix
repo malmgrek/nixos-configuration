@@ -17,10 +17,13 @@
       browsers.firefox.enable = true;
     };
     editors = {
-      default = "vim";
+      default = "nvim";
       emacs.enable = true;
       vim.enable = true;
     };
+    # dev = {
+    #   python.enable = true;
+    # };
     shell = {
       # direnv
       git.enable = true;
@@ -30,5 +33,17 @@
       zsh.enable = true;
     };
   };
+
+  programs.ssh.startAgent = true;
+  networking.wireless.enable = true;
+  hardware.opengl.enable = true;
+  time.timeZone = "Europe/Helsinki";
+
+  # Optimize power usage
+  environment.systemPackages = [ pkgs.acpi ];
+  powerManagement.powertop.enable = true;
+
+  # Backlight control
+  programs.light.enable = true;
 
 }
