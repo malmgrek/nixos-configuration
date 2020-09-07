@@ -28,8 +28,15 @@ with lib;
       # redshift.enable = true;
       xserver = {
         enable = true;
+
+        # Eventually one can remove this but
+        # its here for now to stabilize bspwm configs
+        autorun = false;
+        layout = "fi";  # TODO A better place for this definition?
+
         displayManager.defaultSession = "none+bspwm";
         displayManager.lightdm.enable = true;
+        # FIXME When enabled, won't accept my password
         displayManager.lightdm.greeters.mini.enable = true;
         windowManager.bspwm.enable = true;
       };
