@@ -4,11 +4,13 @@ Learning NixOS configuration. I am mimicking the config
 <https://github.com/hlissner/dotfiles.git> because I really like
 it's modular structure.
 
-## Project checklist
+## Next
+- Adopt home manager
+
+## Project general loop
 - Include modules one by one
 - Test a new rebuild every once in a while
   - Try to make only incremental changes one by one
-- Try to isolate home-manager at first
 
 ## Installation
 
