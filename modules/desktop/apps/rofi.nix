@@ -15,7 +15,7 @@ with lib;
       packages = with pkgs; [
         (writeScriptBin "rofi" ''
           #!${stdenv.shell}
-          exec ${rofi}/bin/rofi -terminal xst -m -l "$@"
+          exec ${rofi}/bin/rofi -terminal xst -m -1 "$@"
           '')
       ];
     };
