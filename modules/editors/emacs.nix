@@ -9,7 +9,7 @@ with lib;
     };
     pkg = mkOption {
       type = types.package;
-      default = pkgs.emacsUnstable;
+      default = pkgs.emacs;
     };
   };
 
@@ -21,7 +21,7 @@ with lib;
         config.modules.editors.emacs.pkg
         git
         (ripgrep.override {withPCRE2 = true;})
-        gnutils  # for TLS connectivity
+        gnutls  # for TLS connectivity
 
         # Optional dependencies
         fd  # Faster projectile indexing
@@ -47,7 +47,9 @@ with lib;
         # :lang javascript
         nodePackages.javascript-typescript-langserver
         # :lang latex & :lang org (latex previews)
-        texlive.combined.scheme-medium
+        # NOTE: Include LaTeX later. Downloading a myriad packages
+        # is annoying.
+        # texlive.combined.scheme-medium
         # :lang rust
         rustfmt
         rls
