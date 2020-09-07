@@ -24,6 +24,7 @@
 
   services.xserver = {
     displayManager.lightdm.greeters.mini.user = config.my.username;
+    layout = "fi";
   };
 
   services.picom = {
