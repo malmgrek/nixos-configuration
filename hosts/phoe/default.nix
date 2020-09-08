@@ -11,7 +11,7 @@
   modules = {
     desktop = {
       bspwm.enable = true;
-      # apps.rofi.enable = true;
+      apps.rofi.enable = true;
       term.st.enable = true;
       # browsers.default = "firefox";
       # browsers.firefox.enable = true;
