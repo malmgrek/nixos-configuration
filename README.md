@@ -19,3 +19,19 @@ it's modular structure.
 1. Legacy boot partition according to NixOS Manual instructions
 2. Install a minimal NixOS
 3. Clone, source, and `nixos-rebuild`
+
+## Notes
+
+### Building
+
+From `~/nixos-configuration/`
+
+```bash
+
+$ nixos-rebuild {arg} -I "bin=$(pwd)/bin" -I "config=$(config)"
+
+```
+
+### Nix-channel
+I had some problems updating `nix-channel` correctly to `NIX_PATH` regarding `<home-manager/nixos>`.
+The problem was solved by updating the channels as `root`.
