@@ -17,8 +17,8 @@ in {
   nix.autoOptimiseStore = true;
   nix.nixPath = options.nix.nixPath.default ++ [
     # So we can use absolute import paths
-    # "bin=/etc/dotfiles/bin"
-    "config=/etc/dotfiles/config"
+    "bin=/home/${username}/nixos-configuration/bin"
+    "config=/home/${username}/nixos-configuration/config"
   ];
 
   # nixpkgs.overlays = import ./packages;

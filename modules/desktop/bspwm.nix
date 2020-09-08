@@ -28,7 +28,7 @@ with lib;
       # redshift.enable = true;
       xserver = {
         enable = true;
-        # autorun = false;
+        autorun = false;
         displayManager.defaultSession = "none+bspwm";
         displayManager.lightdm.enable = true;
         displayManager.lightdm.greeters.mini.enable = true;

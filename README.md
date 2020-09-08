@@ -16,9 +16,11 @@ it's modular structure.
 ## Installation
 
 ### On VirtualBox
-1. Legacy boot partition according to NixOS Manual instructions
+1. Legacy boot partition according to NixOS Manual instructions (no `swapon`)
 2. Install a minimal NixOS
 3. Clone, source, and `nixos-rebuild`
+   - Currently `fileSystem` in `hardware-configuration.nix` must be manually changed
+
 
 ## Notes
 
@@ -37,5 +39,11 @@ I had some problems updating `nix-channel` correctly to `NIX_PATH` regarding `<h
 The problem was solved by updating the channels as `root`.
 
 ### Home-manager
+
+#### Service
 Starting Home Manager service was failing on syntax error `...string 'Derive(['` indicating
 corrupted user environment `.drv` file. Running `nix-store --delete /path/to/drv` and then `nixos-rebuild switch` fixed the problem.
+
+#### ZSH
+After `nixos-rebuild switch` run `zgen reset` to re-initialize Zgen packages
+after next login.

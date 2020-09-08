@@ -9,7 +9,7 @@ export ZGEN_SOURCE="$ZGEN_DIR/zgen.zsh"
 source $ZGEN_SOURCE
 if ! zgen saved; then
   echo "Initializing zgen"
-  zgen load sindresorhus/pure pure.zsh
+  # zgen load sindresorhus/pure pure.zsh
   zgen load hlissner/zsh-autopair autopair.zsh
   # zgen load zsh-users/zsh-history-substring-search
   # zgen load zdharma/history-search-multi-word
