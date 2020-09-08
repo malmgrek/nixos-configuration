@@ -28,11 +28,10 @@
       device = "/dev/disk/by-label/nixos";
       fsType = "ext4";
       options = [ "noatime" ];
-    }
+    };
   };
 
   swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
 
-  nix.maxJobs = lib.mkDefault 1;
   virtualisation.virtualbox.guest.enable = true;
 }
