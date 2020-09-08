@@ -9,16 +9,16 @@
   ];
 
   modules = {
-     desktop = {
-       bspwm.enable = true;
-       apps.rofi.enable = true;
-       term.st.enable = true;
-       browsers.default = "firefox";
-       browsers.firefox.enable = true;
-     };
+    desktop = {
+      bspwm.enable = true;
+      # apps.rofi.enable = true;
+      term.st.enable = true;
+      # browsers.default = "firefox";
+      # browsers.firefox.enable = true;
+    };
     editors = {
       default = "nvim";
-      emacs.enable = true;
+      # emacs.enable = true;
       vim.enable = true;
     };
     # dev = {
@@ -41,7 +41,11 @@
   # networking.wireless.enable = true;
 
   networking.networkmanager.enable = true;
-  hardware.opengl.enable = true;
+
+  # TODO/FIXME/REVIEW Hypothesis: enabling
+  # this causes Picom error in VirtualBox journalctl --user
+  # hardware.opengl.enable = true;
+
   time.timeZone = "Europe/Helsinki";
 
   # Optimize power usage
