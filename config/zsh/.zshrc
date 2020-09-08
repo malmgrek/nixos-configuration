@@ -20,7 +20,7 @@ if ! zgen saved; then
   zgen save
 fi
 
-source $ZDOTDIR/config.zsh
+# source $ZDOTDIR/config.zsh
 if [[ $TERM != dumb ]]; then
   # source $ZDOTDIR/keybinds.zsh
   # source $ZDOTDIR/completion.zsh
