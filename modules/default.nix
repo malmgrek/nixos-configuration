@@ -6,18 +6,24 @@ let mkOptionStr = value: mkOption
 in {
 
   imports = [
+    <home-manager/nixos>
     ./desktop
     ./editors
   ];
 
   options = {
-
     my = {
       username = mkOptionStr "malmgrek";
       email = mkOptionStr "stratos.staboulis@gmail.com";
-      # TODO home = Uses home-manager...
-      user = mkOption { type = types.submodule; };
-      packages = mkOption { type = with types; listOf package; };
+      home = mkOption {
+        type = options.home-manager.users.type.functor.wrapped;
+      };
+      user = mkOption {
+        type = types.submodule;
+      };
+      packages = mkOption {
+        type = with types; listOf package;
+      };
       env = mkOption {
         type = with types; attrsOf
           (either (either str path) (listOf (either str path)));
