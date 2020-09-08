@@ -16,9 +16,11 @@ it's modular structure.
 ## Installation
 
 ### On VirtualBox
-1. Legacy boot partition according to NixOS Manual instructions
+1. Legacy boot partition according to NixOS Manual instructions (no `swapon`)
 2. Install a minimal NixOS
 3. Clone, source, and `nixos-rebuild`
+   - Currently `fileSystem` in `hardware-configuration.nix` must be manually changed
+
 
 ## Notes
 
@@ -35,3 +37,9 @@ $ nixos-rebuild {arg} -I "bin=$(pwd)/bin" -I "config=$(config)"
 ### Nix-channel
 I had some problems updating `nix-channel` correctly to `NIX_PATH` regarding `<home-manager/nixos>`.
 The problem was solved by updating the channels as `root`.
+
+### Home Manager
+
+#### ZSH
+After `nixos-rebuild switch` run `zgen reset` to re-initialize Zgen packages
+after next login.
