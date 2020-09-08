@@ -22,9 +22,9 @@ with lib;
         htop
         tldr
         tree
-      ]
+      ];
 
-      env.ZDOTDIR   = "$XDG_CONFIG_HOME/zsh";
+      env.ZDOTDIR = "$XDG_CONFIG_HOME/zsh";
       env.ZSH_CACHE = "$XDG_CACHE_HOME/zsh";
 
       alias.exa = "exa --group-directories-first";
@@ -40,15 +40,16 @@ with lib;
         recursive = true;
       };
     };
-  };
 
-  program.zsh = {
-    enable = true;
-    enableCompletion = true;
-    # TODO enableGlobalCompInit = false;
-    promptInit = "";
-  };
+    programs.zsh = {
+      enable = true;
+      enableCompletion = true;
+      # TODO enableGlobalCompInit = false;
+      promptInit = "";
+    };
 
-  system.userActivationScripts.cleanupZgen = "rm -fv $XDG_CACHE_HOME/zsh/*";
+    system.userActivationScripts.cleanupZgen = "rm -fv $XDG_CACHE_HOME/zsh/*";
+
+  };
 
 }

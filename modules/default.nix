@@ -9,6 +9,7 @@ in {
     <home-manager/nixos>
     ./desktop
     ./editors
+    ./shell
   ];
 
   options = {

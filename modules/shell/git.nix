@@ -11,7 +11,7 @@ with lib;
 
   config = mkIf config.modules.shell.git.enable {
     my = {
-      packages = with.pkgs; [
+      packages = with pkgs; [
         gitAndTools.hub
         gitAndTools.diff-so-fancy
       ];

@@ -10,7 +10,7 @@ with lib;
   };
 
   config = mkIf config.modules.desktop.term.st.enable {
-    my.zsh.rc = '' [ $TERM = xst-256color ] && export TERM=xterm-256color''
+    my.zsh.rc = '' [ $TERM = xst-256color ] && export TERM=xterm-256color'';
     my.packages = with pkgs; [
       xst  # st + nice-to-have extensions
       (makeDesktopItem {
