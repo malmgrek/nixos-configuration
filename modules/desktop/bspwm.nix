@@ -35,6 +35,14 @@ with lib;
         windowManager.bspwm.enable = true;
       };
     };
+    # link recursively so other modules can link files in their folders
+    my.home.xdg.configFile = {
+      "sxhkd".source = <config/sxhkd>;
+      "bspwm" = {
+        source = <config/bspwm>;
+        recursive = true;
+      };
+    };
   };
 
 }
