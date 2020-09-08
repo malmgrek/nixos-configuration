@@ -11,12 +11,27 @@
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/38e04dc9-b062-4ac3-bfeb-aeab4fc25944";
-      fsType = "ext4";
-    };
+  # CPU
+  nix.maxJobs = lib.mkDefault 8;
+  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  hardware.cpu.intel.updateMicrocode = true;
 
-  swapDevices = [ ];
+  # NOTE: This must be manually configured
+  # fileSystems."/" =
+  #   { device = "/dev/disk/by-uuid/38e04dc9-b062-4ac3-bfeb-aeab4fc25944";
+  #     fsType = "ext4";
+  #   };
+
+  # Legacy boot!
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-label/nixos";
+      fsType = "ext4";
+      options = [ "noatime" ];
+    }
+  };
+
+  swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
 
   nix.maxJobs = lib.mkDefault 1;
   virtualisation.virtualbox.guest.enable = true;
