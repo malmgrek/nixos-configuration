@@ -35,3 +35,7 @@ $ nixos-rebuild {arg} -I "bin=$(pwd)/bin" -I "config=$(config)"
 ### Nix-channel
 I had some problems updating `nix-channel` correctly to `NIX_PATH` regarding `<home-manager/nixos>`.
 The problem was solved by updating the channels as `root`.
+
+### Home-manager
+Starting Home Manager service was failing on syntax error `...string 'Derive(['` indicating
+corrupted user environment `.drv` file. Running `nix-store --delete /path/to/drv` and then `nixos-rebuild switch` fixed the problem.
