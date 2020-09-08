@@ -1,5 +1,6 @@
 { pkgs, options, lib, config, ... }:
 let
+  # TODO/FIXME Parametrize these hard coded values
   device = "phoe";
   username = "malmgrek";
 in {
@@ -12,12 +13,17 @@ in {
     "${./hosts}/${device}"
   ];
 
+  # NixOS
+  nix.autoOptimiseStore = true;
+
   # nixpkgs.overlays = import ./packages;
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
     coreutils
     git
+    killall
+    unzip
     vim
     wget
     sshfs
@@ -27,7 +33,7 @@ in {
   my.user = {
     isNormalUser = true;
     uid = 1000;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "networkmanager" "video" ];
     shell = pkgs.zsh;
   };
 
