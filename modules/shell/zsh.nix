@@ -23,15 +23,22 @@ with lib;
         tldr
         tree
       ]
-      # env.ZDOTDIR = ...
-      # env.ZSH_CACHE = ...
+
+      env.ZDOTDIR   = "$XDG_CONFIG_HOME/zsh";
+      env.ZSH_CACHE = "$XDG_CACHE_HOME/zsh";
+
       alias.exa = "exa --group-directories-first";
       alias.l = "exa -l";
       alias.ll = "exa -lg";
       alias.la = "LC_COLLATEC=C exa -la";
       alias.sc = "systemctl";
       alias.ssc = "sudo systemctl";
-      # TODO home.xdg.configFile."zsh" = {};
+
+      # Write it recursively so other modules can write files to it
+      home.xdg.configFile."zsh" = {
+        source = <config/zsh>;
+        recursive = true;
+      };
     };
   };
 
@@ -42,6 +49,6 @@ with lib;
     promptInit = "";
   };
 
-  # TODO system.userActivationScripts.cleanupZgen = ...;
+  system.userActivationScripts.cleanupZgen = "rm -fv $XDG_CACHE_HOME/zsh/*";
 
 }

@@ -15,6 +15,11 @@ in {
 
   # NixOS
   nix.autoOptimiseStore = true;
+  nix.nixPath = options.nix.nixPath.default ++ [
+    # So we can use absolute import paths
+    # "bin=/etc/dotfiles/bin"
+    "config=/etc/dotfiles/config"
+  ];
 
   # nixpkgs.overlays = import ./packages;
   nixpkgs.config.allowUnfree = true;
