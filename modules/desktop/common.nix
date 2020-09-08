@@ -29,7 +29,7 @@
 
   services.picom = {
     backend = "glx";
-    vSync = true;
+    vSync = false;  # XXX: false fixes picom error in VirtualBox
     # opacityRules = [
     #   "100:class_g = 'VirtualBox Machine'"
     #   "100:class_g = 'Gimp'"
