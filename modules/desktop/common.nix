@@ -5,7 +5,9 @@
   my.packages = with pkgs; [
     evince
     feh
+    mpv
     xclip
+    xdotool
   ];
 
   fonts = {
