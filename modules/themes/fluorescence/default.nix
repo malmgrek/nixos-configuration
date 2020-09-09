@@ -50,12 +50,13 @@ let cfg = config.modules; in
       '';
     };
 
-    fonts.fonts = [ pkgs.nerdfonts ];
+    # fonts.fonts = [ pkgs.nerdfonts ];
+    fonts.fonts = [ pkgs.dejavu_fonts ];
     my.packages = with pkgs; [
       my.ant-dracula
       paper-icon-theme # for rofi
     ];
-    # my.zsh.rc = lib.readFile ./zsh/prompt.zsh;
+    my.zsh.rc = lib.readFile ./zsh/prompt.zsh;
 
     my.home = {
       # home.file = mkMerge [
