@@ -10,6 +10,10 @@
     xdotool
   ];
 
+  ## Sound
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
+
   fonts = {
     enableFontDir = true;
     enableGhostscriptFonts = true;
