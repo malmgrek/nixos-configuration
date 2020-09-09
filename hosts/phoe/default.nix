@@ -32,6 +32,7 @@
       # tmux.enable = true;
       zsh.enable = true;
     };
+    themes.fluorescence.enable = true;
   };
 
   programs.ssh.startAgent = true;

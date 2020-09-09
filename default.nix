@@ -21,7 +21,8 @@ in {
     "config=/home/${username}/nixos-configuration/config"
   ];
 
-  # nixpkgs.overlays = import ./packages;
+  # Add custom packages & unstable channel, so they can be accessed via pkgs.*
+  nixpkgs.overlays = import ./packages;
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
