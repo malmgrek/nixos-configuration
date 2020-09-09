@@ -101,10 +101,10 @@ let cfg = config.modules; in
         (mkIf cfg.desktop.apps.rofi.enable {
           "rofi/theme" = { source = ./rofi; recursive = true; };
         })
-        (mkIf (cfg.desktop.bspwm.enable || cfg.desktop.stumpwm.enable) {
-          "polybar" = { source = ./polybar; recursive = true; };
-          "dunst/dunstrc".source = ./dunstrc;
-        })
+        # (mkIf (cfg.desktop.bspwm.enable || cfg.desktop.stumpwm.enable) {
+        #   "polybar" = { source = ./polybar; recursive = true; };
+        #   "dunst/dunstrc".source = ./dunstrc;
+        # })
         # (mkIf cfg.shell.tmux.enable {
         #   "tmux/theme".source = ./tmux.conf;
         # })
