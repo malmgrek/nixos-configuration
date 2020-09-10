@@ -10,7 +10,6 @@ in {
     ./desktop
     ./editors
     ./shell
-    ./themes
   ];
 
   options = {
