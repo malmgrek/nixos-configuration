@@ -5,8 +5,8 @@ Learning NixOS configuration. I am mimicking the config
 it's modular structure.
 
 ## Next
-- Enable `rofi` properly
-- Refactor some kind of themes
+- Simplify Zsh configuration
+- Get rid of themes for now (I will make own themes later)
 
 ## Project general loop
 - Include modules one by one
