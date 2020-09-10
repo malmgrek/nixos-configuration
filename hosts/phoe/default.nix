@@ -10,7 +10,8 @@
 
   modules = {
     desktop = {
-      bspwm.enable = true;
+      # bspwm.enable = true;
+      i3.enable = true;
       apps.rofi.enable = true;
       term.st.enable = true;
       # browsers.default = "firefox";
@@ -32,7 +33,7 @@
       # tmux.enable = true;
       zsh.enable = true;
     };
-    themes.fluorescence.enable = true;
+    # themes.fluorescence.enable = true;
   };
 
   programs.ssh.startAgent = true;
