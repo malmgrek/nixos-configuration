@@ -26,9 +26,9 @@ block = "load"
 interval = 1
 format = "{1m}"
 
-[[block]]
-block = "backlight"
-device = "intel_backlight"
+# [[block]]
+# block = "backlight"
+# device = "intel_backlight"
 
 [[block]]
 block = "sound"
