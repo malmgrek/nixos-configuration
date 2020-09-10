@@ -47,15 +47,15 @@ call plug#end()
 " NOTE: A longer if statement for Neovim is given e.g. in
 "       https://github.com/joshdick/onedark.vim
 "
-if (has("termguicolors"))
-  set termguicolors
-endif
-set t_Co=256  " Use 256 (uncomment if supported in terminal)
-syntax on
+" if (has("termguicolors"))
+"   set termguicolors
+" endif
+" set t_Co=256  " Use 256 (uncomment if supported in terminal)
+" syntax on
 
 " Load colorscheme from a file so we can swap it
-let color = expand("~/.vim/color.vim")
-if filereadable(color)
+let colorfile = expand("~/.vim/color.vim")
+if filereadable(colorfile)
   exec "source" color
 else
   colorscheme delek
