@@ -1,7 +1,7 @@
 [
   (self: super: with super; {
     my = {
-      ant-dracula = (callPackage ./ant-dracula.nix {});
+      # ant-dracula = (callPackage ./ant-dracula.nix {});
       # cached-nix-shell =
       #   (callPackage
       #     (builtins.fetchTarball
@@ -17,7 +17,7 @@
 
     # Occasionally, "stable" packages are broken or incomplete, so access to the
     # bleeding edge is necessary, as a last resort.
-    # unstable = import <nixos-unstable> { inherit config; };
+    unstable = import <nixos-unstable> { inherit config; };
   })
 
   # emacsGit
