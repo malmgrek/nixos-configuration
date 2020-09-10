@@ -5,8 +5,8 @@ Learning NixOS configuration. I am mimicking the config
 it's modular structure.
 
 ## Next
-- Start using `home-manager,` zsh as an example case
 - Enable `rofi` properly
+- Refactor some kind of themes
 
 ## Project general loop
 - Include modules one by one
