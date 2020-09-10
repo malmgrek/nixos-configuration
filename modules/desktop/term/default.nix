@@ -4,7 +4,7 @@ with lib;
 
   imports = [
     ./alacritty.nix
-    # ./st.nix
+    ./st.nix
     # ./urxvt.nix
   ];
 
