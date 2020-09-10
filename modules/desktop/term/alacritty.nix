@@ -21,7 +21,6 @@ with lib; {
           categories = "Development;System;Utility";
         })
       ];
-
       home.xdg.configFile.".config/alacritty" = {
         source = <config/alacritty>;
         recursive = true;

@@ -15,6 +15,13 @@ with lib;
         editorconfig-core-c
         neovim
       ];
+      home.xdg.configFile.".vim" = {
+        source = <config/vim/.vim>;
+      };
+      home.xdg.configFile."" = {
+        source = <config/vim>;
+        recursive = false;
+      }
     };
   };
 

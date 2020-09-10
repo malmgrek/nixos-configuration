@@ -2,20 +2,19 @@
 "
 " Run :PlugInstall to install
 "
-call plug#begin('~/.config/vim/plugged')
-# Plug 'connorholyday/vim-snazzy'
-# Plug 'dracula/vim', {'as':'dracula'}
-# Plug 'eigenfoo/stan-vim'
-Plug 'jiangmiao/auto-pairs'
-# Plug 'lifepillar/vim-solarized8'
-Plug 'LnL7/vim-nix'
-# Plug 'tomasiser/vim-code-dark'
-Plug 'tpope/vim-fugitive'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'rakr/vim-one'
-call plug#end()
 
+
+function! EnsurePlugInstalled()
+  let plugfile = $HOME.'/.vim/autoload/plug.vim'
+  if !filereadable(plugfile)
+    let url = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    let curl = 'curl -fLo '.plugfile.' --create-dirs'
+    echom system(curl.' '.url)
+  endif
+endfunction
+
+
+call EnsurePlugInstalled()
 
 
 " Automatically install missing plugins on startup
@@ -23,6 +22,22 @@ autocmd VimEnter *
   \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \|   PlugInstall --sync | q
   \| endif
+
+
+call plug#begin('~/.vim/plugged')
+" Plug 'connorholyday/vim-snazzy'
+" Plug 'dracula/vim', {'as':'dracula'}
+" Plug 'eigenfoo/stan-vim'
+Plug 'jiangmiao/auto-pairs'
+" Plug 'lifepillar/vim-solarized8'
+Plug 'LnL7/vim-nix'
+" Plug 'tomasiser/vim-code-dark'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'rakr/vim-one'
+call plug#end()
+
 
 
 " Colors
@@ -37,7 +52,9 @@ if (has("termguicolors"))
 endif
 set t_Co=256  " Use 256 (uncomment if supported in terminal)
 syntax on
-let color = expand("~/.config/vim/color.vim")
+
+" Load colorscheme from a file so we can swap it
+let color = expand("~/.vim/color.vim")
 if filereadable(color)
   exec "source" color
 else
