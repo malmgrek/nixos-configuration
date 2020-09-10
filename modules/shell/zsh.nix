@@ -35,7 +35,7 @@ with lib;
       alias.ssc = "sudo systemctl";
 
       # Write it recursively so other modules can write files to it
-      home.xdg.configFile.".config/zsh" = {
+      home.xdg.configFile."zsh" = {
         source = <config/zsh>;
         recursive = true;
       };

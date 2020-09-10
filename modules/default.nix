@@ -66,7 +66,6 @@ in {
 
     ## PATH should always start with its old value
     my.env.PATH = [ <bin> "$PATH" ];
-    my.home.xdg.configHome = "/home/${config.my.username}";
     environment.extraInit =
       let exportLines = mapAttrsToList (n: v: "export ${n}=\"${v}\"") config.my.env;
       in ''

@@ -17,11 +17,13 @@ with lib;
       ];
       home.xdg.configFile.".vim" = {
         source = <config/vim/.vim>;
+        recursive = true;
       };
-      home.xdg.configFile."" = {
-        source = <config/vim>;
-        recursive = false;
-      }
+      home.xdg.configFile.".vimrc" = {
+        source = <config/vim/.vimrc>;
+        recursive = true;
+	target = "../.vimrc";
+      };
     };
   };
 
