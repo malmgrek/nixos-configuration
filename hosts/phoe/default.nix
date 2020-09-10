@@ -18,7 +18,7 @@
       # browsers.firefox.enable = true;
     };
     editors = {
-      default = "nvim";
+      default = "vim";
       emacs.enable = true;
       vim.enable = true;
     };
