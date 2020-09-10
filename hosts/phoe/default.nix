@@ -14,6 +14,7 @@
       i3.enable = true;
       apps.rofi.enable = true;
       term.alacritty.enable = true;
+      term.st.enable = true;
       # browsers.default = "firefox";
       # browsers.firefox.enable = true;
     };
