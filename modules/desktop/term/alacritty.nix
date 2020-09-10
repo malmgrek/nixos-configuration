@@ -22,7 +22,7 @@ with lib; {
         })
       ];
 
-      home.xdg.configFile."alacritty" = {
+      home.xdg.configFile.".config/alacritty" = {
         source = <config/alacritty>;
         recursive = true;
       };
