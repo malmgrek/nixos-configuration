@@ -45,7 +45,7 @@
 
   # TODO/FIXME/REVIEW Hypothesis: enabling
   # this causes Picom error in VirtualBox journalctl --user
-  # hardware.opengl.enable = true;
+  hardware.opengl.enable = true;
 
   time.timeZone = "Europe/Helsinki";
 
