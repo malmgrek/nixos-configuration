@@ -21,6 +21,7 @@
       dejavu_fonts
       ubuntu_font_family
       fira-code
+      font-awesome-5
     ];
     fontconfig.defaultFonts = {
       sansSerif = ["Ubuntu"];
