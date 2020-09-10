@@ -18,6 +18,7 @@ with lib;
       home.xdg.configFile.".vim" = {
         source = <config/vim/.vim>;
         recursive = true;
+        target = "../.vim";
       };
       home.xdg.configFile.".vimrc" = {
         source = <config/vim/.vimrc>;
