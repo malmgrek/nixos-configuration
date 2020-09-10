@@ -11,7 +11,7 @@ if ! zgen saved; then
   echo "Initializing zgen"
   # zgen load sindresorhus/pure
   zgen load mafredri/zsh-async
-  # zgen load marszall87/lambda-pure
+  zgen load marszall87/lambda-pure
   zgen load hlissner/zsh-autopair autopair.zsh
   # zgen load zsh-users/zsh-history-substring-search
   # zgen load zdharma/history-search-multi-word
