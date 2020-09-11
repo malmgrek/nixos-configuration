@@ -20,7 +20,6 @@ with lib;
   config = mkIf config.modules.desktop.browsers.firefox.enable {
     my.packages = with pkgs; [
       firefox-bin
-      nur
       (makeDesktopItem {
         name = "firefox-private";
         desktopName = "Firefox (Private)";
@@ -31,38 +30,24 @@ with lib;
       })
     ];
 
-    # my.env.XDG_DESKTOP_DIR = "$HOME"; # (try to) prevent ~/Desktop
-
-    # # Use a stable profile name so we can target it in themes
-    # my.home.home.file =
-    #   let cfg = config.modules.desktop.browsers.firefox; in
-    #   {
-    #     ".mozilla/firefox/profiles.ini".text = ''
-    #       [Profile0]
-    #       Name=default
-    #       IsRelative=1
-    #       Path=${cfg.profileName}.default
-    #       Default=1
-
-    #       [General]
-    #       StartWithLastProfile=1
-    #       Version=2
-    #     '';
-    #   };
-
-    my.home.programs.firefox.profiles."${cfg.profileName}" = {
-      isDefault = true;
-      name = "${cfg.profileName}";
-      settings = {
-        browser.startup.homepage = "https://nixos.org";
+    my.home.programs.firefox =
+      let cfg = config.modules.desktop.browsers.firefox; in
+      {
+        enable = true;
+        profiles."${cfg.profileName}.default" = {
+          isDefault = true;
+          name = "${cfg.profileName}.default";
+          settings = {
+            "browser.startup.homepage" = "https://nixos.org";
+          };
+        };
+        # TODO: Requires installing NUR
+        # extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+        #   https-everywhere
+        #   privacy-badger
+        #   vimium-ff
+        # ];
       };
-    }
-
-    # TODO Extensions. Requires installing NUR
-    # my.home.programs.firefox.extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-    #   https-everywhere
-    #   privacy-badger
-    # ];
 
   };
 }
