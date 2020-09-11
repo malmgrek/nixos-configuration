@@ -10,13 +10,12 @@
 
   modules = {
     desktop = {
-      # bspwm.enable = true;
       i3.enable = true;
       apps.rofi.enable = true;
       term.alacritty.enable = true;
       term.st.enable = true;
-      # browsers.default = "firefox";
-      # browsers.firefox.enable = true;
+      browsers.default = "firefox";
+      browsers.firefox.enable = true;
     };
     editors = {
       default = "vim";
@@ -38,14 +37,14 @@
 
   programs.ssh.startAgent = true;
 
-  # NOTE: With this option, the build fails
+  # NOTE: With this option:
+  #
+  #     networking.wireless.enable = true;
+  #
+  # the build fails
   # but enabling networkmanager solves it.
-  # networking.wireless.enable = true;
-
   networking.networkmanager.enable = true;
 
-  # TODO/FIXME/REVIEW Hypothesis: enabling
-  # this causes Picom error in VirtualBox journalctl --user
   hardware.opengl.enable = true;
 
   time.timeZone = "Europe/Helsinki";
