@@ -11,9 +11,9 @@
     #   zunit = (callPackage ./zunit.nix {});
     # };
 
-    # nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
-    #   inherit super;
-    # };
+    nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+      inherit super;
+    };
 
     # Occasionally, "stable" packages are broken or incomplete, so access to the
     # bleeding edge is necessary, as a last resort.

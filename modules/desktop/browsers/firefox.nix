@@ -41,12 +41,11 @@ with lib;
             "browser.startup.homepage" = "https://nixos.org";
           };
         };
-        # TODO: Requires installing NUR
-        # extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-        #   https-everywhere
-        #   privacy-badger
-        #   vimium-ff
-        # ];
+        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+          https-everywhere
+          privacy-badger
+          vimium-ff
+        ];
       };
 
   };
