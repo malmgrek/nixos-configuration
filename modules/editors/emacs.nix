@@ -9,7 +9,7 @@ with lib;
     };
     pkg = mkOption {
       type = types.package;
-      default = pkgs.emacs;
+      default = pkgs.emacsUnstable;
     };
   };
 
