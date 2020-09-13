@@ -41,6 +41,11 @@ with lib;
       alias.po  = "poetry";
       alias.ipy = "ipython --no-banner";
       alias.ipylab = "ipython --pylab=qt5 --no-banner";
+
+      home.xdg.configFile."ipython_config" = {
+        source = <config/ipython/profile_default/ipython_config.py>;
+        recursive = true;
+      };
     };
   };
 }
