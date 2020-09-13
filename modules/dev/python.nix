@@ -46,6 +46,10 @@ with lib;
         source = <config/ipython/profile_default/ipython_config.py>;
         recursive = true;
       };
+      home.xdg.configFile."pythonrc" = {
+        source = <config/python/pythonrc>;
+        recursive = true;
+      };
     };
   };
 }
