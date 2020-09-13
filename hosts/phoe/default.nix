@@ -31,7 +31,7 @@
       gnupg.enable = true;
       pass.enable = true;
       ranger.enable = true;
-      # tmux.enable = true;
+      tmux.enable = true;
       zsh.enable = true;
     };
   };

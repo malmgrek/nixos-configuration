@@ -6,7 +6,7 @@
     ./gnupg.nix
     ./pass.nix
     ./ranger.nix
-    # ./tmux.nix
+    ./tmux.nix
     ./zsh.nix
   ];
 }
