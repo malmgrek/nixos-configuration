@@ -20,12 +20,19 @@ with lib;
       ];
 
       env.TMUX_HOME = "$XDG_CONFIG_HOME/tmux";
-      env.TMUXIFIER = "$XDG_DATA_HOME/tmuxifier";
-      env.TMUXIFIER_LAYOUT_PATH = "$XDG_DATA_HOME/tmuxifier";
-      env.PATH = [ "$TMUXIFIER/bin" ];
+      #
+      # NOTE: To use start using tmuxifier
+      #
+      # env.TMUXIFIER = "$XDG_DATA_HOME/tmuxifier";
+      # env.TMUXIFIER_LAYOUT_PATH = "$XDG_DATA_HOME/tmuxifier";
+      # env.PATH = [ "$TMUXIFIER/bin" ];
+      # zsh.rc = ''
+      #   _cache tmuxifier init -
+      #   ${lib.readFile <config/tmux/aliases.zsh>}
+      # '';
+      #
 
       zsh.rc = ''
-        _cache tmuxifier init -
         ${lib.readFile <config/tmux/aliases.zsh>}
       '';
       home.xdg.configFile = {

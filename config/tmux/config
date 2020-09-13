@@ -1,9 +1,13 @@
 # tmux.conf
 # By Henrik Lissner <henrik@lissner.net>
 # https://github.com/hlissner/dotfiles
-########################################
+#
+# Modified by Stratos Staboulis
+# https://github.com/malmgrek/nixos-configuration
+#################################################
 
-set  -g default-terminal "xterm-256color"
+# this fixes true colors in Vim with Alacritty
+set -ga terminal-overrides ",*256col*:Tc"
 
 new-session     # spawn session if attaching when none are running
 

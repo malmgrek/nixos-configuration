@@ -9,6 +9,7 @@ with lib; {
   };
 
   config = mkIf config.modules.desktop.term.alacritty.enable {
+    my.zsh.rc = ''export TERM=xterm-256color'';
     my = {
       packages = with pkgs; [
         unstable.alacritty
