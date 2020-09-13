@@ -1,12 +1,20 @@
 # NixOS configuration -- first steps
 
-Learning NixOS configuration. I am mimicking the config
+Learning NixOS configuration. I am very much influenced by the config
 <https://github.com/hlissner/dotfiles.git> because I really like
 it's modular structure.
 
-## Next
-- Simplify Zsh configuration
-- Get rid of themes for now (I will make own themes later)
+## TODO
+- SSH module with public key
+- Vim keybindings to Rofi
+- Dunst
+- Tmux plugins and theming
+- Fix `bin/scratch`
+- LaTeX
+- Ask user before cloning plugins etc.
+- Node dev
+  - History file paths wrong
+- Themes
 
 ## Project general loop
 - Include modules one by one
