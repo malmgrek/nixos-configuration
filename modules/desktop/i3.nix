@@ -32,8 +32,9 @@ with lib;
     };
 
     # link recursively so other modules can link files in their folders
-    my.home.xdg.configFile = {
-      "i3".source = <config/i3>;
+    my.home.xdg.configFile."i3" = {
+      source = <config/i3>;
+      recursive = true;
     };
 
   };
