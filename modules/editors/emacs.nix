@@ -47,16 +47,19 @@ with lib;
         # :lang javascript
         nodePackages.javascript-typescript-langserver
         # :lang latex & :lang org (latex previews)
-        # NOTE: Include LaTeX later. Downloading a myriad packages
-        # is annoying.
         # texlive.combined.scheme-medium
         # :lang rust
         rustfmt
         rls
-
       ];
-      # TODO env.PATH = ...
+
+      env.PATH = [ "$XDG_CONFIG_HOME/emacs/bin" ];
       # zsh.rc = lib.readfile <config/emacs/aliases.zsh>;
+      home.home.file.".doom.d" = {
+        source = <config/emacs>;
+        recursive = true;
+      };
+
     };
 
     fonts.fonts = [

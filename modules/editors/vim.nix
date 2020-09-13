@@ -23,7 +23,7 @@ with lib;
       home.xdg.configFile.".vimrc" = {
         source = <config/vim/.vimrc>;
         recursive = true;
-	target = "../.vimrc";
+	      target = "../.vimrc";
       };
     };
   };
