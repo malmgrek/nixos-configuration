@@ -42,13 +42,11 @@ with lib;
       alias.ipy = "ipython --no-banner";
       alias.ipylab = "ipython --pylab=qt5 --no-banner";
 
-      home.xdg.configFile."ipython_config" = {
+      home.xdg.configFile."ipython/profile_default/ipython_config.py" = {
         source = <config/ipython/profile_default/ipython_config.py>;
-        recursive = true;
       };
-      home.xdg.configFile."pythonrc" = {
+      home.xdg.configFile."python/pythonrc" = {
         source = <config/python/pythonrc>;
-        recursive = true;
       };
     };
   };
