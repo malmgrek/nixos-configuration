@@ -12,14 +12,6 @@ with lib; {
     my = {
       packages = with pkgs; [
         unstable.alacritty
-        (makeDesktopItem {
-          name = "alacritty";
-          desktopName = "Alacritty";
-          genericName = "Default terminal";
-          icon = "utilities-terminal";
-          exec = "${alacritty}/bin/alacritty";
-          categories = "Development;System;Utility";
-        })
       ];
       home.xdg.configFile."alacritty" = {
         source = <config/alacritty>;

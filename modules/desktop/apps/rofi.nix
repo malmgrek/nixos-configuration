@@ -20,7 +20,7 @@ with lib;
       packages = with pkgs; [
         (writeScriptBin "rofi" ''
           #!${stdenv.shell}
-          exec ${rofi}/bin/rofi -terminal xst -m -1 "$@"
+          exec ${rofi}/bin/rofi -terminal alacritty -m -1 "$@"
           '')
 
         # For rapidly test changes to rofi's stylesheets
