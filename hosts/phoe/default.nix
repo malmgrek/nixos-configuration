@@ -22,9 +22,11 @@
       emacs.enable = true;
       vim.enable = true;
     };
-    # dev = {
-    #   python.enable = true;
-    # };
+    dev = {
+      clojure.enable = true;
+      node.enable = true;
+      python.enable = true;
+    };
     shell = {
       # direnv.enable = true;
       git.enable = true;

@@ -8,6 +8,7 @@ in {
   imports = [
     <home-manager/nixos>
     ./desktop
+    ./dev
     ./editors
     ./shell
   ];
