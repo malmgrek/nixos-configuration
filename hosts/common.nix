@@ -60,6 +60,12 @@
       in lib.mkIf config.hardware.pulseaudio.enable
         "${paConfigFile}/default.pa";
 
-  # TODO Clean up leftovers
+  # Clean up leftovers, as much as we can
+  system.userActivationScripts.cleanupHome = ''
+    pushd /home/${config.my.username}
+    rm -rf .compose-cache .nv .pki .dbus .fehbg
+    [ -s .xsession-errors ] || rm -f .xsession-errors*
+    popd
+  '';
 
 }
