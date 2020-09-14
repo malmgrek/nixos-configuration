@@ -17,13 +17,15 @@ with lib;
   config = mkIf config.modules.dev.python.enable {
     my = {
       packages = with pkgs; [
+        conda
         python37
-        python37Packages.pip
-        python37Packages.ipython
         python37Packages.black
-        python37Packages.setuptools
-        python37Packages.pylint
+        python37Packages.ipython
+        python37Packages.magic-wormhole
+        python37Packages.pip
         python37Packages.poetry
+        python37Packages.pylint
+        python37Packages.setuptools
       ];
 
       env.IPYTHONDIR      = "$XDG_CONFIG_HOME/ipython";
@@ -34,6 +36,7 @@ with lib;
       env.PYTHONSTARTUP   = "$XDG_CONFIG_HOME/python/pythonrc";
       env.PYTHON_EGG_CACHE = "$XDG_CACHE_HOME/python-eggs";
       env.JUPYTER_CONFIG_DIR = "$XDG_CONFIG_HOME/jupyter";
+      env.JUPYTER_DATA_DIR = "$XDG_DATA_HOME/jupyter";
 
       alias.py  = "python";
       alias.py2 = "python2";
@@ -47,6 +50,17 @@ with lib;
       };
       home.xdg.configFile."python/pythonrc" = {
         source = <config/python/pythonrc>;
+      };
+      # Enable the extension by:
+      # jupyter nbextension enable vim_binding/vim_binding
+      home.xdg.dataFile."jupyter/vim_binding" = {
+        recursive = true;
+        source = pkgs.fetchFromGitHub {
+          owner = "lambdalisue";
+          repo = "jupyter-vim-binding";
+          rev = "v2.1.0";
+          sha256 = "1951wnf0k91h07nfsz8rr0c9nw68dbyflkjvw5pbx9dmmzsa065j";
+        };
       };
     };
   };
