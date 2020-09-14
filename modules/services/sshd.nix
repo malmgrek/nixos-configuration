@@ -1,16 +1,14 @@
-{ config, pkgs, ... }:
-
 { config, options, pkgs, lib, ... }:
 with lib;
 {
-  options.modules.services.ssh = {
+  options.modules.services.sshd = {
     enable = mkOption {
       type = types.bool;
       default = false;
     };
   };
 
-  config = mkIf config.modules.services.ssh.enable {
+  config = mkIf config.modules.services.sshd.enable {
     services.openssh = {
       enable = true;
       forwardX11 = true;
