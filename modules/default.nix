@@ -10,6 +10,7 @@ in {
     ./desktop
     ./dev
     ./editors
+    ./services
     ./shell
   ];
 
