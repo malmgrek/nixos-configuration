@@ -25,7 +25,6 @@ with lib;
 
         # Optional dependencies
         fd  # Faster projectile indexing
-        imagemagick  # For image-dired
         (lib.mkIf (config.programs.gnupg.agent.enable)
          pinentry_emacs)  # in-emacs gnupg prompts
         zstd  # for undo-fu-session/undo-tree compression
@@ -43,14 +42,14 @@ with lib;
         # :tools lookup & :lang org +roam
         sqlite
         # :lang cc
-        ccls
+        # ccls  # c/c++/obj-c language server
         # :lang javascript
         nodePackages.javascript-typescript-langserver
         # :lang latex & :lang org (latex previews)
         # texlive.combined.scheme-medium
         # :lang rust
-        rustfmt
-        rls
+        # rustfmt  # tool for formatting rust code
+        # rls      # rust language server
       ];
 
       env.PATH = [ "$XDG_CONFIG_HOME/emacs/bin" ];
