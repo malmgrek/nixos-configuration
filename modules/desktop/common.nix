@@ -6,7 +6,7 @@
     evince
     feh
     mpv
-    xclip
+    xclip  # system clipboard support for vim
     xdotool
   ];
 

@@ -26,14 +26,29 @@ in {
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+    # Basic command line tools
     coreutils
     git
     killall
     unzip
-    vim
     wget
     sshfs
     gnumake
+    htop
+
+    # VPN
+    openvpn
+
+    # Password hash generator
+    mkpasswd
+    openssl
+
+    # Editors
+    vim
+
+    # AV processing
+    imagemagick
+    ffmpeg
   ];
 
   my.user = {

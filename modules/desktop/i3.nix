@@ -12,12 +12,14 @@ with lib;
 
   config = mkIf config.modules.desktop.i3.enable {
     environment.systemPackages = with pkgs; [
-      lightdm
+      arandr         # GUI for xrandr
       dmenu
       i3status
       i3status-rust
       i3lock
       i3blocks
+      lightdm
+      pavucontrol    # GUI for sound control
     ];
 
     services = {

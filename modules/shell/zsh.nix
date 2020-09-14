@@ -12,16 +12,16 @@ with lib;
   config = mkIf config.modules.shell.zsh.enable {
     my = {
       packages = with pkgs; [
-        zsh
-        nix-zsh-completions
+        autojump
         bat
         exa
         fasd
         fd
         fzf
-        htop
+        nix-zsh-completions
         tldr
         tree
+        zsh
       ];
 
       env.ZDOTDIR = "$XDG_CONFIG_HOME/zsh";
@@ -39,6 +39,9 @@ with lib;
         source = <config/zsh>;
         recursive = true;
       };
+
+      # Enable autojump in zsh
+      zsh.rc = ''source ${pkgs.autojump}/share/autojump/autojump.zsh'';
     };
 
     programs.zsh = {
