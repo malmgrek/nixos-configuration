@@ -19,13 +19,17 @@
     enableGhostscriptFonts = true;
     fonts = with pkgs; [
       dejavu_fonts
-      ubuntu_font_family
       fira-code
+      fira-code-symbols
       font-awesome
+      jetbrains-mono
+      noto-fonts
+      ubuntu_font_family
+      # (nerdfonts.override {withFont="Iosevka";})
     ];
     fontconfig.defaultFonts = {
       sansSerif = ["Ubuntu"];
-      monospace = ["Fira Code"];
+      monospace = ["JetBrains Mono"];
     };
   };
 
