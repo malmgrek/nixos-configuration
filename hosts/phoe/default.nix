@@ -13,12 +13,12 @@
       i3.enable = true;
       apps.rofi.enable = true;
       term.alacritty.enable = true;
-      # term.st.enable = true;
+      term.st.enable = false;
       browsers.default = "firefox";
       browsers.firefox.enable = true;
     };
     editors = {
-      default = "vim";
+      default = "vi";
       emacs.enable = true;
       vim.enable = true;
     };
@@ -27,13 +27,19 @@
       node.enable = true;
       python.enable = true;
     };
+    services = {
+      docker.enable = false;
+      nginx.enable = false;
+      sshd.enable = false;
+    };
     shell = {
-      # direnv.enable = true;
+      direnv.enable = false;
       git.enable = true;
       gnupg.enable = true;
       pass.enable = true;
       ranger.enable = true;
       tmux.enable = true;
+      weechat.enable = false;
       zsh.enable = true;
     };
   };
