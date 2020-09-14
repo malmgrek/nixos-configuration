@@ -6,6 +6,7 @@ it's modular structure.
 
 ## TODO
 - SSH module with public key
+- Automatically add Jupyter Vim extension
 - Vim keybindings to Rofi
 - Dunst
 - Tmux plugins and theming
@@ -14,12 +15,9 @@ it's modular structure.
 - Ask user before cloning plugins etc.
 - Node dev
   - History file paths wrong
+- Swapcolors
 - Themes
-
-## Project general loop
-- Include modules one by one
-- Test a new rebuild every once in a while
-  - Try to make only incremental changes one by one
+- Julia dev
 
 ## Installation
 
@@ -28,7 +26,8 @@ it's modular structure.
 2. Install a minimal NixOS
 3. Clone, source, and `nixos-rebuild`
    - Currently `fileSystem` in `hardware-configuration.nix` must be manually changed
-
+   
+### On laptop
 
 ## Notes
 
@@ -44,19 +43,13 @@ $ nixos-rebuild {arg} -I "bin=$(pwd)/bin" -I "config=$(config)"
 
 ### Nix-channel
 
-I had some problems updating `nix-channel` correctly to `NIX_PATH` regarding `<home-manager/nixos>`.
-The problem was solved by updating the channels as `root`.
+Add and update Nix channels as sudo.
 
 ### Picom
 
 Setting `vSync = true` causes an error in VirtualBox. Might be VirtualBox specific.
 
 ### Home-manager
-
-#### Service
-
-Starting Home Manager service was failing on syntax error `...string 'Derive(['` indicating
-corrupted user environment `.drv` file. Running `nix-store --delete /path/to/drv` and then `nixos-rebuild switch` fixed the problem.
 
 #### ZSH
 
