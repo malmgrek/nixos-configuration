@@ -53,7 +53,6 @@ with lib;
           icon = "folder";
           exec = "${<bin/rofi/filemenu>} -x";
         })
-
         (makeDesktopItem {
           name = "lock-display";
           desktopName = "Lock screen";

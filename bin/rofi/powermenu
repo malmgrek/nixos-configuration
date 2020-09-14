@@ -1,31 +1,35 @@
 #!/usr/bin/env sh
 
-rofi_command="rofi"
+rofi_command='rofi'
 
 ### Options ###
-power_off="\tShutdown"
-reboot="\tReboot"
-lock="\tLock"
-suspend="鈴\tSleep"
-log_out="\tLogout"
+hibernate="Hibernate"
+lock="Lock"
+logout="Logout"
+power_off="Shutdown"
+reboot="Reboot"
+suspend="Sleep"
 # Variable passed to rofi
-options="$power_off\n$reboot\n$lock\n$suspend\n$log_out"
+OPTS="$power_off\n$reboot\n$lock\n$hibernate\n$suspend\n$logout"
+LOCK=i3lock
 
-case "$(echo -e "$options" | $rofi_command -dmenu -selected-row 2)" in
+case "$(echo -e "$OPTS" | $rofi_command -dmenu -selected-row 2)" in
     $power_off)
         systemctl poweroff
+        ;;
+    $hibernate)
+        systemctl hibernate
         ;;
     $reboot)
         systemctl reboot
         ;;
     $lock)
-        zzz
+        $LOCK
         ;;
     $suspend)
-        dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
-        systemctl suspend
+        $LOCK && systemctl suspend
         ;;
-    $log_out)
-        bspc quit
+    $logout)
+        i3-msg exit
         ;;
 esac
