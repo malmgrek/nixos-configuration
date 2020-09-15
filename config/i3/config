@@ -24,6 +24,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
 
+floating_modifier $mod
 bindsym $mod+Shift+q kill      # kill focused window
 bindsym $mod+d exec dmenu_run  # start dmenu
 bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop  # shows just apps
