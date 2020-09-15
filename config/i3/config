@@ -9,9 +9,14 @@ font pango:DejaVu Sans Mono 12
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
-exec picom                                                   # Perhaps not needed
-exec --no-startup-id xset r rate 300 80                      # Keyboard repeat rate
-exec_always --no-startup-id "setxkbmap -option caps:escape"  # Esc to CAPS
+# Perhaps not needed
+exec picom
+
+# Keyboard repeat rate
+exec --no-sqtartup-id xset r rate 300 80
+
+# Esc to CAPS
+exec_always --no-startup-id "setxkbmap -option caps:escape"
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -21,13 +26,19 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Screen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 
 floating_modifier $mod
-bindsym $mod+Shift+q kill      # kill focused window
-bindsym $mod+d exec dmenu_run  # start dmenu
-bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop  # shows just apps
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start menu
+bindsym $mod+d exec dmenu_run
+
+# show just apps
+bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym $mod+h focus left
@@ -41,8 +52,11 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-bindsym $mod+z split h  # split in horizontal direction
-bindsym $mod+v split v  # vertical
+# split in horizontal direction
+bindsym $mod+z split h
+
+# split in vertical direction
+bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -52,9 +66,14 @@ bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
-bindsym $mod+ISO_Level3_Shift floating toggle          # toggle tiling / floating
-bindsym $mod+Shift+ISO_Level3_Shift focus mode_toggle  # change focus between tiling / floating
-bindsym $mod+a focus parent  # focus the parent container
+# toggle tiling / floating
+bindsym $mod+ISO_Level3_Shift floating toggle
+
+# change focus between tiling / floating
+bindsym $mod+Shift+ISO_Level3_Shift focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
