@@ -23,6 +23,11 @@ with lib;
           exec ${rofi}/bin/rofi -terminal alacritty -m -1 "$@"
           '')
 
+        (writeScriptBin "rofi-appmenu" ''
+        #!${stdenv.shell}
+        rofi -show drun -modi drun,run -show-icons
+        '')
+
         # For rapidly test changes to rofi's stylesheets
         # (writeScriptBin "rofi-test" ''
         #   #!${stdenv.shell}

@@ -88,12 +88,6 @@ bindsym $mod+d exec dmenu_run
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
-# Rofi
-bindsym $mod+space exec "source ~/nixos-configuration/bin/rofi/appmenu"
-bindsym $mod+Tab exec "source ~/nixos-configuration/bin/rofi/windowmenu"
-bindsym $mod+Shift+space exec "source ~/nixos-configuration/bin/rofi/filemenu"
-bindsym $mod+p exec "source ~/nixos-configuration/bin/rofi/powermenu"
-
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -238,3 +232,9 @@ bar {
         urgent_workspace #2f343a #900000 #ffffff
     }
 }
+
+# Rofi
+bindsym $mod+space exec rofi-appmenu
+bindsym $mod+Tab exec "source ~/nixos-configuration/bin/rofi/windowmenu"
+bindsym $mod+Shift+space exec "source ~/nixos-configuration/bin/rofi/filemenu"
+bindsym $mod+p exec "source ~/nixos-configuration/bin/rofi/powermenu"
