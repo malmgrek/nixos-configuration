@@ -33,11 +33,9 @@ with lib;
       };
     };
 
-    # link recursively so other modules can link files in their folders
-    my.home.xdg.configFile."i3" = {
-      source = <config/i3>;
-      recursive = true;
-    };
+    my.i3.cfg = ''
+      ${lib.readFile <config/i3/config>}
+    '';
 
   };
 }

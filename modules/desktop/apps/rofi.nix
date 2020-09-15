@@ -28,6 +28,13 @@ with lib;
         rofi -show drun -modi drun,run -show-icons
         '')
 
+        (writeScriptBin "rofi-windowmenu" ''
+        #!${stdenv.shell}
+        rofi -show window -show-icons
+        '')
+
+        # TODO: Write all widgets here
+
         # For rapidly test changes to rofi's stylesheets
         # (writeScriptBin "rofi-test" ''
         #   #!${stdenv.shell}
@@ -65,6 +72,11 @@ with lib;
           exec = "${<bin/zzz>}";
         })
       ];
+
+      i3.cfg = ''
+        bindsym $mod+space exec rofi-appmenu
+        bindsym $mod+Tab exec rofi-windowmenu
+      '';
     };
   };
 
