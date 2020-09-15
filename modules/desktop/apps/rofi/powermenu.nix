@@ -2,7 +2,7 @@
 ''
   #!${shell}
 
-  rofi_command='rofi'
+  rofi_command='rofi -theme theme/config.rasi'
 
   # Options
   hibernate="Hibernate"

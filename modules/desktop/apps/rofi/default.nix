@@ -14,16 +14,17 @@ with lib;
       shell = pkgs.stdenv.shell;
       rofi = pkgs.writeScriptBin "rofi" ''
         #!${shell}
-        exec ${pkgs.rofi}/bin/rofi -terminal ${config.modules.desktop.term.default} -m -1 "$@"
+        exec ${pkgs.rofi}/bin/rofi \
+          -terminal ${config.modules.desktop.term.default} -m -1 "$@"
       '';
       rofi_appmenu = pkgs.writeScriptBin "rofi-appmenu" ''
         #!${shell}
-        rofi -show drun -modi drun,run -show-icons
+        rofi -show drun -modi drun,run -show-icons -theme theme/config.rasi
       '';
       rofi_filemenu = pkgs.writeScriptBin "rofi-filemenu" ''
         #!${shell}
         cd $HOME
-        DIR="$(fd -L -d 4 --type d . | rofi -dmenu -i -p "~/")"
+        DIR="$(fd -L -d 4 --type d . | rofi -dmenu -i -p "~/" -theme theme/config.rasi)"
         if [ -d "$DIR" ]; then
           cd "$DIR"
           ${config.modules.desktop.term.default}
@@ -31,7 +32,7 @@ with lib;
       '';
       rofi_windowmenu = pkgs.writeScriptBin "rofi-windowmenu" ''
         #!${shell}
-        rofi -show window -show-icons
+        rofi -show window -show-icons -theme theme/config.rasi
       '';
       # TODO: Move to window manager module, and evaluate if (mkIf)
       # Rofi is enabled
@@ -85,6 +86,25 @@ with lib;
         #   '')
 
       ];
+
+      home.xdg.configFile."rofi/theme/config.rasi" = {
+        text = ''
+          /* -*- mode: css; -*- */
+          configuration {
+            icon-theme:       "Paper";
+            cycle:            true;
+            disable-history:  false;
+            monitor:          "-4";
+
+            /* Vim-esque C-j/C-k as up/down in rofi */
+            kb-accept-entry: "Return,Control+m,KP_Enter";
+            kb-row-down: "Down,Control+n,Control+j";
+            kb-remove-to-eol: "";
+            kb-row-up: "Up,Control+p,Control+k";
+          }
+        '';
+        recursive = true;
+      };
 
       i3.cfg = ''
         bindsym $mod+space exec rofi-appmenu
