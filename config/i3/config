@@ -1,3 +1,4 @@
+
 set $mod Mod4
 
 font pango:DejaVu Sans Mono 12
@@ -123,11 +124,39 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# Shutdown, reboot, lock screen (as a backup)
+set $Locker i3lock && sleep 1
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
 
-# ----------------------------------------
-# Lines generated within Nix configs below
-# ----------------------------------------
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
 
-# bindsym $mod+Return exec alacritty
-# statusbar
-# rofi
+# The out-of-the-box default
+# bar {
+#         status_command i3status
+# }
+#
+# Using i3-status-rust to generate prettier statusline
+bar {
+    font pango:DejaVu Sans Mono, FontAwesome 12
+    position top
+    status_command i3status-rs ~/.config/i3/status.toml
+    colors {
+        separator #666666
+        background #222222
+        statusline #dddddd
+        focused_workspace #0088CC #0088CC #ffffff
+        active_workspace #333333 #333333 #ffffff
+        inactive_workspace #333333 #333333 #888888
+        urgent_workspace #2f343a #900000 #ffffff
+    }
+}

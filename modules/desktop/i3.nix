@@ -33,9 +33,15 @@ with lib;
       };
     };
 
-    my.i3.cfg = ''
-      ${lib.readFile <config/i3/config>}
-    '';
+    my = {
+      home.xdg.configFile."i3/status.toml" = {
+        source = <config/i3/status.toml>;
+        recursive = true;
+      };
+      i3.cfg = ''
+        ${lib.readFile <config/i3/config>}
+      '';
+    };
 
   };
 }
