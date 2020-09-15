@@ -62,7 +62,7 @@ in {
           default = "";
           description = ''
           i3 configuration lines to be written to $XDG_CONFIG_HOME/i3/config
-          ''
+          '';
         };
       };
     };
