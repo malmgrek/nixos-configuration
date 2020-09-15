@@ -16,8 +16,7 @@ with lib;
   };
 
   config = {
-    services.xserver.desktopManager.xterm.enable =
-      config.modules.desktop.term.default == "xterm";
+    services.xserver.desktopManager.xterm.enable = true;
     my.env.TERMINAL = config.modules.editors.default;
   };
 

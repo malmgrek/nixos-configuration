@@ -3,7 +3,7 @@
 {
 
   imports = [
-    ./rofi.nix
+    ./rofi
   ];
 
 }

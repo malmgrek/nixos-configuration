@@ -14,8 +14,9 @@
       apps.rofi.enable = true;
       term.alacritty.enable = true;
       term.st.enable = false;
-      browsers.default = "firefox";
+      term.default = "alacritty"
       browsers.firefox.enable = true;
+      browsers.default = "firefox";
     };
     editors = {
       default = "vi";
