@@ -5,8 +5,6 @@ Learning NixOS configuration. I am very much influenced by the config
 it's modular structure.
 
 ## TODO
-- SSH module with public key
-- Automatically add Jupyter Vim extension
 - Vim keybindings to Rofi
 - Dunst
 - Tmux plugins and theming
@@ -26,7 +24,7 @@ it's modular structure.
 2. Install a minimal NixOS
 3. Clone, source, and `nixos-rebuild`
    - Currently `fileSystem` in `hardware-configuration.nix` must be manually changed
-   
+
 ### On laptop
 
 ## Notes
