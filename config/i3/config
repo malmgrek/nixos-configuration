@@ -1,5 +1,7 @@
-
-set $mod Mod4
+#
+# Template starts ||
+#                 ||
+#                 \/
 
 font pango:DejaVu Sans Mono 12
 
@@ -139,6 +141,8 @@ mode "$mode_system" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
+
+bindsym $mod+b mode "$mode_system"
 
 # The out-of-the-box default
 # bar {

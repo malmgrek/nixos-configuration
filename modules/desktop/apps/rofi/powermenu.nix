@@ -12,7 +12,7 @@
   reboot="Reboot"
   suspend="Sleep"
   # Variable passed to rofi
-  OPTS="$power_off\n$reboot\n$lock\n$hibernate\n$suspend\n$logout"
+  OPTS="$poweroff\n$reboot\n$lock\n$hibernate\n$suspend\n$logout"
   LOCK=i3lock
 
   case "$(echo -e "$OPTS" | $rofi_command -dmenu -selected-row 2)" in

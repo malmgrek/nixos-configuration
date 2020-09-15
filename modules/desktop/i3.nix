@@ -39,6 +39,7 @@ with lib;
         recursive = true;
       };
       i3.cfg = ''
+        bindsym $mod+Return exec ${config.modules.desktop.term.default}
         ${lib.readFile <config/i3/config>}
       '';
     };
