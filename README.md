@@ -6,8 +6,6 @@ it's modular structure.
 
 ## TODO
 - Dunst
-- Tmux plugins and theming
-- Add screenshot / recording shortcuts to i3
 - Check that screen brightness and sound controls work (i3 vs. sxhkd)
 - Fix `bin/scratch`
 - LaTeX
@@ -17,6 +15,7 @@ it's modular structure.
 - Swapcolors
 - Themes
 - Julia dev
+- Tmux plugins and theming
 
 ## Installation
 
