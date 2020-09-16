@@ -3,7 +3,7 @@
 with lib;
 {
   imports = [
-    ./common.nix
+    ./misc.nix
   ];
 
   options.modules.desktop.i3 = {
@@ -14,6 +14,7 @@ with lib;
     environment.systemPackages = with pkgs; [
       arandr         # GUI for xrandr
       dmenu
+      dunst
       i3status
       i3status-rust
       i3lock
