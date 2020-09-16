@@ -11,6 +11,9 @@ with lib;
 
   config = mkIf config.modules.desktop.apps.rofi.enable {
     my = let
+      # Write rofi-related scripts to derivation binaries. We could just include these
+      # in this repo's "bin" (and PATH) but it is cleaner not globally installing them
+      # unless Rofi is enabled.
       shell = pkgs.stdenv.shell;
       rofi = pkgs.writeScriptBin "rofi" ''
         #!${shell}

@@ -75,7 +75,7 @@ in {
     my.user.packages = config.my.packages;
 
     ## PATH should always start with its old value
-    my.env.PATH = [ <bin> "$PATH" ];
+    my.env.PATH = [ <bin> "$PATH" ];  # include custom scripts to path
     environment.extraInit =
       let exportLines = mapAttrsToList (n: v: "export ${n}=\"${v}\"") config.my.env;
       in ''

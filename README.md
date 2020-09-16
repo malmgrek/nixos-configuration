@@ -5,9 +5,10 @@ Learning NixOS configuration. I am very much influenced by the config
 it's modular structure.
 
 ## TODO
-- Vim keybindings to Rofi
 - Dunst
 - Tmux plugins and theming
+- Add screenshot / recording shortcuts to i3
+- Check that screen brightness and sound controls work (i3 vs. sxhkd)
 - Fix `bin/scratch`
 - LaTeX
 - Ask user before cloning plugins etc.
