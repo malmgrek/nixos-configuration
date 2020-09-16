@@ -19,6 +19,7 @@ with lib;
       i3status-rust
       i3lock
       i3blocks
+      libnotify      # Enables notify-send
       lightdm
       pavucontrol    # GUI for sound control
     ];

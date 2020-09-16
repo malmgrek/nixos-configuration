@@ -8,7 +8,7 @@
     mpv
     xclip    # system clipboard support for vim
     xdotool
-    xev      # find a keyboard button name
+    xorg.xev      # find a keyboard button name
   ];
 
   ## Sound
