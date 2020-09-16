@@ -45,7 +45,7 @@ bindsym Print exec scrcap
 # Screencast region to mp4
 bindsym $mod+Print exec scrrec -s ~/recordings/$(date +%F-%T).mp4
 # Screencast region to gif
-bindsym $mod+Shift+Print exec scrrec -s ~/recordings/$(date + %F-%T).gif
+bindsym $mod+Shift+Print exec scrrec -s ~/recordings/$(date +%F-%T).gif
 
 
 #
