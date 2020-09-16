@@ -6,8 +6,9 @@
     evince
     feh
     mpv
-    xclip  # system clipboard support for vim
+    xclip    # system clipboard support for vim
     xdotool
+    xev      # find a keyboard button name
   ];
 
   ## Sound
