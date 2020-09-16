@@ -46,9 +46,11 @@ in {
     # Editors
     vim
 
-    # AV processing
+    # Image processing
     imagemagick
-    ffmpeg
+
+    # Instant nix-shell scripts
+    my.cached-nix-shell
   ];
 
   my.user = {
