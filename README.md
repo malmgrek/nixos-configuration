@@ -1,21 +1,7 @@
 # NixOS configuration -- first steps
 
 Learning NixOS configuration. I am very much influenced by the config
-<https://github.com/hlissner/dotfiles.git> because I really like
-it's modular structure.
-
-## TODO
-- Dunst
-- Check that screen brightness and sound controls work (i3 vs. sxhkd)
-- Fix `bin/scratch`
-- LaTeX
-- Ask user before cloning plugins etc.
-- Node dev
-  - History file paths wrong
-- Swapcolors
-- Themes
-- Julia dev
-- Tmux plugins and theming
+<https://github.com/hlissner/dotfiles.git> because I love Doom Emacs.
 
 ## Installation
 
@@ -53,3 +39,19 @@ Setting `vSync = true` causes an error in VirtualBox. Might be VirtualBox specif
 
 After `nixos-rebuild switch` run `zgen reset` to re-initialize Zgen packages
 after next login.
+
+## TODO
+- Add apps/graphics (Inkscape, Gimp)
+- Add apps/vm (VirtualBox)
+- Add Qutebrowser
+- Check that screen brightness and sound controls work (i3 vs. sxhkd)
+- Fix `bin/scratch`
+- LaTeX
+- Ask user before cloning plugins etc.
+- Node dev
+  - History file paths wrong
+- Swapcolors
+- Themes
+- Julia dev
+- Tmux plugins and theming
+- Add KDE/Gnome or some other floating window manager module
