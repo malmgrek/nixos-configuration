@@ -1,16 +1,16 @@
-{ config, options, lib, pkgs }:
+{ config, options, lib, pkgs, ... }:
 with lib;
 {
 
-  options.modules.desktop.wm.i3.i3status-rust = {
+  options.modules.desktop.wm.i3.i3statusRust = {
     enable = mkOption { type = types.bool; default = false; };
   };
 
-  config = mkIf config.modules.desktop.wm.i3.i3status-rust.enable {
-    environment.systemPackages = with pkgs; [
-      i3status-rust
-    ];
+  config = mkIf config.modules.desktop.wm.i3.i3statusRust.enable {
     my = {
+      packages = with pkgs; [
+        i3status-rust
+      ];
       home.xdg.configFile."i3/status.toml" = {
         source = <config/i3/status.toml>;
         recursive = true;

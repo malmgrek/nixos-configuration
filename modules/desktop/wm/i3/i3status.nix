@@ -1,4 +1,4 @@
-{ config, options, lib, pkgs }:
+{ config, options, lib, pkgs, ... }:
 with lib;
 {
 
@@ -7,10 +7,10 @@ with lib;
   };
 
   config = mkIf config.modules.desktop.wm.i3.i3status.enable {
-    environment.systemPackages = with pkgs; [
-      i3status
-    ];
     my = {
+      packages = with pkgs; [
+        i3status
+      ];
       i3.cfg = ''
         # Enable the bare bones i3status status bar
 
