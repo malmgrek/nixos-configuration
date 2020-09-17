@@ -1,14 +1,18 @@
+# Miscellaneous desktop environment related settings
+# that one may want to import in window managers
+# other than i3, too.
+
 { config, lib, pkgs, ... }:
 
 {
 
-  my.packages = with pkgs; [
-    evince
-    feh
-    mpv
-    xclip    # system clipboard support for vim
+  environment.systemPackages = with pkgs; [
+    evince    # document viewer
+    feh       # image viewer
+    mpv       # media player
+    xclip     # system clipboard support for vim
     xdotool
-    xorg.xev      # find a keyboard button name
+    xorg.xev  # find a keyboard button name
   ];
 
   ## Sound
