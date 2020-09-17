@@ -13,7 +13,7 @@ with lib;
   };
 
   config = mkIf config.modules.desktop.wm.i3.enable {
-    # These will be available for all users
+    # These will be available for all users which makes sense
     environment.systemPackages = with pkgs; [
       arandr         # GUI for xrandr
       dmenu

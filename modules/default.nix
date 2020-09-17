@@ -71,7 +71,13 @@ in {
   config = {
     ## Convenience aliases
     home-manager.users.${config.my.username} = mkAliasDefinitions options.my.home;
+
+    # Sets my user which is defined in default.nix
     users.users.${config.my.username} = mkAliasDefinitions options.my.user;
+
+    # These packages will be installed only for my user whereas
+    # systemPackages will be installed for all users (see Nixos options search
+    # and `users.users.<username>.packages`).
     my.user.packages = config.my.packages;
 
     ## PATH should always start with its old value

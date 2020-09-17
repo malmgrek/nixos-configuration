@@ -53,6 +53,7 @@ in {
     my.cached-nix-shell
   ];
 
+  # `my` is defined in ./modules/default.nix
   my.user = {
     isNormalUser = true;
     uid = 1000;
