@@ -2,11 +2,11 @@
 with lib;
 {
 
-  options.modules.desktop.wm.i3.i3statusRust = {
+  options.modules.desktop.wm.i3.i3status-rust = {
     enable = mkOption { type = types.bool; default = false; };
   };
 
-  config = mkIf config.modules.desktop.wm.i3.i3statusRust.enable {
+  config = mkIf config.modules.desktop.wm.i3.i3status-rust.enable {
     my = {
       packages = with pkgs; [
         i3status-rust

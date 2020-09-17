@@ -11,7 +11,7 @@
   modules = {
     desktop = {
       wm.i3.enable = true;
-      wm.i3.i3statusRust = true;
+      wm.i3.i3status-rust.enable = true;
       apps.rofi.enable = true;
       term.alacritty.enable = true;
       term.st.enable = false;
