@@ -3,20 +3,20 @@
 with lib;
 {
   imports = [
-    ./misc.nix
+    ./i3status.nix
+    ./i3status-rust.nix
+    ../misc.nix
   ];
 
-  options.modules.desktop.i3 = {
+  options.modules.desktop.wm.i3 = {
     enable = mkOption { type = types.bool; default = false; };
   };
 
-  config = mkIf config.modules.desktop.i3.enable {
+  config = mkIf config.modules.desktop.wm.i3.enable {
     environment.systemPackages = with pkgs; [
       arandr         # GUI for xrandr
       dmenu
       dunst
-      i3status
-      i3status-rust
       i3lock
       i3blocks
       libnotify      # Enables notify-send
@@ -36,13 +36,11 @@ with lib;
     };
 
     my = {
-      home.xdg.configFile."i3/status.toml" = {
-        source = <config/i3/status.toml>;
-        recursive = true;
-      };
       i3.cfg = ''
+        # Launch default terminal emulator
         bindsym $mod+Return exec ${config.modules.desktop.term.default}
         ${lib.readFile <config/i3/config>}
+
       '';
     };
 

@@ -10,7 +10,8 @@
 
   modules = {
     desktop = {
-      i3.enable = true;
+      wm.i3.enable = true;
+      wm.i3.i3status-rust = true;
       apps.rofi.enable = true;
       term.alacritty.enable = true;
       term.st.enable = false;
