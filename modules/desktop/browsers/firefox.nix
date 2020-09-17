@@ -30,6 +30,8 @@ with lib;
       })
     ];
 
+    my.env.XDG_DESKTOP_DIR = "$HOME";  # (try to) prevent ~/Desktop
+
     my.home.programs.firefox =
       let cfg = config.modules.desktop.browsers.firefox; in
       {
