@@ -1,4 +1,4 @@
-# NixOS configuration -- first steps
+# NixOS configuration
 
 Learning NixOS configuration. I am very much influenced by the config
 <https://github.com/hlissner/dotfiles.git> because I love Doom Emacs.
@@ -41,17 +41,16 @@ After `nixos-rebuild switch` run `zgen reset` to re-initialize Zgen packages
 after next login.
 
 ## TODO
-- Add apps/graphics (Inkscape, Gimp)
-- Add apps/vm (VirtualBox)
-- Add Qutebrowser
-- Check that screen brightness and sound controls work (i3 vs. sxhkd)
-- Fix `bin/scratch`
-- LaTeX
-- Ask user before cloning plugins etc.
-- Node dev
-  - History file paths wrong
-- Swapcolors
+- Polybar as a service
 - Themes
-- Julia dev
-- Tmux plugins and theming
+- Nix-shells instead of Conda environments for Python
+- LaTeX + find out if minimal installation is enough
+- Color swapping script
+- Fix `bin/scratch`
+- Check that screen brightness and sound controls work (i3 vs. sxhkd)
+- Node
+  - History file paths wrong
+- Julia (https://discourse.julialang.org/t/using-julia-with-nixos/35129)
+- Tmux plugins and themes
 - Add KDE/Gnome or some other floating window manager module
+- Ask user before cloning plugins and irreversible changes
