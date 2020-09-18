@@ -3,7 +3,10 @@
 {
 
   imports = [
+    ./daw.nix
+    ./graphics.nix
     ./rofi
+    ./vm.nix
   ];
 
 }

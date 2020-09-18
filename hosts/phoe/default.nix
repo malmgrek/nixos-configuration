@@ -12,7 +12,10 @@
     desktop = {
       wm.i3.enable = true;
       wm.i3.i3status-rust.enable = true;
+      apps.daw.enable = false;
+      apps.graphics.enable = true;
       apps.rofi.enable = true;
+      apps.vm.enable = false;
       term.alacritty.enable = true;
       term.st.enable = false;
       term.default = "alacritty";

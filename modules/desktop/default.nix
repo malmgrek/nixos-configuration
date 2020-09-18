@@ -3,10 +3,10 @@
 {
 
   imports = [
-    ./wm
     ./apps
     ./term
     ./browsers
+    ./wm
   ];
 
 }
