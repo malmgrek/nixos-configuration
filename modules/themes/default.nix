@@ -41,6 +41,7 @@ with lib;
     my.home.home.file.".background-image".source =
       config.modules.theme.wallpaper.path;
 
+    # Set a blurred version as LightDM login screen bg image
     services.xserver.displayManager.lightdm.background =
       mkIf config.modules.theme.wallpaper.filter.enable
         (let filteredPath = "wallpaper.filtered.png";
