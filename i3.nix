@@ -26,6 +26,7 @@
         GDK_SCALE = "2";
         GDK_DPI_SCALE = "0.5";
         _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
+        XCURSOR_SIZE = "64";
       };
 
       # TODO: I put this because of i3 status -- is it needed anymore?
@@ -70,7 +71,15 @@
           defaultSession = "none+i3";
           lightdm = {
             enable = true;
-            greeters.mini.enable = true;
+            greeters.gtk = {
+              enable = true;
+              cursorTheme = {
+                name = "Vanilla-DMZ";
+                package = pkgs.vanilla-dmz;
+                size=128;
+              };
+              # user = "malmgrek";  # Needed for greeters.mini
+            };
           };
         };
         # displayManager.lightdm.enable = true;
