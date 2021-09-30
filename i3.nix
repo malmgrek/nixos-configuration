@@ -26,7 +26,6 @@
         GDK_SCALE = "2";
         GDK_DPI_SCALE = "0.5";
         _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
-        XCURSOR_SIZE = "64";
       };
 
       # TODO: I put this because of i3 status -- is it needed anymore?
@@ -59,7 +58,7 @@
 
     };
 
-    # TODO: For HIDPI larger fonts -- is there a better way?
+    # Bigger tty fonts
     console.font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
 
     services = {
@@ -71,19 +70,16 @@
           defaultSession = "none+i3";
           lightdm = {
             enable = true;
-            greeters.gtk = {
+            greeters.mini = {
               enable = true;
-              cursorTheme = {
-                name = "Vanilla-DMZ";
-                package = pkgs.vanilla-dmz;
-                size=128;
-              };
-              # user = "malmgrek";  # Needed for greeters.mini
+              user = "malmgrek";  # Required by mini
+              extraConfig = ''
+                [greeter-theme]
+                background-image-size = cover
+              '';
             };
           };
         };
-        # displayManager.lightdm.enable = true;
-        # displayManager.lightdm.greeters.mini.enable = true;
         layout = "fi";
         dpi = 180;
         windowManager.i3.enable = true;
