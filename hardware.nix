@@ -53,6 +53,8 @@
     cpuFreqGovernor = lib.mkDefault "powersave";
     powertop.enable = lib.mkDefault true;
   };
+
+  # TODO: Move to device specific module
   services.thermald.enable = true;
   services.tlp.enable = true;
 

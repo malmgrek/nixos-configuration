@@ -66,12 +66,6 @@
     services = {
       picom.enable = true;
       xserver = {
-        #
-        # TODO: Nvidia setupts
-        #
-        # To device specific config: videoDrivers = [ "nvidia" ];
-        # Reading: https://nixos.wiki/wiki/Nvidia
-        #
         enable = true;
         desktopManager.xterm.enable = false;
         displayManager = {

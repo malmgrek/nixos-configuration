@@ -13,9 +13,14 @@
       ./hardware.nix
       ./home.nix
       ./i3.nix
+      ./nvidia.nix
     ];
 
   nixpkgs.overlays = import ./packages.nix;
+
+  ###################
+  nixpkgs.config.allowUnfree = true;
+  ###################
 
   # Use the systemd-boot EFI boot loader.
   # TODO: Move to machine specific
