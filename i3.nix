@@ -21,15 +21,13 @@
       ];
 
 
-      # TODO: For HIDPI larger fonts -- is there a better way?
+      # For larger HIDPI fonts
+      # TODO: Move to machine specific module
       variables = {
         GDK_SCALE = "2";
         GDK_DPI_SCALE = "0.5";
         _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
       };
-
-      # TODO: I put this because of i3 status -- is it needed anymore?
-      pathsToLink = [ "/libexec" ];
 
     };
 
@@ -59,30 +57,40 @@
     };
 
     # Bigger tty fonts
+    # TODO: Move to machine specific module
     console.font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
 
     services = {
       picom.enable = true;
       xserver = {
+        #
+        # TODO: Nvidia setupts
+        #
+        # To device specific config: videoDrivers = [ "nvidia" ];
+        # Reading: https://nixos.wiki/wiki/Nvidia
+        #
         enable = true;
         desktopManager.xterm.enable = false;
         displayManager = {
           defaultSession = "none+i3";
           lightdm = {
             enable = true;
-            greeters.mini = {
+            greeters.gtk = {
               enable = true;
-              user = "malmgrek";  # Required by mini
-              extraConfig = ''
-                [greeter-theme]
-                background-image-size = cover
-              '';
+              cursorTheme = {
+                name = "Vanilla-DMZ";
+                package = pkgs.vanilla-dmz;
+                size = 64;
+              };
+              # user = "malmgrek";  # Required by mini
             };
           };
         };
         layout = "fi";
-        dpi = 180;
         windowManager.i3.enable = true;
+        # Larger fonts in X under HIDPI
+        # TODO: Move to machine specific module
+        dpi = 180;
       };
     };
 
