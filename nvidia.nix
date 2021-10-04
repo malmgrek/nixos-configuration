@@ -1,3 +1,6 @@
+#
+# See also https://nixos.wiki/wiki/Nvidia for troubleshooting
+#
 { pkgs, ...  }:
 
 let
@@ -15,11 +18,6 @@ in
 
   services.xserver = {
     videoDrivers = [ "nvidia" ];
-    screenSection = ''
-      Option         "metamodes" "nvidia-auto-select +0+0 {ForceFullCompositionPipeline=On}"
-      Option         "AllowIndirectGLXProtocol" "off"
-      Option         "TripleBuffer" "on"
-    '';
   };
 
   services.picom = {
