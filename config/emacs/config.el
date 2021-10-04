@@ -19,12 +19,12 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "monospace" :size 13.0))
+(setq doom-font (font-spec :family "monospace" :size 12.0))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(load (concat doom-private-dir "color.el"))
+;; (load (concat doom-private-dir "color.el"))
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -43,10 +43,6 @@
 ;; Requires running `all-the-icons-install-fonts'
 (after! neotree
   (setq doom-themes-neotree-file-icons t))
-
-;; Flutter executable to path
-(after! flutter
-  (setq flutter-sdk-path "~/src/flutter"))
 
 ;; JS offset
 (after! javascript

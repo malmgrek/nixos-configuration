@@ -14,20 +14,23 @@
         i3status-rust
         i3status
         libnotify      # Enables notify-send
-        # lightdm
+        lightdm
         pavucontrol    # GUI for sound control
         acpilight      # Replaces xorg.xbacklight
         brightnessctl  # Replaces xorg.xbacklight
       ];
 
 
-      # For larger HIDPI fonts
-      # TODO: Move to machine specific module
-      variables = {
-        GDK_SCALE = "2";
-        GDK_DPI_SCALE = "0.5";
-        _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
-      };
+      # # For larger HIDPI fonts
+      # # TODO: Move to machine specific module
+      # variables = {
+      #   # Scale UI elements by integer factor
+      #   GDK_SCALE = "2";
+      #   # Undo scaling of text
+      #   GDK_DPI_SCALE = "0.5";
+      #   # Scale Java elements, should be unnecessary since Java 9
+      #   _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
+      # };
 
     };
 
@@ -88,9 +91,8 @@
         };
         layout = "fi";
         windowManager.i3.enable = true;
-        # Larger fonts in X under HIDPI
         # TODO: Move to machine specific module
-        dpi = 180;
+        dpi = 160;  # Larger fonts in X on HiDPI
       };
     };
 
