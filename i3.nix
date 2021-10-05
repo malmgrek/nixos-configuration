@@ -21,16 +21,17 @@
       ];
 
 
-      # # For larger HIDPI fonts
-      # # TODO: Move to machine specific module
-      # variables = {
-      #   # Scale UI elements by integer factor
-      #   GDK_SCALE = "2";
-      #   # Undo scaling of text
-      #   GDK_DPI_SCALE = "0.5";
-      #   # Scale Java elements, should be unnecessary since Java 9
-      #   _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
-      # };
+      # Hacking better HiDPI appearance. The effect shows e.g. in
+      # how Firefox scales the tab boxes vs. font size.
+      # TODO: Move to machine specific module
+      variables = {
+        # Scale UI elements by integer factor
+        GDK_SCALE = "2";
+        # Undo scaling of text
+        GDK_DPI_SCALE = "0.5";
+        # Scale Java elements, should be unnecessary since Java 9
+        _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
+      };
 
     };
 
@@ -50,11 +51,12 @@
         jetbrains-mono
         noto-fonts
         ubuntu_font_family
+        powerline-fonts
       ];
 
       fontconfig.defaultFonts = {
         sansSerif = [ "Ubuntu" ];
-        monospace = [ "JetBrains Mono" ];
+        monospace = [ "Deja Vu Sans Mono" ];
       };
 
     };
@@ -70,18 +72,12 @@
         desktopManager.xterm.enable = false;
         displayManager = {
           defaultSession = "none+i3";
-          lightdm = {
-            enable = true;
-            greeters.gtk = {
-              enable = true;
-              cursorTheme = {
-                name = "Vanilla-DMZ";
-                package = pkgs.vanilla-dmz;
-                size = 64;
-              };
-              # user = "malmgrek";  # Required by mini
-            };
-          };
+          lightdm.enable = true;
+          sessionCommands = ''
+            ${pkgs.xorg.xrdb}/bin/xrdb -merge <<EOF
+              XTerm*faceName: xft:Dejavu Sans Mono:size=12
+            EOF
+          '';
         };
         layout = "fi";
         windowManager.i3.enable = true;
