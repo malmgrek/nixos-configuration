@@ -1,6 +1,13 @@
 #
 # See also https://nixos.wiki/wiki/Nvidia for troubleshooting
 #
+# NOTE: Enabling this module seems to increase power consumption
+# significantly. Perhaps the offloading is not working properly or
+# some other power-saving feature is badly configured? There is
+# a Nvidia module in Nixos/nixos-hardware that should be looked at.
+#
+# TODO: Test using through a Nix shell.
+#
 { pkgs, ...  }:
 
 let
@@ -20,19 +27,17 @@ in
     videoDrivers = [ "nvidia" ];
   };
 
-  services.picom = {
-    backend = "glx";
-    vSync = true;  # Removes flickering effects e.g. in Firefox
-  };
-
-  hardware.nvidia = {
-    prime = {
-      offload.enable = true;
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:1:0:0";
+  hardware = {
+    nvidia = {
+      prime = {
+        offload.enable = true;
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
+      };
+      powerManagement.enable = true;
+      # powerManagement.finegrained = true;
     };
-    powerManagement.enable = true;
+    opengl.enable = true;
   };
-
 
 }

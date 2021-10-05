@@ -1,4 +1,4 @@
-{ config, options, pkgs, ...}:
+{ config, options, pkgs, lib, ...}:
 {
   config = {
 
@@ -66,7 +66,13 @@
     console.font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
 
     services = {
-      picom.enable = true;
+      picom = {
+        enable = true;
+        # Apps such as Firefox flicker without
+        # v-sync and GLX backend
+        vSync = true;
+        backend = lib.mkDefault "glx";
+      };
       xserver = {
         enable = true;
         desktopManager.xterm.enable = false;
