@@ -8,8 +8,18 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
-  boot.initrd.kernelModules = [ "dm-snapshot" "acpi_call" ];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "thunderbolt"
+    "nvme"
+    "usb_storage"
+    "sd_mod"
+    "rtsx_pci_sdmmc"
+  ];
+  boot.initrd.kernelModules = [
+    "dm-snapshot"
+    "acpi_call"    # Makes tlp work for newer thinkpads
+  ];
   boot.kernelParams = [ "acpi_backlight=native" ];
   boot.kernelModules = [ "kvm-intel" ];
 
@@ -17,7 +27,6 @@
   # with Linux Kernel 5.10 which is the default in Nixos 21.05. Adding latest
   # kernel version helped getting WiFi to work.
   boot.kernelPackages = pkgs.linuxPackages_latest;
-
   boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
 
   fileSystems."/" =

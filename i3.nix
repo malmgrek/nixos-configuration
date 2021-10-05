@@ -4,7 +4,6 @@
 
     environment = {
 
-      # TODO: Add more system packages
       systemPackages = with pkgs; [
         arandr
         dmenu
@@ -15,9 +14,7 @@
         i3status
         libnotify      # Enables notify-send
         lightdm
-        pavucontrol    # GUI for sound control
-        acpilight      # Replaces xorg.xbacklight
-        brightnessctl  # Replaces xorg.xbacklight
+        brightnessctl  # FIXME: Replace with actkbd
       ];
 
 
@@ -34,10 +31,6 @@
       };
 
     };
-
-    # Sound
-    sound.enable = true;
-    hardware.pulseaudio.enable = true;
 
     fonts = {
 
@@ -68,13 +61,12 @@
     services = {
       picom = {
         enable = true;
-        # Apps such as Firefox flicker without
+        # Apps, such as Firefox, flicker without
         # v-sync and GLX backend
         vSync = true;
         backend = lib.mkDefault "glx";
       };
       xserver = {
-        enable = true;
         desktopManager.xterm.enable = false;
         displayManager = {
           defaultSession = "none+i3";
@@ -85,7 +77,6 @@
             EOF
           '';
         };
-        layout = "fi";
         windowManager.i3.enable = true;
         # TODO: Move to machine specific module
         dpi = 160;  # Larger fonts in X on HiDPI

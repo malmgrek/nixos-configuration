@@ -5,47 +5,92 @@
 # TODO: Networking localhost
 #
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports =
     [
       ./hardware.nix
-      ./home.nix
+      ./home
       ./i3.nix
       # ./nvidia.nix
-      ./zsh.nix
     ];
 
   nixpkgs.overlays = import ./packages.nix;
-
-  ##################################
   nixpkgs.config.allowUnfree = true;
-  ##################################
 
   # Use the systemd-boot EFI boot loader.
   # TODO: Move to machine specific
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub.useOSProber = true;
-
-  networking = {
-    hostName = "nixos";
-    networkmanager.enable = true;
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+      grub.useOSProber = true;
+    };
   };
 
   # Set your time zone.
   time.timeZone = "Europe/Helsinki";
 
-  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
-  networking.useDHCP = false;
-  networking.interfaces.enp0s31f6.useDHCP = true;
+  networking = {
+    hostName = "nixos";
+    networkmanager.enable = true;
+    # The global useDHCP flag is deprecated, therefore explicitly set to false
+    # here. Per-interface useDHCP will be mandatory in the future, so this
+    # generated config replicates the default behaviour.
+    useDHCP = false;
+    interfaces.enp0s31f6.useDHCP = true;
+    # Firewall is enabled by default
+    firewall.enable = true;
+  };
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  hardware = {
+    # Replaces xbacklight
+    # FIXME: Project not maintained anymore, replace with actkbd
+    acpilight = {
+      enable = true;
+    };
+    bluetooth = {
+      enable = lib.mkDefault true;
+      package = lib.mkDefault pkgs.bluezFull;
+    };
+    # TODO: Pulseaudio here from i3.nix
+    pulseaudio = {
+      enable = true;
+    } // (
+      # NixOS allows either a lightweight build (default) or full build of
+      # PulseAudio to be installed. Only the full build has Bluetooth support,
+      # so it must be selected if bluetooth is enabled.
+      if config.hardware.bluetooth.enable
+      then { package = pkgs.pulseaudioFull; }
+      else { }
+    );
+  };
+
+  services = {
+    openssh.enable = true;
+    # # Enable CUPS to print documents.
+    # printing.enable = true;
+    xserver = {
+      enable = true;
+      libinput = {
+        enable = true;
+        touchpad.tapping = false;
+      };
+      layout = "fi";
+    };
+  };
+
+  programs = {
+    # Some programs need SUID wrappers, can be configured further or are started
+    # in user sessions.
+    mtr.enable = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
+    light.enable = true;
+  };
 
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";
@@ -53,14 +98,6 @@
     # font = "Lat2-Terminus16";
     keyMap = "fi";
   };
-
-  # services.xserver.xkbOptions = "eurosign:e";
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.malmgrek = {
@@ -77,46 +114,33 @@
   environment.systemPackages = with pkgs; [
 
     # Minimal CLI programs
+    acpi        # Shows information such as battery status
+    binutils
     coreutils
-    killall
-    unzip
-    gnumake
-    vim
-    wget
-    tmux        # Terminal multiplexer
-    acpi
     git
-    ripgrep
+    gnumake
     htop
-    exa         # Better 'ls'
-    gnupg
+    killall
+    lm_sensors  # Read hardware sensor info
     mkpasswd    # Password hash generator
     openssl
     openvpn
-    lm_sensors  # Read hardware sensor info
+    ranger
+    ripgrep
+    tmux        # Terminal multiplexer
+    unzip
+    usbutils
+    vim
+    wget
+
+    evince
+    libreoffice
+    luakit
+    pavucontrol    # GUI for sound control
+    vlc
+    xclip
 
   ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  programs.light.enable = true;
 
   system.stateVersion = "21.05"; # Don't edit!
 
