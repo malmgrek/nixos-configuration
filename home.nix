@@ -33,18 +33,13 @@ in {
     xdg.configFile."i3/status.toml".source = ./config/i3/status.toml;
 
     # Vim config files
+    # FIXME: xdg.configFile -> home.file
     xdg.configFile.".vimrc" = {
       # The first time Vim is opened, something will break due to missing plugins.
       # Just launch the editor, and the config will force loading of missing packages.
       source = ./config/vim/vimrc;
       target = "../.vimrc";
     };
-
-    # Zsh config files
-    # xdg.configFile.".zshrc" = {
-    #   source = ./config/zsh/zshrc;
-    #   target = "../.zshrc";
-    # };
 
     # Emacs config files
     home.file.".doom.d" = {
@@ -53,6 +48,9 @@ in {
     };
 
     home.packages = with pkgs; [
+
+      # Terminal emulators
+      alacritty
 
       # Doom Emacs dependencies
       emacsUnstable
@@ -77,7 +75,6 @@ in {
     ];
 
     programs = {
-      # Firefox
       firefox = {
         enable = true;
         profiles."malmgrek.default" = {
@@ -85,6 +82,7 @@ in {
           name = "malmgrek.default";
           settings = {
             "browser.startup.homepage" = "https://nixos.org";
+            "browser.uidensity" = 1;
           };
         };
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
