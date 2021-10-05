@@ -9,18 +9,19 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
       ./hardware.nix
       ./home.nix
       ./i3.nix
-      ./nvidia.nix
+      # ./nvidia.nix
+      ./zsh.nix
     ];
 
   nixpkgs.overlays = import ./packages.nix;
 
-  ###################
+  ##################################
   nixpkgs.config.allowUnfree = true;
-  ###################
+  ##################################
 
   # Use the systemd-boot EFI boot loader.
   # TODO: Move to machine specific
@@ -75,7 +76,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
 
-    # Minimal stuff
+    # Minimal CLI programs
     coreutils
     killall
     unzip
@@ -93,13 +94,6 @@
     openssl
     openvpn
     lm_sensors  # Read hardware sensor info
-
-    # Terminal emulator
-    alacritty
-
-    # Shells
-    zsh
-    fish
 
   ];
 
