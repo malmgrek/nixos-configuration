@@ -14,7 +14,6 @@
         i3status
         libnotify      # Enables notify-send
         lightdm
-        brightnessctl  # FIXME: Replace with actkbd
       ];
 
 
@@ -64,6 +63,25 @@
     console.font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
 
     services = {
+      actkbd = {
+        enable = true;
+        bindings = let
+          light = "${pkgs.light}/bin/light";
+          step = "1";
+        in [
+          {
+            keys = [ 224 ];
+            events = [ "key" ];
+            # Use minimum brightness 0.2 so the display won't go totally black.
+            command = "${light} -N 0.2 && ${light} -U ${step}";
+          }
+          {
+            keys = [ 225 ];
+            events = [ "key" ];
+            command = "${light} -A ${step}";
+          }
+        ];
+      };
       picom = {
         enable = true;
         # Apps, such as Firefox, flicker without

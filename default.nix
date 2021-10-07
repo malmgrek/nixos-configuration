@@ -49,7 +49,6 @@
 
   hardware = {
     # Replaces xbacklight
-    # FIXME: Project not maintained anymore, replace with actkbd
     acpilight = {
       enable = true;
     };
