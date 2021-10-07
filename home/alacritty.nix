@@ -9,14 +9,14 @@ let
     normal = {
     # NOTE: Use '#131613' for the `black` color if you'd like to see
     # black text on the background.
-      black =   "#282c34";
-      red =     "#e06c75";
-      green =   "#98c379";
-      yellow =  "#d19a66";
-      blue =    "#61afef";
+      black = "#282c34";
+      red = "#e06c75";
+      green = "#98c379";
+      yellow = "#d19a66";
+      blue = "#61afef";
       magenta = "#c678dd";
-      cyan =    "#56b6c2";
-      white =   "#abb2bf";
+      cyan = "#56b6c2";
+      white = "#abb2bf";
     };
     bright = {
       black = "#5c6370";

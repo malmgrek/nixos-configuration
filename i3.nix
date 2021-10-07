@@ -30,6 +30,11 @@
         _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
       };
 
+      # Configuration file for i3status-rust status bar
+      etc."i3status-rs/config.toml" = {
+        source = ./config/i3status-rs/config.toml;
+      };
+
     };
 
     fonts = {
@@ -77,7 +82,12 @@
             EOF
           '';
         };
-        windowManager.i3.enable = true;
+        windowManager = {
+          i3 = {
+            enable = true;
+            configFile = ./config/i3/config;
+          };
+        };
         # TODO: Move to machine specific module
         dpi = 160;  # Larger fonts in X on HiDPI
       };

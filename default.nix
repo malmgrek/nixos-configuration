@@ -2,7 +2,10 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 #
-# TODO: Networking localhost
+# TODO: Rename to common.nix and import into a machine-specific module.
+# For example, ./p14s/default.nix or ./phoe/default.nix
+#
+# TODO: Networking localhost, hostName
 #
 
 { config, pkgs, lib, ... }:
@@ -99,11 +102,11 @@
     keyMap = "fi";
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # TODO: Use declarative style user management with immutable users
   users.users.malmgrek = {
     isNormalUser = true;
     extraGroups = [
-      "wheel"            # Enable sudo
+      "wheel"
       "networkmanager"
       "video"
     ];

@@ -9,6 +9,7 @@ in {
     ./alacritty.nix
     ./doom-emacs.nix
     ./firefox.nix
+    ./vim.nix
     ./zsh.nix
   ];
 
@@ -22,26 +23,18 @@ in {
   home-manager.users.malmgrek = {
 
     # Xserver
+    # TODO: Resolve without Home Manager
     xsession.pointerCursor = {
       name = "Vanilla-DMZ";
       package = pkgs.vanilla-dmz;
       size = 128;
     };
 
-    # i3 config files
-    xdg.configFile."i3/config".source = ../config/i3/config;
-    xdg.configFile."i3/status.toml".source = ../config/i3/status.toml;
-
-    # Vim config files
-    home.file.".vimrc" = {
-      # The first time Vim is opened, something will break due to missing plugins.
-      # Just launch the editor, and the config will force loading of missing packages.
-      source = ../config/vim/vimrc;
-    };
-
     home.packages = with pkgs; [
-      libreoffice
       okular
+      pass
+      gimp
+      inkscape
     ];
 
 
