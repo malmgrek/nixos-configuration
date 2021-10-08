@@ -2,41 +2,20 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 #
-# TODO: Rename to common.nix and import into a machine-specific module.
-# For example, ./p14s/default.nix or ./phoe/default.nix
-#
 # TODO: Networking localhost, hostName
 #
 
 { config, pkgs, lib, ... }:
 
 {
-  imports =
-    [
-      ./hardware.nix
-      ./home
-      ./i3.nix
-      # ./nvidia.nix
-    ];
 
   nixpkgs.overlays = import ./packages.nix;
   nixpkgs.config.allowUnfree = true;
-
-  # Use the systemd-boot EFI boot loader.
-  # TODO: Move to machine specific
-  boot = {
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-      grub.useOSProber = true;
-    };
-  };
 
   # Set your time zone.
   time.timeZone = "Europe/Helsinki";
 
   networking = {
-    hostName = "nixos";
     networkmanager.enable = true;
     # The global useDHCP flag is deprecated, therefore explicitly set to false
     # here. Per-interface useDHCP will be mandatory in the future, so this
@@ -56,7 +35,6 @@
       enable = lib.mkDefault true;
       package = lib.mkDefault pkgs.bluezFull;
     };
-    # TODO: Pulseaudio here from i3.nix
     pulseaudio = {
       enable = true;
     } // (
@@ -101,16 +79,6 @@
     keyMap = "fi";
   };
 
-  # TODO: Use declarative style user management with immutable users
-  users.users.malmgrek = {
-    isNormalUser = true;
-    extraGroups = [
-      "wheel"
-      "networkmanager"
-      "video"
-    ];
-  };
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -143,8 +111,6 @@
     xclip
 
   ];
-
-  system.stateVersion = "21.05"; # Don't edit!
 
 }
 

@@ -22,21 +22,12 @@ in {
 
   home-manager.users.malmgrek = {
 
-    # Xserver
-    # TODO: Resolve without Home Manager
-    xsession.pointerCursor = {
-      name = "Vanilla-DMZ";
-      package = pkgs.vanilla-dmz;
-      size = 128;
-    };
-
     home.packages = with pkgs; [
       okular
       pass
       gimp
       inkscape
     ];
-
 
   };
 

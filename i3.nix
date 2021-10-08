@@ -16,19 +16,6 @@
         lightdm
       ];
 
-
-      # Hacking better HiDPI appearance. The effect shows e.g. in
-      # how Firefox scales the tab boxes vs. font size.
-      # TODO: Move to machine specific module
-      variables = {
-        # Scale UI elements by integer factor
-        GDK_SCALE = "2";
-        # Undo scaling of text
-        GDK_DPI_SCALE = "0.5";
-        # Scale Java elements, should be unnecessary since Java 9
-        _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
-      };
-
       # Configuration file for i3status-rust status bar
       etc."i3status-rs/config.toml" = {
         source = ./config/i3status-rs/config.toml;
@@ -57,10 +44,6 @@
       };
 
     };
-
-    # Bigger tty fonts
-    # TODO: Move to machine specific module
-    console.font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
 
     services = {
       actkbd = {
@@ -106,8 +89,6 @@
             configFile = ./config/i3/config;
           };
         };
-        # TODO: Move to machine specific module
-        dpi = 160;  # Larger fonts in X on HiDPI
       };
     };
 
