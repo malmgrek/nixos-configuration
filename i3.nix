@@ -67,8 +67,7 @@
       };
       picom = {
         enable = true;
-        # Apps, such as Firefox, flicker without
-        # v-sync and GLX backend
+        # Apps, such as Firefox may flicker without v-sync and GLX backend
         vSync = true;
         backend = lib.mkDefault "glx";
       };
