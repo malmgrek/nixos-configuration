@@ -28,8 +28,8 @@
 
   networking.hostName = "spyridon";
 
-  # Linux thermal daemon controls the system temperature using available cooling
-  # methods
+  # Linux thermal daemon controls the system temperature using available
+  # cooling methods
   services.thermald.enable = true;
   # TLP is a command line for saving laptop battery. TLP will take care of the
   # majority of settings that powertop would enable.
@@ -63,7 +63,7 @@
   };
 
   # Bigger tty fonts
-  # TODO: Try the effect of this
+  # TODO: Document why this is needed
   console.font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
 
   # The effect of the below environment variables shows e.g. in how Firefox

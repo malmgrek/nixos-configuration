@@ -14,6 +14,7 @@
         i3status
         libnotify      # Enables notify-send
         lightdm
+        rofi
       ];
 
       # Configuration file for i3status-rust status bar

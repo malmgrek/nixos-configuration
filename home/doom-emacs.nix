@@ -6,7 +6,7 @@
 
   home-manager.users.malmgrek = {
 
-    # TODO: Move to host specific directory
+    # TODO: Configure font size in host specific directory.
     home.file.".doom.d" = {
       source = ../config/doom-emacs;
       recursive = true;

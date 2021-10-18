@@ -102,6 +102,7 @@
     usbutils
     vim
     wget
+    zip
 
     evince
     libreoffice
