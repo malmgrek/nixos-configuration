@@ -7,6 +7,7 @@ in {
   imports = [
     (import "${home-manager}/nixos")
     ./alacritty.nix
+    ./docker.nix
     ./doom-emacs.nix
     ./firefox.nix
     ./ipython.nix
