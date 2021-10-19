@@ -27,6 +27,11 @@
   };
 
   networking.hostName = "spyridon";
+  time.timeZone = "Europe/Helsinki";
+  location = {
+    latitude = 60.2;
+    longitude = 24.9;
+  };
 
   # Linux thermal daemon controls the system temperature using available
   # cooling methods
@@ -46,8 +51,21 @@
     ];
   };
 
+  # Automatic screen color management
+  services.redshift = {
+    enable = true;
+    brightness = {
+      day = "1";
+      night = "1";
+    };
+    temperature = {
+      day = 7500;
+      night = 4500;
+    };
+  };
+
   #
-  # Hacking a better UI experience on HiDPI
+  # Hacking a better UI experience on HiDPI ----------------------------------
   #
 
   services.xserver.dpi = 150;

@@ -12,9 +12,6 @@
   nixpkgs.overlays = import ./packages.nix;
   nixpkgs.config.allowUnfree = true;
 
-  # Set your time zone.
-  time.timeZone = "Europe/Helsinki";
-
   networking = {
     networkmanager.enable = true;
     # The global useDHCP flag is deprecated, therefore explicitly set to false
