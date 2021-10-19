@@ -30,10 +30,11 @@
 
   # Linux thermal daemon controls the system temperature using available
   # cooling methods
-  services.thermald.enable = true;
+  services.thermald.enable = false;
   # TLP is a command line for saving laptop battery. TLP will take care of the
   # majority of settings that powertop would enable.
   services.tlp.enable = true;
+  powerManagement.powertop.enable = true;
 
   # TODO: Use declarative style user management with immutable users
   users.users.malmgrek = {

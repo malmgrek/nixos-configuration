@@ -64,10 +64,9 @@
     # Powertop is a tool provided by Intel to enable various powersaving modes
     # in userspace.
     #
-    # TODO: Investigate if TLP would be enough. The Powertop actually uses
-    # `powertop --auto-tune` which, according to TLP docs, is mostly covered by
-    # TLP. It should be possible to compare the Powertop report's tuning
-    # suggestions with what TLP already implements.
+    # The Powertop actually uses `powertop --auto-tune` which, according to TLP
+    # docs, is mostly covered by TLP. It should be possible to compare the
+    # Powertop report's tuning suggestions with what TLP already implements.
     #
     powertop.enable = lib.mkDefault true;
   };
