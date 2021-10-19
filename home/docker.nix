@@ -2,7 +2,7 @@
 
 {
 
-  virtualization = {
+  virtualisation = {
     docker = {
       enable = true;
       autoPrune.enable = true;
@@ -11,7 +11,7 @@
   };
 
   home-manager.users.malmgrek = {
-    packages = with pkgs; [
+    home.packages = with pkgs; [
       docker
       docker-compose
     ];
