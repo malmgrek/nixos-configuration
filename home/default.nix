@@ -14,7 +14,7 @@ in {
     ./ipython.nix
     ./jupyter.nix
     ./vim.nix
-    ./zsh.nix
+    ./shells.nix
   ];
 
   # environment.sessionVariables (pam-environment) are set earlier in the login

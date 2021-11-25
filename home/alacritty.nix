@@ -7,8 +7,8 @@ let
       foreground = "#abb2bf";
     };
     normal = {
-    # NOTE: Use '#131613' for the `black` color if you'd like to see
-    # black text on the background.
+      # NOTE: Use '#131613' for the `black` color if you'd like to see
+      # black text on the background.
       black = "#282c34";
       red = "#e06c75";
       green = "#98c379";
@@ -43,7 +43,6 @@ in
               family = "monospace";
               style = "Regular";
             };
-            size = 6.0;
           };
           colors = onedark;
         };
