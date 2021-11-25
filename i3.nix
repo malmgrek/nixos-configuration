@@ -1,3 +1,7 @@
+#
+# Desktop environment based on i3
+#
+
 { config, options, pkgs, lib, ...}:
 {
   config = {
@@ -5,16 +9,18 @@
     environment = {
 
       systemPackages = with pkgs; [
+        # i3blocks
         arandr
         dmenu
         dunst
         i3lock
-        # i3blocks
-        i3status-rust
         i3status
+        i3status-rust
         libnotify      # Enables notify-send
         lightdm
         rofi
+        simplescreenrecorder
+        spectacle
       ];
 
       # Configuration file for i3status-rust status bar
@@ -77,11 +83,6 @@
         displayManager = {
           defaultSession = "none+i3";
           lightdm.enable = true;
-          sessionCommands = ''
-            ${pkgs.xorg.xrdb}/bin/xrdb -merge <<EOF
-              XTerm*faceName: xft:Dejavu Sans Mono:size=12
-            EOF
-          '';
         };
         windowManager = {
           i3 = {
