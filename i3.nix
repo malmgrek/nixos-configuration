@@ -21,6 +21,7 @@
         rofi
         simplescreenrecorder
         spectacle
+        xss-lock
       ];
 
       # Configuration file for i3status-rust status bar

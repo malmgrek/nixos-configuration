@@ -65,7 +65,10 @@
   };
 
   #
-  # Hacking a better UI experience on HiDPI ----------------------------------
+  # Hacking a better UI experience on HiDPI laptop ----------------------------------
+  #
+  # NOTE: Comment out the below code for a temporary build that works
+  #       nicely on a large external monitor.
   #
 
   services = {
