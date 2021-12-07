@@ -80,8 +80,8 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
 
-    # Minimal CLI programs
-    acpi        # Shows information such as battery status
+    # CLI programs
+    acpi  # Battery status etc.
     binutils
     coreutils
     git
@@ -89,24 +89,37 @@
     htop
     killall
     lm_sensors  # Read hardware sensor info
-    mkpasswd    # Password hash generator
-    openssl
-    openvpn
     ranger
     ripgrep
-    tmux        # Terminal multiplexer
+    tmux
     unzip
     usbutils
-    vim
     wget
     zip
 
+    # Text editors
+    vim
+    kakoune
+    xclip
+
+    # Office suite
     evince
     libreoffice
     luakit
-    pavucontrol    # GUI for sound control
+
+    # Media
+    pavucontrol  # GUI for sound control
     vlc
-    xclip
+
+    # VPN
+    openvpn
+
+    # Password hash generator
+    mkpasswd
+    openssl
+
+    # Android
+    jmtpfs
 
   ];
 
