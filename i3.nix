@@ -29,6 +29,11 @@
         source = ./config/i3status-rs/config.toml;
       };
 
+      # Configuration file for dunst
+      etc."dunstrc" = {
+        source = ./config/dunst/dunstrc;
+      };
+
     };
 
     fonts = {
@@ -92,6 +97,17 @@
           };
         };
       };
+    };
+
+    # Notifications with Dunst
+    systemd.user.services."dunst" = {
+      enable = true;
+      description = "Dunst notification daemon";
+      documentation = [ "man:dunst(1)" ];
+      wantedBy = [ "default.target" ];
+      serviceConfig.Restart = "always";
+      serviceConfig.RestartSec = 2;
+      serviceConfig.ExecStart = "${pkgs.dunst}/bin/dunst -conf /etc/dunstrc";
     };
 
   };
