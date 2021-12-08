@@ -16,20 +16,24 @@
         i3lock
         i3status
         i3status-rust
-        libnotify      # Enables notify-send
+        libnotify  # Enables notify-send
         lightdm
+        networkmanagerapplet
         rofi
         simplescreenrecorder
-        spectacle
-        xss-lock
+        spectacle  # Screenshooting
+        udiskie
+        xss-lock  # Listens for screenlock requests
       ];
 
-      # Configuration file for i3status-rust status bar
+      # Configuration file for i3status-rust status bar.
+      # The daemon is started in i3 config.
       etc."i3status-rs/config.toml" = {
         source = ./config/i3status-rs/config.toml;
       };
 
-      # Configuration file for dunst
+      # Configuration file for dunst.
+      # The daemon is started in i3 config.
       etc."dunstrc" = {
         source = ./config/dunst/dunstrc;
       };
@@ -97,17 +101,6 @@
           };
         };
       };
-    };
-
-    # Notifications with Dunst
-    systemd.user.services."dunst" = {
-      enable = true;
-      description = "Dunst notification daemon";
-      documentation = [ "man:dunst(1)" ];
-      wantedBy = [ "default.target" ];
-      serviceConfig.Restart = "always";
-      serviceConfig.RestartSec = 2;
-      serviceConfig.ExecStart = "${pkgs.dunst}/bin/dunst -conf /etc/dunstrc";
     };
 
   };
