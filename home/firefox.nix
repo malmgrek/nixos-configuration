@@ -16,8 +16,10 @@
           };
         };
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+          bypass-paywalls-clean
           https-everywhere
           privacy-badger
+          ublock-origin
           vim-vixen
         ];
       };
