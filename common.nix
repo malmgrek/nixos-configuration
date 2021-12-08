@@ -46,8 +46,11 @@
 
   services = {
     openssh.enable = true;
-    # # Enable CUPS to print documents.
-    # printing.enable = true;
+    printing = {
+      enable = true;
+      webInterface = true;
+      drivers = with pkgs; [ gutenprint ];
+    };
     xserver = {
       enable = true;
       libinput = {
