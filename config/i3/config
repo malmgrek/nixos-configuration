@@ -39,24 +39,10 @@ exec_always --no-startup-id "setxkbmap -option caps:escape"
 exec "setxkbmap -layout fi,gr"
 exec "setxkbmap -option 'grp:alt_shift_toggle'"
 
-# Shutdown, reboot, lock screen
-# Source: https://wiki.archlinux.org/index.php/I3
-set $Locker i3lock && sleep 1
-set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
-mode "$mode_system" {
-    bindsym l exec --no-startup-id $Locker, mode "default"
-    bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id systemctl suspend, mode "default"
-    bindsym h exec --no-startup-id systemctl hibernate, mode "default"
-    bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
-
-    # back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
-bindsym $mod+b mode "$mode_system"
+# Rofi menus
+bindsym $mod+b exec rofi-power-menu
+bindsym $mod+Tab exec rofi-window-menu
+bindsym $mod+Shift+period exec rofi-app-menu
 
 # Network manager
 exec --no-startup-id nm-applet

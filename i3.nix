@@ -3,7 +3,39 @@
 #
 
 { config, options, pkgs, lib, ...}:
-{
+
+let
+  rofi-power-menu = pkgs.writeScriptBin "rofi-power-menu" (
+    import ./utils/rofi-power-menu.nix {
+      shell = pkgs.stdenv.shell;
+      cmds = {
+        rofi = "${pkgs.rofi}/bin/rofi -theme /etc/rofi/config.rasi -dpi 150";
+        hibernate = "systemctl hibernate";
+        lock = "i3lock";
+        logout = "i3-msg exit";
+        poweroff = "systemctl poweroff";
+        reboot = "systemctl reboot";
+        suspend = "systemctl suspend";
+      };
+    }
+  );
+  rofi-app-menu = pkgs.writeScriptBin "rofi-app-menu" (
+    import ./utils/rofi-app-menu.nix {
+      shell = pkgs.stdenv.shell;
+      cmds = {
+        rofi = "${pkgs.rofi}/bin/rofi -theme /etc/rofi/config.rasi -dpi 150";
+      };
+    }
+  );
+  rofi-window-menu = pkgs.writeScriptBin "rofi-window-menu" (
+    import ./utils/rofi-window-menu.nix {
+      shell = pkgs.stdenv.shell;
+      cmds = {
+        rofi = "${pkgs.rofi}/bin/rofi -theme /etc/rofi/config.rasi -dpi 150";
+      };
+    }
+  );
+in {
   config = {
 
     environment = {
@@ -19,7 +51,10 @@
         libnotify  # Enables notify-send
         lightdm
         networkmanagerapplet
-        rofi
+        rofi  # TODO: Remove
+        rofi-app-menu
+        rofi-power-menu
+        rofi-window-menu
         simplescreenrecorder
         spectacle  # Screenshooting
         udiskie
@@ -36,6 +71,10 @@
       # The daemon is started in i3 config.
       etc."dunstrc" = {
         source = ./config/dunst/dunstrc;
+      };
+
+      etc."rofi/config.rasi" = {
+        source = ./config/rofi/config.rasi;
       };
 
     };

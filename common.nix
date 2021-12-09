@@ -83,6 +83,10 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
 
+    # Terminal emulators
+    alacritty
+    xst
+
     # CLI programs
     acpi  # Battery status etc.
     binutils
