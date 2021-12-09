@@ -86,6 +86,13 @@ element active, element selected active {
   text-color: @purple;
 }
 
+element-icon {
+  horizontal-align: 0.5;
+  layout: vertical;
+  orientation: vertical;
+  size: 30;
+}
+
 message {
   padding: 5px;
   border-radius: 3px;

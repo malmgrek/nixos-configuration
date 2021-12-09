@@ -51,7 +51,7 @@ in {
         libnotify  # Enables notify-send
         lightdm
         networkmanagerapplet
-        rofi  # TODO: Remove
+        rofi
         rofi-app-menu
         rofi-power-menu
         rofi-window-menu

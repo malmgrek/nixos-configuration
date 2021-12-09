@@ -5,32 +5,41 @@
 
   rofi_cmd='${cmds.rofi}'
 
+  trim ()
+  {
+    # Replace a tab with a space
+    echo ''${1//\\t/ }
+  }
+
   # Options
-  hibernate=" Hibernate"
-  lock=" Lock"
-  logout=" Logout"
-  poweroff=" Shutdown"
-  reboot=" Reboot"
-  suspend=" Suspend"
+  hibernate="\tHibernate"
+  lock="\tLock"
+  logout="\tLogout"
+  poweroff="\tShutdown"
+  reboot="\tReboot"
+  suspend="\tSuspend"
   options="$poweroff\n$reboot\n$lock\n$hibernate\n$suspend\n$logout"
 
-  case "$(echo -e "$options" | $rofi_cmd -dmenu -selected-row 2)" in
-      $hibernate)
+  # HACK: Cut out messed up whitespaces using xargs
+  # TODO: A faster version which doesn't use xargs
+  case "$(echo -e "$options" | $rofi_cmd -dmenu -selected-row 2 | xargs)" in
+      # HACK: Trim original menu items so that they have only one space
+      $(trim $hibernate))
           ${cmds.hibernate}
           ;;
-      $lock)
+      $(trim $lock))
           ${cmds.lock}
           ;;
-      $logout)
+      $(trim $logout))
           ${cmds.logout}
           ;;
-      $poweroff)
+      $(trim $poweroff))
           ${cmds.poweroff}
           ;;
-      $reboot)
+      $(trim $reboot))
           ${cmds.reboot}
           ;;
-      $suspend)
+      $(trim $suspend))
           ${cmds.suspend}
           ;;
   esac
