@@ -6,13 +6,12 @@
   rofi_cmd='${cmds.rofi}'
 
   # Options
-  hibernate="Hibernate"
-  lock="Lock"
-  logout="Logout"
-  poweroff="Shutdown"
-  reboot="Reboot"
-  suspend="Suspend"
-  # Variable passed to rofi
+  hibernate=" Hibernate"
+  lock=" Lock"
+  logout=" Logout"
+  poweroff=" Shutdown"
+  reboot=" Reboot"
+  suspend=" Suspend"
   options="$poweroff\n$reboot\n$lock\n$hibernate\n$suspend\n$logout"
 
   case "$(echo -e "$options" | $rofi_cmd -dmenu -selected-row 2)" in

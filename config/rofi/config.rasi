@@ -27,6 +27,7 @@ configuration {
   background-color: transparent;
 
   font: "Knack Nerd Font 14";
+  /* font: "Monospace 14"; */
   text-color: @text;
 }
 
