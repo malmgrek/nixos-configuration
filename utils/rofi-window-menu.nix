@@ -1,7 +1,7 @@
 { shell, cmds }:
 
 ''
-  #!${shell}
+  #!/usr/bin/env sh
 
   ${cmds.rofi} -show window -show-icons
 ''
