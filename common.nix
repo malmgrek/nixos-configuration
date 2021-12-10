@@ -58,7 +58,8 @@
         enable = true;
         touchpad.tapping = false;
       };
-      layout = "fi";
+      layout = "fi,us,gr";
+      xkbOptions = "grp:alt_shift_toggle";
     };
   };
 

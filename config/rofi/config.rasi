@@ -26,8 +26,10 @@ configuration {
   spacing: 0;
   background-color: transparent;
 
-  font: "Knack Nerd Font 14";
+  /* font: "Knack Nerd Font 14"; */
   /* font: "Monospace 14"; */
+  /* font: "Fira Code 14"; */
+  font: "JetBrains Mono 14";
   text-color: @text;
 }
 
