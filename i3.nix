@@ -27,6 +27,14 @@ let
       };
     }
   );
+  rofi-dmenu = pkgs.writeScriptBin "rofi-dmenu" (
+    import ./utils/rofi-dmenu.nix {
+      shell = pkgs.stdenv.shell;
+      cmds = {
+        rofi = "${pkgs.rofi}/bin/rofi -theme /etc/rofi/config.rasi -dpi 150";
+      };
+    }
+  );
   rofi-window-menu = pkgs.writeScriptBin "rofi-window-menu" (
     import ./utils/rofi-window-menu.nix {
       shell = pkgs.stdenv.shell;
@@ -53,6 +61,7 @@ in {
         networkmanagerapplet
         rofi
         rofi-app-menu
+        rofi-dmenu
         rofi-power-menu
         rofi-window-menu
         simplescreenrecorder

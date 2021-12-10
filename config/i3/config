@@ -35,17 +35,17 @@ exec --no-startup-id xset r rate 300 80
 # Esc to CAPS
 exec_always --no-startup-id "setxkbmap -option caps:escape"
 
-# Change keyboard layout
-exec "setxkbmap -layout fi,gr"
-exec "setxkbmap -option 'grp:alt_shift_toggle'"
-
 # Rofi menus
-bindsym $mod+b exec rofi-power-menu
-bindsym $mod+Tab exec rofi-window-menu
-bindsym $mod+Shift+period exec rofi-app-menu
+bindsym $mod+b exec --no-startup-id rofi-power-menu
+bindsym $mod+Tab exec --no-startup-id rofi-window-menu
+bindsym $mod+Shift+period exec --no-startup-id rofi-app-menu
+bindsym $mod+d exec --no-startup-id rofi-dmenu
 
 # Network manager
 exec --no-startup-id nm-applet
+
+# Bluetooth front end
+exec --no-startup-id blueman-applet
 
 # Udiskie
 exec --no-startup-id udiskie --no-automount --tray
@@ -68,13 +68,6 @@ bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
-
-# start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym $mod+h focus left
