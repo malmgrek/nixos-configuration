@@ -135,6 +135,8 @@ in {
         # Apps, such as Firefox may flicker without v-sync and GLX backend
         vSync = true;
         backend = lib.mkDefault "glx";
+        activeOpacity = 0.95;
+        inactiveOpacity = 0.7;
       };
       xserver = {
         desktopManager.xterm.enable = false;
@@ -146,6 +148,7 @@ in {
           i3 = {
             enable = true;
             configFile = ./config/i3/config;
+            package = pkgs.i3-gaps;
           };
         };
       };

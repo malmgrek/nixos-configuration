@@ -64,13 +64,19 @@ in
       alacritty = {
         enable = true;
         settings = {
+          colors = onedark;
           font = {
             normal = {
               family = "monospace";
               style = "Regular";
             };
           };
-          colors = onedark;
+          window = {
+            padding = {
+              x = 4;
+              y = 4;
+            };
+          };
         };
       };
     };
