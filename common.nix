@@ -87,17 +87,20 @@
 
     # Terminal emulators
     alacritty
+    rxvt-unicode  # urxvt
     xst
 
     # CLI programs
-    acpi  # Battery status etc.
+    acpi        # Battery status etc.
     binutils
+    broot       # Directory tree viewer
     coreutils
     git
     gnumake
     htop
     killall
     lm_sensors  # Read hardware sensor info
+    pass        # Password store
     ranger
     ripgrep
     tmux
@@ -113,8 +116,12 @@
 
     # Office suite
     evince
+    gimp
+    inkscape
     libreoffice
-    luakit
+    luakit       # Vim-esque web browser
+    mupdf
+    okular
 
     # Media
     pavucontrol  # GUI for sound control

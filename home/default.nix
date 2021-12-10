@@ -34,13 +34,6 @@ in {
     # Home Manager's system state. Has effect on some default settings such as
     # xdg. Let's use same value as that of the whole system.
     home.stateVersion = config.system.stateVersion;
-    home.packages = with pkgs; [
-      broot
-      okular
-      pass
-      gimp
-      inkscape
-    ];
   };
 
 }
