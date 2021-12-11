@@ -54,21 +54,11 @@ client.focused_inactive    $black         $black        $white   $darkblack
 client.urgent              $darkred       $darkred      $black   $darkred
 client.background          $black
 
-# The combination of xss-lock, nm-applet and pactl is a popular choice, so
-# they are included here as an example. Modify as you see fit.
-
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+# Enable external session locker
+exec --no-startup-id xss-lock --transfer-sleep-lock -- wrapped-xsecurelock
 
 # Picom window composition
 exec --no-startup-id picom
-
-# Keyboard repeat rate
-exec --no-startup-id xset r rate 300 80
-
-# Esc to CAPS
-exec_always --no-startup-id "setxkbmap -option caps:escape"
 
 # Rofi menus
 bindsym $mod+b exec --no-startup-id rofi-power-menu

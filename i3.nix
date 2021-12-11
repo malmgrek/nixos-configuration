@@ -5,13 +5,25 @@
 { config, options, pkgs, lib, ...}:
 
 let
+  wrapped-xsecurelock = pkgs.writeScriptBin "wrapped-xsecurelock" (
+    ''
+      #!/bin/sh
+
+      export XSECURELOCK_SAVER=saver_xscreensaver
+      export XSECURELOCK_PASSWORD_PROMPT=emoticon
+      export XSECURELOCK_FONT='JetBrains Mono'
+      # exec fixes broken pipe error
+      exec ${pkgs.xsecurelock}/bin/xsecurelock
+    ''
+  );
   rofi-power-menu = pkgs.writeScriptBin "rofi-power-menu" (
     import ./utils/rofi-power-menu.nix {
       shell = pkgs.stdenv.shell;
       cmds = {
         rofi = "${pkgs.rofi}/bin/rofi -theme /etc/rofi/config.rasi -dpi 150";
         hibernate = "systemctl hibernate";
-        lock = "i3lock";
+        # Custom session locker is defined in i3/config by xss-lock
+        lock = "loginctl lock-session";
         logout = "i3-msg exit";
         poweroff = "systemctl poweroff";
         reboot = "systemctl reboot";
@@ -53,7 +65,7 @@ in {
         arandr
         dmenu
         dunst
-        i3lock
+        # i3lock
         i3status
         i3status-rust
         libnotify  # Enables notify-send
@@ -66,8 +78,10 @@ in {
         rofi-window-menu
         simplescreenrecorder
         spectacle  # Screenshooting
-        udiskie
-        xss-lock  # Listens for screenlock requests
+        udiskie  # Removable media daemon
+        xscreensaver
+        wrapped-xsecurelock
+        xss-lock
       ];
 
       # Configuration file for i3status-rust status bar.
@@ -99,6 +113,7 @@ in {
         font-awesome
         jetbrains-mono
         noto-fonts
+        noto-fonts-emoji
         ubuntu_font_family
         powerline-fonts
       ];
@@ -106,6 +121,7 @@ in {
       fontconfig.defaultFonts = {
         sansSerif = [ "Ubuntu" ];
         monospace = [ "Deja Vu Sans Mono" ];
+        emoji = [ "Noto Color Emoji" ];
       };
 
     };
@@ -135,8 +151,10 @@ in {
         # Apps, such as Firefox may flicker without v-sync and GLX backend
         vSync = true;
         backend = lib.mkDefault "glx";
-        activeOpacity = 0.95;
-        inactiveOpacity = 0.7;
+        activeOpacity = 1.0;
+        inactiveOpacity = 0.8;
+        # fade = true;
+        # fadeDelta = 5;
       };
       xserver = {
         desktopManager.xterm.enable = false;
