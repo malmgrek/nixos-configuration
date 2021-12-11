@@ -59,7 +59,9 @@
         touchpad.tapping = false;
       };
       layout = "fi,us,gr";
-      xkbOptions = "grp:alt_shift_toggle";
+      xkbOptions = "grp:alt_shift_toggle,caps:escape";
+      autoRepeatDelay = 300;
+      autoRepeatInterval = 12;
     };
   };
 
@@ -93,14 +95,12 @@
     # CLI programs
     acpi        # Battery status etc.
     binutils
-    broot       # Directory tree viewer
     coreutils
     git
     gnumake
     htop
     killall
     lm_sensors  # Read hardware sensor info
-    pass        # Password store
     ranger
     ripgrep
     tmux
