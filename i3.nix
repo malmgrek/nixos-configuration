@@ -5,15 +5,28 @@
 { config, options, pkgs, lib, ...}:
 
 let
-  wrapped-xsecurelock = pkgs.writeScriptBin "wrapped-xsecurelock" (
+  # Wrap as script for clarity, used in i3/config
+  xsecurelock-xscreensaver = pkgs.writeScriptBin "xsecurelock-xscreensaver" (
     ''
       #!/bin/sh
 
       export XSECURELOCK_SAVER=saver_xscreensaver
       export XSECURELOCK_PASSWORD_PROMPT=emoticon
       export XSECURELOCK_FONT='JetBrains Mono'
-      # exec fixes broken pipe error
       exec ${pkgs.xsecurelock}/bin/xsecurelock
+    ''
+  );
+  # Wrap to script so we can use it in i3/config (xss-lock)
+  xsecurelock-dimmer = pkgs.writeScriptBin "xsecurelock-dimmer" (
+    ''
+      #!/bin/sh
+
+      export XSECURELOCK_DIM_ALPHA=1.0
+      export XSECURELOCK_DIM_TIME_MS=10000
+      export XSECURELOCK_WAIT_TIME_MS=5000
+      dimmer=${pkgs.xsecurelock}/libexec/xsecurelock/dimmer
+      until_nonidle=${pkgs.xsecurelock}/libexec/xsecurelock/until_nonidle
+      $until_nonidle $dimmer
     ''
   );
   rofi-power-menu = pkgs.writeScriptBin "rofi-power-menu" (
@@ -80,7 +93,8 @@ in {
         spectacle  # Screenshooting
         udiskie  # Removable media daemon
         xscreensaver
-        wrapped-xsecurelock
+        xsecurelock-dimmer
+        xsecurelock-xscreensaver
         xss-lock
       ];
 

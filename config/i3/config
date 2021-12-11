@@ -55,7 +55,8 @@ client.urgent              $darkred       $darkred      $black   $darkred
 client.background          $black
 
 # Enable external session locker
-exec --no-startup-id xss-lock --transfer-sleep-lock -- wrapped-xsecurelock
+exec_always --no-startup-id xset s 300 10
+exec --no-startup-id xss-lock -n xsecurelock-dimmer -l -- xsecurelock-xscreensaver
 
 # Picom window composition
 exec --no-startup-id picom
