@@ -1,5 +1,26 @@
-theme = "native"
 icons = "awesome"
+
+[theme]
+name = "plain"
+[theme.overrides]
+idle_bg = "#1d2021"
+idle_fg = "#abb2bf"
+info_bg = "#1d2021"
+info_fg = "#abb2bf"
+good_bg = "#1d2021"
+good_fg = "#98c379"
+warning_bg  = "#1d2021"
+warning_fg  = "#e5c07b"
+critical_bg = "#1d2021"
+critical_fg = "#be504"
+separator = "|"
+separator_bg = "#1d2021"
+separator_fg = "#4b5263"
+
+[[block]]
+block = "xrandr"
+icons = true
+resolution = true
 
 [[block]]
 block = "temperature"
