@@ -31,8 +31,13 @@ bindsym $mod+Shift+i gaps inner current minus 1
 bindsym $mod+o gaps outer current plus 1
 bindsym $mod+Shift+o gaps outer current minus 1
 
-# Color settings --------
-# ONE DARK --------------
+# Color definitions ----------------------------
+# ONE DARK -------------------------------------
+#
+# The constants aren't used super pedantly but
+# are added for reference.
+#
+set $doom         #000000
 set $black        #282c34
 set $darkblack    #1d2021
 set $white        #abb2bf
@@ -47,12 +52,14 @@ set $cyan         #56b6c2
 set $guttergrey   #4b5263
 set $commentgrey  #5c6370
 
-#                          BORDER         BACKGROUND    TEXT     INDICATOR    CHILD_BORDER
-client.focused             $black         $black        $white   $darkblack   $commentgrey
-client.unfocused           $commentgrey   $black        $white   $darkblack   $black
-client.focused_inactive    $black         $black        $white   $darkblack
-client.urgent              $darkred       $darkred      $black   $darkred
-client.background          $black
+# CLASS                 BORDER      BACKGROUND    TEXT         INDICATOR     CHILD_BORDER
+client.focused          #4c7899     #285577       #ffffff      #2e9ef4       #285577
+client.focused_inactive #333333     $commentgrey  #ffffff      $commentgrey  #333333
+client.unfocused        #333333     $darkblack    $commentgrey $commentgrey  #333333
+client.urgent           $darkblack  $darkred      #ffffff      $darkred      $darkred
+client.placeholder      #000000     $darkblack    #ffffff      #000000       $darkblack
+client.background       $black
+
 
 # Enable external session locker
 exec_always --no-startup-id xset s 300 10
@@ -225,9 +232,9 @@ bar {
         separator $commentgrey
         background $darkblack
         statusline $white
-        focused_workspace $darkblack $commentgrey $white
-        active_workspace $darkblack $black $white
-        inactive_workspace $darkblack $black $commentgrey
-        urgent_workspace $darkblack $darkred $white
+        focused_workspace #4c7899 #285577 #ffffff
+        active_workspace $darkblack $black #ffffff
+        inactive_workspace $darkblack #333333 $commentgrey
+        urgent_workspace $darkblack $darkred #ffffff
     }
 }
