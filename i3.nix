@@ -34,7 +34,7 @@ let
     import ./utils/rofi-power-menu.nix {
       shell = pkgs.stdenv.shell;
       cmds = {
-        rofi = "${pkgs.rofi}/bin/rofi -theme /etc/rofi/config.rasi -dpi 150";
+        rofi = "${pkgs.rofi}/bin/rofi -theme /etc/rofi/config.rasi";
         hibernate = "systemctl hibernate";
         # Custom session locker is defined in i3/config by xss-lock
         lock = "loginctl lock-session";
@@ -49,7 +49,7 @@ let
     import ./utils/rofi-app-menu.nix {
       shell = pkgs.stdenv.shell;
       cmds = {
-        rofi = "${pkgs.rofi}/bin/rofi -theme /etc/rofi/config.rasi -dpi 150";
+        rofi = "${pkgs.rofi}/bin/rofi -theme /etc/rofi/config.rasi";
       };
     }
   );
@@ -57,7 +57,7 @@ let
     import ./utils/rofi-dmenu.nix {
       shell = pkgs.stdenv.shell;
       cmds = {
-        rofi = "${pkgs.rofi}/bin/rofi -theme /etc/rofi/config.rasi -dpi 150";
+        rofi = "${pkgs.rofi}/bin/rofi -theme /etc/rofi/config.rasi";
       };
     }
   );
@@ -65,7 +65,7 @@ let
     import ./utils/rofi-window-menu.nix {
       shell = pkgs.stdenv.shell;
       cmds = {
-        rofi = "${pkgs.rofi}/bin/rofi -theme /etc/rofi/config.rasi -dpi 150";
+        rofi = "${pkgs.rofi}/bin/rofi -theme /etc/rofi/config.rasi";
       };
     }
   );

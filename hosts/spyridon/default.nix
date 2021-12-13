@@ -64,59 +64,15 @@
     };
   };
 
-  #
-  # Hacking a better UI experience on HiDPI laptop ----------------------------------
-  #
-  # NOTE: Comment out the below code for a temporary build that works
-  #       nicely on a large external monitor.
-  #
-
-  services = {
-    xserver = {
-      dpi = 150;
-      displayManager = {
-        defaultSession = "none+i3";
-        lightdm.enable = true;
-        # Fix font size in XTerm
-        sessionCommands = ''
-          ${pkgs.xorg.xrdb}/bin/xrdb -merge <<EOF
-            XTerm*faceName: xft:Dejavu Sans Mono:size=12
-          EOF
-        '';
-      };
-    };
-  };
-
-  # On HiDPI, the pointer cursor is ridiculously small by default. Configuring
-  # cursors seems a bit tricky. For now, let's rely on Home Manager which wraps
-  # the configs so we don't need to stab multiple config files.
   home-manager.users.malmgrek = {
     xsession.pointerCursor = {
       name = "Vanilla-DMZ";
       package = pkgs.vanilla-dmz;
-      size = 128;
     };
     programs = {
       alacritty = {
-        settings.font.size = 6.0;
+        settings.font.size = 8.0;
       };
-    };
-  };
-
-  # Bigger tty fonts
-  # TODO: Document why this is needed
-  console.font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
-
-  environment = {
-    # The effect of the below environment variables shows e.g. in how Firefox
-    # inflates the tab boxes vs. font size.
-    variables = {
-      # Scale UI elements by integer factor
-      GDK_SCALE = "2";
-      # Undo scaling of text
-      GDK_DPI_SCALE = "0.5";
-      # Scale Java elements, should be unnecessary since Java 9
-      _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
     };
   };
 
