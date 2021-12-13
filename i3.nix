@@ -5,7 +5,7 @@
 { config, options, pkgs, lib, ...}:
 
 let
-  # Wrap as script for clarity, used in i3/config
+  # Wrap as script for clarity, used in i3/config.
   xsecurelock-xscreensaver = pkgs.writeScriptBin "xsecurelock-xscreensaver" (
     ''
       #!/bin/sh
@@ -14,6 +14,12 @@ let
       export XSECURELOCK_PASSWORD_PROMPT=emoticon
       export XSECURELOCK_FONT='JetBrains Mono'
       export XSECURELOCK_AUTH_BACKGROUND_COLOR='#1d2021'
+
+      # When connected on dual monitor, a minor incompatibility issue between
+      # Picom and xsecurelock may cause flickering error message on screen.
+      # Hides the message.
+      export XSECURELOCK_COMPOSITE_OBSCURER=0
+
       exec ${pkgs.xsecurelock}/bin/xsecurelock
     ''
   );
