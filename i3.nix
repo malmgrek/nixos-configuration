@@ -13,6 +13,7 @@ let
       export XSECURELOCK_SAVER=saver_xscreensaver
       export XSECURELOCK_PASSWORD_PROMPT=emoticon
       export XSECURELOCK_FONT='JetBrains Mono'
+      export XSECURELOCK_AUTH_BACKGROUND_COLOR='#1d2021'
       exec ${pkgs.xsecurelock}/bin/xsecurelock
     ''
   );
@@ -167,6 +168,7 @@ in {
         backend = lib.mkDefault "glx";
         activeOpacity = 1.0;
         inactiveOpacity = 0.8;
+        shadow = true;
         # fade = true;
         # fadeDelta = 5;
       };

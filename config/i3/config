@@ -53,9 +53,9 @@ set $guttergrey   #4b5263
 set $commentgrey  #5c6370
 
 # CLASS                 BORDER      BACKGROUND    TEXT         INDICATOR     CHILD_BORDER
-client.focused          #4c7899     #285577       #ffffff      #2e9ef4       #285577
-client.focused_inactive #333333     $commentgrey  #ffffff      $commentgrey  #333333
-client.unfocused        #333333     $darkblack    $commentgrey $commentgrey  #333333
+client.focused          #4c7899     #285577       #ffffff      #2e9ef4       $black
+client.focused_inactive #333333     $commentgrey  #ffffff      $commentgrey  $black
+client.unfocused        #333333     $darkblack    $commentgrey $commentgrey  $black
 client.urgent           $darkblack  $darkred      #ffffff      $darkred      $darkred
 client.placeholder      #000000     $darkblack    #ffffff      #000000       $darkblack
 client.background       $black
