@@ -20,7 +20,9 @@ set $editor alacritty
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 font pango:JetBrains Mono
 
-# Gaps
+# Gaps and windows
+for_window [title="Bluetooth Devices"] floating enable
+for_window [title="Volume Control"] floating enable
 for_window [class=".*"] border pixel 1
 smart_gaps on
 smart_borders on

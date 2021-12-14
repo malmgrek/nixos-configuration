@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  home-manager.users.malmgrek = {
+  home-manager.users.${config.customParams.userName} = {
     programs = {
       direnv = {
         enable = true;

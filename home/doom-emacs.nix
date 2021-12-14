@@ -4,7 +4,7 @@
 
   fonts.fonts = [ pkgs.emacs-all-the-icons-fonts ];
 
-  home-manager.users.malmgrek = {
+  home-manager.users.${config.customParams.userName} = {
 
     # TODO: Configure font size in host specific directory.
     home.file.".doom.d" = {

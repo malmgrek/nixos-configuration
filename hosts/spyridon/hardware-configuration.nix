@@ -3,7 +3,7 @@
 # to /etc/nixos/configuration.nix instead.
 { config, lib, pkgs, modulesPath, ... }:
 
-{
+with lib; {
   imports =
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
@@ -59,7 +59,7 @@
   # - https://discourse.nixos.org/t/fan-keeps-spinning-with-a-base-installation-of-nixos/1394
   #
   powerManagement = {
-    cpuFreqGovernor = lib.mkDefault "powersave";
+    cpuFreqGovernor = mkDefault "powersave";
     #
     # Powertop is a tool provided by Intel to enable various powersaving modes
     # in userspace.
@@ -68,9 +68,9 @@
     # docs, is mostly covered by TLP. It should be possible to compare the
     # Powertop report's tuning suggestions with what TLP already implements.
     #
-    powertop.enable = lib.mkDefault true;
+    powertop.enable = mkDefault true;
   };
 
   # high-resolution display
-  hardware.video.hidpi.enable = lib.mkDefault true;
+  hardware.video.hidpi.enable = mkDefault true;
 }

@@ -1,7 +1,7 @@
-{ shell, cmds }:
+{ cmds }:
 
 ''
-  #!/usr/bin/env sh
+  #!/bin/sh
 
   rofi_cmd='${cmds.rofi}'
 

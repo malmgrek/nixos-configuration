@@ -2,14 +2,14 @@
 
 {
 
-  home-manager.users.malmgrek = {
+  home-manager.users.${config.customParams.userName} = {
 
     programs = {
       firefox = {
         enable = true;
-        profiles."malmgrek.default" = {
+        profiles."${config.customParams.userName}.default" = {
           isDefault = true;
-          name = "malmgrek.default";
+          name = "${config.customParams.userName}.default";
           settings = {
             "browser.startup.homepage" = "https://nixos.org";
             "browser.uidensity" = 1;

@@ -13,8 +13,9 @@ in {
     ./firefox.nix
     ./ipython.nix
     ./jupyter.nix
-    ./vim.nix
     ./shells.nix
+    ./vim.nix
+    ./xsession.nix
   ];
 
   # environment.sessionVariables (pam-environment) are set earlier in the login
@@ -29,7 +30,7 @@ in {
     XDG_BIN_HOME = "$HOME/.local/bin";
   };
 
-  home-manager.users.malmgrek = {
+  home-manager.users.${config.customParams.userName} = {
     xdg.enable = true;
     # Home Manager's system state. Has effect on some default settings such as
     # xdg. Let's use same value as that of the whole system.

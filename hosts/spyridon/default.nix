@@ -3,121 +3,67 @@
 {
 
   imports = [
+
+    # Mandatory imports
     ./hardware-configuration.nix
     ../../common.nix
+
+    # Optional
     ../../home
     ../../i3.nix
     # ../../nvidia.nix
+
   ];
 
+  config = rec {
 
-  ######## Don't edit! #########
-  system.stateVersion = "21.05";
-  ##############################
+    ######## Don't edit! #########
+    system.stateVersion = "21.05";
+    ##############################
 
 
-  # Use the systemd-boot EFI boot loader
-  # TODO: Try grub
-  boot = {
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-      grub.useOSProber = true;
-    };
-  };
-
-  networking.hostName = "spyridon";
-  time.timeZone = "Europe/Helsinki";
-  location = {
-    latitude = 60.2;
-    longitude = 24.9;
-  };
-
-  # Linux thermal daemon controls the system temperature using available
-  # cooling methods
-  services.thermald.enable = false;
-  # TLP is a command line for saving laptop battery. TLP will take care of the
-  # majority of settings that powertop would enable.
-  services.tlp.enable = true;
-  powerManagement.powertop.enable = true;
-
-  # TODO: Use declarative style user management with immutable users
-  users.users.malmgrek = {
-    isNormalUser = true;
-    extraGroups = [
-      "wheel"
-      "networkmanager"
-      "video"
-    ];
-  };
-
-  # Automatic screen color management
-  services.redshift = {
-    enable = true;
-    brightness = {
-      day = "1";
-      night = "1";
-    };
-    temperature = {
-      day = 7500;
-      night = 4500;
-    };
-  };
-
-  #
-  # Hacking a better UI experience on HiDPI laptop ----------------------------------
-  #
-  # NOTE: Comment out the below code for a temporary build that works
-  #       nicely on a large external monitor.
-  #
-
-  services = {
-    xserver = {
+    # Custom declarations
+    customParams = {
       dpi = 150;
-      displayManager = {
-        defaultSession = "none+i3";
-        lightdm.enable = true;
-        # Fix font size in XTerm
-        sessionCommands = ''
-          ${pkgs.xorg.xrdb}/bin/xrdb -merge <<EOF
-            XTerm*faceName: xft:Dejavu Sans Mono:size=12
-          EOF
-        '';
+      userName = "malmgrek";
+    };
+    hidpiHacks.enable = true;
+
+    # Use the systemd-boot EFI boot loader
+    # TODO: Try grub
+    boot = {
+      loader = {
+        systemd-boot.enable = true;
+        efi.canTouchEfiVariables = true;
+        grub.useOSProber = true;
       };
     };
-  };
 
-  # On HiDPI, the pointer cursor is ridiculously small by default. Configuring
-  # cursors seems a bit tricky. For now, let's rely on Home Manager which wraps
-  # the configs so we don't need to stab multiple config files.
-  home-manager.users.malmgrek = {
-    xsession.pointerCursor = {
-      name = "Vanilla-DMZ";
-      package = pkgs.vanilla-dmz;
-      size = 128;
+    networking.hostName = "spyridon";
+    time.timeZone = "Europe/Helsinki";
+    location = {
+      latitude = 60.2;
+      longitude = 24.9;
     };
-    programs = {
-      alacritty = {
-        settings.font.size = 6.0;
-      };
-    };
-  };
 
-  # Bigger tty fonts
-  # TODO: Document why this is needed
-  console.font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
+    # Linux thermal daemon controls the system temperature using available
+    # cooling methods
+    services.thermald.enable = false;
+    # TLP is a command line for saving laptop battery. TLP will take care of the
+    # majority of settings that powertop would enable.
+    services.tlp.enable = true;
+    powerManagement.powertop.enable = true;
 
-  environment = {
-    # The effect of the below environment variables shows e.g. in how Firefox
-    # inflates the tab boxes vs. font size.
-    variables = {
-      # Scale UI elements by integer factor
-      GDK_SCALE = "2";
-      # Undo scaling of text
-      GDK_DPI_SCALE = "0.5";
-      # Scale Java elements, should be unnecessary since Java 9
-      _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
+    # TODO: Use declarative style user management with immutable users
+    users.users.${customParams.userName} = {
+      isNormalUser = true;
+      extraGroups = [
+        "wheel"
+        "networkmanager"
+        "video"
+      ];
     };
+
   };
 
 }

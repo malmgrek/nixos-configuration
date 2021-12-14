@@ -2,12 +2,13 @@
 
 {
 
-  home-manager.users.malmgrek = {
+  home-manager.users.${config.customParams.userName} = {
 
     programs.vim = {
       enable = true;
       plugins = with pkgs.vimPlugins; [
         auto-pairs
+        nerdtree
         vim-airline
         vim-airline-themes
         vim-fugitive

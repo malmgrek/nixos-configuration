@@ -58,7 +58,7 @@ let
 in
 {
 
-  home-manager.users.malmgrek = {
+  home-manager.users.${config.customParams.userName} = {
 
     programs = {
       alacritty = {
@@ -70,6 +70,7 @@ in
               family = "monospace";
               style = "Regular";
             };
+            size = if config.hidpiHacks.enable then 6.0 else 8.0;
           };
           window = {
             padding = {
@@ -80,9 +81,6 @@ in
         };
       };
     };
-
-    # Alacritty config files
-    # xdg.configFile."alacritty/alacritty.yml".source = ../config/alacritty/alacritty.yml;
 
   };
 

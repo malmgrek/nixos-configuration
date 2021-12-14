@@ -1,11 +1,15 @@
 #
-# Desktop environment based on i3
+# Desktop environment based on i3-gaps
 #
 
 { config, options, pkgs, lib, ...}:
 
 let
-  # Wrap as script for clarity, used in i3/config.
+  dpi = config.customParams.dpi;
+  rofiCmd = "${pkgs.rofi}/bin/rofi -theme /etc/rofi/config.rasi -dpi ${(
+    toString
+      (if config.hidpiHacks.enable then (if isNull dpi then 150 else dpi) else 0)
+  )}";
   xsecurelock-xscreensaver = pkgs.writeScriptBin "xsecurelock-xscreensaver" (
     ''
       #!/bin/sh
@@ -18,7 +22,7 @@ let
       # When connected on dual monitor, a minor incompatibility issue between
       # Picom and xsecurelock may cause flickering error message on screen.
       # Hides the message.
-      export XSECURELOCK_COMPOSITE_OBSCURER=0
+      # export XSECURELOCK_COMPOSITE_OBSCURER=0
 
       exec ${pkgs.xsecurelock}/bin/xsecurelock
     ''
@@ -38,11 +42,9 @@ let
   );
   rofi-power-menu = pkgs.writeScriptBin "rofi-power-menu" (
     import ./utils/rofi-power-menu.nix {
-      shell = pkgs.stdenv.shell;
       cmds = {
-        rofi = "${pkgs.rofi}/bin/rofi -theme /etc/rofi/config.rasi -dpi 150";
+        rofi = rofiCmd;
         hibernate = "systemctl hibernate";
-        # Custom session locker is defined in i3/config by xss-lock
         lock = "loginctl lock-session";
         logout = "i3-msg exit";
         poweroff = "systemctl poweroff";
@@ -52,28 +54,25 @@ let
     }
   );
   rofi-app-menu = pkgs.writeScriptBin "rofi-app-menu" (
-    import ./utils/rofi-app-menu.nix {
-      shell = pkgs.stdenv.shell;
-      cmds = {
-        rofi = "${pkgs.rofi}/bin/rofi -theme /etc/rofi/config.rasi -dpi 150";
-      };
-    }
+    ''
+      #!/bin/sh
+
+      ${rofiCmd} -show drun -modi drun,run -show-icons
+    ''
   );
   rofi-dmenu = pkgs.writeScriptBin "rofi-dmenu" (
-    import ./utils/rofi-dmenu.nix {
-      shell = pkgs.stdenv.shell;
-      cmds = {
-        rofi = "${pkgs.rofi}/bin/rofi -theme /etc/rofi/config.rasi -dpi 150";
-      };
-    }
+    ''
+      #!/bin/sh
+
+      ${rofiCmd} -show run -modi run
+    ''
   );
   rofi-window-menu = pkgs.writeScriptBin "rofi-window-menu" (
-    import ./utils/rofi-window-menu.nix {
-      shell = pkgs.stdenv.shell;
-      cmds = {
-        rofi = "${pkgs.rofi}/bin/rofi -theme /etc/rofi/config.rasi -dpi 150";
-      };
-    }
+    ''
+      !/bin/sh
+
+      ${rofiCmd} -show window -show-icons
+    ''
   );
 in {
   config = {
@@ -81,44 +80,50 @@ in {
     environment = {
 
       systemPackages = with pkgs; [
-        # i3blocks
         arandr
         dmenu
         dunst
-        # i3lock
         i3status
         i3status-rust
         libnotify  # Enables notify-send
         lightdm
         networkmanagerapplet
         rofi
-        rofi-app-menu
-        rofi-dmenu
-        rofi-power-menu
-        rofi-window-menu
         simplescreenrecorder
         spectacle  # Screenshooting
         udiskie  # Removable media daemon
         xscreensaver
+        xss-lock
+
+        # Custom wrappers
+        rofi-app-menu
+        rofi-dmenu
+        rofi-power-menu
+        rofi-window-menu
         xsecurelock-dimmer
         xsecurelock-xscreensaver
-        xss-lock
       ];
 
-      # Configuration file for i3status-rust status bar.
-      # The daemon is started in i3 config.
-      etc."i3status-rs/config.toml" = {
-        source = ./config/i3status-rs/config.toml;
-      };
-
-      # Configuration file for dunst.
-      # The daemon is started in i3 config.
-      etc."dunstrc" = {
-        source = ./config/dunst/dunstrc;
-      };
-
-      etc."rofi/config.rasi" = {
-        source = ./config/rofi/config.rasi;
+      # Write global config files
+      etc = {
+        # The i3status-rust daemon is started in i3 config.
+        "i3status-rs/config.toml" = {
+          source = ./config/i3status-rs/config.toml;
+        };
+        "dunstrc" = {
+          text = (
+            builtins.replaceStrings
+              [ "# GEOMETRY" ]
+              [ "geometry = \"${
+                if config.hidpiHacks.enable then "600x10-30+40"
+                else "300x5-30+24"
+              }\"" ]
+              (builtins.readFile ./config/dunst/dunstrc)
+          );
+        };
+       "rofi/config.rasi" = {
+          source = ./config/rofi/config.rasi;
+        };
       };
 
     };
@@ -177,6 +182,18 @@ in {
         shadow = true;
         # fade = true;
         # fadeDelta = 5;
+      };
+      # Automatic screen color management
+      redshift = {
+        enable = true;
+        brightness = {
+          day = "1";
+          night = "1";
+        };
+        temperature = {
+          day = 7500;
+          night = 4500;
+        };
       };
       xserver = {
         desktopManager.xterm.enable = false;

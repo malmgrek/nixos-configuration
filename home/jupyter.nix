@@ -17,7 +17,7 @@ in
     JUPYTER_CONFIG_DIR = "$XDG_CONFIG_HOME/jupyter";
     JUPYTER_DATA_DIR = "$XDG_DATA_HOME/jupyter";
   };
-  home-manager.users.malmgrek = {
+  home-manager.users.${config.customParams.userName} = {
     xdg.dataFile."jupyter/nbextensions/vim_binding" = {
       source = vimBinding;
     };

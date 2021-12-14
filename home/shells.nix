@@ -2,9 +2,9 @@
 
 {
 
-  users.users.malmgrek.shell = pkgs.zsh;
+  users.users.${config.customParams.userName}.shell = pkgs.zsh;
 
-  home-manager.users.malmgrek = {
+  home-manager.users.${config.customParams.userName} = {
 
     programs = {
       fzf = {

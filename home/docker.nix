@@ -10,13 +10,13 @@
     };
   };
 
-  home-manager.users.malmgrek = {
+  home-manager.users.${config.customParams.userName} = {
     home.packages = with pkgs; [
       docker
       docker-compose
     ];
   };
 
-  users.users.malmgrek.extraGroups = [ "docker" ];
+  users.users.${config.customParams.userName}.extraGroups = [ "docker" ];
 
 }

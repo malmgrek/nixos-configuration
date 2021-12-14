@@ -7,7 +7,13 @@
 
 { config, pkgs, lib, ... }:
 
-{
+with lib; {
+
+  imports = [
+    # Introduces options that are assumed
+    # available in all Nix modules
+    ./options.nix
+  ];
 
   nixpkgs.overlays = import ./packages.nix;
   nixpkgs.config.allowUnfree = true;
@@ -19,7 +25,6 @@
     # generated config replicates the default behaviour.
     useDHCP = false;
     interfaces.enp0s31f6.useDHCP = true;
-    # Firewall is enabled by default
     firewall.enable = true;
   };
 
@@ -29,8 +34,8 @@
       enable = true;
     };
     bluetooth = {
-      enable = lib.mkDefault true;
-      package = lib.mkDefault pkgs.bluezFull;
+      enable = mkDefault true;
+      package = mkDefault pkgs.bluezFull;
     };
     pulseaudio = {
       enable = true;
