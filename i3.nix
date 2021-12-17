@@ -15,19 +15,20 @@ let
       #!/bin/sh
 
       export XSECURELOCK_SAVER=saver_xscreensaver
-      export XSECURELOCK_PASSWORD_PROMPT=emoticon
+      export XSECURELOCK_PASSWORD_PROMPT=asterisks
       export XSECURELOCK_FONT='JetBrains Mono'
       export XSECURELOCK_AUTH_BACKGROUND_COLOR='#1d2021'
 
       # When connected on dual monitor, a minor incompatibility issue between
       # Picom and xsecurelock may cause flickering error message on screen.
       # Hides the message.
-      # export XSECURELOCK_COMPOSITE_OBSCURER=0
+      export XSECURELOCK_COMPOSITE_OBSCURER=0
 
       exec ${pkgs.xsecurelock}/bin/xsecurelock
     ''
   );
-  # Wrap to script so we can use it in i3/config (xss-lock)
+  # Wrap to script so we can use it in i3/config (xss-lock).
+  # The dim time should match that of xset s.
   xsecurelock-dimmer = pkgs.writeScriptBin "xsecurelock-dimmer" (
     ''
       #!/bin/sh
