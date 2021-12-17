@@ -27,7 +27,7 @@
       dpi = 150;
       userName = "malmgrek";
     };
-    hidpiHacks.enable = true;
+    hidpiHacks.enable = false;
 
     # Use the systemd-boot EFI boot loader
     # TODO: Try grub
@@ -63,6 +63,8 @@
         "video"
       ];
     };
+
+    services.printing.drivers = [ pkgs.cups-toshiba-estudio ];
 
   };
 

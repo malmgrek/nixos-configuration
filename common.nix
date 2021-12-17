@@ -52,10 +52,16 @@ with lib; {
   services = {
     blueman.enable = true;
     openssh.enable = true;
+    # CUPS is started automatically for printing. Printers can be configured
+    # on web browser at http://localhost:631/admin
     printing = {
       enable = true;
       webInterface = true;
       drivers = with pkgs; [ gutenprint ];
+    };
+    avahi = {
+      enable = true;
+      nssmdns = true;
     };
     xserver = {
       enable = true;
