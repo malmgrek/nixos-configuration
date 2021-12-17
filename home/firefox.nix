@@ -20,7 +20,7 @@
           https-everywhere
           privacy-badger
           ublock-origin
-          vim-vixen
+          vimium
         ];
       };
     };
