@@ -127,6 +127,7 @@ with lib; {
 
     # Office suite
     evince
+    feh
     gimp
     inkscape
     libreoffice

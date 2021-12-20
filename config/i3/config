@@ -20,6 +20,9 @@ set $editor alacritty
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 font pango:JetBrains Mono
 
+# Wallpaper
+exec --no-startup-id feh --bg-fill --randomize ~/.wallpaper/*
+
 # Gaps and windows
 for_window [title="Bluetooth Devices"] floating enable
 for_window [title="Volume Control"] floating enable
