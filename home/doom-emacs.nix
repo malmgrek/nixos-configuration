@@ -27,6 +27,7 @@
       languagetool
       editorconfig-core-c
       sqlite
+      python3
       # ccls  # C/C++ language server
       # nodePackages.javascript-typescript-langserver
       # texlive.combined.scheme-medium
