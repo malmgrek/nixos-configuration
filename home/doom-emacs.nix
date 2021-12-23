@@ -16,6 +16,7 @@
     home.packages = with pkgs; [
       emacsUnstable
       (ripgrep.override {withPCRE2 = true;})  # Perl compatible regex
+      gcc
       gnutls
       fd              # opt: Faster projectile indexing
       pinentry_emacs  # opt: Gnupg prompts in Emacs
