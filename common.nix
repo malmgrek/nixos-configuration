@@ -107,11 +107,13 @@ with lib; {
     acpi        # Battery status etc.
     binutils
     coreutils
+    dig         # DNS lookup utility
     git
     gnumake
     htop
     killall
     lm_sensors  # Read hardware sensor info
+    pandoc      # Document format conversion
     ranger
     ripgrep
     tmux
@@ -121,8 +123,9 @@ with lib; {
     zip
 
     # Text editors
-    vim
     kakoune
+    neovim
+    vim
     xclip
 
     # Office suite
@@ -133,7 +136,11 @@ with lib; {
     libreoffice
     luakit       # Vim-esque web browser
     mupdf
-    okular
+    # okular
+
+    # Multimedia tools
+    ffmpeg
+    imagemagick
 
     # Media
     pavucontrol  # GUI for sound control

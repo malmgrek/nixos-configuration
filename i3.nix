@@ -89,9 +89,9 @@ in {
         libnotify  # Enables notify-send
         lightdm
         networkmanagerapplet
+        peek  # Screen rec
         rofi
-        simplescreenrecorder
-        spectacle  # Screenshooting
+        spectacle  # Screen shoot
         udiskie  # Removable media daemon
         xscreensaver
         xss-lock
