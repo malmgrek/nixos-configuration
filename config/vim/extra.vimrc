@@ -35,3 +35,7 @@ autocmd BufRead,BufNewFile .spacemacs set filetype=lisp
 
 " Remove trailing whitespace on saving
 autocmd BufWritePre * :%s/\s\+$//e
+
+" Indentation per filetype
+autocmd FileType python setlocal shiftwidth=4 tabstop=4
+autocmd FileType c setlocal shiftwidth=2 tabstop=2
