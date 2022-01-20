@@ -26,6 +26,8 @@ in {
         vim-jsx-pretty
         vim-nix
         vim-one
+        vim-orgmode
+        vim-speeddating  # Used by vim-orgmode
       ];
       extraConfig = builtins.readFile ../config/vim/extra.vimrc;
     };
