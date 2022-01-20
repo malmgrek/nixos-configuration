@@ -27,7 +27,7 @@
       dpi = 150;
       userName = "malmgrek";
     };
-    hidpiHacks.enable = false;
+    hidpiHacks.enable = true;
 
     # Use the systemd-boot EFI boot loader
     # TODO: Try grub
