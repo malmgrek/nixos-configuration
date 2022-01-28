@@ -44,7 +44,7 @@ can be disabled completely from the configuration.
 
 ### Desktop environment
 
-Currently I only use an i3 based desktop environment which is included.
+Currently I use an i3 based desktop environment that is included in the configuration as a module.
 
 ![Screenshot](https://raw.githubusercontent.com/malmgrek/nixos-configuration/master/resources/screenshot.png)
 

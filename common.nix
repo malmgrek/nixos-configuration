@@ -141,6 +141,7 @@ with lib; {
     # Multimedia tools
     ffmpeg
     imagemagick
+    ghostscript
 
     # Media
     pavucontrol  # GUI for sound control
