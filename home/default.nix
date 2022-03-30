@@ -16,6 +16,7 @@ in {
     ./shells.nix
     ./vim.nix
     ./xsession.nix
+    ./virtualbox.nix
   ];
 
   # environment.sessionVariables (pam-environment) are set earlier in the login
@@ -36,8 +37,9 @@ in {
     # xdg. Let's use same value as that of the whole system.
     home.stateVersion = config.system.stateVersion;
     home.packages = with pkgs; [
-      broot  # Directory tree viewer
-      pass   # Password store
+      broot     # Directory tree viewer
+      pass      # Password store
+      chromium  # MS Teams works better in chromium
     ];
   };
 

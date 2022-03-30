@@ -1,22 +1,22 @@
 { config, lib, pkgs, ... }:
 
-{
+let userName = config.customParams.userName;
+in {
 
-  virtualisation = {
-    docker = {
-      enable = true;
-      autoPrune.enable = true;
-      enableOnBoot = false;
-    };
+  virtualisation.docker = {
+    enable = true;
+    autoPrune.enable = true;
+    enableOnBoot = false;
   };
 
-  home-manager.users.${config.customParams.userName} = {
+  home-manager.users.${userName} = {
     home.packages = with pkgs; [
       docker
       docker-compose
     ];
   };
 
-  users.users.${config.customParams.userName}.extraGroups = [ "docker" ];
+
+  users.users.${userName}.extraGroups = [ "docker" ];
 
 }
