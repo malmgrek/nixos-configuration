@@ -160,8 +160,14 @@ with lib; {
     mkpasswd
     openssl
 
-    # Android
-    jmtpfs
+    # File system
+    pcmanfm       # File browser with GUI
+    jmtpfs        # Mount Android
+    gparted       # Disk formatter (run as sudo)
+    ntfs3g        # Enable mounting NTFS (windows) filesystems
+    # Another disk formatter, useful GUI for creating
+    # LUKS encrypted ext4 partitions
+    gnome.gnome-disk-utility
 
   ];
 
