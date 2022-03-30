@@ -14,7 +14,10 @@
 
     # Doom dependencies
     home.packages = with pkgs; [
+
+      # Bleeding edge Emacs
       emacsUnstable
+
       (ripgrep.override {withPCRE2 = true;})  # Perl compatible regex
       gcc
       gnutls
@@ -34,6 +37,11 @@
       # texlive.combined.scheme-medium
       # rustfmt
       # rls  # Rust language server
+
+      # mu4e -- Emacs as email client
+      # mu
+      # isync
+
     ];
 
   };
