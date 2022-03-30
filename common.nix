@@ -134,14 +134,15 @@ with lib; {
     xclip
 
     # Office suite
-    evince
-    feh
-    gimp
-    inkscape
-    libreoffice
+    mupdf        # Vim-esque lightweight PDF reader
+    evince       # Gnome default PDF viewer
+    okular       # Fancy PDF reader with annotations tools
+    xournal      # Add images over PDF
+    feh          # Simplest image viewer
+    gimp         # Open source Photoshop
+    inkscape     # Open source Illustrator
+    libreoffice  # Open source Office
     luakit       # Vim-esque web browser
-    mupdf
-    # okular
 
     # Multimedia tools
     ffmpeg
