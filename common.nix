@@ -122,6 +122,11 @@ with lib; {
     wget
     zip
 
+    # Programming
+    gcc
+    cmake
+    python
+
     # Text editors
     kakoune
     neovim
