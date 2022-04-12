@@ -144,6 +144,9 @@ with lib; {
     libreoffice  # Open source Office
     luakit       # Vim-esque web browser
 
+    # Email
+    thunderbird
+
     # Multimedia tools
     ffmpeg
     imagemagick
