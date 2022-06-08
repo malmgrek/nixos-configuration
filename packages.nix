@@ -11,7 +11,7 @@
     # bleeding edge is necessary, as a last resort. If needed, comment out
     # and use in configuration instead of `pkgs`
     #
-    # unstable = import <nixpkgs-unstable> { inherit config; };
+    unstable = import <nixpkgs-unstable> { inherit config; };
 
   })
 
