@@ -125,6 +125,7 @@ with lib; {
     # Programming
     gcc
     cmake
+    nodejs
     python
 
     # Text editors
