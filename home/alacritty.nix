@@ -64,13 +64,13 @@ in
       alacritty = {
         enable = true;
         settings = {
-          colors = onedark;
+          colors = if config.lightMode.enable then onelight else onedark;
           font = {
             normal = {
               family = "monospace";
               style = "Regular";
             };
-            size = if config.hidpiHacks.enable then 6.0 else 8.0;
+            size = if config.hidpiHacks.enable then 6.0 else 9.0;
           };
           window = {
             padding = {

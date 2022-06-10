@@ -4,6 +4,7 @@ with lib; {
 
   options = {
     hidpiHacks.enable = mkEnableOption "Hacking better HiDPI experience";
+    lightMode.enable = mkEnableOption "Light colorscheme in old school tools";
     customParams = {
       userName = mkOption {
         type = types.str;

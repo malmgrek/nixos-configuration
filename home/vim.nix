@@ -29,7 +29,11 @@ in {
         vim-orgmode
         vim-speeddating  # Used by vim-orgmode
       ];
-      extraConfig = builtins.readFile ../config/vim/extra.vimrc;
+      extraConfig = builtins.readFile (pkgs.substituteAll {
+        src = ../config/vim/extra.vimrc;
+        background = if config.lightMode.enable then "light"
+                     else "dark";
+      });
     };
   };
 }

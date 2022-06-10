@@ -7,9 +7,18 @@
   home-manager.users.${config.customParams.userName} = {
 
     # TODO: Configure font size in host specific directory.
-    home.file.".doom.d" = {
-      source = ../config/doom-emacs;
-      recursive = true;
+    home.file.".doom.d/config.el" = {
+      source = pkgs.substituteAll {
+        src = ../config/doom-emacs/config.el;
+        theme = if config.lightMode.enable then "doom-one-light"
+                else "doom-one";
+      };
+    };
+    home.file.".doom.d/init.el" = {
+      source = ../config/doom-emacs/init.el;
+    };
+    home.file.".doom.d/packages.el" = {
+      source = ../config/doom-emacs/packages.el;
     };
 
     # Doom dependencies

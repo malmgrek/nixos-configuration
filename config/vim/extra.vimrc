@@ -14,7 +14,7 @@ endif
 syntax on
 
 colorscheme one
-set background=dark
+set background=@background@
 
 " Vim airline
 let g:airline_powerline_fonts=1
