@@ -12,6 +12,9 @@
         src = ../config/doom-emacs/config.el;
         theme = if config.lightMode.enable then "doom-one-light"
                 else "doom-one";
+        font = if config.hidpiHacks.enable
+               then ''(font-spec :family "monospace" :size 12.0)''
+               else ''(font-spec :family "monospace" :size 10.5)'';
       };
     };
     home.file.".doom.d/init.el" = {
