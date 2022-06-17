@@ -200,7 +200,12 @@ in {
         desktopManager.xterm.enable = false;
         displayManager = {
           defaultSession = "none+i3";
-          lightdm.enable = true;
+          lightdm = {
+            enable = true;
+            greeters.gtk = {
+              enable = true;
+            };
+          };
         };
         windowManager = {
           i3 = {

@@ -25,8 +25,13 @@ with lib; {
 
   # In Lenovo P14s gen 2 (Intel CPU) the network driver AX210 does not work
   # with Linux Kernel 5.10 which is the default in Nixos 21.05. Adding latest
-  # kernel version helped getting WiFi to work.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # kernel version helped getting WiFi to work:
+  #
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  #
+  # NOTE: In general, a NixOS version uses the latest LTS linux kernel at the
+  # time of release.
+
   boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
 
   fileSystems."/" =

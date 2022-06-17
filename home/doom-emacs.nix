@@ -6,7 +6,6 @@
 
   home-manager.users.${config.customParams.userName} = {
 
-    # TODO: Configure font size in host specific directory.
     home.file.".doom.d/config.el" = {
       source = pkgs.substituteAll {
         src = ../config/doom-emacs/config.el;

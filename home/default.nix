@@ -1,11 +1,9 @@
 { config, pkgs, ... }:
-let
-  home-manager = builtins.fetchTarball
-    "https://github.com/nix-community/home-manager/archive/release-21.11.tar.gz";
-in {
+
+{
 
   imports = [
-    (import "${home-manager}/nixos")
+    <home-manager/nixos>
     ./alacritty.nix
     ./direnv.nix
     ./docker.nix
@@ -31,10 +29,26 @@ in {
     XDG_BIN_HOME = "$HOME/.local/bin";
   };
 
+  # By default, Home Manager uses a private pkgs instance that is configured via
+  # the home-manager.users.<name>.nixpkgs options. To instead use the global pkgs
+  # that is configured via the system level nixpkgs options, set
+
+  home-manager.useGlobalPkgs = true;
+
+  # Setting above to `true` saves an extra Nixpkgs evaluation, adds consistency,
+  # and removes the dependency on NIX_PATH, which is otherwise used for
+  # importing Nixpkgs.
+
   home-manager.users.${config.customParams.userName} = {
     xdg.enable = true;
-    # Home Manager's system state. Has effect on some default settings such as
-    # xdg. Let's use same value as that of the whole system.
+    # This value determines the Home Manager release that your
+    # configuration is compatible with. This helps avoid breakage
+    # when a new Home Manager release introduces backwards
+    # incompatible changes.
+    #
+    # You can update Home Manager without changing this value. See
+    # the Home Manager release notes for a list of state version
+    # changes in each release.
     home.stateVersion = config.system.stateVersion;
     home.packages = with pkgs; [
       unstable.azuredatastudio  # MS Azure SQL client

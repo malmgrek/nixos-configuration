@@ -7,14 +7,12 @@
   #
   # Some HiDPI hacks related to "more general" UX are currently
   # done with Home Manager, which is suboptimal.
-  #
-  # TODO: Separation of HiDPI tweaks and Home Manager configs.
-  #
   home-manager.users.${config.customParams.userName} = {
-    xsession.pointerCursor = {
+    home.pointerCursor = {
       name = "Vanilla-DMZ";
       package = pkgs.vanilla-dmz;
       size = lib.mkIf config.hidpiHacks.enable 128;
+      x11.enable = true;
     };
   };
 }
