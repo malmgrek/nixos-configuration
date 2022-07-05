@@ -11,10 +11,12 @@
     ./firefox.nix
     ./ipython.nix
     ./jupyter.nix
+    ./ptpython.nix
     ./shells.nix
+    ./tex.nix
     ./vim.nix
-    ./xsession.nix
     ./virtualbox.nix
+    ./xsession.nix
   ];
 
   # environment.sessionVariables (pam-environment) are set earlier in the login
@@ -51,10 +53,12 @@
     # changes in each release.
     home.stateVersion = config.system.stateVersion;
     home.packages = with pkgs; [
-      unstable.azuredatastudio  # MS Azure SQL client
       broot                     # Directory tree viewer
-      pass                      # Password store
       chromium                  # MS Teams works better in chromium
+      pass                      # Password store
+      signal-desktop            # Signal messaging app desktop client
+      tor-browser-bundle-bin    # Tor browser
+      unstable.azuredatastudio  # MS Azure SQL client
     ];
   };
 
