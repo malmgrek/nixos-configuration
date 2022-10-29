@@ -148,6 +148,9 @@ with lib; {
     # Email
     thunderbird
 
+    # Torrent
+    transmission-gtk
+
     # Multimedia tools
     ffmpeg
     imagemagick
