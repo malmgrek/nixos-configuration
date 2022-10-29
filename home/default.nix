@@ -56,7 +56,7 @@
       broot                     # Directory tree viewer
       chromium                  # MS Teams works better in chromium
       pass                      # Password store
-      signal-desktop            # Signal messaging app desktop client
+      unstable.signal-desktop   # Signal messaging app desktop client
       tor-browser-bundle-bin    # Tor browser
       unstable.azuredatastudio  # MS Azure SQL client
     ];
