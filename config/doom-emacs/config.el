@@ -49,6 +49,9 @@
 (after! javascript
   (setq js2-basic-offset 2))
 
+;; HTML offset
+(after! web-mode
+  (setq web-mode-markup-indent-offset 2))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
