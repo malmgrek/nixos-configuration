@@ -27,7 +27,7 @@ with lib; {
   # with Linux Kernel 5.10 which is the default in Nixos 21.05. Adding latest
   # kernel version helped getting WiFi to work:
   #
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;  ### 5.15.75 ###
   #
   # NOTE: In general, a NixOS version uses the latest LTS linux kernel at the
   # time of release.

@@ -110,7 +110,6 @@ with lib; {
     dig         # DNS lookup utility
     git
     gnumake
-    htop
     killall
     lm_sensors  # Read hardware sensor info
     pandoc      # Document format conversion
@@ -121,6 +120,14 @@ with lib; {
     usbutils
     wget
     zip
+
+    # System monitoring
+    btop
+    htop
+    gtop
+
+    # Backup
+    borgbackup
 
     # Programming
     gcc
