@@ -53,6 +53,7 @@
     # changes in each release.
     home.stateVersion = config.system.stateVersion;
     home.packages = with pkgs; [
+      azure-cli                 # Azure CLI
       broot                     # Directory tree viewer
       chromium                  # MS Teams works better in chromium
       pass                      # Password store
