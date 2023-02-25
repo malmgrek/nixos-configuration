@@ -40,6 +40,9 @@
 ;; Use `:pin' to specify a particular commit to install.
 ;(package! builtin-package :pin "1a2b3c4d5e")
 
+;; XXX Temporary fix, see https://github.com/doomemacs/doomemacs/issues/7078
+(package! transient :pin "c2bdf7e12c530eb85476d3aef317eb2941ab9440")
+(package! with-editor :pin "391e76a256aeec6b9e4cbd733088f30c677d965b")
 
 ;; Doom's packages are pinned to a specific commit and updated from release to
 ;; release. The `unpin!' macro allows you to unpin single packages...
