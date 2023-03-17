@@ -15,7 +15,7 @@ with lib; {
     ./options.nix
   ];
 
-  nixpkgs.overlays = import ./packages.nix;
+  nixpkgs.overlays = import ./overlays.nix;
   nixpkgs.config.allowUnfree = true;
 
   networking = {
@@ -105,16 +105,23 @@ with lib; {
 
     # CLI programs
     acpi        # Battery status etc.
+    bat         # Better cat
     binutils
     coreutils
     dig         # DNS lookup utility
+    exa         # Better ls
+    # fasd
+    fd          # Better find
     git
     gnumake
     killall
     lm_sensors  # Read hardware sensor info
     pandoc      # Document format conversion
+    pciutils    # PCI utils, e.g., lspci
     ranger
     ripgrep
+    tldr        # Man for dummies
+    tree
     tmux
     unzip
     usbutils
@@ -142,15 +149,16 @@ with lib; {
     xclip
 
     # Office suite
-    mupdf        # Vim-esque lightweight PDF reader
     evince       # Gnome default PDF viewer
-    okular       # Fancy PDF reader with annotations tools
-    xournal      # Add images over PDF
     feh          # Simplest image viewer
     gimp         # Open source Photoshop
+    graphviz     # Graph visualization
     inkscape     # Open source Illustrator
     libreoffice  # Open source Office
     luakit       # Vim-esque web browser
+    mupdf        # Vim-esque lightweight PDF reader
+    okular       # Fancy PDF reader with annotations tools
+    xournal      # Add images over PDF
 
     # Email
     thunderbird
@@ -164,6 +172,7 @@ with lib; {
     ghostscript
 
     # Media
+    audacity
     pavucontrol  # GUI for sound control
     vlc
 

@@ -5,15 +5,12 @@
   imports = [
     <home-manager/nixos>
     ./alacritty.nix
-    ./direnv.nix
     ./docker.nix
     ./doom-emacs.nix
-    ./firefox.nix
     ./ipython.nix
     ./jupyter.nix
     ./ptpython.nix
-    ./shells.nix
-    ./tex.nix
+    ./zsh.nix
     ./vim.nix
     ./virtualbox.nix
     ./xsession.nix
@@ -52,15 +49,45 @@
     # the Home Manager release notes for a list of state version
     # changes in each release.
     home.stateVersion = config.system.stateVersion;
-    home.packages = with pkgs; [
+    home.packages = with pkgs; let
+      azuredatastudio = callPackage ./azuredatastudio.nix { };
+      tex = (texlive.combine {
+        inherit (texlive) scheme-basic wrapfig ulem amsmath hyperref capt-of metafont;
+      });
+    in [
       azure-cli                 # Azure CLI
+      azuredatastudio           # MS Azure SQL client
       broot                     # Directory tree viewer
       chromium                  # MS Teams works better in chromium
       pass                      # Password store
       unstable.signal-desktop   # Signal messaging app desktop client
+      tex
       tor-browser-bundle-bin    # Tor browser
-      unstable.azuredatastudio  # MS Azure SQL client
     ];
+    programs = {
+      firefox = {
+        enable = true;
+        profiles."${config.customParams.userName}.default" = {
+          isDefault = true;
+          name = "${config.customParams.userName}.default";
+          settings = {
+            "browser.startup.homepage" = "https://nixos.org";
+            "browser.uidensity" = 1;
+          };
+        };
+        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+          # bypass-paywalls-clean
+          # https-everywhere
+          privacy-badger
+          ublock-origin
+          vimium
+        ];
+      };
+    };
+    # Nixpkgs config file, enables e.g. `allowUnfree` globally
+    xdg.configFile."nixpkgs/config.nix" = {
+      source = ../config/nixpkgs/config.nix;
+    };
   };
 
 }

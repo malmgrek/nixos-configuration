@@ -7,6 +7,11 @@
   home-manager.users.${config.customParams.userName} = {
 
     programs = {
+      direnv = {
+        enable = true;
+        # Adds `eval "$(direnv hook zsh)"` into .zshrc
+        enableZshIntegration = true;
+      };
       fzf = {
         enable = true;
         enableZshIntegration = true;
@@ -53,17 +58,6 @@
         };
       };
     };
-
-    home.packages = with pkgs; [
-      # autojump
-      bat
-      exa
-      # fasd
-      fd
-      # nix-zsh-completions  # Automatically set with programs.zsh.enable ?
-      tldr
-      tree
-    ];
 
   };
 

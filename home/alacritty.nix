@@ -57,9 +57,7 @@ let
   };
 in
 {
-
   home-manager.users.${config.customParams.userName} = {
-
     programs = {
       alacritty = {
         enable = true;
@@ -81,7 +79,5 @@ in
         };
       };
     };
-
   };
-
 }
