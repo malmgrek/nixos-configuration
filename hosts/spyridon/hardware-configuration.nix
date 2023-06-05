@@ -75,7 +75,4 @@ with lib; {
     #
     powertop.enable = mkDefault true;
   };
-
-  # high-resolution display
-  hardware.video.hidpi.enable = mkDefault true;
 }

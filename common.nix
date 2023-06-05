@@ -85,6 +85,7 @@ with lib; {
       enableSSHSupport = true;
     };
     light.enable = true;
+    zsh.enable = true;
   };
 
   # Select internationalisation properties.
@@ -140,7 +141,7 @@ with lib; {
     gcc
     cmake
     nodejs
-    python
+    python3
 
     # Text editors
     kakoune

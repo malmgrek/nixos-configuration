@@ -21,7 +21,7 @@
         enableZshIntegration = true;
       };
       zsh = {
-        enable = true;
+        enable = true;  # TODO: Already set in common.nix, is this necessary?
         defaultKeymap = "viins";
         shellAliases = {
           zcp = "zmv -C";
@@ -38,24 +38,60 @@
         };
         initExtra = ''
           autoload zmv  # Better "mv"
+          # . ~/.zshaliases
         '';
         envExtra = ''
           export TERM=xterm-256color
           export LS_COLORS=""
           export KEYTIMEOUT=1
         '';
-        enableCompletion = true;
-        zplug = {
-          enable = true;
-          plugins = [
-            { name = "zsh-users/zsh-completions"; }
-            { name = "zsh-users/zsh-autosuggestions"; }
-            { name = "zsh-users/zsh-syntax-highlighting"; tags = [ defer:2 ]; }
-            { name = "hlissner/zsh-autopair"; tags = [ defer:2 ]; }
-            { name = "mafredri/zsh-async"; }  # Dependency of Pure
-            { name = "sindresorhus/pure"; tags = [ use:pure.zsh as:theme ]; }
-          ];
-        };
+        plugins = [
+          {
+            name = "zsh-autosuggestions";
+            src = pkgs.fetchFromGitHub {
+              owner = "zsh-users";
+              repo = "zsh-autosuggestions";
+              rev = "v0.7.0";
+              sha256 = "sha256-KLUYpUu4DHRumQZ3w59m9aTW6TBKMCXl2UcKi4uMd7w=";
+            };
+          }
+          {
+            name = "zsh-autopair";
+            src = pkgs.fetchFromGitHub {
+              owner = "hlissner";
+              repo = "zsh-autopair";
+              rev = "v1.0";
+              sha256 = "sha256-wd/6x2p5QOSFqWYgQ1BTYBUGNR06Pr2viGjV/JqoG8A=";
+            };
+          }
+          {
+            name = "zsh-completions";
+            src = pkgs.fetchFromGitHub {
+              owner = "zsh-users";
+              repo = "zsh-completions";
+              rev = "0.34.0";
+              sha256 = "sha256-qSobM4PRXjfsvoXY6ENqJGI9NEAaFFzlij6MPeTfT0o=";
+            };
+          }
+          {
+            name = "zsh-syntax-highlighting";
+            src = pkgs.fetchFromGitHub {
+              owner = "zsh-users";
+              repo = "zsh-syntax-highlighting";
+              rev = "0.7.1";
+              sha256 = "sha256-gOG0NLlaJfotJfs+SUhGgLTNOnGLjoqnUp54V9aFJg8=";
+            };
+          }
+          {
+            name = "pure";
+            src = pkgs.fetchFromGitHub {
+              owner = "sindresorhus";
+              repo = "pure";
+              rev = "v1.21.0";
+              sha256 = "sha256-YfasTKCABvMtncrfoWR1Su9QxzCqPED18/BTXaJHttg=";
+            };
+          }
+        ];
       };
     };
 

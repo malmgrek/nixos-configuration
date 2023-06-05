@@ -74,14 +74,14 @@
             "browser.startup.homepage" = "https://nixos.org";
             "browser.uidensity" = 1;
           };
+          extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+            # bypass-paywalls-clean
+            # https-everywhere
+            privacy-badger
+            ublock-origin
+            vimium
+          ];
         };
-        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-          # bypass-paywalls-clean
-          # https-everywhere
-          privacy-badger
-          ublock-origin
-          vimium
-        ];
       };
     };
     # Nixpkgs config file, enables e.g. `allowUnfree` globally
