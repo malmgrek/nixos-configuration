@@ -27,7 +27,10 @@
     home.packages = with pkgs; [
 
       # Bleeding edge Emacs
-      emacsUnstable
+      # emacsUnstable
+
+      # Regular NixPkgs Emacs
+      emacs
 
       (ripgrep.override {withPCRE2 = true;})  # Perl compatible regex
       gcc
