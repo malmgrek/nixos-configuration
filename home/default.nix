@@ -57,6 +57,7 @@
     in [
       azure-cli                 # Azure CLI
       azuredatastudio           # MS Azure SQL client
+      awscli2                   # AWS CLI
       broot                     # Directory tree viewer
       chromium                  # MS Teams works better in chromium
       pass                      # Password store

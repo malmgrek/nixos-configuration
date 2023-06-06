@@ -105,23 +105,24 @@ with lib; {
     xst
 
     # CLI programs
-    acpi        # Battery status etc.
-    bat         # Better cat
+    acpi         # Battery status etc.
+    bat          # Better cat
     binutils
     coreutils
-    dig         # DNS lookup utility
-    exa         # Better ls
+    dig          # DNS lookup utility
+    exa          # Better ls
     # fasd
-    fd          # Better find
+    fd           # Better find
     git
     gnumake
     killall
-    lm_sensors  # Read hardware sensor info
-    pandoc      # Document format conversion
-    pciutils    # PCI utils, e.g., lspci
+    lm_sensors   # Read hardware sensor info
+    pandoc       # Document format conversion
+    pciutils     # PCI utils, e.g., lspci
     ranger
     ripgrep
-    tldr        # Man for dummies
+    ripgrep-all
+    tldr         # Man for dummies
     tree
     tmux
     unzip
