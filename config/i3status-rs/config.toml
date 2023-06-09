@@ -1,5 +1,5 @@
 [icons]
-icons = "awesome6"
+icons = "awesome4"
 
 [theme]
 theme = "plain"
@@ -18,10 +18,10 @@ separator = "|"
 separator_bg = "#1d2021"
 separator_fg = "#4b5263"
 
-# [[block]]
-# block = "xrandr"
-# format = " $icon $display $resolution "
-# interval = 10
+[[block]]
+block = "xrandr"
+format = " $icon $display $resolution "
+interval = 10
 
 [[block]]
 block = "temperature"
@@ -79,3 +79,4 @@ format = "$icon $timestamp.datetime(f:%R)"
 
 [[block]]
 block = "net"
+format = " $icon {$signal_strength $ssid $frequency|Wired connection} via $device "
