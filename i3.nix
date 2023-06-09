@@ -5,10 +5,9 @@
 { config, options, pkgs, lib, ...}:
 
 let
-  dpi = config.customParams.dpi;
   rofiCmd = "${pkgs.rofi}/bin/rofi -theme /etc/rofi/config.rasi -dpi ${(
     toString
-      (if config.hidpiHacks.enable then (if isNull dpi then 150 else dpi) else 0)
+      (if config.hidpiHacks.enable then config.customParams.dpi else 0)
   )}";
   xsecurelock-xscreensaver = pkgs.writeScriptBin "xsecurelock-xscreensaver" (
     ''
