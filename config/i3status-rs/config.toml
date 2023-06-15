@@ -75,7 +75,7 @@ format = " $icon $percentage $time"
 [[block]]
 block = "time"
 interval = 60
-format = "$icon $timestamp.datetime(f:%R)"
+format = " $icon $timestamp.datetime(f:'%a %Y-%m-%d %R %Z', l:en_US) "
 
 [[block]]
 block = "net"
