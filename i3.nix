@@ -215,6 +215,9 @@ in {
           };
         };
       };
+      # USB mounting
+      gvfs = { enable = true; };
+      udisks2 = { enable = true; };
     };
 
   };
