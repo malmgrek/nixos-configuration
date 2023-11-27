@@ -1,7 +1,8 @@
 { config, lib, pkgs, ... }:
 let
-  ps = pkgs.python3Packages;
-  vimBinding = pkgs.fetchFromGitHub {
+  unstable = pkgs.unstable;
+  ps = unstable.python311Packages;
+  vimBinding = unstable.fetchFromGitHub {
     owner = "lambdalisue";
     repo = "jupyter-vim-binding";
     rev = "v2.1.0";
