@@ -30,7 +30,7 @@
       # emacsUnstable
 
       # Regular NixPkgs Emacs
-      emacs
+      emacs29
 
       (ripgrep.override {withPCRE2 = true;})  # Perl compatible regex
       gcc

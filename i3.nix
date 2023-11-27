@@ -138,6 +138,7 @@ in {
         fira-code-symbols
         font-awesome
         jetbrains-mono
+        nerdfonts
         noto-fonts
         noto-fonts-emoji
         ubuntu_font_family
