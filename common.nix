@@ -158,6 +158,7 @@ with lib; {
     inkscape     # Open source Illustrator
     libreoffice  # Open source Office
     luakit       # Vim-esque web browser
+    nyxt         # Another vim-esque web browser
     mupdf        # Vim-esque lightweight PDF reader
     okular       # Fancy PDF reader with annotations tools
     xournal      # Add images over PDF
