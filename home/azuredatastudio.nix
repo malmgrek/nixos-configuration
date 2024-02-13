@@ -4,21 +4,31 @@
 , copyDesktopItems
 , makeDesktopItem
 , makeWrapper
-, libuuid
-, libunwind
-, libxkbcommon
-, icu
-, openssl
-, zlib
-, curl
-, at-spi2-core
+, alsa-lib
 , at-spi2-atk
+, at-spi2-core
+, cairo
+, cups
+, curl
+, dbus
+, expat
+, gdk-pixbuf
+, glib
 , gnutar
-, atomEnv
-, libkrb5
+, gtk3
+, icu
 , libdrm
+, libunwind
+, libuuid
+, libxkbcommon
 , mesa
+, nspr
+, nss
+, openssl
+, pango
+, systemd
 , xorg
+, zlib
 }:
 
 # from justinwoo/azuredatastudio-nix
@@ -62,14 +72,14 @@ in
 stdenv.mkDerivation rec {
 
   pname = "azuredatastudio";
-  version = "1.46.1";
+  version = "1.47.1";
 
   desktopItems = [ desktopItem urlHandlerDesktopItem ];
 
   src = fetchurl {
     name = "${pname}-${version}.tar.gz";
     url = "https://azuredatastudio-update.azurewebsites.net/${version}/linux-x64/stable";
-    sha256 = "sha256-gf2fQYrbAUKXlOWO8mI7/Ji0VbysR5oCDgWiaWRSInY=";
+    sha256 = "sha256-ZreWq7E3AKqsV/qmMC9m2xaK7lBJyI3AGWcn/jlf2KM=";
   };
 
   nativeBuildInputs = [
@@ -85,8 +95,10 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     runHook preInstall
+
     mkdir -p $out/share/pixmaps
     cp ${targetPath}/resources/app/resources/linux/code.png $out/share/pixmaps/azuredatastudio.png
+
     runHook postInstall
   '';
 
@@ -110,23 +122,37 @@ stdenv.mkDerivation rec {
   ];
 
   # this will most likely need to be updated when azuredatastudio's version changes
-  sqltoolsservicePath = "${targetPath}/resources/app/extensions/mssql/sqltoolsservice/Linux/4.9.1.4";
+  sqltoolsservicePath = "${targetPath}/resources/app/extensions/mssql/sqltoolsservice/Linux/4.10.2.1";
 
   rpath = lib.concatStringsSep ":" [
-    atomEnv.libPath
-    (
-      lib.makeLibraryPath [
-        libuuid
-        at-spi2-core
-        at-spi2-atk
-        stdenv.cc.cc.lib
-        libkrb5
-        libdrm
-        libxkbcommon
-        mesa
-        xorg.libxshmfence
-      ]
-    )
+    (lib.makeLibraryPath [
+      alsa-lib
+      at-spi2-atk
+      cairo
+      cups
+      dbus
+      expat
+      gdk-pixbuf
+      glib
+      gtk3
+      mesa
+      nss
+      nspr
+      libdrm
+      xorg.libX11
+      xorg.libxcb
+      xorg.libXcomposite
+      xorg.libXdamage
+      xorg.libXext
+      xorg.libXfixes
+      xorg.libXrandr
+      xorg.libxshmfence
+      libxkbcommon
+      xorg.libxkbfile
+      pango
+      stdenv.cc.cc.lib
+      systemd
+    ])
     targetPath
     sqltoolsserviceRpath
   ];
@@ -138,17 +164,21 @@ stdenv.mkDerivation rec {
       patchelf \
         --set-interpreter "${stdenv.cc.bintools.dynamicLinker}" \
         ${sqltoolsservicePath}/$1_old
+
       makeWrapper \
         ${sqltoolsservicePath}/$1_old \
         ${sqltoolsservicePath}/$1 \
         --set LD_LIBRARY_PATH ${sqltoolsserviceRpath}
     }
+
     fix_sqltoolsservice MicrosoftSqlToolsServiceLayer
     fix_sqltoolsservice MicrosoftSqlToolsCredentials
     fix_sqltoolsservice SqlToolsResourceProviderService
+
     patchelf \
       --set-interpreter "${stdenv.cc.bintools.dynamicLinker}" \
       ${targetPath}/${edition}
+
     mkdir -p $out/bin
     makeWrapper \
       ${targetPath}/bin/${edition} \

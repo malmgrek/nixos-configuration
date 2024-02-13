@@ -2,7 +2,7 @@
 
 {
 
-  fonts.fonts = [ pkgs.emacs-all-the-icons-fonts ];
+  fonts.packages = [ pkgs.emacs-all-the-icons-fonts ];
 
   home-manager.users.${config.customParams.userName} = {
 
@@ -36,7 +36,7 @@
       gcc
       gnutls
       fd              # opt: Faster projectile indexing
-      pinentry_emacs  # opt: Gnupg prompts in Emacs
+      pinentry-emacs  # opt: Gnupg prompts in Emacs
       zstd            # opt: Undo-fu-session/undo-tree compression
       aspell
       aspellDicts.en

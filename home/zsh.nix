@@ -26,11 +26,11 @@
         shellAliases = {
           zcp = "zmv -C";
           zln = "zmv -L";
-          ls = "exa";
-          ll = "exa -l";
-          lla = "exa -la";
-          llt = "exa -T";
-          llfu = "exa -bghGliS --git";
+          ls = "eza";
+          ll = "eza -l";
+          lla = "eza -la";
+          llt = "eza -T";
+          llfu = "eza -bghGliS --git";
         };
         history = {
           size = 10000;

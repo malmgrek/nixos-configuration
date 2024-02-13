@@ -18,6 +18,10 @@ with lib; {
   nixpkgs.overlays = import ./overlays.nix;
   nixpkgs.config.allowUnfree = true;
 
+  environment.sessionVariables = {
+    EDITOR = "vi";
+  };
+
   networking = {
     networkmanager.enable = true;
     # The global useDHCP flag is deprecated, therefore explicitly set to false
@@ -35,7 +39,7 @@ with lib; {
     };
     bluetooth = {
       enable = mkDefault true;
-      package = mkDefault pkgs.bluezFull;
+      package = mkDefault pkgs.bluez;
     };
     pulseaudio = {
       enable = true;
@@ -110,7 +114,7 @@ with lib; {
     binutils
     coreutils
     dig          # DNS lookup utility
-    exa          # Better ls
+    eza          # Better ls
     # fasd
     fd           # Better find
     git

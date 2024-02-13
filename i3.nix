@@ -132,7 +132,7 @@ in {
 
       fontDir.enable = true;
       enableGhostscriptFonts = true;
-      fonts = with pkgs; [
+      packages = with pkgs; [
         dejavu_fonts
         fira-code
         fira-code-symbols

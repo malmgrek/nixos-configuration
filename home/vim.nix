@@ -2,7 +2,7 @@
 let
   # Override broken package
   customVimPlugins = {
-    vim-fugitive = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    vim-fugitive = pkgs.vimUtils.buildVimPlugin {
       name = "vim-fugitive";
       src = pkgs.fetchFromGitHub {
         owner = "tpope";
