@@ -49,9 +49,17 @@
 (after! javascript
   (setq js2-basic-offset 2))
 
+;; TS offset
+(after! typescript-tsx-mode
+  (setq typescript-indent-level 2))
+
 ;; HTML offset
 (after! web-mode
   (setq web-mode-markup-indent-offset 2))
+
+;; CSS offset
+(after! css-mode
+  (setq css-indent-offset 2))
 
 ;; GitHub copilot -- accept completion from copilot and fallback to company
 ;; (use-package! copilot

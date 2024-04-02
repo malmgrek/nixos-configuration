@@ -55,7 +55,14 @@ with lib; {
 
   services = {
     blueman.enable = true;
-    openssh.enable = true;
+    openssh = {
+      enable = true;
+      settings = {
+        KbdInteractiveAuthentication = false;
+        PermitRootLogin = "no";
+        PasswordAuthentication = false;
+      };
+    };
     # CUPS is started automatically for printing. Printers can be configured
     # on web browser at http://localhost:631/admin
     printing = {

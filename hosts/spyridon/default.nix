@@ -68,6 +68,7 @@
     powerManagement.powertop.enable = true;
 
     # TODO: Use declarative style user management with immutable users
+    # (users.mutableUsers = false)
     users.users.${customParams.userName} = {
       isNormalUser = true;
       extraGroups = [
