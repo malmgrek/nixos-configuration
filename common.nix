@@ -72,30 +72,35 @@ with lib; {
     };
     avahi = {
       enable = true;
-      nssmdns = true;
+      nssmdns4 = true;
+    };
+    libinput = {
+      enable = true;
+      touchpad.tapping = false;
     };
     xserver = {
       enable = true;
-      libinput = {
-        enable = true;
-        touchpad.tapping = false;
+      xkb = {
+        layout = "fi,us,gr";
+        options = "grp:alt_shift_toggle,caps:escape";
       };
-      layout = "fi,us,gr";
-      xkbOptions = "grp:alt_shift_toggle,caps:escape";
       autoRepeatDelay = 300;
       autoRepeatInterval = 12;
     };
   };
 
   programs = {
+    # Android debug bridge
+    adb.enable = true;
     # Some programs need SUID wrappers, can be configured further or are started
     # in user sessions.
-    mtr.enable = true;
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
     };
     light.enable = true;
+    mtr.enable = true;
+    openvpn3.enable = true;
     zsh.enable = true;
   };
 
@@ -166,7 +171,7 @@ with lib; {
     feh          # Simplest image viewer
     gimp         # Open source Photoshop
     graphviz     # Graph visualization
-    inkscape     # Open source Illustrator
+    pkgs.unstable.inkscape     # Open source Illustrator
     libreoffice  # Open source Office
     luakit       # Vim-esque web browser
     nyxt         # Another vim-esque web browser
@@ -192,6 +197,7 @@ with lib; {
 
     # VPN
     openvpn
+    openvpn3  # Client with web-SAML capability
 
     # Password hash generator
     mkpasswd

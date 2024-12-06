@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  onedark = {
+  dark = {
     primary = {
       background = "#282c34";
       foreground = "#abb2bf";
@@ -10,48 +10,48 @@ let
       # NOTE: Use '#131613' for the `black` color if you'd like to see
       # black text on the background.
       black =   "#282c34";
-      red =     "#e06c75";
-      green =   "#98c379";
-      yellow =  "#d19a66";
-      blue =    "#61afef";
+      red =     "#ff6c6b";
+      green =   "#98be65";
+      yellow =  "#ecbe7b";
+      blue =    "#51afef";
       magenta = "#c678dd";
-      cyan =    "#56b6c2";
+      cyan =    "#46d9ff";
       white =   "#abb2bf";
     };
     bright = {
       black =   "#5c6370";
-      red =     "#e06c75";
-      green =   "#98c379";
-      yellow =  "#d19a66";
-      blue =    "#61afef";
+      red =     "#ff6655";
+      green =   "#99bb66";
+      yellow =  "#ecbe7b";
+      blue =    "#51afef";
       magenta = "#c678dd";
-      cyan =    "#56b6c2";
+      cyan =    "#46d9ff";
       white =   "#ffffff";
     };
   };
-  onelight = {
+  light = {
     primary = {
       foreground = "#282c34";
       background = "#ffffff";
     };
     normal = {
       black =   "#282c34";
-      red =     "#e06c75";
-      green =   "#98c379";
-      yellow =  "#d19a66";
-      blue =    "#61afef";
-      magenta = "#c678dd";
-      cyan =    "#56b6c2";
+      red =     "#ff5f5f";
+      green =   "#5fff87";
+      yellow =  "#d7d700";
+      blue =    "#4078f2";
+      magenta = "#ff5faf";
+      cyan =    "#5fd7ff";
       white =   "#abb2bf";
     };
     bright = {
       black =   "#5c6370";
-      red =     "#e06c75";
-      green =   "#98c379";
-      yellow =  "#d19a66";
-      blue =    "#61afef";
-      magenta = "#c678dd";
-      cyan =    "#56b6c2";
+      red =     "#ff5f5f";
+      green =   "#5fff87";
+      yellow =  "#d7d700";
+      blue =    "#4078f2";
+      magenta = "#ff5faf";
+      cyan =    "#5fd7ff";
       white =   "#ffffff";
     };
   };
@@ -62,7 +62,7 @@ in
       alacritty = {
         enable = true;
         settings = {
-          colors = if config.lightMode.enable then onelight else onedark;
+          colors = if config.lightMode.enable then light else dark;
           font = {
             normal = {
               family = "monospace";

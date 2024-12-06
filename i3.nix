@@ -196,10 +196,12 @@ in {
           night = 4500;
         };
       };
+      displayManager = {
+        defaultSession = "none+i3";
+      };
       xserver = {
         desktopManager.xterm.enable = false;
         displayManager = {
-          defaultSession = "none+i3";
           lightdm = {
             enable = true;
             greeters.gtk = {

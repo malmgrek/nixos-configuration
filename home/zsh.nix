@@ -20,6 +20,10 @@
         enable = true;
         enableZshIntegration = true;
       };
+      # starship = {
+      #   enable = true;
+      #   enableZshIntegration = true;
+      # };
       zsh = {
         enable = true;  # TODO: Already set in common.nix, is this necessary?
         defaultKeymap = "viins";
@@ -38,26 +42,42 @@
         };
         initExtra = ''
           autoload zmv  # Better "mv"
-          # . ~/.zshaliases
         '';
         envExtra = ''
           export TERM=xterm-256color
           export LS_COLORS=""
           export KEYTIMEOUT=1
         '';
-        plugins = [
+        #
+        # Zplug: Results in a much slower shell startup
+        #
+        # zplug = {
+        #   enable = true;
+        #   plugins = [
+        #     { name = "zsh-users/zsh-autosuggestions"; }
+        #     { name = "hlissner/zsh-autopair"; tags = [ "defer:2" ]; }
+        #     { name = "zsh-users/zsh-completions"; }
+        #     { name = "zsh-users/zsh-syntax-highlighting"; }
+        #     # Pure theme requires the two below plugins
+        #     # { name = "mafredri/zsh-async"; tags = [ "from:github" ]; }
+        #     # { name = "sindresorhus/pure"; tags = [ "use:pure.zsh" "from:github" "as:theme" ]; }
+        #     # Powerlevel10k
+        #     # { name = "romkatv/powerlevel10k"; tags = [ "as:theme" "depth:1" ]; }
+        #   ];
+        # };
+        plugins = with pkgs; [
           {
             name = "zsh-autosuggestions";
-            src = pkgs.fetchFromGitHub {
+            src = fetchFromGitHub {
               owner = "zsh-users";
               repo = "zsh-autosuggestions";
-              rev = "v0.7.0";
-              sha256 = "sha256-KLUYpUu4DHRumQZ3w59m9aTW6TBKMCXl2UcKi4uMd7w=";
+              rev = "v0.7.1";
+              sha256 = "sha256-vpTyYq9ZgfgdDsWzjxVAE7FZH4MALMNZIFyEOBLm5Qo=";
             };
           }
           {
             name = "zsh-autopair";
-            src = pkgs.fetchFromGitHub {
+            src = fetchFromGitHub {
               owner = "hlissner";
               repo = "zsh-autopair";
               rev = "v1.0";
@@ -66,29 +86,31 @@
           }
           {
             name = "zsh-completions";
-            src = pkgs.fetchFromGitHub {
+            src = fetchFromGitHub {
               owner = "zsh-users";
               repo = "zsh-completions";
-              rev = "0.34.0";
-              sha256 = "sha256-qSobM4PRXjfsvoXY6ENqJGI9NEAaFFzlij6MPeTfT0o=";
+              rev = "0.35.0";
+              sha256 = "sha256-GFHlZjIHUWwyeVoCpszgn4AmLPSSE8UVNfRmisnhkpg=";
             };
           }
           {
             name = "zsh-syntax-highlighting";
-            src = pkgs.fetchFromGitHub {
+            src = fetchFromGitHub {
               owner = "zsh-users";
               repo = "zsh-syntax-highlighting";
-              rev = "0.7.1";
-              sha256 = "sha256-gOG0NLlaJfotJfs+SUhGgLTNOnGLjoqnUp54V9aFJg8=";
+              rev = "0.8.0";
+              sha256 = "sha256-iJdWopZwHpSyYl5/FQXEW7gl/SrKaYDEtTH9cGP7iPo=";
             };
           }
           {
             name = "pure";
-            src = pkgs.fetchFromGitHub {
+            src = fetchFromGitHub {
               owner = "sindresorhus";
               repo = "pure";
-              rev = "v1.21.0";
-              sha256 = "sha256-YfasTKCABvMtncrfoWR1Su9QxzCqPED18/BTXaJHttg=";
+              rev = "v1.23.0";
+              sha256 = "sha256-BmQO4xqd/3QnpLUitD2obVxL0UulpboT8jGNEh4ri8k=";
+              # NOTE: Use this as template to get the specified/got message
+              # sha256 = "0gj89pj0zlm90ix3m1qpzzda8ih24iqhpjm7mh9004a6ga8ih82l"
             };
           }
         ];

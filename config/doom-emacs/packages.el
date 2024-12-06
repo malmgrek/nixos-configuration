@@ -49,5 +49,9 @@
 ;(unpin! t)
 
 ;; GitHub Copilot
-;; (package! copilot
-;;   :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))
+(package! copilot
+  :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el")))
+
+;; gptel
+(package! gptel
+  :recipe (:host github :repo "karthink/gptel" :files ("*.el")))

@@ -40,6 +40,9 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
+;; Quit Emacs without asking for confirmation
+(setq confirm-kill-emacs nil)
+
 ;; Use complicated fonts with neotree
 ;; Requires running `all-the-icons-install-fonts'
 (after! neotree
@@ -61,15 +64,46 @@
 (after! css-mode
   (setq css-indent-offset 2))
 
-;; GitHub copilot -- accept completion from copilot and fallback to company
-;; (use-package! copilot
-;;   :hook (prog-mode . copilot-mode)
-;;   :bind (:map copilot-completion-map
-;;               ("<tab>" . 'copilot-accept-completion)
-;;               ("TAB" . 'copilot-accept-completion)
-;;               ("C-TAB" . 'copilot-accept-completion-by-word)
-;;               ("C-<tab>" . 'copilot-accept-completion-by-word)))
 
+;;
+;; Github Copilot
+;;
+
+;; accept completion from copilot and fallback to company
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ("<tab>" . 'copilot-accept-completion)
+              ("TAB" . 'copilot-accept-completion)
+              ("C-TAB" . 'copilot-accept-completion-by-word)
+              ("C-<tab>" . 'copilot-accept-completion-by-word)))
+
+(after! (evil copilot)
+  ;; Define the custom function that either accepts the completion or does the default behavior
+  (defun my/copilot-tab-or-default ()
+    (interactive)
+    (if (and (bound-and-true-p copilot-mode)
+             ;; Add any other conditions to check for active copilot suggestions if necessary
+             )
+        (copilot-accept-completion)
+      (evil-insert 1))) ; Default action to insert a tab. Adjust as needed.
+
+  ;; Bind the custom function to <tab> in Evil's insert state
+  (evil-define-key 'insert 'global (kbd "<tab>") 'my/copilot-tab-or-default))
+
+
+;;
+;; gptel: A simple LLM client for Emacs
+;;
+
+(defun read-openai-api-key ()
+  (with-temp-buffer
+    (insert-file-contents "~/.gptel-api-key")
+    (string-trim (buffer-string))))
+
+(use-package! gptel
+ :config
+ (setq! gptel-api-key (read-openai-api-key)))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;

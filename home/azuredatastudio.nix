@@ -72,14 +72,14 @@ in
 stdenv.mkDerivation rec {
 
   pname = "azuredatastudio";
-  version = "1.47.1";
+  version = "1.50.0";
 
   desktopItems = [ desktopItem urlHandlerDesktopItem ];
 
   src = fetchurl {
     name = "${pname}-${version}.tar.gz";
     url = "https://azuredatastudio-update.azurewebsites.net/${version}/linux-x64/stable";
-    sha256 = "sha256-ZreWq7E3AKqsV/qmMC9m2xaK7lBJyI3AGWcn/jlf2KM=";
+    sha256 = "sha256-ys85qopTTvr7cXIOhPKASjMthfW9cao61Q+RXvreX1c=";
   };
 
   nativeBuildInputs = [
@@ -122,7 +122,7 @@ stdenv.mkDerivation rec {
   ];
 
   # this will most likely need to be updated when azuredatastudio's version changes
-  sqltoolsservicePath = "${targetPath}/resources/app/extensions/mssql/sqltoolsservice/Linux/4.10.2.1";
+  sqltoolsservicePath = "${targetPath}/resources/app/extensions/mssql/sqltoolsservice/Linux/5.0.20241115.1";
 
   rpath = lib.concatStringsSep ":" [
     (lib.makeLibraryPath [

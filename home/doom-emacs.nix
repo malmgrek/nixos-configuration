@@ -46,6 +46,7 @@
       editorconfig-core-c
       sqlite
       python3
+      metals  # Scala language server
       # ccls  # C/C++ language server
       # nodePackages.javascript-typescript-langserver
       # texlive.combined.scheme-medium

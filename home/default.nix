@@ -9,11 +9,12 @@
     ./doom-emacs.nix
     ./ipython.nix
     ./jupyter.nix
-    ./ptpython.nix
-    ./zsh.nix
+    # ./ptpython.nix
+    ./tmux.nix
     ./vim.nix
-    ./virtualbox.nix
+    # ./virtualbox.nix
     ./xsession.nix
+    ./zsh.nix
   ];
 
   # environment.sessionVariables (pam-environment) are set earlier in the login
@@ -52,7 +53,16 @@
     home.packages = with pkgs; let
       azuredatastudio = callPackage ./azuredatastudio.nix { };
       tex = (texlive.combine {
-        inherit (texlive) scheme-basic wrapfig ulem amsmath hyperref capt-of metafont;
+        inherit (texlive)
+          scheme-basic
+          wrapfig
+          ulem
+          amsmath
+          hyperref
+          capt-of
+          metafont
+          beamer
+        ;
       });
     in [
       azure-cli                 # Azure CLI
@@ -61,9 +71,11 @@
       broot                     # Directory tree viewer
       chromium                  # MS Teams works better in chromium
       pass                      # Password store
-      unstable.signal-desktop   # Signal messaging app desktop client
+      spotify
       tex
       tor-browser-bundle-bin    # Tor browser
+      unstable.code-cursor      # AI powered code editor
+      unstable.signal-desktop   # Signal messaging app desktop client
     ];
     programs = {
       firefox = {
