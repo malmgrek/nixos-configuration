@@ -54,6 +54,10 @@ with lib; {
   };
 
   services = {
+    # When upgrading 24.05 –> 24.11 PipeWire became default audio server.
+    # Without explicitly disabling it causes a nixos-rebuild error.
+    # TODO: Change from pulseaudio to pipewire.
+    pipewire.enable = false;
     blueman.enable = true;
     openssh = {
       enable = true;
@@ -86,6 +90,11 @@ with lib; {
       };
       autoRepeatDelay = 300;
       autoRepeatInterval = 12;
+    };
+    # Openvpn3 requires systemd-resolved this after NixOS 24.11
+    resolved = {
+      enable = true;
+      # Are there some other important settings?
     };
   };
 
@@ -183,7 +192,7 @@ with lib; {
     thunderbird
 
     # Torrent
-    transmission-gtk
+    transmission_4-gtk
 
     # Multimedia tools
     ffmpeg
@@ -211,7 +220,7 @@ with lib; {
     syncthing     # Continuous file synchronization
     # Another disk formatter, useful GUI for creating
     # LUKS encrypted ext4 partitions
-    gnome.gnome-disk-utility
+    gnome-disk-utility
 
   ];
 
