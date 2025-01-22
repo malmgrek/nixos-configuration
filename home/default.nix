@@ -8,8 +8,6 @@
     ./docker.nix
     ./doom-emacs.nix
     ./ipython.nix
-    ./jupyter.nix
-    # ./ptpython.nix
     ./tmux.nix
     ./vim.nix
     # ./virtualbox.nix
@@ -71,6 +69,7 @@
       broot                     # Directory tree viewer
       chromium                  # MS Teams works better in chromium
       pass                      # Password store
+      ruff                      # Faster Python formatter
       spotify
       tex
       tor-browser-bundle-bin    # Tor browser

@@ -103,7 +103,20 @@
 
 (use-package! gptel
  :config
+ (setq gptel-default-mode 'org-mode)
  (setq! gptel-api-key (read-openai-api-key)))
+
+;;
+;; Python formatter ruff
+;;
+(use-package! lazy-ruff
+  ;; Enable automatic ruff formatting on save in Python buffers
+  ;; :hook (python-mode . lazy-ruff-mode)
+  ;; Don't lint, only format
+  :config
+  (setq lazy-ruff-only-format-block t)
+  (setq lazy-ruff-only-format-region t)
+  (setq lazy-ruff-only-format-buffer t))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;

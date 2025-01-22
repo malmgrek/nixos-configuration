@@ -55,3 +55,7 @@
 ;; gptel
 (package! gptel
   :recipe (:host github :repo "karthink/gptel" :files ("*.el")))
+
+;; lazy-ruff
+(package! lazy-ruff
+  :recipe (:host github :repo "christophermadsen/emacs-lazy-ruff" :files ("*.el")))

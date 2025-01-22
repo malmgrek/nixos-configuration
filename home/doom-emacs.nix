@@ -35,25 +35,26 @@
       (ripgrep.override {withPCRE2 = true;})  # Perl compatible regex
       gcc
       gnutls
-      fd              # opt: Faster projectile indexing
-      pinentry-emacs  # opt: Gnupg prompts in Emacs
-      zstd            # opt: Undo-fu-session/undo-tree compression
+      fd                                               # opt: Faster projectile indexing
+      pinentry-emacs                                   # opt: Gnupg prompts in Emacs
+      zstd                                             # opt: Undo-fu-session/undo-tree compression
       aspell
       aspellDicts.en
-      aspellDicts.en-computers
+      aspellDicts.en-computers                         #
       aspellDicts.en-science
       languagetool
       editorconfig-core-c
       sqlite
-      python3
-      metals  # Scala language server
-      # ccls  # C/C++ language server
-      # nodePackages.javascript-typescript-langserver
+      python312Packages.ruff                           # Python formatter
+      nodePackages.prettier                            # JavaScript formatter
+      metals                                           # Scala language server
+      # ccls                                           # C/C++ language server
+      # nodePackages.javascript-typescript-langserver  #
       # texlive.combined.scheme-medium
       # rustfmt
-      # rls  # Rust language server
+      # rls                                            # Rust language server
 
-      # mu4e -- Emacs as email client
+      # mu4e                                           # Emacs as email client
       # mu
       # isync
 
