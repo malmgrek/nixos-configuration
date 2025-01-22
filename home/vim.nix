@@ -7,8 +7,8 @@ let
       src = pkgs.fetchFromGitHub {
         owner = "tpope";
         repo = "vim-fugitive";
-        rev = "365231384cf9edc32b2fc34f6c3e1b31eeabfedf";
-        sha256 = "1mibf943kpvg7b8rzir1wa7pn1akgnjbwysbyw2sqcy92ib6ls7b";
+        rev = "d74a7cff4cfcf84f83cc7eccfa365488f3bbabc2";
+        sha256 = "sha256-dsIuUz5o9Q44vrXz3U50d4inASoug8pR7zGXkBL5+t8=";
       };
     };
   };

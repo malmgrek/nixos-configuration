@@ -1,3 +1,5 @@
+let mapleader = " "
+
 " Colors
 "
 " Use 24-bit (true-color) mode in Vim when outside tmux
