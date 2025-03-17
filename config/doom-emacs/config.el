@@ -67,6 +67,7 @@
 
 ;;
 ;; Github Copilot
+;; NOTE: Need to `npm install @github/copilot-language-server` in project
 ;;
 
 ;; accept completion from copilot and fallback to company
@@ -92,7 +93,12 @@
 (use-package! gptel
  :config
  (setq gptel-default-mode 'org-mode)
- (setq! gptel-api-key (read-openai-api-key)))
+ (setq! gptel-api-key (read-openai-api-key))
+ (gptel-make-ollama "Ollama"
+   :host "localhost:11434"
+   :stream t
+   :models '(qwen2.5-coder:3b deepseek-coder-v2:16b))
+ )
 
 ;;
 ;; Python formatter ruff
