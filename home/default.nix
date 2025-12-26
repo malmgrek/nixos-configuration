@@ -15,6 +15,8 @@
     ./zsh.nix
   ];
 
+  services.ollama.enable = true;
+
   # environment.sessionVariables (pam-environment) are set earlier in the login
   # process than environment.variables which are shell specific.
   environment.sessionVariables = {
@@ -49,10 +51,10 @@
     # changes in each release.
     home.stateVersion = config.system.stateVersion;
     home.packages = with pkgs; let
-      azuredatastudio = callPackage ./azuredatastudio.nix { };
+      # azuredatastudio = callPackage ./azuredatastudio.nix { };
       tex = (texlive.combine {
         inherit (texlive)
-          scheme-basic
+          scheme-medium
           wrapfig
           ulem
           amsmath
@@ -63,17 +65,22 @@
         ;
       });
     in [
+      # AI tools
+      unstable.copilot-language-server
+      unstable.aichat
+      unstable.aider-chat
+
       azure-cli                 # Azure CLI
-      azuredatastudio           # MS Azure SQL client
+      # azuredatastudio         # MS Azure SQL client
       awscli2                   # AWS CLI
       broot                     # Directory tree viewer
       chromium                  # MS Teams works better in chromium
+      dbeaver-bin               # Database client
       pass                      # Password store
-      ruff                      # Faster Python formatter
       spotify
       tex
-      tor-browser-bundle-bin    # Tor browser
-      unstable.code-cursor      # AI powered code editor
+      tor-browser               # Tor browser
+      # unstable.code-cursor      # AI powered code editor
       unstable.signal-desktop   # Signal messaging app desktop client
     ];
     programs = {
@@ -86,15 +93,20 @@
             "browser.startup.homepage" = "https://nixos.org";
             "browser.uidensity" = 1;
           };
-          extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-            # bypass-paywalls-clean
-            # https-everywhere
-            privacy-badger
-            ublock-origin
-            vimium
-          ];
         };
       };
+      # vscode = {
+      #   enable = true;
+      #   profiles.default.extensions = with pkgs.vscode-extensions;
+      #     pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+      #       {
+      #         name = "mssql";
+      #         publisher = "ms-mssql";
+      #         version = "1.33.0";
+      #         sha256 = "sha256-3EXx5IRbMwYxJjUirTPOdb4E8/1w7b1fw6AAUH1s/cc=";
+      #       }
+      #     ];
+      # };
     };
     # Nixpkgs config file, enables e.g. `allowUnfree` globally
     xdg.configFile."nixpkgs/config.nix" = {

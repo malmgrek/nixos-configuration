@@ -8,6 +8,9 @@
   # Some HiDPI hacks related to "more general" UX are currently
   # done with Home Manager, which is suboptimal.
   home-manager.users.${config.customParams.userName} = {
+    home.packages = with pkgs; [
+      xorg.xhost
+    ];
     home.pointerCursor = {
       name = "Vanilla-DMZ";
       package = pkgs.vanilla-dmz;

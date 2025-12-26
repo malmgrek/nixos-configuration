@@ -41,16 +41,6 @@ with lib; {
       enable = mkDefault true;
       package = mkDefault pkgs.bluez;
     };
-    pulseaudio = {
-      enable = true;
-    } // (
-      # NixOS allows either a lightweight build (default) or full build of
-      # PulseAudio to be installed. Only the full build has Bluetooth support,
-      # so it must be selected if bluetooth is enabled.
-      if config.hardware.bluetooth.enable
-      then { package = pkgs.pulseaudioFull; }
-      else { }
-    );
   };
 
   services = {
@@ -69,6 +59,16 @@ with lib; {
     };
     # CUPS is started automatically for printing. Printers can be configured
     # on web browser at http://localhost:631/admin
+    pulseaudio = {
+      enable = true;
+    } // (
+      # NixOS allows either a lightweight build (default) or full build of
+      # PulseAudio to be installed. Only the full build has Bluetooth support,
+      # so it must be selected if bluetooth is enabled.
+      if config.hardware.bluetooth.enable
+      then { package = pkgs.pulseaudioFull; }
+      else { }
+    );
     printing = {
       enable = true;
       webInterface = true;
@@ -142,6 +142,7 @@ with lib; {
     gnumake
     killall
     lm_sensors   # Read hardware sensor info
+    ncdu         # NCurses disk utility
     pandoc       # Document format conversion
     pciutils     # PCI utils, e.g., lspci
     ranger
@@ -166,8 +167,10 @@ with lib; {
     # Programming
     gcc
     cmake
+    jq  # CLI Json processor
     nodejs
     python3
+    terraform
 
     # Text editors
     kakoune
@@ -185,11 +188,11 @@ with lib; {
     luakit       # Vim-esque web browser
     nyxt         # Another vim-esque web browser
     mupdf        # Vim-esque lightweight PDF reader
-    okular       # Fancy PDF reader with annotations tools
-    xournal      # Add images over PDF
+    kdePackages.okular       # Fancy PDF reader with annotations tools
+    xournalpp      # Add images over PDF
 
     # Email
-    thunderbird
+    thunderbird-latest
 
     # Torrent
     transmission_4-gtk

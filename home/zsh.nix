@@ -40,7 +40,7 @@
           size = 10000;
           save = 10000;
         };
-        initExtra = ''
+        initContent = ''
           autoload zmv  # Better "mv"
         '';
         envExtra = ''

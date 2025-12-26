@@ -87,13 +87,15 @@
 
 (defun read-openai-api-key ()
   (with-temp-buffer
-    (insert-file-contents "~/.gptel-api-key")
+    (insert-file-contents "~/.openai-api-key")
     (string-trim (buffer-string))))
 
 (use-package! gptel
  :config
- (setq gptel-default-mode 'org-mode)
- (setq! gptel-api-key (read-openai-api-key))
+ (setq gptel-default-mode 'org-mode
+       gptel-api-key (read-openai-api-key)
+       gptel-model 'claude-sonnet-4
+       gptel-backend (gptel-make-gh-copilot "Copilot"))
  (gptel-make-ollama "Ollama"
    :host "localhost:11434"
    :stream t

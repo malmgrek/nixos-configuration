@@ -7,10 +7,9 @@
   home-manager.users.${config.customParams.userName} = {
 
     home.file.".doom.d/config.el" = {
-      source = pkgs.substituteAll {
-        src = ../config/doom-emacs/config.el;
+      source = pkgs.replaceVars ../config/doom-emacs/config.el {
         theme = if config.lightMode.enable then "doom-one-light"
-                else "doom-one";
+                else "doom-vibrant";
         font = if config.hidpiHacks.enable
                then ''(font-spec :family "monospace" :size 12.0)''
                else ''(font-spec :family "monospace" :size 10.5)'';
@@ -30,11 +29,21 @@
       # emacsUnstable
 
       # Regular NixPkgs Emacs
-      emacs29
+      # emacs
+      ((emacsPackagesFor emacs).emacsWithPackages (epkgs: [
+        epkgs.vterm
+      ]))
 
       (ripgrep.override {withPCRE2 = true;})  # Perl compatible regex
       gcc
+
+      # NOTE: Fix error when launching Emacs from shell
       gnutls
+      gtk3
+      glib
+      ######
+
+      gsettings-desktop-schemas
       fd                                               # opt: Faster projectile indexing
       pinentry-emacs                                   # opt: Gnupg prompts in Emacs
       zstd                                             # opt: Undo-fu-session/undo-tree compression
@@ -58,8 +67,24 @@
       # mu
       # isync
 
+      #
+      # NOTE: Grammars for tree-sitter can be installed directly in Emacs with
+      # "treesit-install-grammar...". –> At least select tsx and typescript from the list.
+      # Installs under ~/.emacs.d/.local
+      #
+      # See also: https://github.com/doomemacs/doomemacs/tree/master/modules/tools/tree-sitter
+      #
+      # These are not recognized by Doom Emacs when installed :(
+      #
+      # tree-sitter-grammars.tree-sitter-typescript
+      # tree-sitter-grammars.tree-sitter-tsx
+      # tree-sitter-grammars.tree-sitter-python
+      #
+
     ];
 
   };
 
 }
+
+

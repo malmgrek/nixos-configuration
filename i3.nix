@@ -83,14 +83,16 @@ in {
         arandr
         dmenu
         dunst
+        flameshot  # Screen shoot
         i3status
         i3status-rust
         libnotify  # Enables notify-send
         lightdm
         networkmanagerapplet
         peek  # Screen rec
+        dconf  # Required by peek
         rofi
-        spectacle  # Screen shoot
+        kdePackages.spectacle  # Screen shoot
         udiskie  # Removable media daemon
         xscreensaver
         xss-lock
@@ -138,10 +140,15 @@ in {
         fira-code-symbols
         font-awesome
         jetbrains-mono
-        nerdfonts
+        nerd-fonts.fira-code
+        nerd-fonts.hack
+        # NOTE: nerd-fonts.jetbrains-mono also exists, should use instead?
+        nerd-fonts.sauce-code-pro
+        nerd-fonts.symbols-only
+        nerd-fonts.ubuntu-mono
         noto-fonts
-        noto-fonts-emoji
-        ubuntu_font_family
+        noto-fonts-color-emoji
+        ubuntu-classic
         powerline-fonts
       ];
 
@@ -213,7 +220,7 @@ in {
           i3 = {
             enable = true;
             configFile = ./config/i3/config;
-            package = pkgs.i3-gaps;
+            package = pkgs.i3;
           };
         };
       };

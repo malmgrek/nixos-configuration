@@ -23,6 +23,10 @@ with lib; {
   boot.kernelParams = [ "acpi_backlight=native" ];
   boot.kernelModules = [ "kvm-intel" ];
 
+  # Ensure ntfs-3g is available for write support, needed for
+  # external NTFS formatted drives.
+  boot.supportedFilesystems = [ "ntfs" ];
+
   # In Lenovo P14s gen 2 (Intel CPU) the network driver AX210 does not work
   # with Linux Kernel 5.10 which is the default in Nixos 21.05. Adding latest
   # kernel version helped getting WiFi to work:
@@ -51,9 +55,9 @@ with lib; {
     };
   };
 
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/c13767db-2f81-462d-807b-99025e64dbf8"; }
-    ];
+  swapDevices = [
+    { device = "/dev/disk/by-uuid/c13767db-2f81-462d-807b-99025e64dbf8"; }
+  ];
 
   # I have tried my best looking for power management hacks. The fan of
   # my Lenovo P14s keeps quite loud noise when running on NixOS. However,

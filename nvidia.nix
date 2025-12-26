@@ -22,10 +22,7 @@ in
 
   environment.systemPackages = with pkgs; [ nvidia-offload cudaPackages.cudatoolkit ];
 
-  services.ollama = {
-    enable = true;
-    acceleration = "cuda";
-  };
+  services.ollama.acceleration = "cuda";
 
   services.xserver = {
     videoDrivers = [ "nvidia" ];
