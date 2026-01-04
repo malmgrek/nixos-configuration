@@ -68,7 +68,8 @@
       # AI tools
       unstable.copilot-language-server
       unstable.aichat
-      unstable.aider-chat
+      unstable.aider-chat-with-playwright
+      unstable.opencode
 
       azure-cli                 # Azure CLI
       # azuredatastudio         # MS Azure SQL client
