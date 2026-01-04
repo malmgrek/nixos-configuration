@@ -111,6 +111,18 @@ with lib; {
     mtr.enable = true;
     openvpn3.enable = true;
     zsh.enable = true;
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        stdenv.cc.cc
+        zlib
+        fuse3
+        openssl
+        icu
+        nss
+        expat
+      ];
+    };
   };
 
   # Select internationalisation properties.

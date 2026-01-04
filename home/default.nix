@@ -8,6 +8,7 @@
     ./docker.nix
     ./doom-emacs.nix
     ./ipython.nix
+    ./neovim.nix
     ./tmux.nix
     ./vim.nix
     # ./virtualbox.nix
