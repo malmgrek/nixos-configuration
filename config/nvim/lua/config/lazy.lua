@@ -10,10 +10,12 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.util.project" },
     
     -- AI tools (the reason for switching!)
-    { import = "lazyvim.plugins.extras.coding.copilot" },
-    { import = "lazyvim.plugins.extras.coding.copilot-chat" },
-    { import = "lazyvim.plugins.extras.ai.codeium" },  -- Alternative to Copilot
+    { import = "lazyvim.plugins.extras.ai.avante" },
+    { import = "lazyvim.plugins.extras.ai.copilot" },
+    { import = "lazyvim.plugins.extras.ai.copilot-chat" },
+    -- { import = "lazyvim.plugins.extras.ai.codeium" },  -- Alternative to Copilot
     { import = "lazyvim.plugins.extras.coding.blink" },
+    { import = "lazyvim.plugins.extras.coding.yanky" },
     
     -- Language support (based on your packages)
     { import = "lazyvim.plugins.extras.lang.nix" },

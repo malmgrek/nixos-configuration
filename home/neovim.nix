@@ -42,11 +42,27 @@
         shellcheck
         markdownlint-cli2
 
+        # Git integration
+        lazygit
+
         # AI tools dependencies
         nodejs_20
         
         # Clipboard (you're using X11 based on your i3 config)
         xclip
+
+        # Tree-sitter grammars (install via Nix for reliability)
+        tree-sitter-grammars.tree-sitter-nix
+        tree-sitter-grammars.tree-sitter-lua
+        tree-sitter-grammars.tree-sitter-python
+        tree-sitter-grammars.tree-sitter-typescript
+        tree-sitter-grammars.tree-sitter-tsx
+        tree-sitter-grammars.tree-sitter-javascript
+        tree-sitter-grammars.tree-sitter-json
+        tree-sitter-grammars.tree-sitter-bash
+        tree-sitter-grammars.tree-sitter-html
+        tree-sitter-grammars.tree-sitter-css
+
       ];
     };
 
