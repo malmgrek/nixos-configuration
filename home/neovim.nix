@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   home-manager.users.${config.customParams.userName} = {
@@ -16,7 +21,7 @@
         gcc
         gnumake
         tree-sitter
-        cargo  # For some Tree-sitter grammars
+        cargo # For some Tree-sitter grammars
 
         # Search tools (Telescope)
         ripgrep
@@ -25,18 +30,21 @@
 
         # Language servers
         lua-language-server
-        nixd  # Superior to nil for Nix
-        unstable.typescript-language-server
-        unstable.pyright
+        nixd # Superior to nil for Nix
+        typescript-language-server
+        pyright
+        basedpyright
+        ruff
         yaml-language-server
-        vscode-langservers-extracted  # HTML/CSS/JSON
-        marksman  # Markdown
+        vscode-langservers-extracted # HTML/CSS/JSON
+        marksman # Markdown
+        statix # Nix linter
 
         # Formatters
         stylua
         nixfmt-rfc-style
-        unstable.prettier
-        python312Packages.ruff  # You already have this for Emacs
+        prettier
+        python312Packages.ruff # You already have this for Emacs
 
         # Linters
         shellcheck
@@ -47,7 +55,7 @@
 
         # AI tools dependencies
         nodejs_20
-        
+
         # Clipboard (you're using X11 based on your i3 config)
         xclip
 
@@ -74,7 +82,7 @@
 
     # Set EDITOR if not using Emacs
     home.sessionVariables = {
-      EDITOR = lib.mkDefault "nvim";  # mkDefault allows Emacs to override
+      EDITOR = lib.mkDefault "nvim"; # mkDefault allows Emacs to override
       LIGHT_MODE = if config.lightMode.enable then "1" else "0";
     };
   };

@@ -78,6 +78,7 @@
       broot                     # Directory tree viewer
       chromium                  # MS Teams works better in chromium
       dbeaver-bin               # Database client
+      neovide                   # Neovim GUI
       pass                      # Password store
       spotify
       tex
