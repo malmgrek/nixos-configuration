@@ -31,3 +31,5 @@ opt.clipboard = "unnamedplus"
 
 -- Persist undo
 opt.undofile = true
+
+vim.g.lazyvim_python_lsp = "basedpyright"
