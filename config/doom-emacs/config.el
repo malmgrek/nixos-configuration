@@ -70,15 +70,23 @@
 ;; NOTE: Need to `npm install @github/copilot-language-server` in project
 ;;
 
-;; accept completion from copilot and fallback to company
+;; Accept completion from copilot in both code and text/markup modes
 (use-package! copilot
-  :hook (prog-mode . copilot-mode)
+  :hook ((prog-mode
+          markdown-mode
+          org-mode
+          text-mode) . copilot-mode)
   :bind (:map copilot-completion-map
               ("<backtab>" . 'copilot-accept-completion)
               ;; ("TAB" . 'copilot-accept-completion)
               ;; ("C-TAB" . 'copilot-accept-completion-by-word)
               ;; Control + Shift + Tab
-              ("C-<iso-lefttab>" . 'copilot-accept-completion-by-word)))
+              ("C-<iso-lefttab>" . 'copilot-accept-completion-by-word))
+  :config
+  ;; Disable company-mode auto-completion in text modes (prevent fallback)
+  (dolist (mode '(markdown-mode org-mode text-mode))
+    (add-hook (intern (format "%s-hook" (symbol-name mode)))
+              (lambda () (setq-local company-idle-delay nil)))))
 
 
 ;;
