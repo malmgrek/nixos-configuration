@@ -6,6 +6,7 @@ require("lazy").setup({
 		{ import = "lazyvim.plugins.extras.ui.edgy" },
 		{ import = "lazyvim.plugins.extras.editor.telescope" },
 		{ import = "lazyvim.plugins.extras.editor.aerial" },
+		{ import = "lazyvim.plugins.extras.editor.mini-files" },
 		{ import = "lazyvim.plugins.extras.editor.neo-tree" },
 		{ import = "lazyvim.plugins.extras.util.project" },
 		-- AI tools (the reason for switching!)
