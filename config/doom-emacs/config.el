@@ -41,6 +41,11 @@
 ;; To use TokyoNight Moon theme, uncomment the line below and comment out the line above:
 (setq doom-theme 'doom-tokyonight-moon)
 
+;; Enable tree-sitter mode for Python (for enhanced multicolor syntax highlighting)
+(after! python
+  ;; Use python-ts-mode instead of python-mode for tree-sitter support
+  (add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode)))
+
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/Documents/org/"

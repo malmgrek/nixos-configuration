@@ -74,20 +74,20 @@ Features vibrant colors with glossy highlights and colored diagnostic background
    (grey       base4)
    (red        '("#ff757f" "#ff757f" "red"          ))
    (red1       '("#c53b53" "#c53b53" "red"          ))
-   (orange     '("#ff966c" "#ff966c" "brightred"    ))
+   (orange     '("#ff9e64" "#ff9e64" "brightred"    ))  ; Brightened from #ff966c
    (green      '("#c3e88d" "#c3e88d" "green"        ))
    (green1     '("#b8db87" "#b8db87" "green"        ))
    (green2     '("#4fd6be" "#4fd6be" "brightgreen"  ))
-   (teal       '("#4fd6be" "#4fd6be" "brightgreen"  ))
+   (teal       '("#1abc9c" "#1abc9c" "brightgreen"  ))  ; More vibrant teal
    (yellow     '("#ffc777" "#ffc777" "yellow"       ))
    (blue       '("#82aaff" "#82aaff" "brightblue"   ))
    (blue0      '("#3e68d7" "#3e68d7" "blue"         ))
-   (blue1      '("#65bcff" "#65bcff" "brightblue"   ))
+   (blue1      '("#7dcfff" "#7dcfff" "brightblue"   ))  ; Brightened from #65bcff
    (blue2      '("#0db9d7" "#0db9d7" "brightblue"   ))
    (blue5      '("#89ddff" "#89ddff" "brightcyan"   ))
    (dark-blue  '("#394b70" "#394b70" "blue"         ))
    (magenta    '("#c099ff" "#c099ff" "brightmagenta"))
-   (purple     '("#fca7ea" "#fca7ea" "magenta"      ))
+   (purple     '("#ff9cff" "#ff9cff" "magenta"      ))  ; Brightened from #fca7ea
    (violet     '("#c099ff" "#c099ff" "magenta"      ))
    (cyan       '("#86e1fc" "#86e1fc" "brightcyan"   ))
    (dark-cyan  '("#41a6b5" "#41a6b5" "cyan"         ))
@@ -137,6 +137,15 @@ Features vibrant colors with glossy highlights and colored diagnostic background
    (vc-added       git-add)
    (vc-deleted     git-delete)
 
+   ;; Additional vibrant syntax classes for multicolor highlighting
+   (property-name  teal)
+   (property-use   teal)
+   (variable-name  blue1)      ; Assignment targets (LHS) - brighter blue
+   (variable-use   fg)         ; Variable usage (RHS) - default fg
+   (parameter      orange)     ; Function parameters
+   (decorator      magenta)    ; Decorators like @property
+   (special-param  purple)     ; Special parameters like self, cls
+
    ;; Modeline colors
    (modeline-fg              fg)
    (modeline-fg-alt          base5)
@@ -156,11 +165,16 @@ Features vibrant colors with glossy highlights and colored diagnostic background
         4))))
 
 
-  ;;;; Base theme face overrides
-  (((line-number &override) :foreground base4)
-   ((line-number-current-line &override) :foreground orange :weight 'bold)
-   ((font-lock-comment-face &override) :slant 'italic)
-   ((font-lock-keyword-face &override) :slant 'italic)
+   ;;;; Base theme face overrides
+   (((line-number &override) :foreground base4)
+    ((line-number-current-line &override) :foreground orange :weight 'bold)
+    ((font-lock-comment-face &override) :slant 'italic)
+    ((font-lock-doc-face &override) :slant 'italic :foreground (doom-lighten comment-fg 0.3))
+    ((font-lock-keyword-face &override) :slant 'italic :weight 'semi-bold)
+    ((font-lock-builtin-face &override) :weight 'semi-bold)
+    ((font-lock-function-name-face &override) :weight 'bold)
+    ((font-lock-type-face &override) :slant 'italic)
+    ((font-lock-constant-face &override) :weight 'semi-bold)
 
    ;; Cursor and highlights
    (cursor :background fg :foreground bg)
@@ -214,29 +228,29 @@ Features vibrant colors with glossy highlights and colored diagnostic background
    (lsp-ui-sideline-symbol :foreground base7)
 
    ;;;; Org-mode (with backgrounds like markdown in tokyonight)
-   (org-level-1 :foreground blue :weight 'bold :background "#2c314a" :extend t)
-   (org-level-2 :foreground yellow :weight 'bold :background "#38343d" :extend t)
-   (org-level-3 :foreground green :weight 'bold :background "#32383f" :extend t)
+   (org-level-1 :foreground blue :weight 'extra-bold :height 1.15 :background "#2c314a" :extend t)
+   (org-level-2 :foreground yellow :weight 'bold :height 1.10 :background "#38343d" :extend t)
+   (org-level-3 :foreground green :weight 'bold :height 1.05 :background "#32383f" :extend t)
    (org-level-4 :foreground teal :weight 'bold :background "#273644" :extend t)
-   (org-level-5 :foreground magenta :weight 'bold :background "#32304a" :extend t)
-   (org-level-6 :foreground purple :weight 'bold :background "#383148" :extend t)
-   (org-level-7 :foreground orange :weight 'bold :background "#382f3b" :extend t)
-   (org-level-8 :foreground red :weight 'bold :background "#382c3d" :extend t)
+   (org-level-5 :foreground magenta :weight 'semi-bold :background "#32304a" :extend t)
+   (org-level-6 :foreground purple :weight 'semi-bold :background "#383148" :extend t)
+   (org-level-7 :foreground orange :weight 'semi-bold :background "#382f3b" :extend t)
+   (org-level-8 :foreground red :weight 'semi-bold :background "#382c3d" :extend t)
    (org-block :background bg-dark :extend t)
    (org-block-begin-line :foreground comment-fg :slant 'italic :background bg-dark :extend t)
    (org-block-end-line :foreground comment-fg :slant 'italic :background bg-dark :extend t)
-   (org-code :foreground blue :background "#444a73")
-   (org-verbatim :foreground green)
+   (org-code :foreground blue :background "#444a73" :weight 'semi-bold)
+   (org-verbatim :foreground green :weight 'semi-bold)
    (org-todo :foreground red :weight 'bold)
    (org-done :foreground green :weight 'bold)
    (org-headline-done :foreground base5 :strike-through t)
-   (org-link :foreground teal :underline t)
-   (org-checkbox :foreground cyan)
-   (org-date :foreground blue5)
-   (org-tag :foreground magenta :weight 'bold)
-   (org-document-title :foreground blue :weight 'bold :height 1.3)
+   (org-link :foreground teal :underline t :weight 'semi-bold)
+   (org-checkbox :foreground cyan :weight 'bold)
+   (org-date :foreground blue5 :slant 'italic)
+   (org-tag :foreground magenta :weight 'bold :slant 'italic)
+   (org-document-title :foreground blue :weight 'bold :height 1.4)
    (org-document-info :foreground cyan)
-   (org-document-info-keyword :foreground comment-fg)
+   (org-document-info-keyword :foreground comment-fg :slant 'italic)
 
    ;;;; Magit
    (magit-section-heading :foreground blue :weight 'bold)
@@ -318,22 +332,55 @@ Features vibrant colors with glossy highlights and colored diagnostic background
    (dired-perm-write :foreground orange)
 
    ;;;; JavaScript/TypeScript/TSX
-   (js2-function-call :foreground blue)
-   (js2-function-param :foreground yellow)
+   (js2-function-call :foreground blue :slant 'italic)
+   (js2-function-param :foreground orange)
    (js2-object-property :foreground teal)
-   (js2-private-function-call :foreground blue)
-   (js2-jsdoc-tag :foreground blue :slant 'italic)
-   (js2-jsdoc-type :foreground cyan)
+   (js2-private-function-call :foreground blue :slant 'italic)
+   (js2-jsdoc-tag :foreground blue :slant 'italic :weight 'semi-bold)
+   (js2-jsdoc-type :foreground cyan :slant 'italic)
    (js2-jsdoc-value :foreground green)
-   (typescript-jsdoc-tag :foreground blue :slant 'italic)
-   (typescript-jsdoc-type :foreground cyan)
-   (rjsx-tag :foreground red)
+   (typescript-jsdoc-tag :foreground blue :slant 'italic :weight 'semi-bold)
+   (typescript-jsdoc-type :foreground cyan :slant 'italic)
+   (rjsx-tag :foreground red :weight 'bold)
    (rjsx-tag-bracket-face :foreground base7)
    (rjsx-attr :foreground orange :slant 'italic)
 
-   ;;;; Python
+   ;;;; Python (Enhanced with Tree-sitter multicolor highlighting)
+   ;; Legacy python-mode faces (non-tree-sitter fallback)
    (python-shell-prompt :foreground blue :weight 'bold)
-   (py-builtins-face :foreground magenta)
+   (py-builtins-face :foreground magenta :weight 'semi-bold)
+   (py-class-name-face :foreground cyan :weight 'bold)
+   (py-decorators-face :foreground magenta :weight 'bold)
+   (py-object-reference-face :foreground purple)
+
+   ;; Tree-sitter Python faces (python-ts-mode)
+   ;; Function calls and definitions
+   (font-lock-function-call-face :foreground blue :slant 'italic)
+
+   ;; Properties and attributes (obj.property)
+   (font-lock-property-name-face :foreground teal :weight 'bold)
+   (font-lock-property-use-face :foreground teal)
+
+   ;; Assignment targets (left-hand side) get a brighter blue
+   (font-lock-variable-name-face :foreground blue1)
+
+   ;; Variable usage (right-hand side) - default foreground
+   (font-lock-variable-use-face :foreground fg)
+
+   ;; Numbers get their own vibrant color with bold weight
+   (font-lock-number-face :foreground orange :weight 'bold)
+
+   ;; Operators - glossy cyan-blue
+   (font-lock-operator-face :foreground blue5)
+
+   ;; Brackets and delimiters
+   (font-lock-bracket-face :foreground base7)
+   (font-lock-delimiter-face :foreground base6)
+   (font-lock-punctuation-face :foreground base6)
+   (font-lock-misc-punctuation-face :foreground blue5)
+
+   ;; String escape sequences (like \n, \t) - bold orange
+   (font-lock-escape-face :foreground orange :weight 'bold)
 
    ;;;; Web-mode
    (web-mode-html-tag-face :foreground red)
@@ -427,7 +474,30 @@ Features vibrant colors with glossy highlights and colored diagnostic background
    (diff-hl-delete :foreground git-delete :background git-delete)
    (diff-hl-change :foreground git-change :background git-change))
 
-  ;;;; Base theme variable overrides
-  ())
+   ;;;; Base theme variable overrides
+   ())
+
+;;; Custom Python highlighting for 'self' and 'cls' parameters
+
+(defface doom-tokyonight-moon-python-self
+  `((t (:foreground ,(doom-color 'purple) :slant italic)))
+  "Face for Python 'self' and 'cls' parameters in TokyoNight Moon theme."
+  :group 'doom-tokyonight-moon-theme)
+
+(defun doom-tokyonight-moon--highlight-python-self ()
+  "Add custom font-lock rules to highlight 'self' and 'cls' in purple."
+  (font-lock-add-keywords
+   nil
+   '(;; Match 'self' as a parameter or standalone
+     ("\\<\\(self\\)\\>" 1 'doom-tokyonight-moon-python-self)
+     ;; Match 'cls' as a parameter or standalone
+     ("\\<\\(cls\\)\\>" 1 'doom-tokyonight-moon-python-self)
+     ;; Match self.property access
+     ("\\<self\\." 0 'doom-tokyonight-moon-python-self prepend))
+   'append))
+
+;; Apply custom highlighting when python-ts-mode or python-mode is loaded
+(add-hook 'python-ts-mode-hook #'doom-tokyonight-moon--highlight-python-self)
+(add-hook 'python-mode-hook #'doom-tokyonight-moon--highlight-python-self)
 
 ;;; doom-tokyonight-moon-theme.el ends here
