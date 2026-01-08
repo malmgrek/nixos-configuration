@@ -21,11 +21,25 @@
 ;; font string. You generally only need these two:
 (setq doom-font @font@)
 
+;; Add custom themes directory to load path
+(add-to-list 'custom-theme-load-path
+             (expand-file-name "themes" doom-user-dir))
+
+;; TokyoNight Moon theme customization options (set before loading theme)
+;; Uncomment and adjust these to customize the theme:
+;; (setq doom-tokyonight-moon-brighter-comments t)    ; Brighter purple comments
+;; (setq doom-tokyonight-moon-brighter-modeline t)    ; Vivid blue modeline
+;; (setq doom-tokyonight-moon-padded-modeline 4)      ; Add 4px padding to modeline
+;; (setq doom-tokyonight-moon-transparent-background nil) ; Enable transparency
+
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 ;; (load (concat doom-private-dir "color.el"))
-(setq doom-theme '@theme@)
+;; (setq doom-theme '@theme@)
+
+;; To use TokyoNight Moon theme, uncomment the line below and comment out the line above:
+(setq doom-theme 'doom-tokyonight-moon)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!

@@ -21,6 +21,10 @@
     home.file.".doom.d/packages.el" = {
       source = ../config/doom-emacs/packages.el;
     };
+    home.file.".doom.d/themes" = {
+      source = ../config/doom-emacs/themes;
+      recursive = true;
+    };
 
     # Doom dependencies
     home.packages = with pkgs; [
