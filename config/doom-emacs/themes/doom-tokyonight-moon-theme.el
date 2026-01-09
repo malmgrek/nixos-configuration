@@ -71,26 +71,26 @@ Features vibrant colors with glossy highlights and colored diagnostic background
    (base7      '("#828bb8" "#828bb8"     "brightblack"  ))
    (base8      '("#c8d3f5" "#c8d3f5"     "white"        ))
 
-   (grey       base4)
-   (red        '("#ff757f" "#ff757f" "red"          ))
-   (red1       '("#c53b53" "#c53b53" "red"          ))
-   (orange     '("#ff9e64" "#ff9e64" "brightred"    ))  ; Brightened from #ff966c
-   (green      '("#c3e88d" "#c3e88d" "green"        ))
-   (green1     '("#b8db87" "#b8db87" "green"        ))
-   (green2     '("#4fd6be" "#4fd6be" "brightgreen"  ))
-   (teal       '("#1abc9c" "#1abc9c" "brightgreen"  ))  ; More vibrant teal
-   (yellow     '("#ffc777" "#ffc777" "yellow"       ))
-   (blue       '("#82aaff" "#82aaff" "brightblue"   ))
-   (blue0      '("#3e68d7" "#3e68d7" "blue"         ))
-   (blue1      '("#7dcfff" "#7dcfff" "brightblue"   ))  ; Brightened from #65bcff
-   (blue2      '("#0db9d7" "#0db9d7" "brightblue"   ))
-   (blue5      '("#89ddff" "#89ddff" "brightcyan"   ))
-   (dark-blue  '("#394b70" "#394b70" "blue"         ))
-   (magenta    '("#c099ff" "#c099ff" "brightmagenta"))
-   (purple     '("#ff9cff" "#ff9cff" "magenta"      ))  ; Brightened from #fca7ea
-   (violet     '("#c099ff" "#c099ff" "magenta"      ))
-   (cyan       '("#86e1fc" "#86e1fc" "brightcyan"   ))
-   (dark-cyan  '("#41a6b5" "#41a6b5" "cyan"         ))
+    (grey       base4)
+    (red        '("#ff757f" "#ff757f" "red"          ))
+    (red1       '("#c53b53" "#c53b53" "red"          ))
+    (orange     '("#ff966c" "#ff966c" "brightred"    ))
+    (green      '("#c3e88d" "#c3e88d" "green"        ))
+    (green1     '("#b8db87" "#b8db87" "green"        ))
+    (green2     '("#4fd6be" "#4fd6be" "brightgreen"  ))
+    (teal       '("#1abc9c" "#1abc9c" "brightgreen"  ))
+    (yellow     '("#ffc777" "#ffc777" "yellow"       ))
+    (blue       '("#82aaff" "#82aaff" "brightblue"   ))
+    (blue0      '("#3e68d7" "#3e68d7" "blue"         ))
+    (blue1      '("#65bcff" "#65bcff" "brightblue"   ))
+    (blue2      '("#0db9d7" "#0db9d7" "brightblue"   ))
+    (blue5      '("#89ddff" "#89ddff" "brightcyan"   ))
+    (dark-blue  '("#394b70" "#394b70" "blue"         ))
+    (magenta    '("#c099ff" "#c099ff" "brightmagenta"))
+    (purple     '("#fca7ea" "#fca7ea" "magenta"      ))
+    (violet     '("#c099ff" "#c099ff" "magenta"      ))
+    (cyan       '("#86e1fc" "#86e1fc" "brightcyan"   ))
+    (dark-cyan  '("#41a6b5" "#41a6b5" "cyan"         ))
 
    ;; TokyoNight Moon specific colors
    (bg-dark    '("#1e2030" "#1e2030" "black"))
@@ -137,14 +137,12 @@ Features vibrant colors with glossy highlights and colored diagnostic background
    (vc-added       git-add)
    (vc-deleted     git-delete)
 
-   ;; Additional vibrant syntax classes for multicolor highlighting
-   (property-name  teal)
-   (property-use   teal)
-   (variable-name  blue1)      ; Assignment targets (LHS) - brighter blue
-   (variable-use   fg)         ; Variable usage (RHS) - default fg
-   (parameter      orange)     ; Function parameters
-   (decorator      magenta)    ; Decorators like @property
-   (special-param  purple)     ; Special parameters like self, cls
+    ;; Additional vibrant syntax classes for multicolor highlighting
+    (property-name  green2)
+    (property-use   green2)
+    (parameter      yellow)     ; Function parameters - match LazyVim
+    (decorator      magenta)    ; Decorators like @property
+    (special-param  red)        ; Special parameters like self, cls - match LazyVim
 
    ;; Modeline colors
    (modeline-fg              fg)
@@ -168,13 +166,8 @@ Features vibrant colors with glossy highlights and colored diagnostic background
    ;;;; Base theme face overrides
   (((line-number &override) :foreground base4)
    ((line-number-current-line &override) :foreground orange :weight 'bold)
-   ((font-lock-comment-face &override) :slant 'italic)
-   ((font-lock-doc-face &override) :slant 'italic :foreground (doom-lighten comment-fg 0.3))
-   ;; ((font-lock-keyword-face &override) :slant 'italic :weight 'semi-bold)
-   ;; ((font-lock-builtin-face &override) :weight 'semi-bold)
-   ;; ((font-lock-function-name-face &override) :weight 'bold)
-   ;; ((font-lock-type-face &override) :slant 'italic)
-   ((font-lock-constant-face &override) :weight 'semi-bold)
+    ((font-lock-comment-face &override) :slant 'italic)
+    ((font-lock-doc-face &override) :slant 'italic :foreground (doom-lighten comment-fg 0.3))
 
    ;; Cursor and highlights
    (cursor :background fg :foreground bg)
@@ -199,10 +192,10 @@ Features vibrant colors with glossy highlights and colored diagnostic background
     :box (if -modeline-pad `(:line-width ,-modeline-pad :color ,modeline-bg-inactive)))
    (mode-line-emphasis :foreground (if doom-tokyonight-moon-brighter-modeline base8 highlight))
 
-   ;;;; LSP & Diagnostics (with colored backgrounds - the glossy effect!)
-   (lsp-face-highlight-textual :background bg-highlight :distant-foreground fg)
-   (lsp-face-highlight-read :background bg-highlight :distant-foreground fg :underline t)
-   (lsp-face-highlight-write :background bg-highlight :distant-foreground fg :weight 'bold)
+    ;;;; LSP & Diagnostics (with colored backgrounds - the glossy effect!)
+    (lsp-face-highlight-textual :background "#3b4261" :foreground fg)
+    (lsp-face-highlight-read :background "#3b4261" :foreground fg :underline t)
+    (lsp-face-highlight-write :background "#3b4261" :foreground fg)
 
    ;; Flycheck with background colors
    (flycheck-error :background error-bg :foreground red1 :underline `(:style wave :color ,red1))
@@ -228,19 +221,19 @@ Features vibrant colors with glossy highlights and colored diagnostic background
    (lsp-ui-sideline-current-symbol :foreground blue :weight 'bold)
    (lsp-ui-sideline-symbol :foreground base7)
 
-   ;;;; Org-mode (with backgrounds like markdown in tokyonight)
-   (org-level-1 :foreground blue :weight 'extra-bold :height 1.15 :background "#2c314a" :extend t)
-   (org-level-2 :foreground yellow :weight 'bold :height 1.10 :background "#38343d" :extend t)
-   (org-level-3 :foreground green :weight 'bold :height 1.05 :background "#32383f" :extend t)
-   (org-level-4 :foreground teal :weight 'bold :background "#273644" :extend t)
-   (org-level-5 :foreground magenta :weight 'semi-bold :background "#32304a" :extend t)
-   (org-level-6 :foreground purple :weight 'semi-bold :background "#383148" :extend t)
-   (org-level-7 :foreground orange :weight 'semi-bold :background "#382f3b" :extend t)
-   (org-level-8 :foreground red :weight 'semi-bold :background "#382c3d" :extend t)
+    ;;;; Org-mode (with backgrounds like markdown in tokyonight)
+    (org-level-1 :foreground blue :weight 'bold :height 1.25 :background "#2c314a" :extend t)
+    (org-level-2 :foreground yellow :weight 'bold :height 1.15 :background "#38343d" :extend t)
+    (org-level-3 :foreground green :weight 'bold :height 1.12 :background "#32383f" :extend t)
+    (org-level-4 :foreground green2 :weight 'bold :background "#273644" :extend t)
+    (org-level-5 :foreground magenta :weight 'bold :background "#32304a" :extend t)
+    (org-level-6 :foreground purple :weight 'bold :background "#383148" :extend t)
+    (org-level-7 :foreground orange :weight 'bold :background "#382f3b" :extend t)
+    (org-level-8 :foreground red :weight 'bold :background "#382c3d" :extend t)
    (org-block :background bg-dark :extend t)
    (org-block-begin-line :foreground comment-fg :slant 'italic :background bg-dark :extend t)
    (org-block-end-line :foreground comment-fg :slant 'italic :background bg-dark :extend t)
-   (org-code :foreground blue :background "#444a73" :weight 'semi-bold)
+    (org-code :foreground blue :background "#444a73")
    (org-verbatim :foreground green :weight 'semi-bold)
    (org-todo :foreground red :weight 'bold)
    (org-done :foreground green :weight 'bold)
@@ -346,34 +339,32 @@ Features vibrant colors with glossy highlights and colored diagnostic background
    (rjsx-tag-bracket-face :foreground base7)
    (rjsx-attr :foreground orange :slant 'italic)
 
-   ;; Tree-sitter Python faces (python-ts-mode)
-   ;; Function calls and definitions
-   (font-lock-function-call-face :foreground blue :slant 'italic)
+    ;; Tree-sitter Python faces (python-ts-mode)
+    ;; Function calls and definitions
+    (font-lock-function-call-face :foreground blue)
 
-   ;; Properties and attributes (obj.property)
-   (font-lock-property-name-face :foreground teal :weight 'bold)
-   (font-lock-property-use-face :foreground teal)
+    ;; Properties and attributes (obj.property)
+    (font-lock-property-name-face :foreground green2)
+    (font-lock-property-use-face :foreground green2)
 
-   ;; Assignment targets (left-hand side) get a brighter blue
-   (font-lock-variable-name-face :foreground blue1)
+    ;; Variable names - match LazyVim which uses default fg
+    (font-lock-variable-name-face :foreground fg)
+    (font-lock-variable-use-face :foreground fg)
 
-   ;; Variable usage (right-hand side) - default foreground
-   (font-lock-variable-use-face :foreground fg)
-
-   ;; Numbers get their own vibrant color with bold weight
-   (font-lock-number-face :foreground orange :weight 'bold)
+    ;; Numbers get their own vibrant color
+    (font-lock-number-face :foreground orange)
 
    ;; Operators - glossy cyan-blue
    (font-lock-operator-face :foreground blue5)
 
-   ;; Brackets and delimiters
-   (font-lock-bracket-face :foreground base7)
-   (font-lock-delimiter-face :foreground base6)
-   (font-lock-punctuation-face :foreground base6)
-   (font-lock-misc-punctuation-face :foreground blue5)
+    ;; Brackets and delimiters
+    (font-lock-bracket-face :foreground base7)
+    (font-lock-delimiter-face :foreground blue5)
+    (font-lock-punctuation-face :foreground blue5)
+    (font-lock-misc-punctuation-face :foreground blue5)
 
-   ;; String escape sequences (like \n, \t) - bold orange
-   (font-lock-escape-face :foreground orange :weight 'bold)
+    ;; String escape sequences (like \n, \t)
+    (font-lock-escape-face :foreground magenta)
 
    ;;;; Web-mode
    (web-mode-html-tag-face :foreground red)
