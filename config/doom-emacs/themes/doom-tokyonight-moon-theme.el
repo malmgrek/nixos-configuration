@@ -274,8 +274,9 @@ Features vibrant colors with glossy highlights and colored diagnostic background
    (magit-sequence-part :foreground yellow)
    (magit-sequence-stop :foreground teal)
 
-   ;;;; Treemacs
-   (treemacs-root-face :foreground blue :weight 'bold :height 1.2)
+   ;;;; Treemacs - LazyVim Neo-Tree style
+   (treemacs-window-background-face :background base0)  ; Darker sidebar background
+   (treemacs-root-face :foreground blue :weight 'bold :height 1.0)
    (treemacs-directory-face :foreground blue)
    (treemacs-file-face :foreground fg)
    (treemacs-git-modified-face :foreground yellow)
@@ -472,8 +473,8 @@ Features vibrant colors with glossy highlights and colored diagnostic background
     (markdown-header-face-4 :foreground teal :weight 'bold :background "#273644" :extend t)
     (markdown-header-face-5 :foreground magenta :weight 'bold)
     (markdown-header-face-6 :foreground purple :weight 'bold)
-    (markdown-code-face :background "#444a73" :foreground blue :extend t)
-    (markdown-inline-code-face :background "#444a73" :foreground blue)
+    (markdown-code-face :background "#2c314a" :foreground blue :extend t)
+    (markdown-inline-code-face :background "#2c314a" :foreground blue)
     (markdown-link-face :foreground teal :underline t)
     (markdown-url-face :foreground cyan :underline t)
     (markdown-markup-face :foreground orange)

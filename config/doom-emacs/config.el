@@ -27,6 +27,7 @@
 
 ;; TokyoNight Moon theme customization options (set before loading theme)
 ;; Uncomment and adjust these to customize the theme:
+;; FIXME: Are these used? Move to under theme
 ;; (setq doom-tokyonight-moon-brighter-comments t)    ; Brighter purple comments
 ;; (setq doom-tokyonight-moon-brighter-modeline t)    ; Vivid blue modeline
 ;; (setq doom-tokyonight-moon-padded-modeline 4)      ; Add 4px padding to modeline
@@ -172,9 +173,70 @@
            :icon (nerd-icons-octicon "nf-oct-tools" :face 'doom-dashboard-menu-icon)
            :when (file-directory-p doom-user-dir)
            :action doom/open-private-config)
-          ("Open documentation"
-           :icon (nerd-icons-octicon "nf-oct-book" :face 'doom-dashboard-menu-icon)
-           :action doom/help))))
+           ("Open documentation"
+            :icon (nerd-icons-octicon "nf-oct-book" :face 'doom-dashboard-menu-icon)
+            :action doom/help))))
+
+;;
+;; Custom ASCII art banner
+;;
+(defun my-custom-doom-banner ()
+  "Display custom ASCII art banner"
+  (let* ((banner
+          '(""
+            "                           ▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▒     ████████████████▒   ▒██▓▓▓▓▓    ▓▓▓▓▓▓▓▓▓▓▓▓"
+            "▓██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓▓▒ ▒▓▓███████████████▓▓ ▓▓▓███▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ ▓▓▓▓▓▓▓▓▒  ▒▓▓▓▓▓▓▓▓▓▓"
+            "  ▒▓▓▓▓▓▓▓███▓▓████████▓ ███████▓▓▓█████████▓ ▓██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ ▓▓▓▓▓▓▓▓▓  ▓▓▓▓▓▓▓▓▓▓"
+            "   ▓▓▓▓▓▓▓▓▓▓▓▓▓██▓████▓ ▓██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ ▓▓▓▓▓▓▓▓▓▒▒▓▓▓▓▓▓▓▓▓▒"
+            "   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓ ▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓ ▓▓▓▓▓▓▓▓█▓▓▓▓▓▓▓▓▓▓▓▓ ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▓▓▒▓▒"
+            "   ▒▓▓▓▓▓▓▓▒   ▒▓▓▓▓▓▓▓▓ ▓▓▓▓▓▓▓▒    ▓▓▓▓▓▓▓▓ ▓▓▓▓▓▓▓▓    ▒▓▓▓▓▓▓▓▓ ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▓▒"
+            "   ▒▓▓▓▓▓▓▓▒    ▓▓▓▓▓▓▓▓ ▓▓▓▓▓▓▓     ▓▓▓▓▓▓▓▓ ▓▓▓▓▓▓▓▓    ▒▓▓▓▓▓▓▓▓ ▓▓▓▓▒▓▓▓▓▓▓▓▒▒▓▒▒▒▒▓"
+            "    ▓▓▓▓▓▓▓▒    ▓▓▓▓▓▓▓▓ ▓▓▓▓▓▓▓▒    ▓▓▓▓▓▓▓▓ ▓▓▓▓▓▓▓▓    ▒▓▓▓▓▓▓▒▓ ▓▓▓▒▓▒▓▓▓▓▒▒▒▒▒▒▒▒▒▓"
+            "    ▓▓▓▓▓▓▓▒    ▒▓▓▓▓▓▓▓ ▓▓▓▓▓▓▓▒    ▓▓▓▓▓▓▓▓ ▓▓▓▓▓▓▓▓     ▓▓▓▓▒▒▒▒ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓"
+            "    ▒▓▓▓▓▓▓▓    ▒▓▓▓▓▓▓▓ ▓▓▓▓▓▓▓▒    ▒▓▓▓▓▓▓▓ ▓▓▓▓▓▓▓▓     ▓▒▒▒▒▒▒▒ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓"
+            "    ▒▓▓▓▓▓▓▓     ▓▓▓▓▓▓▓ ▓▓▓▓▓▓▓▒    ▒▓▓▓▓▓▓▓ ▓▓▓▓▓▓▓▓     ▓▒▒▒▒▒▒▒ ▒▒▒▒▒▒▒▓▒▒▒▒▒▒▒▒▒▒▒▓"
+            "     ▓▓▓▓▓▓▓     ▓▓▓▓▓▓▓ ▓▓▓▓▓▓▓▒    ▒▓▓▓▓▓▓▓ ▓▓▓▓▓▓▓▓     ▓▒▒▒▒▒▒▒ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+            "     ▓▓▓▓▓▓▓▒    ▓▓▓▒▓▓▓ ▓▓▒▓▒▒▓▓    ▒▓▓▒▒▒▓▓ ▓▓▓▓▒▓▓▓     ▓▒▒▒▒▒▒▒ ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+            "     ▒▓▓▓▒▓▓▒    ▓▒▒▓▓▒▓▓▒▒▒▓▓▒▒▓     ▓▒▓▓▒▒▓ ▓▓▓▓▒▒▒▓     ▓▒▒▒▒▒▒▒▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+            "     ▒▒▒▓▓▓▓▒   ▒▒▓▓▒▒▓▓▓▒▓▓▓▒▒▒▒▓▒   ▓▒▒▒▒▓▓ ▓▓▒▒▒▒▒▓   ▒▒▒▒▒▒▒▒▒▒▓▒▒▒▒▒▒▓▒▒▒▒▓▒▒▒▒▒▒▒"
+            "     ▒▒▓▓▓▓▓▓▒▒▒▒▓▒▒▒▒▒▒▓▒▓▓▒▓▓▒▒▒▒▓▒▒▓▒▒▒▒▒▒▒▓▒▒▒▒▒▒▓▒▓▒▒▒▒▒▒▒▒▒▒▒▓▒▒▒▒▒▒▓▒▒▒▒▒▒▒▒▒▒▒▒"
+            "     ▒▒▓▓▓▓▓▒▒▓▓▒▒▒▒▒▒▒▓▓▒▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▒▓▒▒▒▒▒▒▒ ▒▒▒▒▒▒▒▒▒▒▒"
+            "      ▒▒▒▓▓▒▒▓▓▓▒▒▒▒▒▒▒▓▓   ▒▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▒   ▒▒▒▒▒▒▒▒ ▒▓ ▒▒▒▒▒▒▒▒"
+            "      ▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▒        ▓▓▒▒▒▒▒▒▒▒▒▒▒▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓         ▓▒▒▒▒    ▒▒▒▒▒▒▒▒"
+            "      ▒▒▒▒▒▒▒▒▒▒▒▓▓▓              ▓▓▒▒▒▒▒▒▓▒    ▒▓▒▒▒▒▒▒▒▓▒             ▒▓▒    ▒▒▒▒▒▒▒▒"
+            "      ▒▒▒▒▒▒▒▒▒▒▒▒                  ▒▓▒▒▓          ▒▒▒▓▒                       ▒▒▒▒▒▒▒▒"
+            "       ▒▒▒▒▒▒▒▓                                                                ▒▒▒▒▒▒▒▒"
+            "       ▒▒▒▒▒▒                            E M A C S                             ▒▒▒▒▒▒▒"
+            "       ▒▒▒▒                                                                        ▒▒▒"
+            "                                                                                     ▒"
+            ""))
+         (longest-line (apply #'max (mapcar #'length banner))))
+    (put-text-property
+     (point)
+     (dolist (line banner (point))
+       (insert (+doom-dashboard--center
+                +doom-dashboard--width
+                (concat line (make-string (max 0 (- longest-line (length line))) 32)))
+               "\n"))
+     'face 'doom-dashboard-banner)))
+
+;; Use custom banner
+(setq +doom-dashboard-ascii-banner-fn #'my-custom-doom-banner)
+
+;;
+;; Treemacs customization - LazyVim Neo-Tree style
+;;
+(after! treemacs
+  ;; Reduce icon size for compact LazyVim-style appearance
+  (setq treemacs-nerd-icons-icon-size 0.8)
+
+  ;; Set treemacs window width
+  (setq treemacs-width 40))
+
+;; Darken minibuffer background to match sidebar aesthetic
+(add-hook 'minibuffer-setup-hook
+          (lambda ()
+            (face-remap-add-relative 'default :background "#181924")))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
