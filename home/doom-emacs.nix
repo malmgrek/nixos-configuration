@@ -61,6 +61,8 @@
       python312Packages.ruff                           # Python formatter
       nodePackages.prettier                            # JavaScript formatter
       metals                                           # Scala language server
+      basedpyright
+      pyright
       # ccls                                           # C/C++ language server
       # nodePackages.javascript-typescript-langserver  #
       # texlive.combined.scheme-medium
@@ -73,8 +75,9 @@
 
       #
       # NOTE: Grammars for tree-sitter can be installed directly in Emacs with
-      # "treesit-install-grammar...". –> At least select tsx and typescript from the list.
-      # Installs under ~/.emacs.d/.local
+      # - "treesit-install-grammar...". –> At least select tsx and typescript from the list.
+      # - Also Python can be installed, type "python" and install from sources.
+      # - Installs under ~/.emacs.d/.local
       #
       # See also: https://github.com/doomemacs/doomemacs/tree/master/modules/tools/tree-sitter
       #

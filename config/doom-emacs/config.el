@@ -7,7 +7,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Stratos Staboulis"
-      user-mail-address "stratos.staboulis@gmail.com")
+      user-mail-address "stratos.staboulis@gmail.com")  ;; FIXME: Should be secret
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:

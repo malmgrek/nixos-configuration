@@ -1,7 +1,7 @@
 ;;; doom-tokyonight-moon-theme.el --- TokyoNight Moon theme for Doom Emacs -*- lexical-binding: t; no-byte-compile: t; -*-
 ;;
-;; Author: Stratos Staboulis
-;; Maintainer: Stratos Staboulis
+;; Author: Malmgrek
+;; Maintainer: Malmgrek
 ;; Source: https://github.com/folke/tokyonight.nvim
 ;;
 ;;; Commentary:
@@ -48,7 +48,7 @@ Can be an integer to determine the exact padding."
 ;;; Theme definition
 
 (def-doom-theme doom-tokyonight-moon
-  "A dark theme inspired by TokyoNight Moon from LazyVim.
+    "A dark theme inspired by TokyoNight Moon from LazyVim.
 Features vibrant colors with glossy highlights and colored diagnostic backgrounds."
 
   ;; name        default   256           16
@@ -122,7 +122,7 @@ Features vibrant colors with glossy highlights and colored diagnostic background
    (doc-comments   (doom-lighten comment-fg 0.25))
    (constants      orange)
    (functions      blue)
-   (keywords       cyan)
+   (keywords       purple)
    (methods        blue)
    (operators      blue5)
    (type           yellow)
@@ -166,15 +166,15 @@ Features vibrant colors with glossy highlights and colored diagnostic background
 
 
    ;;;; Base theme face overrides
-   (((line-number &override) :foreground base4)
-    ((line-number-current-line &override) :foreground orange :weight 'bold)
-    ((font-lock-comment-face &override) :slant 'italic)
-    ((font-lock-doc-face &override) :slant 'italic :foreground (doom-lighten comment-fg 0.3))
-    ((font-lock-keyword-face &override) :slant 'italic :weight 'semi-bold)
-    ((font-lock-builtin-face &override) :weight 'semi-bold)
-    ((font-lock-function-name-face &override) :weight 'bold)
-    ((font-lock-type-face &override) :slant 'italic)
-    ((font-lock-constant-face &override) :weight 'semi-bold)
+  (((line-number &override) :foreground base4)
+   ((line-number-current-line &override) :foreground orange :weight 'bold)
+   ((font-lock-comment-face &override) :slant 'italic)
+   ((font-lock-doc-face &override) :slant 'italic :foreground (doom-lighten comment-fg 0.3))
+   ;; ((font-lock-keyword-face &override) :slant 'italic :weight 'semi-bold)
+   ;; ((font-lock-builtin-face &override) :weight 'semi-bold)
+   ;; ((font-lock-function-name-face &override) :weight 'bold)
+   ;; ((font-lock-type-face &override) :slant 'italic)
+   ((font-lock-constant-face &override) :weight 'semi-bold)
 
    ;; Cursor and highlights
    (cursor :background fg :foreground bg)
@@ -188,6 +188,7 @@ Features vibrant colors with glossy highlights and colored diagnostic background
    ;; Borders and visual elements
    (vertical-border :foreground base0)
    (fringe :background bg)
+   (vi-tilde-fringe-face :foreground base4)
 
    ;; Mode line
    (mode-line
@@ -345,14 +346,6 @@ Features vibrant colors with glossy highlights and colored diagnostic background
    (rjsx-tag-bracket-face :foreground base7)
    (rjsx-attr :foreground orange :slant 'italic)
 
-   ;;;; Python (Enhanced with Tree-sitter multicolor highlighting)
-   ;; Legacy python-mode faces (non-tree-sitter fallback)
-   (python-shell-prompt :foreground blue :weight 'bold)
-   (py-builtins-face :foreground magenta :weight 'semi-bold)
-   (py-class-name-face :foreground cyan :weight 'bold)
-   (py-decorators-face :foreground magenta :weight 'bold)
-   (py-object-reference-face :foreground purple)
-
    ;; Tree-sitter Python faces (python-ts-mode)
    ;; Function calls and definitions
    (font-lock-function-call-face :foreground blue :slant 'italic)
@@ -475,29 +468,6 @@ Features vibrant colors with glossy highlights and colored diagnostic background
    (diff-hl-change :foreground git-change :background git-change))
 
    ;;;; Base theme variable overrides
-   ())
-
-;;; Custom Python highlighting for 'self' and 'cls' parameters
-
-(defface doom-tokyonight-moon-python-self
-  `((t (:foreground ,(doom-color 'purple) :slant italic)))
-  "Face for Python 'self' and 'cls' parameters in TokyoNight Moon theme."
-  :group 'doom-tokyonight-moon-theme)
-
-(defun doom-tokyonight-moon--highlight-python-self ()
-  "Add custom font-lock rules to highlight 'self' and 'cls' in purple."
-  (font-lock-add-keywords
-   nil
-   '(;; Match 'self' as a parameter or standalone
-     ("\\<\\(self\\)\\>" 1 'doom-tokyonight-moon-python-self)
-     ;; Match 'cls' as a parameter or standalone
-     ("\\<\\(cls\\)\\>" 1 'doom-tokyonight-moon-python-self)
-     ;; Match self.property access
-     ("\\<self\\." 0 'doom-tokyonight-moon-python-self prepend))
-   'append))
-
-;; Apply custom highlighting when python-ts-mode or python-mode is loaded
-(add-hook 'python-ts-mode-hook #'doom-tokyonight-moon--highlight-python-self)
-(add-hook 'python-mode-hook #'doom-tokyonight-moon--highlight-python-self)
+  ())
 
 ;;; doom-tokyonight-moon-theme.el ends here

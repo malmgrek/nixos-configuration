@@ -40,8 +40,8 @@
     xdg.configFile."opencode/opencode.json" = {
       text = builtins.toJSON {
         "$schema" = "https://opencode.ai/config.json";
-        # theme = "tokyonight";
-        theme = "one-dark";
+        theme = "tokyonight";
+        # theme = "one-dark";
         # Default model - enforced on each rebuild
         model = "github-copilot/claude-haiku-4.5";
         # Default agent
