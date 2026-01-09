@@ -141,6 +141,41 @@
   (setq lazy-ruff-only-format-region t)
   (setq lazy-ruff-only-format-buffer t))
 
+;;
+;; Dashboard customization - LazyVim TokyoNight Moon style
+;;
+;; Override dashboard menu sections to use custom icon face (blue1 instead of purple)
+;; This separates icon colors (blue1) from menu text colors (cyan)
+(after! doom-dashboard
+  (setq +doom-dashboard-menu-sections
+        '(("Recently opened files"
+           :icon (nerd-icons-faicon "nf-fa-file_text" :face 'doom-dashboard-menu-icon)
+           :action recentf-open-files)
+          ("Reload last session"
+           :icon (nerd-icons-octicon "nf-oct-history" :face 'doom-dashboard-menu-icon)
+           :when (cond ((modulep! :ui workspaces)
+                        (file-exists-p (expand-file-name persp-auto-save-fname persp-save-dir)))
+                       ((require 'desktop nil t)
+                        (file-exists-p (desktop-full-file-name))))
+           :action doom/quickload-session)
+          ("Open org-agenda"
+           :icon (nerd-icons-octicon "nf-oct-calendar" :face 'doom-dashboard-menu-icon)
+           :when (fboundp 'org-agenda)
+           :action org-agenda)
+          ("Open project"
+           :icon (nerd-icons-octicon "nf-oct-briefcase" :face 'doom-dashboard-menu-icon)
+           :action projectile-switch-project)
+          ("Jump to bookmark"
+           :icon (nerd-icons-octicon "nf-oct-bookmark" :face 'doom-dashboard-menu-icon)
+           :action bookmark-jump)
+          ("Open private configuration"
+           :icon (nerd-icons-octicon "nf-oct-tools" :face 'doom-dashboard-menu-icon)
+           :when (file-directory-p doom-user-dir)
+           :action doom/open-private-config)
+          ("Open documentation"
+           :icon (nerd-icons-octicon "nf-oct-book" :face 'doom-dashboard-menu-icon)
+           :action doom/help))))
+
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
