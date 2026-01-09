@@ -92,50 +92,55 @@ Features vibrant colors with glossy highlights and colored diagnostic background
     (cyan       '("#86e1fc" "#86e1fc" "brightcyan"   ))
     (dark-cyan  '("#41a6b5" "#41a6b5" "cyan"         ))
 
-   ;; TokyoNight Moon specific colors
-   (bg-dark    '("#1e2030" "#1e2030" "black"))
-   (bg-highlight '("#2f334d" "#2f334d" "brightblack"))
-   (bg-visual  '("#2d3f76" "#2d3f76" "blue"))        ; The glossy selection!
-   (bg-search  '("#3e68d7" "#3e68d7" "brightblue"))
-   (comment-fg '("#636da6" "#636da6" "brightblack"))
-   (border     '("#589ed7" "#589ed7" "brightblue"))
+    ;; TokyoNight Moon specific colors
+    (bg-dark    '("#1e2030" "#1e2030" "black"))
+    (bg-highlight '("#2f334d" "#2f334d" "brightblack"))
+    (bg-visual  '("#2d3f76" "#2d3f76" "blue"))        ; The glossy selection!
+    (bg-search  '("#3e68d7" "#3e68d7" "brightblue"))
+    (comment-fg '("#636da6" "#636da6" "brightblack"))
+    (border     '("#589ed7" "#589ed7" "brightblue"))
 
-   ;; Diagnostic background colors (the glossy effect!)
-   (error-bg   '("#322639" "#322639" "black"))
-   (warning-bg '("#38343d" "#38343d" "black"))
-   (info-bg    '("#203346" "#203346" "black"))
-   (hint-bg    '("#273644" "#273644" "black"))
+    ;; Darker colors for modeline and borders
+    (modeline-bg-dark   '("#15161f" "#15161f" "black"))      ; Very dark modeline
+    (modeline-bg-darker '("#0f1014" "#0f1014" "black"))      ; Even darker for inactive
+    (border-dark        '("#0d0e14" "#0d0e14" "black"))      ; Very dark blue-black border
 
-   ;; Git colors
-   (git-add    green1)
-   (git-change '("#7ca1f2" "#7ca1f2" "blue"))
-   (git-delete '("#e26a75" "#e26a75" "red"))
+    ;; Diagnostic background colors (the glossy effect!)
+    (error-bg   '("#322639" "#322639" "black"))
+    (warning-bg '("#38343d" "#38343d" "black"))
+    (info-bg    '("#203346" "#203346" "black"))
+    (hint-bg    '("#273644" "#273644" "black"))
 
-   ;; These are the "universal syntax classes" that doom-themes establishes.
-   (highlight      blue)
-   (vertical-bar   (doom-darken base1 0.1))
-   (selection      bg-visual)  ; The vibrant glossy selection!
-   (builtin        magenta)
-   (comments       (if doom-tokyonight-moon-brighter-comments
-                       (doom-lighten comment-fg 0.2)
-                     comment-fg))
-   (doc-comments   (doom-lighten comment-fg 0.25))
-   (constants      orange)
-   (functions      blue)
-   (keywords       purple)
-   (methods        blue)
-   (operators      blue5)
-   (type           yellow)
-   (strings        green)
-   (variables      fg)
-   (numbers        orange)
-   (region         bg-visual)  ; Glossy blue selection region
-   (error          red1)
-   (warning        yellow)
-   (success        green)
-   (vc-modified    git-change)
-   (vc-added       git-add)
-   (vc-deleted     git-delete)
+    ;; Git colors
+    (git-add    green1)
+    (git-change '("#7ca1f2" "#7ca1f2" "blue"))
+    (git-delete '("#e26a75" "#e26a75" "red"))
+
+    ;; These are the "universal syntax classes" that doom-themes establishes.
+    (highlight      blue)
+    (vertical-bar   border-dark)
+    (selection      bg-visual)  ; The vibrant glossy selection!
+    (builtin        magenta)
+    (comments       (if doom-tokyonight-moon-brighter-comments
+                        (doom-lighten comment-fg 0.2)
+                      comment-fg))
+    (doc-comments   (doom-lighten comment-fg 0.25))
+    (constants      orange)
+    (functions      blue)
+    (keywords       purple)
+    (methods        blue)
+    (operators      blue5)
+    (type           yellow)
+    (strings        green)
+    (variables      fg)
+    (numbers        orange)
+    (region         bg-visual)  ; Glossy blue selection region
+    (error          red1)
+    (warning        yellow)
+    (success        green)
+    (vc-modified    git-change)
+    (vc-added       git-add)
+    (vc-deleted     git-delete)
 
     ;; Additional vibrant syntax classes for multicolor highlighting
     (property-name  green2)
@@ -144,30 +149,30 @@ Features vibrant colors with glossy highlights and colored diagnostic background
     (decorator      magenta)    ; Decorators like @property
     (special-param  red)        ; Special parameters like self, cls - match LazyVim
 
-   ;; Modeline colors
-   (modeline-fg              fg)
-   (modeline-fg-alt          base5)
-   (modeline-bg              (if doom-tokyonight-moon-brighter-modeline
-                                 (doom-darken blue 0.45)
-                               bg-dark))
-   (modeline-bg-alt          (if doom-tokyonight-moon-brighter-modeline
-                                 (doom-darken blue 0.475)
-                               base1))
-   (modeline-bg-inactive     base1)
-   (modeline-bg-inactive-alt base0)
+    ;; Modeline colors
+    (modeline-fg              fg)
+    (modeline-fg-alt          base5)
+    (modeline-bg              (if doom-tokyonight-moon-brighter-modeline
+                                  (doom-darken blue 0.45)
+                                modeline-bg-dark))
+    (modeline-bg-alt          (if doom-tokyonight-moon-brighter-modeline
+                                  (doom-darken blue 0.475)
+                                modeline-bg-darker))
+    (modeline-bg-inactive     modeline-bg-darker)
+    (modeline-bg-inactive-alt (doom-darken modeline-bg-darker 0.1))
 
-   (-modeline-pad
-    (when doom-tokyonight-moon-padded-modeline
-      (if (integerp doom-tokyonight-moon-padded-modeline)
-          doom-tokyonight-moon-padded-modeline
-        4))))
+    (-modeline-pad
+     (when doom-tokyonight-moon-padded-modeline
+       (if (integerp doom-tokyonight-moon-padded-modeline)
+           doom-tokyonight-moon-padded-modeline
+         4))))
 
 
    ;;;; Base theme face overrides
   (((line-number &override) :foreground base4)
    ((line-number-current-line &override) :foreground orange :weight 'bold)
-    ((font-lock-comment-face &override) :slant 'italic)
-    ((font-lock-doc-face &override) :slant 'italic :foreground (doom-lighten comment-fg 0.3))
+   ((font-lock-comment-face &override) :slant 'italic)
+   ((font-lock-doc-face &override) :slant 'italic :foreground (doom-lighten comment-fg 0.3))
 
    ;; Cursor and highlights
    (cursor :background fg :foreground bg)
@@ -179,7 +184,7 @@ Features vibrant colors with glossy highlights and colored diagnostic background
    (isearch :background orange :foreground base0 :weight 'bold)
 
    ;; Borders and visual elements
-   (vertical-border :foreground base0)
+   (vertical-border :foreground border-dark)
    (fringe :background bg)
    (vi-tilde-fringe-face :foreground base4)
 
@@ -193,9 +198,9 @@ Features vibrant colors with glossy highlights and colored diagnostic background
    (mode-line-emphasis :foreground (if doom-tokyonight-moon-brighter-modeline base8 highlight))
 
     ;;;; LSP & Diagnostics (with colored backgrounds - the glossy effect!)
-    (lsp-face-highlight-textual :background "#3b4261" :foreground fg)
-    (lsp-face-highlight-read :background "#3b4261" :foreground fg :underline t)
-    (lsp-face-highlight-write :background "#3b4261" :foreground fg)
+   (lsp-face-highlight-textual :background "#3b4261" :foreground fg)
+   (lsp-face-highlight-read :background "#3b4261" :foreground fg :underline t)
+   (lsp-face-highlight-write :background "#3b4261" :foreground fg)
 
    ;; Flycheck with background colors
    (flycheck-error :background error-bg :foreground red1 :underline `(:style wave :color ,red1))
@@ -221,19 +226,19 @@ Features vibrant colors with glossy highlights and colored diagnostic background
    (lsp-ui-sideline-current-symbol :foreground blue :weight 'bold)
    (lsp-ui-sideline-symbol :foreground base7)
 
-    ;;;; Org-mode (with backgrounds like markdown in tokyonight)
-    (org-level-1 :foreground blue :weight 'bold :height 1.1 :background "#2c314a" :extend t)
-    (org-level-2 :foreground yellow :weight 'bold :height 1.05 :background "#38343d" :extend t)
-    (org-level-3 :foreground green :weight 'bold :height 1.0 :background "#32383f" :extend t)
-    (org-level-4 :foreground green2 :weight 'bold :background "#273644" :extend t)
-    (org-level-5 :foreground magenta :weight 'bold :background "#32304a" :extend t)
-    (org-level-6 :foreground purple :weight 'bold :background "#383148" :extend t)
-    (org-level-7 :foreground orange :weight 'bold :background "#382f3b" :extend t)
-    (org-level-8 :foreground red :background "#382c3d" :extend t)
+   ;; Org-mode (with backgrounds like markdown in tokyonight)
+   (org-level-1 :foreground blue :weight 'bold :height 1.1 :background "#2c314a" :extend t)
+   (org-level-2 :foreground yellow :weight 'bold :height 1.05 :background "#38343d" :extend t)
+   (org-level-3 :foreground green :weight 'bold :height 1.0 :background "#32383f" :extend t)
+   (org-level-4 :foreground green2 :weight 'bold :background "#273644" :extend t)
+   (org-level-5 :foreground magenta :weight 'bold :background "#32304a" :extend t)
+   (org-level-6 :foreground purple :weight 'bold :background "#383148" :extend t)
+   (org-level-7 :foreground orange :weight 'bold :background "#382f3b" :extend t)
+   (org-level-8 :foreground red :background "#382c3d" :extend t)
    (org-block :background bg-dark :extend t)
    (org-block-begin-line :foreground comment-fg :slant 'italic :background bg-dark :extend t)
    (org-block-end-line :foreground comment-fg :slant 'italic :background bg-dark :extend t)
-    (org-code :foreground blue :background "#444a73")
+   (org-code :foreground blue :background "#444a73")
    (org-verbatim :foreground green :weight 'semi-bold)
    (org-todo :foreground red :weight 'bold)
    (org-done :foreground green :weight 'bold)
@@ -284,6 +289,10 @@ Features vibrant colors with glossy highlights and colored diagnostic background
    (neo-dir-link-face :foreground blue)
    (neo-file-link-face :foreground fg)
    (neo-expand-btn-face :foreground cyan)
+
+   ;;;; Window Separators (for sidebars like Treemacs, NeoTree)
+   (window-separator :foreground border-dark :background bg)
+   (win-separator :foreground border-dark :background bg)
 
    ;;;; Company (glossy completion popup)
    (company-tooltip :background bg-dark :foreground fg)
@@ -339,32 +348,32 @@ Features vibrant colors with glossy highlights and colored diagnostic background
    (rjsx-tag-bracket-face :foreground base7)
    (rjsx-attr :foreground orange :slant 'italic)
 
-    ;; Tree-sitter Python faces (python-ts-mode)
-    ;; Function calls and definitions
-    (font-lock-function-call-face :foreground blue)
+   ;; Tree-sitter Python faces (python-ts-mode)
+   ;; Function calls and definitions
+   (font-lock-function-call-face :foreground blue)
 
-    ;; Properties and attributes (obj.property)
-    (font-lock-property-name-face :foreground green2)
-    (font-lock-property-use-face :foreground green2)
+   ;; Properties and attributes (obj.property)
+   (font-lock-property-name-face :foreground green2)
+   (font-lock-property-use-face :foreground green2)
 
-    ;; Variable names - match LazyVim which uses default fg
-    (font-lock-variable-name-face :foreground fg)
-    (font-lock-variable-use-face :foreground fg)
+   ;; Variable names - match LazyVim which uses default fg
+   (font-lock-variable-name-face :foreground fg)
+   (font-lock-variable-use-face :foreground fg)
 
-    ;; Numbers get their own vibrant color
-    (font-lock-number-face :foreground orange)
+   ;; Numbers get their own vibrant color
+   (font-lock-number-face :foreground orange)
 
    ;; Operators - glossy cyan-blue
    (font-lock-operator-face :foreground blue5)
 
-    ;; Brackets and delimiters
-    (font-lock-bracket-face :foreground base7)
-    (font-lock-delimiter-face :foreground blue5)
-    (font-lock-punctuation-face :foreground blue5)
-    (font-lock-misc-punctuation-face :foreground blue5)
+   ;; Brackets and delimiters
+   (font-lock-bracket-face :foreground base7)
+   (font-lock-delimiter-face :foreground blue5)
+   (font-lock-punctuation-face :foreground blue5)
+   (font-lock-misc-punctuation-face :foreground blue5)
 
-    ;; String escape sequences (like \n, \t)
-    (font-lock-escape-face :foreground magenta)
+   ;; String escape sequences (like \n, \t)
+   (font-lock-escape-face :foreground magenta)
 
    ;;;; Web-mode
    (web-mode-html-tag-face :foreground red)
