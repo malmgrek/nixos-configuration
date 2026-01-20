@@ -87,6 +87,9 @@
       # tree-sitter-grammars.tree-sitter-tsx
       # tree-sitter-grammars.tree-sitter-python
       #
+      # NOTE: Good linting is available through LSP servers
+      # Install: lsp-install-server -> select from list
+      #
 
     ];
 
