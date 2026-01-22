@@ -64,6 +64,7 @@
       ty
       basedpyright
       pyright
+      typescript-language-server                      # TypeScript/JavaScript language server
       # ccls                                           # C/C++ language server
       # nodePackages.javascript-typescript-langserver  #
       # texlive.combined.scheme-medium

@@ -1,5 +1,8 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
+;; Quit Emacs without asking for confirmation
+(setq confirm-kill-emacs nil)
+
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Stratos Staboulis"
@@ -26,13 +29,9 @@
 ;; For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
-;; Quit Emacs without asking for confirmation
-(setq confirm-kill-emacs nil)
-
 ;; 
 ;; Set 2-space indentation for web development modes
 ;; 
-
 (setq-default
  ;; JavaScript
  js-indent-level 2                    ; built-in js-mode
@@ -68,17 +67,17 @@
 
 ;; Gptel
 (use-package! gptel
- :config
- (setq gptel-default-mode 'markdown-mode
-       gptel-use-tools t
-       gptel-api-key (read-openai-api-key)
-       gptel-model 'claude-haiku-4.5
-       gptel-backend (gptel-make-gh-copilot "Copilot"))
- (gptel-make-ollama "Ollama"
-   :host "localhost:11434"
-   :stream t
-   :models '(qwen2.5-coder:3b deepseek-coder-v2:16b))
- )
+  :config
+  (setq gptel-default-mode 'markdown-mode
+        gptel-use-tools t
+        gptel-api-key (read-openai-api-key)
+        gptel-model 'claude-haiku-4.5
+        gptel-backend (gptel-make-gh-copilot "Copilot"))
+  (gptel-make-ollama "Ollama"
+    :host "localhost:11434"
+    :stream t
+    :models '(qwen2.5-coder:3b deepseek-coder-v2:16b))
+  )
 (use-package! gptel-agent  ;; Agentic features for gptel
   :config
   (gptel-agent-update))  ;Read files from agents directories
@@ -106,9 +105,8 @@
 
 
 ;;
-;; Python LSP and lint improvements
+;; LSP mode customizations
 ;; 
-
 (use-package! lazy-ruff
   ;; Enable automatic ruff formatting on save in Python buffers
   ;; :hook (python-mode . lazy-ruff-mode)
@@ -116,21 +114,20 @@
   :config
   (setq lazy-ruff-only-format-block t
         lazy-ruff-only-format-region t
-        lazy-ruff-only-format-buffer t)
-
+        lazy-ruff-only-format-buffer t))
 (after! lsp-pyright
   (setq lsp-pyright-langserver-command "basedpyright")
   (setq lsp-pyright-inlay-hints t)
   (setq lsp-pyright-type-checking-mode "strict"
         ;; Override specific rules to be warnings instead of errors
         lsp-pyright-diagnostic-severity-overrides
-        '(("reportMissingTypeStubs" . "warning")
-          ("reportUnknownMemberType" . "warning")
+        '(("reportDeprecated" . "warning")
+          ("reportMissingTypeStubs" . "warning")
           ("reportMissingParameterType" . "warning")
+          ("reportUnknownMemberType" . "warning")
           ("reportUnknownParameterType" . "warning")
           ("reportUnknownArgumentType" . "warning")
           ("reportUnknownVariableType" . "warning"))))
-
 (after! lsp-ui
   (setq lsp-ui-sideline-enable t          ; Toggle sideline on/off
         lsp-ui-sideline-show-hover t       ; Show hover info in sideline
