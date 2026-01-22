@@ -42,11 +42,6 @@
 ;; To use TokyoNight Moon theme, uncomment the line below and comment out the line above:
 (setq doom-theme 'doom-tokyonight-moon)
 
-;; Enable tree-sitter mode for Python (for enhanced multicolor syntax highlighting)
-(after! python
-  ;; Use python-ts-mode instead of python-mode for tree-sitter support
-  (add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode)))
-
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/Documents/org/"
@@ -104,6 +99,9 @@
               ("C-<iso-lefttab>" . 'copilot-accept-completion-by-word))
   :config
   ;; Disable company-mode auto-completion in text modes (prevent fallback)
+  (add-to-list 'copilot-indentation-alist '(org-mode 2))
+  (add-to-list 'copilot-indentation-alist '(markdown-mode 2))
+  (add-to-list 'copilot-indentation-alist '(text-mode 2))
   (dolist (mode '(markdown-mode org-mode text-mode))
     (add-hook (intern (format "%s-hook" (symbol-name mode)))
               (lambda () (setq-local company-idle-delay nil)))))
@@ -120,15 +118,20 @@
 
 (use-package! gptel
  :config
- (setq gptel-default-mode 'org-mode
+ (setq gptel-default-mode 'markdown-mode
+       gptel-use-tools t
        gptel-api-key (read-openai-api-key)
-       gptel-model 'claude-sonnet-4
+       gptel-model 'claude-haiku-4.5
        gptel-backend (gptel-make-gh-copilot "Copilot"))
  (gptel-make-ollama "Ollama"
    :host "localhost:11434"
    :stream t
    :models '(qwen2.5-coder:3b deepseek-coder-v2:16b))
  )
+
+(use-package! gptel-agent
+  :config
+  (gptel-agent-update))  ;Read files from agents directories
 
 ;;
 ;; Python formatter ruff

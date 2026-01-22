@@ -61,6 +61,7 @@
       python312Packages.ruff                           # Python formatter
       nodePackages.prettier                            # JavaScript formatter
       metals                                           # Scala language server
+      ty
       basedpyright
       pyright
       # ccls                                           # C/C++ language server
@@ -85,7 +86,7 @@
       #
       # tree-sitter-grammars.tree-sitter-typescript
       # tree-sitter-grammars.tree-sitter-tsx
-      # tree-sitter-grammars.tree-sitter-python
+      tree-sitter-grammars.tree-sitter-python
       #
       # NOTE: Good linting is available through LSP servers
       # Install: lsp-install-server -> select from list

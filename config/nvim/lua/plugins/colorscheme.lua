@@ -10,6 +10,15 @@ return {
 			-- - @lsp.type.decorator → @attribute (distinct color for decorators)
 			-- - @lsp.type.parameter → @variable.parameter (distinct color for params)
 		},
+		config = function()
+			require("tokyonight").setup({
+				style = "moon",
+				on_highlights = function(hl, c)
+					-- Make docstrings the same color as comments
+					hl["@string.documentation.python"] = { link = "String" } -- { fg = c.comment, italic = true }
+				end,
+			})
+		end,
 	},
 
 	-- Alternative: OneDark (no semantic token support for Python)

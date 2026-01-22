@@ -53,9 +53,10 @@
   :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el")))
 
 ;; gptel
-(package! gptel
-  :recipe (:host github :repo "karthink/gptel" :files ("*.el")))
+(package! gptel :recipe (:nonrecursive t))
 
 ;; lazy-ruff
 (package! lazy-ruff
   :recipe (:host github :repo "christophermadsen/emacs-lazy-ruff" :files ("*.el")))
+
+(package! gptel-agent)

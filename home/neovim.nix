@@ -39,6 +39,8 @@
         vscode-langservers-extracted # HTML/CSS/JSON
         marksman # Markdown
         statix # Nix linter
+        dockerfile-language-server  # Dockerfiles
+        hadolint  # Dockerfile linter
 
         # Formatters
         stylua
@@ -60,6 +62,7 @@
         xclip
 
         # Tree-sitter grammars (install via Nix for reliability)
+        tree-sitter-grammars.tree-sitter-dockerfile
         tree-sitter-grammars.tree-sitter-nix
         tree-sitter-grammars.tree-sitter-lua
         tree-sitter-grammars.tree-sitter-python
@@ -70,6 +73,9 @@
         tree-sitter-grammars.tree-sitter-bash
         tree-sitter-grammars.tree-sitter-html
         tree-sitter-grammars.tree-sitter-css
+
+        # GUI
+        neovide
 
       ];
     };

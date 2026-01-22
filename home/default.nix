@@ -52,40 +52,44 @@
     # the Home Manager release notes for a list of state version
     # changes in each release.
     home.stateVersion = config.system.stateVersion;
-    home.packages = with pkgs; let
-      # azuredatastudio = callPackage ./azuredatastudio.nix { };
-      tex = (texlive.combine {
-        inherit (texlive)
-          scheme-medium
-          wrapfig
-          ulem
-          amsmath
-          hyperref
-          capt-of
-          metafont
-          beamer
-        ;
-      });
-    in [
-      # AI tools
-      unstable.copilot-language-server
-      unstable.aichat
-      unstable.aider-chat-with-playwright
+    home.packages =
+      with pkgs;
+      let
+        # azuredatastudio = callPackage ./azuredatastudio.nix { };
+        tex = (
+          texlive.combine {
+            inherit (texlive)
+              scheme-medium
+              wrapfig
+              ulem
+              amsmath
+              hyperref
+              capt-of
+              metafont
+              beamer
+              ;
+          }
+        );
+      in
+      [
+        # AI tools
+        unstable.copilot-language-server
+        unstable.aichat
+        unstable.aider-chat-with-playwright
 
-      azure-cli                 # Azure CLI
-      # azuredatastudio         # MS Azure SQL client
-      awscli2                   # AWS CLI
-      broot                     # Directory tree viewer
-      chromium                  # MS Teams works better in chromium
-      dbeaver-bin               # Database client
-      neovide                   # Neovim GUI
-      pass                      # Password store
-      spotify
-      tex
-      tor-browser               # Tor browser
-      # unstable.code-cursor      # AI powered code editor
-      unstable.signal-desktop   # Signal messaging app desktop client
-    ];
+        azure-cli # Azure CLI
+        # azuredatastudio         # MS Azure SQL client
+        awscli2 # AWS CLI
+        broot # Directory tree viewer
+        chromium # MS Teams works better in chromium
+        dbeaver-bin # Database client
+        pass # Password store
+        spotify
+        tex
+        tor-browser # Tor browser
+        # unstable.code-cursor      # AI powered code editor
+        unstable.signal-desktop # Signal messaging app desktop client
+      ];
     programs = {
       firefox = {
         enable = true;
@@ -100,15 +104,18 @@
       };
       # vscode = {
       #   enable = true;
-      #   profiles.default.extensions = with pkgs.vscode-extensions;
-      #     pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-      #       {
-      #         name = "mssql";
-      #         publisher = "ms-mssql";
-      #         version = "1.33.0";
-      #         sha256 = "sha256-3EXx5IRbMwYxJjUirTPOdb4E8/1w7b1fw6AAUH1s/cc=";
-      #       }
-      #     ];
+      #   profiles.default.extensions = with pkgs.unstable.vscode-extensions; [
+      #     github.copilot
+      #     github.copilot-chat
+      #     ms-azuretools.vscode-containers
+      #     enkia.tokyo-night
+      #   ];
+      #   profiles.default.userSettings = {
+      #     "workbench.colorTheme" = "Tokyo Night Storm";
+      #     "editor.fontFamily" = "JetBrains Mono";
+      #     "terminal.integrated.fontFamily" = "JetBrains Mono";
+      #     "chat.fontFamily" = "JetBrains Mono";
+      #   };
       # };
     };
     # Nixpkgs config file, enables e.g. `allowUnfree` globally
