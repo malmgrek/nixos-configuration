@@ -71,54 +71,54 @@ Features vibrant colors with glossy highlights and colored diagnostic background
    (base7      '("#828bb8" "#828bb8"     "brightblack"  ))
    (base8      '("#c8d3f5" "#c8d3f5"     "white"        ))
 
-    (grey       base4)
-    (red        '("#ff757f" "#ff757f" "red"          ))
-    (red1       '("#c53b53" "#c53b53" "red"          ))
-    (orange     '("#ff966c" "#ff966c" "brightred"    ))
-    (green      '("#c3e88d" "#c3e88d" "green"        ))
-    (green1     '("#b8db87" "#b8db87" "green"        ))
-    (green2     '("#4fd6be" "#4fd6be" "brightgreen"  ))
-    (teal       '("#1abc9c" "#1abc9c" "brightgreen"  ))
-    (yellow     '("#ffc777" "#ffc777" "yellow"       ))
-    (blue       '("#82aaff" "#82aaff" "brightblue"   ))
-    (blue0      '("#3e68d7" "#3e68d7" "blue"         ))
-    (blue1      '("#65bcff" "#65bcff" "brightblue"   ))
-    (blue2      '("#0db9d7" "#0db9d7" "brightblue"   ))
-    (blue5      '("#89ddff" "#89ddff" "brightcyan"   ))
-    (dark-blue  '("#394b70" "#394b70" "blue"         ))
-    (magenta    '("#c099ff" "#c099ff" "brightmagenta"))
-    (purple     '("#fca7ea" "#fca7ea" "magenta"      ))
-    (violet     '("#c099ff" "#c099ff" "magenta"      ))
-    (cyan       '("#86e1fc" "#86e1fc" "brightcyan"   ))
-    (dark-cyan  '("#41a6b5" "#41a6b5" "cyan"         ))
-
-    ;; TokyoNight Moon specific colors
-    (bg-dark    '("#1e2030" "#1e2030" "black"))
-    (bg-highlight '("#2f334d" "#2f334d" "brightblack"))
-    (bg-visual  '("#2d3f76" "#2d3f76" "blue"))        ; The glossy selection!
-    (bg-search  '("#3e68d7" "#3e68d7" "brightblue"))
-    (comment-fg '("#636da6" "#636da6" "brightblack"))
-    (border     '("#589ed7" "#589ed7" "brightblue"))
-
-    ;; Darker colors for modeline and borders
-    (modeline-bg-dark   '("#15161f" "#15161f" "black"))      ; Very dark modeline
-    (modeline-bg-darker '("#0f1014" "#0f1014" "black"))      ; Even darker for inactive
-    (border-dark        '("#0d0e14" "#0d0e14" "black"))      ; Very dark blue-black border
-
+   (grey       base4)
+   (red        '("#ff757f" "#ff757f" "red"          ))
+   (red1       '("#c53b53" "#c53b53" "red"          ))
+   (orange     '("#ff966c" "#ff966c" "brightred"    ))
+   (green      '("#c3e88d" "#c3e88d" "green"        ))
+   (green1     '("#b8db87" "#b8db87" "green"        ))
+   (green2     '("#4fd6be" "#4fd6be" "brightgreen"  ))
+   (teal       '("#1abc9c" "#1abc9c" "brightgreen"  ))
+   (yellow     '("#ffc777" "#ffc777" "yellow"       ))
+   (blue       '("#82aaff" "#82aaff" "brightblue"   ))
+   (blue0      '("#3e68d7" "#3e68d7" "blue"         ))
+   (blue1      '("#65bcff" "#65bcff" "brightblue"   ))
+   (blue2      '("#0db9d7" "#0db9d7" "brightblue"   ))
+   (blue5      '("#89ddff" "#89ddff" "brightcyan"   ))
+   (dark-blue  '("#394b70" "#394b70" "blue"         ))
+   (magenta    '("#c099ff" "#c099ff" "brightmagenta"))
+   (purple     '("#fca7ea" "#fca7ea" "magenta"      ))
+   (violet     '("#c099ff" "#c099ff" "magenta"      ))
+   (cyan       '("#86e1fc" "#86e1fc" "brightcyan"   ))
+   (dark-cyan  '("#41a6b5" "#41a6b5" "cyan"         ))
+   
+   ;; TokyoNight Moon specific colors
+   (bg-dark    '("#1e2030" "#1e2030" "black"))
+   (bg-highlight '("#2f334d" "#2f334d" "brightblack"))
+   (bg-visual  '("#2d3f76" "#2d3f76" "blue"))        ; The glossy selection!
+   (bg-search  '("#3e68d7" "#3e68d7" "brightblue"))
+   (comment-fg '("#636da6" "#636da6" "brightblack"))
+   (border     '("#589ed7" "#589ed7" "brightblue"))
+   
+   ;; Darker colors for modeline and borders
+   (modeline-bg-dark   '("#15161f" "#15161f" "black"))      ; Very dark modeline
+   (modeline-bg-darker '("#0f1014" "#0f1014" "black"))      ; Even darker for inactive
+   (border-dark        '("#0d0e14" "#0d0e14" "black"))      ; Very dark blue-black border
+   
    ;; Diagnostic background colors (the glossy effect!)
    (error-bg   '("#322639" "#322639" "black"))
    (warning-bg '("#38343d" "#38343d" "black"))
    (info-bg    '("#203346" "#203346" "black"))
    (hint-bg    '("#273644" "#273644" "black"))
-
+   
    ;; Git colors
    (git-add    green1)
    (git-change '("#7ca1f2" "#7ca1f2" "blue"))
    (git-delete '("#e26a75" "#e26a75" "red"))
 
-    ;; These are the "universal syntax classes" that doom-themes establishes.
-    (highlight      blue)
-    (vertical-bar   border-dark)
+   ;; These are the "universal syntax classes" that doom-themes establishes.
+   (highlight      blue)
+   (vertical-bar   border-dark)
    (selection      bg-visual)  ; The vibrant glossy selection!
    (builtin        magenta)
    (comments       (if doom-tokyonight-moon-brighter-comments
@@ -142,52 +142,52 @@ Features vibrant colors with glossy highlights and colored diagnostic background
    (vc-added       git-add)
    (vc-deleted     git-delete)
 
-     ;; Additional vibrant syntax classes for multicolor highlighting
-     (property-name  green2)
-     (property-use   green2)
-     (parameter      yellow)     ; Function parameters - match LazyVim
-     (decorator      magenta)    ; Decorators like @property
-     (special-param  red)        ; Special parameters like self, cls - match LazyVim
+   ;; Additional vibrant syntax classes for multicolor highlighting
+   (property-name  green2)
+   (property-use   green2)
+   (parameter      yellow)     ; Function parameters - match LazyVim
+   (decorator      magenta)    ; Decorators like @property
+   (special-param  red)        ; Special parameters like self, cls - match LazyVim
 
-    ;; Modeline colors
-    (modeline-fg              fg)
-    (modeline-fg-alt          base5)
-    (modeline-bg              (if doom-tokyonight-moon-brighter-modeline
-                                  (doom-darken blue 0.45)
-                                modeline-bg-dark))
-    (modeline-bg-alt          (if doom-tokyonight-moon-brighter-modeline
-                                  (doom-darken blue 0.475)
-                                modeline-bg-darker))
-    (modeline-bg-inactive     modeline-bg-darker)
-    (modeline-bg-inactive-alt (doom-darken modeline-bg-darker 0.1))
-
-    (-modeline-pad
+   ;; Modeline colors
+   (modeline-fg              fg)
+   (modeline-fg-alt          base5)
+   (modeline-bg              (if doom-tokyonight-moon-brighter-modeline
+                                 (doom-darken blue 0.45)
+                               modeline-bg-dark))
+   (modeline-bg-alt          (if doom-tokyonight-moon-brighter-modeline
+                                 (doom-darken blue 0.475)
+                               modeline-bg-darker))
+   (modeline-bg-inactive     modeline-bg-darker)
+   (modeline-bg-inactive-alt (doom-darken modeline-bg-darker 0.1))
+   
+   (-modeline-pad
     (when doom-tokyonight-moon-padded-modeline
       (if (integerp doom-tokyonight-moon-padded-modeline)
           doom-tokyonight-moon-padded-modeline
         4))))
+  
 
-
-   ;;;; Base theme face overrides
+  ;;;; Base theme face overrides
   (((line-number &override) :foreground base4)
    ((line-number-current-line &override) :foreground orange :weight 'bold)
-    ((font-lock-comment-face &override) :slant 'italic)
-    ((font-lock-doc-face &override) :slant 'italic :foreground (doom-lighten comment-fg 0.3))
-
+   ((font-lock-comment-face &override) :slant 'italic)
+   ((font-lock-doc-face &override) :slant 'italic :foreground (doom-lighten comment-fg 0.3))
+   
    ;; Cursor and highlights
    (cursor :background fg :foreground bg)
    (hl-line :background bg-highlight)
-
+   
    ;; Selection and search
    (region :background bg-visual :distant-foreground fg :extend t)
    (lazy-highlight :background bg-search :foreground fg :weight 'bold)
    (isearch :background orange :foreground base0 :weight 'bold)
-
-    ;; Borders and visual elements
-    (vertical-border :foreground border-dark)
+   
+   ;; Borders and visual elements
+   (vertical-border :foreground border-dark)
    (fringe :background bg)
    (vi-tilde-fringe-face :foreground base4)
-
+   
    ;; Mode line
    (mode-line
     :background modeline-bg :foreground modeline-fg
@@ -196,22 +196,22 @@ Features vibrant colors with glossy highlights and colored diagnostic background
     :background modeline-bg-inactive :foreground modeline-fg-alt
     :box (if -modeline-pad `(:line-width ,-modeline-pad :color ,modeline-bg-inactive)))
    (mode-line-emphasis :foreground (if doom-tokyonight-moon-brighter-modeline base8 highlight))
-
+   
     ;;;; LSP & Diagnostics (with colored backgrounds - the glossy effect!)
-    (lsp-face-highlight-textual :background "#3b4261" :foreground fg)
-    (lsp-face-highlight-read :background "#3b4261" :foreground fg :underline t)
-    (lsp-face-highlight-write :background "#3b4261" :foreground fg)
-
+   (lsp-face-highlight-textual :background "#3b4261" :foreground fg)
+   (lsp-face-highlight-read :background "#3b4261" :foreground fg :underline t)
+   (lsp-face-highlight-write :background "#3b4261" :foreground fg)
+   
    ;; Flycheck with background colors
    (flycheck-error :background error-bg :foreground red1 :underline `(:style wave :color ,red1))
    (flycheck-warning :background warning-bg :foreground yellow :underline `(:style wave :color ,yellow))
    (flycheck-info :background info-bg :foreground blue2 :underline `(:style wave :color ,blue2))
-
+   
    ;; Flymake with background colors
    (flymake-error :background error-bg :foreground red1 :underline `(:style wave :color ,red1))
    (flymake-warning :background warning-bg :foreground yellow :underline `(:style wave :color ,yellow))
    (flymake-note :background info-bg :foreground blue2 :underline `(:style wave :color ,blue2))
-
+   
    ;; LSP UI
    (lsp-ui-doc-background :background bg-dark)
    (lsp-ui-doc-border :foreground border)
@@ -225,20 +225,20 @@ Features vibrant colors with glossy highlights and colored diagnostic background
    (lsp-ui-sideline-code-action :foreground yellow)
    (lsp-ui-sideline-current-symbol :foreground blue :weight 'bold)
    (lsp-ui-sideline-symbol :foreground base7)
-
-    ;;;; Org-mode (with backgrounds like markdown in tokyonight)
-    (org-level-1 :foreground blue :weight 'bold :height 1.1 :background "#2c314a" :extend t)
-    (org-level-2 :foreground yellow :weight 'bold :height 1.05 :background "#38343d" :extend t)
-    (org-level-3 :foreground green :weight 'bold :height 1.0 :background "#32383f" :extend t)
-    (org-level-4 :foreground green2 :weight 'bold :background "#273644" :extend t)
-    (org-level-5 :foreground magenta :weight 'bold :background "#32304a" :extend t)
-    (org-level-6 :foreground purple :weight 'bold :background "#383148" :extend t)
-    (org-level-7 :foreground orange :weight 'bold :background "#382f3b" :extend t)
-    (org-level-8 :foreground red :background "#382c3d" :extend t)
+   
+   ;;;; Org-mode (with backgrounds like markdown in tokyonight)
+   (org-level-1 :foreground blue :weight 'bold :height 1.1 :background "#2c314a" :extend t)
+   (org-level-2 :foreground yellow :weight 'bold :height 1.05 :background "#38343d" :extend t)
+   (org-level-3 :foreground green :weight 'bold :height 1.0 :background "#32383f" :extend t)
+   (org-level-4 :foreground green2 :weight 'bold :background "#273644" :extend t)
+   (org-level-5 :foreground magenta :weight 'bold :background "#32304a" :extend t)
+   (org-level-6 :foreground purple :weight 'bold :background "#383148" :extend t)
+   (org-level-7 :foreground orange :weight 'bold :background "#382f3b" :extend t)
+   (org-level-8 :foreground red :background "#382c3d" :extend t)
    (org-block :background bg-dark :extend t)
    (org-block-begin-line :foreground comment-fg :slant 'italic :background bg-dark :extend t)
    (org-block-end-line :foreground comment-fg :slant 'italic :background bg-dark :extend t)
-    (org-code :foreground blue :background "#444a73")
+   (org-code :foreground blue :background "#444a73")
    (org-verbatim :foreground green :weight 'semi-bold)
    (org-todo :foreground red :weight 'bold)
    (org-done :foreground green :weight 'bold)
@@ -285,17 +285,17 @@ Features vibrant colors with glossy highlights and colored diagnostic background
    (treemacs-git-untracked-face :foreground magenta)
    (treemacs-git-ignored-face :foreground base5)
 
-    ;;;; Neotree
-    (neo-root-dir-face :foreground blue :weight 'bold :height 1.2)
-    (neo-dir-link-face :foreground blue)
-    (neo-file-link-face :foreground fg)
-    (neo-expand-btn-face :foreground cyan)
-
-    ;;;; Window Separators (for sidebars like Treemacs, NeoTree)
-    (window-separator :foreground border-dark :background bg)
-    (win-separator :foreground border-dark :background bg)
-
-    ;;;; Company (glossy completion popup)
+   ;;;; Neotree
+   (neo-root-dir-face :foreground blue :weight 'bold :height 1.2)
+   (neo-dir-link-face :foreground blue)
+   (neo-file-link-face :foreground fg)
+   (neo-expand-btn-face :foreground cyan)
+   
+   ;;;; Window Separators (for sidebars like Treemacs, NeoTree)
+   (window-separator :foreground border-dark :background bg)
+   (win-separator :foreground border-dark :background bg)
+   
+   ;;;; Company (glossy completion popup)
    (company-tooltip :background bg-dark :foreground fg)
    (company-tooltip-selection :background bg-visual :foreground fg :weight 'bold)
    (company-tooltip-common :foreground blue1 :weight 'bold)
@@ -349,36 +349,36 @@ Features vibrant colors with glossy highlights and colored diagnostic background
    (rjsx-tag-bracket-face :foreground base7)
    (rjsx-attr :foreground orange :slant 'italic)
 
-    ;; Tree-sitter Python faces (python-ts-mode)
-    ;; Function calls and definitions
-    (font-lock-function-call-face :foreground blue)
+   ;; Tree-sitter Python faces (python-ts-mode)
+   ;; Function calls and definitions
+   (font-lock-function-call-face :foreground blue)
 
-    ;; Properties and attributes (obj.property)
-    (font-lock-property-name-face :foreground green2)
-    (font-lock-property-use-face :foreground green2)
+   ;; Properties and attributes (obj.property)
+   (font-lock-property-name-face :foreground green2)
+   (font-lock-property-use-face :foreground green2)
 
-    ;; Variable names - match LazyVim which uses default fg
-    (font-lock-variable-name-face :foreground fg)
-    (font-lock-variable-use-face :foreground fg)
-
-    ;; Numbers get their own vibrant color
-    (font-lock-number-face :foreground orange)
-
+   ;; Variable names - match LazyVim which uses default fg
+   (font-lock-variable-name-face :foreground fg)
+   (font-lock-variable-use-face :foreground fg)
+   
+   ;; Numbers get their own vibrant color
+   (font-lock-number-face :foreground orange)
+   
    ;; Operators - glossy cyan-blue
    (font-lock-operator-face :foreground blue5)
-
-    ;; Brackets and delimiters
-    (font-lock-bracket-face :foreground base7)
-    (font-lock-delimiter-face :foreground blue5)
-    (font-lock-punctuation-face :foreground blue5)
-    (font-lock-misc-punctuation-face :foreground blue5)
-
-    ;; String escape sequences (like \n, \t)
-    (font-lock-escape-face :foreground magenta)
-
-    ;; Keywords like def, class, return
-    ((font-lock-keyword-face &override) :slant 'italic)
-
+   
+   ;; Brackets and delimiters
+   (font-lock-bracket-face :foreground base7)
+   (font-lock-delimiter-face :foreground blue5)
+   (font-lock-punctuation-face :foreground blue5)
+   (font-lock-misc-punctuation-face :foreground blue5)
+   
+   ;; String escape sequences (like \n, \t)
+   (font-lock-escape-face :foreground magenta)
+   
+   ;; Keywords like def, class, return
+   ((font-lock-keyword-face &override) :slant 'italic)
+   
    ;;;; Web-mode
    (web-mode-html-tag-face :foreground red)
    (web-mode-html-tag-bracket-face :foreground base7)
@@ -429,56 +429,56 @@ Features vibrant colors with glossy highlights and colored diagnostic background
    (which-key-group-description-face :foreground blue)
    (which-key-separator-face :foreground comment-fg)
 
-    ;;;; Alpha/Dashboard - LazyVim TokyoNight Moon style colors
-    ;; Dashboard colors matching LazyVim TokyoNight Moon (snacks.nvim dashboard)
-    ;; Banner/Logo: blue (#82aaff) - the actual face used by Doom dashboard
-    (doom-dashboard-banner :foreground blue :weight 'bold)
-    ;; Dashboard menu items (Doom-specific faces)
-    (doom-dashboard-menu-title :foreground cyan)        ; Menu item text: cyan (#86e1fc)
-    (doom-dashboard-menu-desc :foreground orange)       ; Menu keys/shortcuts: orange (#ff966c)
-    (doom-dashboard-menu-icon :foreground blue1)        ; Menu icons: blue1 (#65bcff)
-    ;; Dashboard footer (Doom loaded X packages...)
-    (doom-dashboard-loaded :foreground blue1)           ; Footer text: blue1 (#65bcff)
-    (doom-dashboard-footer :foreground blue1)
-    ;; Alpha/Dashboard generic faces (for compatibility)
-    ;; Header/Logo: blue (#82aaff)
-    (AlphaHeader :foreground blue :weight 'bold)
-    (DashboardHeader :foreground blue :weight 'bold)
-    ;; Keys/Shortcuts: orange (#ff966c)
-    (AlphaShortcut :foreground orange)
-    (DashboardKey :foreground orange)
-    (DashboardShortCut :foreground cyan)
-    ;; Icons: blue1 (#65bcff) - changed from cyan to match LazyVim
-    (AlphaButtons :foreground blue1)
-    (DashboardIcon :foreground blue1)
-    (DashboardMruIcon :foreground purple)
-    (DashboardProjectIcon :foreground yellow)
-    (DashboardShortCutIcon :foreground magenta)
-    ;; Descriptions: cyan (#86e1fc)
-    (DashboardDesc :foreground cyan)
-    (DashboardMruTitle :foreground cyan)
-    (DashboardProjectTitle :foreground cyan)
-    (DashboardFiles :foreground blue)
-    ;; Footer: blue1 (#65bcff)
-    (AlphaFooter :foreground blue1)
-    (DashboardFooter :foreground blue1)
-    ;; Special/Numbers (like startup time): purple (#fca7ea) - matches LazyVim
-    (AlphaSpecial :foreground purple :weight 'bold)
-    (DashboardSpecial :foreground purple :weight 'bold)
-
-    ;;;; Markdown
-    (markdown-header-face-1 :foreground blue :weight 'bold :background "#2c314a" :extend t)
-    (markdown-header-face-2 :foreground yellow :weight 'bold :background "#38343d" :extend t)
-    (markdown-header-face-3 :foreground green :weight 'bold :background "#32383f" :extend t)
-    (markdown-header-face-4 :foreground teal :weight 'bold :background "#273644" :extend t)
-    (markdown-header-face-5 :foreground magenta :weight 'bold)
-    (markdown-header-face-6 :foreground purple :weight 'bold)
-    (markdown-code-face :background "#2c314a" :foreground blue :extend t)
-    (markdown-inline-code-face :background "#2c314a" :foreground blue)
-    (markdown-link-face :foreground teal :underline t)
-    (markdown-url-face :foreground cyan :underline t)
-    (markdown-markup-face :foreground orange)
-
+   ;;;; Alpha/Dashboard - LazyVim TokyoNight Moon style colors
+   ;; Dashboard colors matching LazyVim TokyoNight Moon (snacks.nvim dashboard)
+   ;; Banner/Logo: blue (#82aaff) - the actual face used by Doom dashboard
+   (doom-dashboard-banner :foreground blue :weight 'bold)
+   ;; Dashboard menu items (Doom-specific faces)
+   (doom-dashboard-menu-title :foreground cyan)        ; Menu item text: cyan (#86e1fc)
+   (doom-dashboard-menu-desc :foreground orange)       ; Menu keys/shortcuts: orange (#ff966c)
+   (doom-dashboard-menu-icon :foreground blue1)        ; Menu icons: blue1 (#65bcff)
+   ;; Dashboard footer (Doom loaded X packages...)
+   (doom-dashboard-loaded :foreground blue1)           ; Footer text: blue1 (#65bcff)
+   (doom-dashboard-footer :foreground blue1)
+   ;; Alpha/Dashboard generic faces (for compatibility)
+   ;; Header/Logo: blue (#82aaff)
+   (AlphaHeader :foreground blue :weight 'bold)
+   (DashboardHeader :foreground blue :weight 'bold)
+   ;; Keys/Shortcuts: orange (#ff966c)
+   (AlphaShortcut :foreground orange)
+   (DashboardKey :foreground orange)
+   (DashboardShortCut :foreground cyan)
+   ;; Icons: blue1 (#65bcff) - changed from cyan to match LazyVim
+   (AlphaButtons :foreground blue1)
+   (DashboardIcon :foreground blue1)
+   (DashboardMruIcon :foreground purple)
+   (DashboardProjectIcon :foreground yellow)
+   (DashboardShortCutIcon :foreground magenta)
+   ;; Descriptions: cyan (#86e1fc)
+   (DashboardDesc :foreground cyan)
+   (DashboardMruTitle :foreground cyan)
+   (DashboardProjectTitle :foreground cyan)
+   (DashboardFiles :foreground blue)
+   ;; Footer: blue1 (#65bcff)
+   (AlphaFooter :foreground blue1)
+   (DashboardFooter :foreground blue1)
+   ;; Special/Numbers (like startup time): purple (#fca7ea) - matches LazyVim
+   (AlphaSpecial :foreground purple :weight 'bold)
+   (DashboardSpecial :foreground purple :weight 'bold)
+   
+   ;;;; Markdown
+   (markdown-header-face-1 :foreground blue :weight 'bold :background "#2c314a" :extend t)
+   (markdown-header-face-2 :foreground yellow :weight 'bold :background "#38343d" :extend t)
+   (markdown-header-face-3 :foreground green :weight 'bold :background "#32383f" :extend t)
+   (markdown-header-face-4 :foreground teal :weight 'bold :background "#273644" :extend t)
+   (markdown-header-face-5 :foreground magenta :weight 'bold)
+   (markdown-header-face-6 :foreground purple :weight 'bold)
+   (markdown-code-face :background "#2c314a" :foreground blue :extend t)
+   (markdown-inline-code-face :background "#2c314a" :foreground blue)
+   (markdown-link-face :foreground teal :underline t)
+   (markdown-url-face :foreground cyan :underline t)
+   (markdown-markup-face :foreground orange)
+   
    ;;;; Rainbow-delimiters
    (rainbow-delimiters-depth-1-face :foreground blue)
    (rainbow-delimiters-depth-2-face :foreground yellow)
@@ -489,12 +489,12 @@ Features vibrant colors with glossy highlights and colored diagnostic background
    (rainbow-delimiters-depth-7-face :foreground orange)
    (rainbow-delimiters-depth-8-face :foreground red)
    (rainbow-delimiters-depth-9-face :foreground cyan)
-
+   
    ;;;; Highlight-indent-guides
    (highlight-indent-guides-character-face :foreground base4)
    (highlight-indent-guides-stack-character-face :foreground base4)
    (highlight-indent-guides-top-character-face :foreground blue1)
-
+   
    ;;;; Git-gutter
    (git-gutter:added :foreground git-add)
    (git-gutter:deleted :foreground git-delete)
@@ -502,13 +502,54 @@ Features vibrant colors with glossy highlights and colored diagnostic background
    (git-gutter-fr:added :foreground git-add)
    (git-gutter-fr:deleted :foreground git-delete)
    (git-gutter-fr:modified :foreground git-change)
-
+   
    ;;;; Diff-hl
    (diff-hl-insert :foreground git-add :background git-add)
    (diff-hl-delete :foreground git-delete :background git-delete)
    (diff-hl-change :foreground git-change :background git-change))
-
-   ;;;; Base theme variable overrides
+  
+  ;;;; Base theme variable overrides
   ())
+
+;;
+;;; Theme-specific configurations
+
+;; Dashboard customization - LazyVim TokyoNight Moon style
+;; Override dashboard menu sections to use custom icon face (blue1 instead of purple)
+;; This separates icon colors (blue1) from menu text colors (cyan)
+(after! doom-dashboard
+  (setq +doom-dashboard-menu-sections
+        '(("Recently opened files"
+           :icon (nerd-icons-faicon "nf-fa-file_text" :face 'doom-dashboard-menu-icon)
+           :action recentf-open-files)
+          ("Reload last session"
+           :icon (nerd-icons-octicon "nf-oct-history" :face 'doom-dashboard-menu-icon)
+           :when (cond ((modulep! :ui workspaces)
+                        (file-exists-p (expand-file-name persp-auto-save-fname persp-save-dir)))
+                       ((require 'desktop nil t)
+                        (file-exists-p (desktop-full-file-name))))
+           :action doom/quickload-session)
+          ("Open org-agenda"
+           :icon (nerd-icons-octicon "nf-oct-calendar" :face 'doom-dashboard-menu-icon)
+           :when (fboundp 'org-agenda)
+           :action org-agenda)
+          ("Open project"
+           :icon (nerd-icons-octicon "nf-oct-briefcase" :face 'doom-dashboard-menu-icon)
+           :action projectile-switch-project)
+          ("Jump to bookmark"
+           :icon (nerd-icons-octicon "nf-oct-bookmark" :face 'doom-dashboard-menu-icon)
+           :action bookmark-jump)
+          ("Open private configuration"
+           :icon (nerd-icons-octicon "nf-oct-tools" :face 'doom-dashboard-menu-icon)
+           :when (file-directory-p doom-user-dir)
+           :action doom/open-private-config)
+           ("Open documentation"
+            :icon (nerd-icons-octicon "nf-oct-book" :face 'doom-dashboard-menu-icon)
+            :action doom/help))))
+
+;; Darken minibuffer background to match sidebar aesthetic
+(add-hook 'minibuffer-setup-hook
+          (lambda ()
+            (face-remap-add-relative 'default :background "#181924")))
 
 ;;; doom-tokyonight-moon-theme.el ends here
