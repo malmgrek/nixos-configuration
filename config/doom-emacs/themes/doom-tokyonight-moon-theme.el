@@ -543,9 +543,9 @@ Features vibrant colors with glossy highlights and colored diagnostic background
            :icon (nerd-icons-octicon "nf-oct-tools" :face 'doom-dashboard-menu-icon)
            :when (file-directory-p doom-user-dir)
            :action doom/open-private-config)
-           ("Open documentation"
-            :icon (nerd-icons-octicon "nf-oct-book" :face 'doom-dashboard-menu-icon)
-            :action doom/help))))
+          ("Open documentation"
+           :icon (nerd-icons-octicon "nf-oct-book" :face 'doom-dashboard-menu-icon)
+           :action doom/help))))
 
 ;; Darken minibuffer background to match sidebar aesthetic
 (add-hook 'minibuffer-setup-hook

@@ -19,8 +19,8 @@
        ;;japanese
 
        :completion
-       (company +childframe)           ; the ultimate code completion backend
-       ;; (corfu +orderless +dabbrev)  ; complete with cap(f), cape and a flying feather!
+       company
+       ;;(corfu +orderless)  ; complete with cap(f), cape and a flying feather!
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ;; (ivy +icons)               ; a search engine for love and life
@@ -183,4 +183,6 @@
        :config
        ;;literate
        (default +bindings +smartparens))
+
+
 

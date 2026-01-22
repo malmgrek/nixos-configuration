@@ -9,14 +9,14 @@
       user-mail-address "stratos.staboulis@gmail.com")  ;; FIXME: Should be secret
 
 ;; Fonts
-(setq doom-font (font-spec :family "monospace" :size 10.5))
+(setq doom-font @font@)
 
 ;; Add custom themes directory to load path
 (add-to-list 'custom-theme-load-path
              (expand-file-name "themes" doom-user-dir))
 
 ;; Theme
-(setq doom-theme 'doom-tokyonight-moon)
+(setq doom-theme @theme@)
 
 ;; Org setup
 (setq org-directory "~/Documents/org/"
@@ -29,9 +29,7 @@
 ;; For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
-;; 
 ;; Set 2-space indentation for web development modes
-;; 
 (setq-default
  ;; JavaScript
  js-indent-level 2                    ; built-in js-mode
@@ -65,7 +63,6 @@
     (insert-file-contents "~/.openai-api-key")
     (string-trim (buffer-string))))
 
-;; Gptel
 (use-package! gptel
   :config
   (setq gptel-default-mode 'markdown-mode
@@ -78,6 +75,7 @@
     :stream t
     :models '(qwen2.5-coder:3b deepseek-coder-v2:16b))
   )
+
 (use-package! gptel-agent  ;; Agentic features for gptel
   :config
   (gptel-agent-update))  ;Read files from agents directories
@@ -107,6 +105,7 @@
 ;;
 ;; LSP mode customizations
 ;; 
+
 (use-package! lazy-ruff
   ;; Enable automatic ruff formatting on save in Python buffers
   ;; :hook (python-mode . lazy-ruff-mode)
@@ -115,6 +114,7 @@
   (setq lazy-ruff-only-format-block t
         lazy-ruff-only-format-region t
         lazy-ruff-only-format-buffer t))
+
 (after! lsp-pyright
   (setq lsp-pyright-langserver-command "basedpyright")
   (setq lsp-pyright-inlay-hints t)
@@ -128,6 +128,7 @@
           ("reportUnknownParameterType" . "warning")
           ("reportUnknownArgumentType" . "warning")
           ("reportUnknownVariableType" . "warning"))))
+
 (after! lsp-ui
   (setq lsp-ui-sideline-enable t          ; Toggle sideline on/off
         lsp-ui-sideline-show-hover t       ; Show hover info in sideline
@@ -138,6 +139,7 @@
 ;;
 ;; Nerd trees
 ;;
+
 (after! treemacs
   ;; Reduce icon size for compact LazyVim-style appearance
   (setq treemacs-nerd-icons-icon-size 0.8)
@@ -146,3 +148,4 @@
 
 (after! neotree
   (setq neo-theme (if (display-graphic-p) 'nerd-icons)))
+
