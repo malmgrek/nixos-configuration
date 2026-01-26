@@ -76,9 +76,10 @@
         unstable.copilot-language-server
         unstable.aichat
         unstable.aider-chat-with-playwright
+        unstable.claude-code
+        unstable.claude-code-acp
 
         azure-cli # Azure CLI
-        # azuredatastudio         # MS Azure SQL client
         awscli2 # AWS CLI
         broot # Directory tree viewer
         chromium # MS Teams works better in chromium

@@ -13,10 +13,13 @@
 
 ;; Add custom themes directory to load path
 (add-to-list 'custom-theme-load-path
-             (expand-file-name "themes" doom-user-dir))
+             (expand-file-name "my/themes" doom-user-dir))
 
 ;; Theme
-(setq doom-theme @theme@)
+(setq doom-theme '@theme@)
+
+;; Markdown beautification
+(load! "my/markdown-beautify")
 
 ;; Org setup
 (setq org-directory "~/Documents/org/"
@@ -58,16 +61,17 @@
 ;; AI settings
 ;;
 
-(defun read-openai-api-key ()
+(defun my/read-openai-api-key ()
   (with-temp-buffer
     (insert-file-contents "~/.openai-api-key")
     (string-trim (buffer-string))))
 
+;; GPTel
 (use-package! gptel
   :config
   (setq gptel-default-mode 'markdown-mode
         gptel-use-tools t
-        gptel-api-key (read-openai-api-key)
+        gptel-api-key (my/read-openai-api-key)
         gptel-model 'claude-haiku-4.5
         gptel-backend (gptel-make-gh-copilot "Copilot"))
   (gptel-make-ollama "Ollama"
@@ -97,10 +101,22 @@
   (add-to-list 'copilot-indentation-alist '(org-mode 2))
   (add-to-list 'copilot-indentation-alist '(markdown-mode 2))
   (add-to-list 'copilot-indentation-alist '(text-mode 2))
+  (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2))
+  ;; TODO: Is this 'dolist' loop necessary in the config?
   (dolist (mode '(markdown-mode org-mode text-mode))
     (add-hook (intern (format "%s-hook" (symbol-name mode)))
               (lambda () (setq-local company-idle-delay nil)))))
 
+;; Aidermacs
+(use-package! aidermacs
+  :bind (("C-c a" . aidermacs-transient-menu))
+  ;; :config
+  :custom
+  (aidermacs-default-chat-mode 'architect)
+  (aidermacs-default-model "github_copilot/sonnet-4.5"))
+
+;; Agent Shell
+(use-package! agent-shell)
 
 ;;
 ;; LSP mode customizations
@@ -148,4 +164,3 @@
 
 (after! neotree
   (setq neo-theme (if (display-graphic-p) 'nerd-icons)))
-

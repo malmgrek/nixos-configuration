@@ -5,7 +5,6 @@
     home.packages = with pkgs; [
       unstable.opencode
     ];
-
     # OpenCode Configuration Management
     #
     # OpenCode uses multiple JSON files for configuration and state:
@@ -35,33 +34,12 @@
     # - Changes take effect immediately (state files are writable)
     # - After nixos-rebuild, settings revert to your Nix configuration
     # - Conversation history persists across rebuilds
-
-    # Static configuration (read-only, managed by Nix)
-    xdg.configFile."opencode/opencode.json" = {
-      text = builtins.toJSON {
-        "$schema" = "https://opencode.ai/config.json";
-        theme = "tokyonight";
-        # theme = "one-dark";
-        # Default model - enforced on each rebuild
-        model = "github-copilot/claude-haiku-4.5";
-        # Default agent
-        default_agent = "plan";
-        # Permission settings - strict for business projects
-        permission = {
-          "*" = "ask";
-          list = "allow";
-          glob = "allow";
-          grep = "allow";
-          read = {
-            "*" = "allow";
-            "*.env" = "deny";
-            "*.env.*" = "deny";
-            "*.env.example" = "allow";
-          };
-        };
-      };
+    xdg.configFile."opencode/instructions/core-rules.md" = {
+      source = ../config/opencode/instructions/core-rules.md;
     };
-
+    xdg.configFile."opencode/opencode.jsonc" = {
+      source = ../config/opencode/opencode.jsonc;
+    };
     # Reset configuration state on activation
     # This enforces Nix-configured defaults while preserving user data
     home.activation.resetOpenCodeState = ''

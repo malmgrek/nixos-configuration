@@ -182,6 +182,7 @@ with lib; {
     jq  # CLI Json processor
     nodejs
     python3
+    typescript
     terraform
 
     # Text editors

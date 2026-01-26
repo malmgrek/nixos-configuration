@@ -1,3 +1,5 @@
+;; packages.el -*- lexical-binding: t; -*-
+
 ;; GitHub Copilot
 (package! copilot
   :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el")))
@@ -12,3 +14,10 @@
 
 ;; Icons
 (package! nerd-icons)
+
+;; Aidermacs
+(package! aidermacs
+  :recipe (:host github :repo "MatthewZMD/aidermacs" :files ("*.el")))
+
+;; Agent Shell
+(package! agent-shell)
