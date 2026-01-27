@@ -74,7 +74,7 @@
       [
         # AI tools
         unstable.copilot-language-server
-        unstable.aichat
+        unstable.llm
         unstable.aider-chat-with-playwright
         unstable.claude-code
         unstable.claude-code-acp

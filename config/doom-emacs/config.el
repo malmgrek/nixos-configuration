@@ -32,7 +32,10 @@
 ;; For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
-;; Set 2-space indentation for web development modes
+;;
+;; Set 2-space indentation for web
+;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;;
 (setq-default
  ;; JavaScript
  js-indent-level 2                    ; built-in js-mode
@@ -59,6 +62,7 @@
 
 ;; 
 ;; AI settings
+;; ~~~~~~~~~~~
 ;;
 
 (defun my/read-openai-api-key ()
@@ -119,8 +123,22 @@
 (use-package! agent-shell)
 
 ;;
+;; Nerd trees
+;; ~~~~~~~~~~
+;;
+
+(after! treemacs
+  ;; Reduce icon size for compact LazyVim-style appearance
+  (setq treemacs-nerd-icons-icon-size 0.8)
+  ;; Set treemacs window width
+  (setq treemacs-width 40))
+
+(after! neotree
+  (setq neo-theme (if (display-graphic-p) 'nerd-icons)))
+
+;;
 ;; LSP mode customizations
-;; 
+;; ~~~~~~~~~~~~~~~~~~~~~~~
 
 (use-package! lazy-ruff
   ;; Enable automatic ruff formatting on save in Python buffers
@@ -132,8 +150,6 @@
         lazy-ruff-only-format-buffer t))
 
 (after! lsp-pyright
-  (setq lsp-pyright-langserver-command "basedpyright")
-  (setq lsp-pyright-inlay-hints t)
   (setq lsp-pyright-type-checking-mode "strict"
         ;; Override specific rules to be warnings instead of errors
         lsp-pyright-diagnostic-severity-overrides
@@ -146,21 +162,51 @@
           ("reportUnknownVariableType" . "warning"))))
 
 (after! lsp-ui
-  (setq lsp-ui-sideline-enable t          ; Toggle sideline on/off
-        lsp-ui-sideline-show-hover t       ; Show hover info in sideline
-        lsp-ui-sideline-show-code-actions t ; Show code actions
-        lsp-ui-sideline-show-diagnostics t ; Show errors/warnings
-        lsp-ui-sideline-ignore-duplicate t))
+  (setq lsp-ui-sideline-enable t
+        lsp-ui-sideline-show-hover nil
+        lsp-ui-sideline-show-code-actions nil
+        lsp-ui-sideline-show-diagnostics t
+        lsp-ui-sideline-ignore-duplicate t
+        lsp-ui-sideline-delay 0.5
+        lsp-ui-sideline-update-mode 'line))
 
 ;;
-;; Nerd trees
+;; LSP Booster integration
+;;
+;; Requires:
+;; - the env var LSP_USE_PLISTS=true to be set in LSP package build time
+;; - Emacs variable `lsp-use-plists` to be set to `t` (done by Doom's lsp module)
+;; - Both are done in Doom's lsp module
+;; - See also: https://github.com/blahgeek/emacs-lsp-booster
 ;;
 
-(after! treemacs
-  ;; Reduce icon size for compact LazyVim-style appearance
-  (setq treemacs-nerd-icons-icon-size 0.8)
-  ;; Set treemacs window width
-  (setq treemacs-width 40))
+(defun lsp-booster--advice-json-parse (old-fn &rest args)
+  "Try to parse bytecode instead of json."
+  (or
+   (when (equal (following-char) ?#)
+     (let ((bytecode (read (current-buffer))))
+       (when (byte-code-function-p bytecode)
+         (funcall bytecode))))
+   (apply old-fn args)))
+(advice-add (if (progn (require 'json)
+                       (fboundp 'json-parse-buffer))
+                'json-parse-buffer
+              'json-read)
+            :around
+            #'lsp-booster--advice-json-parse)
 
-(after! neotree
-  (setq neo-theme (if (display-graphic-p) 'nerd-icons)))
+(defun lsp-booster--advice-final-command (old-fn cmd &optional test?)
+  "Prepend emacs-lsp-booster command to lsp CMD."
+  (let ((orig-result (funcall old-fn cmd test?)))
+    (if (and (not test?)                             ;; for check lsp-server-present?
+             (not (file-remote-p default-directory)) ;; see lsp-resolve-final-command, it would add extra shell wrapper
+             lsp-use-plists
+             (not (functionp 'json-rpc-connection))  ;; native json-rpc
+             (executable-find "emacs-lsp-booster"))
+        (progn
+          (when-let ((command-from-exec-path (executable-find (car orig-result))))  ;; resolve command from exec-path (in case not found in $PATH)
+            (setcar orig-result command-from-exec-path))
+          (message "Using emacs-lsp-booster for %s!" orig-result)
+          (cons "emacs-lsp-booster" orig-result))
+      orig-result)))
+(advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)

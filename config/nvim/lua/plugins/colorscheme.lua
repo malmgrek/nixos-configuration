@@ -1,37 +1,39 @@
 return {
-	-- TokyoNight colorscheme with excellent semantic token support
+	-- 	-- TokyoNight colorscheme with excellent semantic token support
+	-- 	{
+	-- 		 "folke/tokyonight.nvim",
+	-- 		 opts = {
+	-- 		 	style = "moon", -- Options: "storm", "moon", "night", "day"
+	-- 		 },
+	-- 		-- Semantic tokens are enabled by default
+	-- 		-- Explicit Python semantic highlighting support:
+	-- 		-- - @lsp.type.selfKeyword → @variable.builtin (distinct color for 'self')
+	-- 		-- - @lsp.type.decorator → @attribute (distinct color for decorators)
+	-- 		-- - @lsp.type.parameter → @variable.parameter (distinct color for params)
+	-- 		config = function()
+	-- 			require("tokyonight").setup({
+	-- 				style = "moon",
+	-- 				on_highlights = function(hl, c)
+	-- 					-- Make docstrings the same color as comments
+	-- 					hl["@string.documentation.python"] = { link = "String" } -- { fg = c.comment, italic = true }
+	-- 				end,
+	-- 			})
+	-- 		end,
+	-- 	},
+	-- OneDarkPro colorscheme
+	-- {
+	-- 	"olimorris/onedarkpro.nvim",
+	-- 	priority = 1000,
+	-- },
 	{
-		"folke/tokyonight.nvim",
-		opts = {
-			style = "moon", -- Options: "storm", "moon", "night", "day"
-			-- Semantic tokens are enabled by default
-			-- Explicit Python semantic highlighting support:
-			-- - @lsp.type.selfKeyword → @variable.builtin (distinct color for 'self')
-			-- - @lsp.type.decorator → @attribute (distinct color for decorators)
-			-- - @lsp.type.parameter → @variable.parameter (distinct color for params)
-		},
-		config = function()
-			require("tokyonight").setup({
-				style = "moon",
-				on_highlights = function(hl, c)
-					-- Make docstrings the same color as comments
-					hl["@string.documentation.python"] = { link = "String" } -- { fg = c.comment, italic = true }
-				end,
-			})
-		end,
+		"navarasu/onedark.nvim",
+		priority = 1000, -- make sure to load this before all the other start plugins
 	},
-
-	-- Alternative: OneDark (no semantic token support for Python)
-	-- Uncomment to switch back:
-	-- { "navarasu/onedark.nvim" },
-
-	-- Configure LazyVim to load TokyoNight
 	{
 		"LazyVim/LazyVim",
 		opts = {
-			colorscheme = "tokyonight",
-			-- To use OneDark instead, change to:
-			-- colorscheme = "onedark",
+			-- colorscheme = "tokyonight",
+			colorscheme = "onedark",
 		},
 	},
 }

@@ -19,8 +19,8 @@
        ;;japanese
 
        :completion
-       company
-       ;;(corfu +orderless)  ; complete with cap(f), cape and a flying feather!
+       ;;company
+       (corfu +orderless +icons)  ; complete with cap(f), cape and a flying feather!
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ;; (ivy +icons)               ; a search engine for love and life
