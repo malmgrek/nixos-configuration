@@ -1,0 +1,66 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "default_agent": "plan",
+  "model": "github-copilot/claude-haiku-4.5",
+  "share": "disabled",
+
+  "permission": {
+    "*": "ask",
+    "glob": "allow",
+    "grep": "allow",
+    "list": "allow",
+    "read": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "*.env.example": "allow"
+    }
+  },
+
+  // "theme": "tokyonight",
+  "theme": "one-dark",
+
+  "compaction": {
+    "auto": true,
+    "prune": true
+  },
+
+  // Global efficiency guidelines
+  "instructions": [
+    "~/.config/opencode/instructions/core-rules.md"
+  ],
+
+  "agent": {
+    // Plan mode: High quality, very focused
+    "plan": {
+      "model": "github-copilot/claude-sonnet-4.5",
+      // "temperature": 0.2,  // Not tested for GitHub models
+      "steps": 15,
+      "description": "Analyze and plan without making changes"
+    },
+
+    // Build mode: Balanced quality/speed
+    "build": {
+      "model": "github-copilot/claude-haiku-4.5",
+      // "temperature": 0.3,  // Not tested for GitHub models
+      "steps": 15,
+      "description": "Implementation with all tools enabled"
+    },
+
+    // Explore subagent: Fast file exploration
+    "explore": {
+      "model": "github-copilot/claude-haiku-4.5",
+      // "temperature": 0.2,  // Not tested for GitHub models
+      "steps": 15,
+      "description": "Fast codebase exploration and file search",
+    },
+
+    // General subagent: Quality research
+    "general": {
+      "model": "github-copilot/claude-sonnet-4.5",
+      // "temperature": 0.3,  // Not tested for GitHub models
+      "steps": 15,
+      "description": "Multi-step research and complex question answering",
+    }
+  }
+}
