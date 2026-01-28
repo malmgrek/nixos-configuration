@@ -28,12 +28,24 @@ return {
 	{
 		"navarasu/onedark.nvim",
 		priority = 1000, -- make sure to load this before all the other start plugins
+		config = function()
+			require("onedark").setup({
+				style = "dark",
+				toggle_style_list = { "dark", "darker", "cool", "deep", "warm", "warmer", "light" },
+			})
+			require("onedark").load()
+		end,
 	},
+	-- {
+	-- 	"NTBBloodbath/doom-one.nvim",
+	-- 	priority = 1000,
+	-- },
 	{
 		"LazyVim/LazyVim",
 		opts = {
 			-- colorscheme = "tokyonight",
 			colorscheme = "onedark",
+			-- colorscheme = "doom-one",
 		},
 	},
 }

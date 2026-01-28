@@ -1,35 +1,35 @@
--- Basic options mirroring your Doom setup
+-- basic options mirroring your doom setup
 local opt = vim.opt
 
--- Line numbers
+-- line numbers
 opt.number = true
 opt.relativenumber = true
 
--- Indentation (matching your conventions)
+-- indentation (matching your conventions)
 opt.tabstop = 2
 opt.shiftwidth = 2
 opt.expandtab = true
 opt.smartindent = true
 
--- Search
+-- search
 opt.ignorecase = true
 opt.smartcase = true
 opt.hlsearch = true
 
--- UI
+-- ui
 opt.termguicolors = true
 opt.cursorline = true
 opt.signcolumn = "yes"
 opt.wrap = false
 
--- Splits
+-- splits
 opt.splitright = true
 opt.splitbelow = true
 
--- Clipboard (sync with system)
+-- clipboard (sync with system)
 opt.clipboard = "unnamedplus"
 
--- Persist undo
+-- persist undo
 opt.undofile = true
 
-vim.g.lazyvim_python_lsp = "basedpyright"
+-- vim.g.lazyvim_python_lsp = "basedpyright"
