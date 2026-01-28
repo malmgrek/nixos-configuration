@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
 
@@ -6,24 +11,30 @@
 
   home-manager.users.${config.customParams.userName} = {
 
-    # home.file.".doom.d/config.el" = {
-    #   source = pkgs.replaceVars ../config/doom-emacs/config.el {
-    #     theme = if config.lightMode.enable then "doom-one-light"
-    #             else "doom-vibrant";
-    #     font = if config.hidpiHacks.enable
-    #            then ''(font-spec :family "monospace" :size 12.0)''
-    #            else ''(font-spec :family "monospace" :size 10.5)'';
-    #   };
-    # };
-    # home.file.".doom.d/init.el" = {
-    #   source = ../config/doom-emacs/init.el;
-    # };
-    home.file.".doom.d/packages.el" = {
-      source = ../config/doom-emacs/packages.el;
+    xdg.configFile."doom/config.el" = {
+      source = pkgs.replaceVars ../config/doom/config.el {
+        theme = if config.lightMode.enable then "doom-one-light" else "doom-vibrant";
+        font =
+          if config.hidpiHacks.enable then
+            ''(font-spec :family "monospace" :size 12.0)''
+          else
+            ''(font-spec :family "monospace" :size 10.5)'';
+      };
     };
-    home.file.".doom.d/my" = {
-      source = ../config/doom-emacs/my;
+    xdg.configFile."doom/init.el" = {
+      source = ../config/doom/init.el;
+    };
+    xdg.configFile."doom/packages.el" = {
+      source = ../config/doom/packages.el;
+    };
+    xdg.configFile."doom/my" = {
+      source = ../config/doom/my;
       recursive = true;
+    };
+
+    home.sessionVariables = {
+      DOOMDIR = "$HOME/.config/doom";
+      EMACSDIR = "$HOME/.config/emacs";
     };
 
     # Doom dependencies
@@ -38,7 +49,7 @@
         epkgs.vterm
       ]))
 
-      (ripgrep.override {withPCRE2 = true;})  # Perl compatible regex
+      (ripgrep.override { withPCRE2 = true; }) # Perl compatible regex
       gcc
 
       # NOTE: Fix error when launching Emacs from shell
@@ -48,26 +59,26 @@
       ######
 
       gsettings-desktop-schemas
-      fd                                               # opt: Faster projectile indexing
-      pinentry-emacs                                   # opt: Gnupg prompts in Emacs
-      zstd                                             # opt: Undo-fu-session/undo-tree compression
+      fd # opt: Faster projectile indexing
+      pinentry-emacs # opt: Gnupg prompts in Emacs
+      zstd # opt: Undo-fu-session/undo-tree compression
       aspell
       aspellDicts.en
-      aspellDicts.en-computers                         #
+      aspellDicts.en-computers
       aspellDicts.en-science
       languagetool
       editorconfig-core-c
       sqlite
-      python312Packages.ruff                           # Python formatter
-      nodePackages.prettier                            # JavaScript formatter
+      python312Packages.ruff # Python formatter
+      nodePackages.prettier # JavaScript formatter
 
       # Language servers
       emacs-lsp-booster
-      metals                                           # Scala language server
+      metals # Scala language server
       ty
-      basedpyright
       pyright
-      typescript-language-server                      # TypeScript/JavaScript language server
+      basedpyright
+      typescript-language-server # TypeScript/JavaScript language server
       nixd
 
       # ccls                                           # C/C++ language server
