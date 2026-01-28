@@ -60,7 +60,7 @@
  js-json-indent-level 2)              ; JSON files (uses js-mode)
 
 
-;; 
+;;
 ;; AI settings
 ;; ~~~~~~~~~~~
 ;;
@@ -105,11 +105,7 @@
   (add-to-list 'copilot-indentation-alist '(org-mode 2))
   (add-to-list 'copilot-indentation-alist '(markdown-mode 2))
   (add-to-list 'copilot-indentation-alist '(text-mode 2))
-  (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2))
-  ;; TODO: Is this 'dolist' loop necessary in the config?
-  (dolist (mode '(markdown-mode org-mode text-mode))
-    (add-hook (intern (format "%s-hook" (symbol-name mode)))
-              (lambda () (setq-local company-idle-delay nil)))))
+  (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2)))
 
 ;; Aidermacs
 (use-package! aidermacs
@@ -173,10 +169,10 @@
 ;;
 ;; LSP Booster integration
 ;;
-;; Requires:
-;; - the env var LSP_USE_PLISTS=true to be set in LSP package build time
-;; - Emacs variable `lsp-use-plists` to be set to `t` (done by Doom's lsp module)
-;; - Both are done in Doom's lsp module
+;; NOTE:
+;; - The env var LSP_USE_PLISTS=true to be set in LSP package build time. Doom
+;;   sets this automatically to "1" (lsp-optimization-mode). As lsp-mode passes
+;;   the value to lsp-use-plists which is used in if-statement, both work.
 ;; - See also: https://github.com/blahgeek/emacs-lsp-booster
 ;;
 
