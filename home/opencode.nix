@@ -34,8 +34,17 @@
     # - Changes take effect immediately (state files are writable)
     # - After nixos-rebuild, settings revert to your Nix configuration
     # - Conversation history persists across rebuilds
-    xdg.configFile."opencode/instructions/core-rules.md" = {
-      source = ../config/opencode/instructions/core-rules.md;
+    xdg.configFile."opencode/agents/build-orchestrator.md" = {
+      source = ../config/opencode/agents/build-orchestrator.md;
+    };
+    xdg.configFile."opencode/agents/coder.md" = {
+      source = ../config/opencode/agents/coder.md;
+    };
+    xdg.configFile."opencode/agents/reviewer.md" = {
+      source = ../config/opencode/agents/reviewer.md;
+    };
+    xdg.configFile."opencode/agents/spar-and-plan.md" = {
+      source = ../config/opencode/agents/spar-and-plan.md;
     };
     xdg.configFile."opencode/opencode.jsonc" = {
       source = ../config/opencode/opencode.jsonc;

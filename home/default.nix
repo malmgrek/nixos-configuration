@@ -7,6 +7,7 @@
     ./alacritty.nix
     ./docker.nix
     ./doom-emacs.nix
+    ./copilot.nix
     ./ipython.nix
     ./neovim.nix
     ./opencode.nix
@@ -113,10 +114,11 @@
       #   ];
       #   profiles.default.userSettings = {
       #     "workbench.colorTheme" = "Tokyo Night Storm";
-      #     "editor.fontFamily" = "JetBrains Mono";
       #     "terminal.integrated.fontFamily" = "JetBrains Mono";
+      #     "editor.fontFamily" = "JetBrains Mono";
       #     "chat.fontFamily" = "JetBrains Mono";
       #   };
+      #     "chat.customAgentInSubagent.enabled" = "true";
       # };
     };
     # Nixpkgs config file, enables e.g. `allowUnfree` globally

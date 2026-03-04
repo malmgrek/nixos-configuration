@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
 
@@ -20,7 +25,6 @@
     ######## Don't edit! #########
     system.stateVersion = "21.05";
     ##############################
-
 
     # Custom declarations
     customParams = {
@@ -72,7 +76,7 @@
     users.users.${customParams.userName} = {
       isNormalUser = true;
       extraGroups = [
-        "adbusers"  # Android debug bridge
+        "adbusers" # Android debug bridge
         "wheel"
         "networkmanager"
         "video"
