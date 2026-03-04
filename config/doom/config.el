@@ -136,6 +136,8 @@
 ;; LSP mode customizations
 ;; ~~~~~~~~~~~~~~~~~~~~~~~
 
+(load! "my/lsp-booster")
+
 (use-package! lazy-ruff
   ;; Enable automatic ruff formatting on save in Python buffers
   ;; :hook (python-mode . lazy-ruff-mode)
@@ -165,44 +167,3 @@
         lsp-ui-sideline-ignore-duplicate t
         lsp-ui-sideline-delay 0.5
         lsp-ui-sideline-update-mode 'line))
-
-;;
-;; LSP Booster integration
-;;
-;; NOTE:
-;; - The env var LSP_USE_PLISTS=true to be set in LSP package build time. Doom
-;;   sets this automatically to "1" (lsp-optimization-mode). As lsp-mode passes
-;;   the value to lsp-use-plists which is used in if-statement, both work.
-;; - See also: https://github.com/blahgeek/emacs-lsp-booster
-;;
-
-(defun lsp-booster--advice-json-parse (old-fn &rest args)
-  "Try to parse bytecode instead of json."
-  (or
-   (when (equal (following-char) ?#)
-     (let ((bytecode (read (current-buffer))))
-       (when (byte-code-function-p bytecode)
-         (funcall bytecode))))
-   (apply old-fn args)))
-(advice-add (if (progn (require 'json)
-                       (fboundp 'json-parse-buffer))
-                'json-parse-buffer
-              'json-read)
-            :around
-            #'lsp-booster--advice-json-parse)
-
-(defun lsp-booster--advice-final-command (old-fn cmd &optional test?)
-  "Prepend emacs-lsp-booster command to lsp CMD."
-  (let ((orig-result (funcall old-fn cmd test?)))
-    (if (and (not test?)                             ;; for check lsp-server-present?
-             (not (file-remote-p default-directory)) ;; see lsp-resolve-final-command, it would add extra shell wrapper
-             lsp-use-plists
-             (not (functionp 'json-rpc-connection))  ;; native json-rpc
-             (executable-find "emacs-lsp-booster"))
-        (progn
-          (when-let ((command-from-exec-path (executable-find (car orig-result))))  ;; resolve command from exec-path (in case not found in $PATH)
-            (setcar orig-result command-from-exec-path))
-          (message "Using emacs-lsp-booster for %s!" orig-result)
-          (cons "emacs-lsp-booster" orig-result))
-      orig-result)))
-(advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)

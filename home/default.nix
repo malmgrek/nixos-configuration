@@ -117,8 +117,8 @@
       #     "terminal.integrated.fontFamily" = "JetBrains Mono";
       #     "editor.fontFamily" = "JetBrains Mono";
       #     "chat.fontFamily" = "JetBrains Mono";
-      #   };
       #     "chat.customAgentInSubagent.enabled" = "true";
+      #   };
       # };
     };
     # Nixpkgs config file, enables e.g. `allowUnfree` globally

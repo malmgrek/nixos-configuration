@@ -5,6 +5,12 @@
   ...
 }:
 
+# NOTE: After migrating the config directory from .emacs.d to .config/emacs,
+# there is the issue that Emacs auto-generates .emacs.d/ with vanilla config.
+# A potential solution is to define environment variable EMACS_USER_DIRECTORY
+# and running `doom env` which puts the environment variable into the doom env
+# file.
+
 {
 
   fonts.packages = [ pkgs.emacs-all-the-icons-fonts ];
@@ -32,21 +38,16 @@
       recursive = true;
     };
 
-    home.sessionVariables = {
-      DOOMDIR = "$HOME/.config/doom";
-      EMACSDIR = "$HOME/.config/emacs";
-    };
+    home.sessionPath = [ "$XDG_CONFIG_HOME/emacs/bin" ];
 
     # Doom dependencies
     home.packages = with pkgs; [
 
-      # Bleeding edge Emacs
-      # emacsUnstable
-
-      # Regular NixPkgs Emacs
-      # emacs
+      # emacsUnstable  # bleeding edge
+      # emacs  # default
       ((emacsPackagesFor emacs).emacsWithPackages (epkgs: [
         epkgs.vterm
+        # epkgs.lsp-bridge  # Fast LSP client but not much faster than emacs-lsp-booster
       ]))
 
       (ripgrep.override { withPCRE2 = true; }) # Perl compatible regex
