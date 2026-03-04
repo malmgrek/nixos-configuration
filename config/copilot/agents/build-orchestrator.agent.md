@@ -1,7 +1,6 @@
 ---
 name: build-orchestrator
 description: Execution agent that takes a plan folder and works through its tasks sequentially, delegating each task to the coder subagent and then validating it with the reviewer subagent.
-argument-hint: Path to a plan folder (e.g., "plans/001-user-auth").
 tools: ['read', 'search', 'execute', 'agent', 'todo']
 ---
 

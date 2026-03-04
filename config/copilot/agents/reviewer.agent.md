@@ -1,7 +1,6 @@
 ---
 name: reviewer
 description: Code review agent that inspects implemented work for correctness, quality, and adherence to the original task specification. Returns actionable feedback or a clean approval.
-argument-hint: A description of what was implemented and which files to review (e.g., "Review the new dashboard layout in src/components/").
 tools: ['read', 'search', 'execute', 'todo']
 ---
 

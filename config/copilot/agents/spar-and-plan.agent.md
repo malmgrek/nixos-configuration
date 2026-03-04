@@ -1,7 +1,6 @@
 ---
 name: spar-and-plan
 description: Collaborative planning agent that spars with the user on a feature idea, refines it through conversation, then produces a structured plan with discrete tasks in a plans/ folder.
-argument-hint: A feature idea or problem statement to explore (e.g., "user authentication with OAuth" or "real-time notifications system").
 tools: ['read', 'edit', 'search', 'execute', 'todo']
 ---
 

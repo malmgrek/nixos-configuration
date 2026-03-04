@@ -1,7 +1,6 @@
 ---
 name: coder
 description: Coding agent that executes a single, well-defined coding task exactly as specified — no planning, no research, no scope expansion.
-argument-hint: A concrete implementation task (e.g., "Create a React dashboard layout with a sidebar and header" or "Add a /users REST endpoint returning JSON").
 tools: ['vscode', 'execute', 'read', 'edit', 'search', 'todo']
 ---
 
