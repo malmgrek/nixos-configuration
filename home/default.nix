@@ -7,6 +7,7 @@
     ./alacritty.nix
     ./docker.nix
     ./doom-emacs.nix
+    ./claude-code.nix
     ./copilot.nix
     ./ipython.nix
     ./neovim.nix
@@ -77,8 +78,7 @@
         unstable.copilot-language-server
         unstable.llm
         unstable.aider-chat-with-playwright
-        unstable.claude-code
-        unstable.claude-code-acp
+        unstable.rtk
 
         azure-cli # Azure CLI
         awscli2 # AWS CLI

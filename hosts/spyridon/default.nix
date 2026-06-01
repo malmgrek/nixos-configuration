@@ -32,7 +32,7 @@
       userName = "malmgrek";
     };
     hidpiHacks.enable = false;
-    lightMode.enable = false;
+    lightMode.enable = true;
 
     # Use the systemd-boot EFI boot loader
     # TODO: Try grub
