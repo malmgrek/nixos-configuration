@@ -80,6 +80,9 @@ What needs to be done in concrete, implementation-ready terms.
 ## Dependencies
 List any tasks that must be completed before this one (e.g., "Requires Task 01").
 
+## Validation Commands
+The exact build/lint/test commands that verify this task (e.g. `npm test -- src/auth`, `tsc --noEmit`, `ruff check src/`). List every command that must pass before the task can be marked done. Be specific — the implementer and the reviewer both run these commands independently, so vague or missing commands mean nothing gets verified consistently.
+
 ## Review Level
 One of `trivial` or `standard`.
 - `trivial` — no behaviour change beyond a single value or file (config tweak, dependency bump, file move, type alias, generated boilerplate). The orchestrator skips the @reviewer and validates with build/lint only.
