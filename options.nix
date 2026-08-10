@@ -45,7 +45,7 @@ with lib; {
         displayManager = {
           # Fix font size in XTerm
           sessionCommands = mkDefault ''
-            ${pkgs.xorg.xrdb}/bin/xrdb -merge <<EOF
+            ${pkgs.xrdb}/bin/xrdb -merge <<EOF
               XTerm*faceName: xft:Dejavu Sans Mono:size=12
             EOF
           '';

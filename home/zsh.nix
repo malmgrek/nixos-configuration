@@ -1,10 +1,12 @@
 { config, lib, pkgs, ... }:
-
+let
+  nixosConfig = config;
+in
 {
 
-  users.users.${config.customParams.userName}.shell = pkgs.zsh;
+  users.users.${nixosConfig.customParams.userName}.shell = pkgs.zsh;
 
-  home-manager.users.${config.customParams.userName} = {
+  home-manager.users.${nixosConfig.customParams.userName} = { config, ... }: {
 
     programs = {
       direnv = {
@@ -26,6 +28,7 @@
       # };
       zsh = {
         enable = true;  # TODO: Already set in common.nix, is this necessary?
+        dotDir = "${config.xdg.configHome}/zsh";
         defaultKeymap = "viins";
         shellAliases = {
           zcp = "zmv -C";

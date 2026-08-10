@@ -71,7 +71,7 @@
       editorconfig-core-c
       sqlite
       python312Packages.ruff # Python formatter
-      nodePackages.prettier # JavaScript formatter
+      prettier # JavaScript formatter
 
       # Language servers
       emacs-lsp-booster

@@ -99,15 +99,12 @@ with lib; {
   };
 
   programs = {
-    # Android debug bridge
-    adb.enable = true;
     # Some programs need SUID wrappers, can be configured further or are started
     # in user sessions.
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
     };
-    light.enable = true;
     mtr.enable = true;
     openvpn3.enable = true;
     zsh.enable = true;
@@ -142,25 +139,27 @@ with lib; {
     xst
 
     # CLI programs
-    acpi         # Battery status etc.
-    bat          # Better cat
+    acpi           # Battery status etc.
+    android-tools  # Contains `adb` (android debug bridge)
+    bat            # Better cat
     binutils
+    brightnessctl  # Adjust screen brightness, replaces `light`
     coreutils
-    dig          # DNS lookup utility
-    eza          # Better ls
+    dig            # DNS lookup utility
+    eza            # Better ls
     # fasd
-    fd           # Better find
+    fd             # Better find
     git
     gnumake
     killall
-    lm_sensors   # Read hardware sensor info
-    ncdu         # NCurses disk utility
-    pandoc       # Document format conversion
-    pciutils     # PCI utils, e.g., lspci
+    lm_sensors     # Read hardware sensor info
+    ncdu           # NCurses disk utility
+    pandoc         # Document format conversion
+    pciutils       # PCI utils, e.g., lspci
     ranger
     ripgrep
     ripgrep-all
-    tldr         # Man for dummies
+    tldr           # Man for dummies
     tree
     tmux
     unzip

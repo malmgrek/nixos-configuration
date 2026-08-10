@@ -9,7 +9,7 @@
   # done with Home Manager, which is suboptimal.
   home-manager.users.${config.customParams.userName} = {
     home.packages = with pkgs; [
-      xorg.xhost
+      xhost
     ];
     home.pointerCursor = {
       name = "Vanilla-DMZ";

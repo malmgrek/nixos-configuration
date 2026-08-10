@@ -15,6 +15,7 @@
       vimdiffAlias = true;
       withNodeJs = true;
       withPython3 = true;
+      withRuby = true;
 
       extraPackages = with pkgs; [
         # Core build tools
@@ -44,7 +45,7 @@
 
         # Formatters
         stylua
-        nixfmt-rfc-style
+        nixfmt
         prettier
         python312Packages.ruff # You already have this for Emacs
 
@@ -56,7 +57,7 @@
         lazygit
 
         # AI tools dependencies
-        nodejs_20
+        nodejs
 
         # Clipboard (you're using X11 based on your i3 config)
         xclip

@@ -1,5 +1,7 @@
 { config, pkgs, ... }:
-
+let
+  nixosConfig = config;
+in
 {
 
   imports = [
@@ -31,6 +33,9 @@
     XDG_CACHE_HOME = "$HOME/.cache";
     XDG_DATA_HOME = "$HOME/.local/share";
     XDG_BIN_HOME = "$HOME/.local/bin";
+
+    # Enables installing with `npm install -g` and the sources go to $HOME/.npm-global
+    NPM_CONFIG_PREFIX = "$HOME/.npm-global";
   };
 
   # By default, Home Manager uses a private pkgs instance that is configured via
@@ -43,8 +48,13 @@
   # and removes the dependency on NIX_PATH, which is otherwise used for
   # importing Nixpkgs.
 
-  home-manager.users.${config.customParams.userName} = {
+  home-manager.users.${nixosConfig.customParams.userName} = { config, ... }: {
     xdg.enable = true;
+
+    home.sessionPath = [ "$HOME/.npm-global/bin" ];
+    # Handles .npm-global creation if it doesn't exist yet
+    home.file.".npm-global/.keep".text = ""; 
+
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
     # when a new Home Manager release introduces backwards
@@ -53,11 +63,10 @@
     # You can update Home Manager without changing this value. See
     # the Home Manager release notes for a list of state version
     # changes in each release.
-    home.stateVersion = config.system.stateVersion;
+    home.stateVersion = nixosConfig.system.stateVersion;
     home.packages =
       with pkgs;
       let
-        # azuredatastudio = callPackage ./azuredatastudio.nix { };
         tex = (
           texlive.combine {
             inherit (texlive)
@@ -95,9 +104,10 @@
     programs = {
       firefox = {
         enable = true;
-        profiles."${config.customParams.userName}.default" = {
+        configPath = "${config.xdg.configHome}/mozilla/firefox";
+        profiles."${nixosConfig.customParams.userName}.default" = {
           isDefault = true;
-          name = "${config.customParams.userName}.default";
+          name = "${nixosConfig.customParams.userName}.default";
           settings = {
             "browser.startup.homepage" = "https://nixos.org";
             "browser.uidensity" = 1;

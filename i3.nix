@@ -164,19 +164,18 @@ in {
       actkbd = {
         enable = true;
         bindings = let
-          light = "${pkgs.light}/bin/light";
-          step = "1";
+          brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
+          step = "1%";
         in [
           {
             keys = [ 224 ];
             events = [ "key" ];
-            # Use minimum brightness 0.2 so the display won't go totally black.
-            command = "${light} -N 0.2 && ${light} -U ${step}";
+            command = "${brightnessctl} set ${step}- --min-value=1";
           }
           {
             keys = [ 225 ];
             events = [ "key" ];
-            command = "${light} -A ${step}";
+            command = "${brightnessctl} set ${step}+";
           }
         ];
       };
