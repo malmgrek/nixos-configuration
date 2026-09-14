@@ -32,7 +32,7 @@
       userName = "malmgrek";
     };
     hidpiHacks.enable = false;
-    lightMode.enable = true;
+    lightMode.enable = false;
 
     # Use the systemd-boot EFI boot loader
     # TODO: Try grub
@@ -86,7 +86,7 @@
       ];
     };
 
-    services.printing.drivers = [ pkgs.cups-toshiba-estudio ];
+    services.printing.drivers = [ pkgs.hplip ];
 
   };
 

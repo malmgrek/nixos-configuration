@@ -4,9 +4,11 @@ let userName = config.customParams.userName;
 in {
 
   virtualisation.docker = {
-    enable = true;
-    autoPrune.enable = true;
-    enableOnBoot = false;
+    enable = false;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
   };
 
   home-manager.users.${userName} = {
@@ -15,8 +17,4 @@ in {
       docker-compose
     ];
   };
-
-
-  users.users.${userName}.extraGroups = [ "docker" ];
-
 }

@@ -96,6 +96,10 @@ with lib; {
       enable = true;
       # Are there some other important settings?
     };
+    # Gnome keyring for storing tokens
+    gnome = {
+      gnome-keyring.enable = true;
+    };
   };
 
   programs = {
@@ -237,7 +241,19 @@ with lib; {
     # LUKS encrypted ext4 partitions
     gnome-disk-utility
 
+    # secret-tool
+    gnome-keyring
+    libsecret
+
   ];
+
+  security.sudo = {
+    wheelNeedsPassword = true;
+    execWheelOnly = true;
+    extraConfig = ''
+      Defaults timestamp_timeout=0
+    '';
+  };
 
 }
 

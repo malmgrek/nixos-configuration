@@ -13,6 +13,7 @@ let
   skills = [
     "plan-executor"
     "grilling"
+    "doc-audit"
   ];
 in
 {

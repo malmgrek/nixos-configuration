@@ -14,10 +14,3 @@
 
 ;; Icons
 (package! nerd-icons)
-
-;; Aidermacs
-(package! aidermacs
-  :recipe (:host github :repo "MatthewZMD/aidermacs" :files ("*.el")))
-
-;; Agent Shell
-(package! agent-shell)

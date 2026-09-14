@@ -86,7 +86,6 @@ in
         # AI tools
         unstable.copilot-language-server
         unstable.llm
-        unstable.aider-chat-with-playwright
         unstable.rtk
 
         azure-cli # Azure CLI

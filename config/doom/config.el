@@ -107,17 +107,6 @@
   (add-to-list 'copilot-indentation-alist '(text-mode 2))
   (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2)))
 
-;; Aidermacs
-(use-package! aidermacs
-  :bind (("C-c a" . aidermacs-transient-menu))
-  ;; :config
-  :custom
-  (aidermacs-default-chat-mode 'architect)
-  (aidermacs-default-model "github_copilot/sonnet-4.5"))
-
-;; Agent Shell
-(use-package! agent-shell)
-
 ;;
 ;; Nerd trees
 ;; ~~~~~~~~~~
