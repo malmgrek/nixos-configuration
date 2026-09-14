@@ -97,4 +97,3 @@ One of `trivial` or `standard`.
 - Every task must have clear acceptance criteria so a reviewer can verify it.
 - Mark each task's `Review Level` honestly. Default to `standard`; reserve `trivial` for tasks that genuinely do not change behaviour.
 - Include file paths where possible so the implementer knows where to work.
-

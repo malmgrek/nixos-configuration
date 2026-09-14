@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "type": "local",
+      "command": "playwright-mcp",
+      "tools": ["*"],
+      "args": []
+    }
+  }
+}

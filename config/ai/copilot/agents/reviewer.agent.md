@@ -50,4 +50,3 @@ If approved with no findings, write: *No issues found.*
 ### Summary
 
 2-3 sentences summarising the overall state of the implementation.
-

@@ -7,10 +7,9 @@ in
   imports = [
     <home-manager/nixos>
     ./alacritty.nix
+    ./ai.nix
     ./docker.nix
     ./doom-emacs.nix
-    ./claude-code.nix
-    ./copilot.nix
     ./ipython.nix
     ./neovim.nix
     ./opencode.nix
@@ -86,7 +85,6 @@ in
         # AI tools
         unstable.copilot-language-server
         unstable.llm
-        unstable.rtk
 
         azure-cli # Azure CLI
         awscli2 # AWS CLI

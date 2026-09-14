@@ -42,6 +42,13 @@ GitHub project") which is a system for managing a Linux user environment (e.g.
 Emacs/Vim configurations). All related configs are defined under `./home/` and
 can be disabled completely from the configuration.
 
+### AI development tools
+
+`home/ai.nix` installs vanilla Claude Code and Copilot CLI executables. Reusable
+project configuration lives in [`config/ai/`](./config/ai/): projects copy and
+track native harness files, while their Nix shells provide supporting
+executables such as language servers and MCP servers.
+
 ### Desktop environment
 
 Currently I use an i3 based desktop environment that is included in the configuration as a module.
