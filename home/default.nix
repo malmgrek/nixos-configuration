@@ -6,6 +6,7 @@ in
 
   imports = [
     <home-manager/nixos>
+    ./agent-jail.nix
     ./alacritty.nix
     ./ai.nix
     ./docker.nix
