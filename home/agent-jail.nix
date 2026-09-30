@@ -24,11 +24,28 @@ let
         stateDir="$HOME/.local/state/agent-jail/${state}"
         mkdir -p "$stateDir"
 
+        # uv's managed interpreters live outside the project, so a venv's
+        # bin/python dangles once $HOME is the state directory. Bind that
+        # subdirectory alone, keeping the sibling `credentials` out, and skip it
+        # when absent: a missing bind source aborts bwrap for every agent.
+        uvPythonDir="$HOME/.local/share/uv/python"
+        uvPythonBind=()
+        if [ -d "$uvPythonDir" ]; then
+          uvPythonBind=(--ro-bind "$uvPythonDir" "$uvPythonDir")
+        fi
+
+        # /bin, /usr and /lib64 are NixOS's FHS shims, which imperative projects
+        # need: `#!/usr/bin/env` and `#!/bin/sh` shebangs, and the nix-ld loader
+        # that lets prebuilt non-Nix binaries start at all. Each is a lone
+        # symlink into the already-bound store, so nothing new becomes readable.
         exec bwrap \
           --unshare-all --share-net --die-with-parent \
           --ro-bind /nix/store /nix/store \
           --ro-bind /run/current-system /run/current-system \
           --ro-bind /etc /etc \
+          --ro-bind /bin /bin \
+          --ro-bind /usr /usr \
+          --ro-bind /lib64 /lib64 \
           --ro-bind /run/systemd/resolve /run/systemd/resolve \
           --ro-bind /nix/var/nix/daemon-socket/socket /nix/var/nix/daemon-socket/socket \
           --ro-bind /nix/var/nix/profiles /nix/var/nix/profiles \
@@ -39,6 +56,7 @@ let
           --bind "$stateDir" "$HOME" \
           --ro-bind "$HOME/.nix-profile" "$HOME/.nix-profile" \
           --ro-bind "$HOME/.local/state/nix/profile" "$HOME/.local/state/nix/profile" \
+          "''${uvPythonBind[@]}" \
           --setenv NIX_REMOTE daemon \
           --bind "$PWD" "$PWD" \
           --chdir "$PWD" \
