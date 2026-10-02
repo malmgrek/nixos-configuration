@@ -53,7 +53,12 @@ executables such as language servers and MCP servers.
 
 Currently I use an i3 based desktop environment that is included in the configuration as a module.
 
-![Screenshot](https://raw.githubusercontent.com/malmgrek/nixos-configuration/master/resources/screenshot.png)
+<!-- TODO: add a new screenshot as resources/screenshot.png and restore the image
+     link below. Before committing one, check what the i3 status bar shows: the
+     previous screenshot exposed the WiFi SSID, which public wardriving databases
+     can map to a physical address. -->
+
+_Screenshot to be added._
 
 ## Installation alongside Windows
 

@@ -5,8 +5,11 @@
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
-(setq user-full-name "Stratos Staboulis"
-      user-mail-address "stratos.staboulis@gmail.com")  ;; FIXME: Should be secret
+;; Read from the environment so no personal address is committed to this public
+;; repository. Set NAME and EMAIL outside the repo, e.g. in ~/.profile, which
+;; `git` also honours for commit authorship.
+(setq user-full-name (or (getenv "NAME") "")
+      user-mail-address (or (getenv "EMAIL") ""))
 
 ;; Fonts
 (setq doom-font @font@)

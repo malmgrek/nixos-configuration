@@ -93,6 +93,7 @@ in
         chromium # MS Teams works better in chromium
         dbeaver-bin # Database client
         pass # Password store
+        age  # Encryption tool
         spotify
         tex
         tor-browser # Tor browser
