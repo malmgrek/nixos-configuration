@@ -44,10 +44,7 @@ can be disabled completely from the configuration.
 
 ### AI development tools
 
-`home/ai.nix` installs vanilla Claude Code and Copilot CLI executables. Reusable
-project configuration lives in [`config/ai/`](./config/ai/): projects copy and
-track native harness files, while their Nix shells provide supporting
-executables such as language servers and MCP servers.
+`home/ai.nix` installs vanilla Claude Code and Copilot CLI executables.
 
 ### Desktop environment
 
