@@ -1,3 +1,6 @@
 result
 .aider*
 .opencode*
+
+# Local backups taken before destructive git operations. Never published.
+backups/
