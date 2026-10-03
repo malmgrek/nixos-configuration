@@ -94,8 +94,9 @@ links to it and goes with it.
 - Commits that touched only `plans/` become empty and are dropped, so the
   history gets shorter and some commit messages disappear. Expected and
   harmless for a configuration repository.
-- The `feature/001-*` and `backup/001-*` branches are rewritten along with
-  `master`. Any other clone diverges and must be re-cloned.
+- The `feature/001-*`, `backup/001-*` and `x11-cleanup` branches are rewritten
+  along with `master`; `x11-cleanup` is the only ref carrying the tenth plan
+  folder. Any other clone diverges and must be re-cloned.
 - Salvage happens in Tasks 2.1-2.2 and destruction in Task 3.1 onward. If the
   order is broken the source is gone -- mitigated by the Task 1.1 backup, which
   zips the working tree including `.git` and the untracked plan folders, and is

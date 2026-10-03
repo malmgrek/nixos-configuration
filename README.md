@@ -44,7 +44,8 @@ can be disabled completely from the configuration.
 
 ### AI development tools
 
-`home/ai.nix` installs vanilla Claude Code and Copilot CLI executables.
+`home/ai.nix` installs the Claude Code, Copilot CLI and OpenSpec
+executables, together with the Playwright tooling and `rtk`.
 
 ### Desktop environment
 

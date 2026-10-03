@@ -18,7 +18,7 @@
   list is empty, so it is the recorded `origin/master` SHA and the recorded
   plan-commit count that rule out a vacuous pass. Record them first, and read
   them.
-  Validation: `cd ~/NixOS && for c in $(git log --format=%H --all -- plans/); do git merge-base --is-ancestor "$c" origin/master 2>/dev/null && echo PUSHED; done; unzip -l backups/nixos-backup-$(date +%F).zip | grep -q '\.git/config' && test -z "$(git status --short | grep backups)" && echo BACKUP-OK`
+  Validation: `cd ~/NixOS && for c in $(git log --format=%H --all -- plans/); do git merge-base --is-ancestor "$c" origin/master 2>/dev/null && echo PUSHED; done; unzip -l backups/nixos-backup-*.zip | grep -q '\.git/config' && test -z "$(git status --short | grep backups)" && echo BACKUP-OK`
 
 ## 2. Salvage, while the plans still exist
 
@@ -43,7 +43,7 @@
 
 ## 3. Deletions
 
-- [ ] 3.1 Remove the three newest plan folders and commit everything else, so
+- [x] 3.1 Remove the three newest plan folders and commit everything else, so
   `filter-repo` has the clean tree it requires. `plans/007-*`, `plans/008-*`
   and `plans/009-*` are **staged**, not untracked, so clearing them needs
   `git rm -r --cached` as well as `rm -rf`: a bare `rm -rf` leaves index
@@ -55,9 +55,11 @@
   own artifacts, Task 1.1's `backups/` ignore line, and the four files section
   2 produced (`openspec/specs/agent-jail/spec.md` and the three under
   `openspec/changes/011-jailed-containers/`).
-  Validation: `cd ~/NixOS && test -z "$(git status --short)" && test ! -e plans/009-jail-foreign-toolchains && echo CLEAN`
+  Do not assert a clean tree here: ticking this task's own checkbox dirties it.
+  The clean tree is Task 4.1's precondition and is checked there.
+  Validation: `cd ~/NixOS && test ! -e plans/009-jail-foreign-toolchains && test -z "$(git ls-files 'plans/00[789]*')" && git cat-file -e HEAD:openspec/specs/agent-jail/spec.md && git cat-file -e HEAD:openspec/changes/011-jailed-containers/design.md && echo DELETED-AND-SALVAGED`
 
-- [ ] 3.2 Remove `config/ai/` with `git rm -r` and the `README.md` paragraph
+- [x] 3.2 Remove `config/ai/` with `git rm -r` and the `README.md` paragraph
   that links to it, then commit. Nothing in `home/` references the directory,
   so this changes no behaviour -- but check the copilot `lsp-config.json`,
   `mcp-config.json` and the `rtk` hook and instructions before committing, as
@@ -66,7 +68,8 @@
 
 ## 4. History rewrite
 
-- [ ] 4.1 Run `nix-shell -p git-filter-repo --run 'git filter-repo --path plans/ --invert-paths --force'`,
+- [ ] 4.1 Commit any outstanding artifact edits, then run
+  `nix-shell -p git-filter-repo --run 'git filter-repo --path plans/ --invert-paths --force'`,
   then re-add `origin` at `git@github.com:malmgrek/nixos-configuration.git`.
   `--path plans/` and nothing else: `resources/screenshot.png` lives in pushed
   history and rewriting it would turn a fast-forward into a force-push.
@@ -76,7 +79,13 @@
   absence afterwards is expected, not a failure. It may also drop
   `refs/remotes/origin/*`, so verify the fast-forward property against the SHA
   recorded in Task 1.1 rather than against `origin/master`.
-  Validation: `cd ~/NixOS && test "$(git log --all --oneline -- plans/ | wc -l)" = 0 && test "$(git ls-files | grep -c '^plans/')" = 0 && git merge-base --is-ancestor 321a591 master && test -f backups/nixos-backup-$(date +%F).zip && echo FF-OK`
+  The run ends with a hard reset and a `gc`. Neither should touch an ignored
+  path, so confirm the backup zip survived rather than assuming it -- and note
+  that the same reset is why the tree must be committed first: `--force`
+  proceeds on a dirty tree and the reset then discards whatever was
+  uncommitted, checkbox edits included. The rewrite also removes a tenth plan
+  folder that exists in history but in no index.
+  Validation: `cd ~/NixOS && test "$(git log --all --oneline -- plans/ | wc -l)" = 0 && test "$(git ls-files | grep -c '^plans/')" = 0 && git merge-base --is-ancestor 321a591 master && test -n "$(ls backups/nixos-backup-*.zip 2>/dev/null)" && echo FF-OK`
 
 ## 5. Durable controls and verification
 
@@ -100,3 +109,7 @@
   Validation: `cd ~/NixOS && test "$(git log --all -p -- plans/ | wc -l)" = 0 && test -z "$(git status --short | grep plans)" && nix-instantiate '<nixpkgs/nixos>' -A system -I nixos-config=/etc/nixos/configuration.nix >/dev/null && echo VERIFIED`
 
 ## Unreconciled
+
+- `README.md`: made the retained AI-tools sentence accurate. It named two of the
+  six packages `home/ai.nix` installs, and its "vanilla" contrasted with the
+  `config/ai/` sentence Task 3.2 removed. Visual only.
