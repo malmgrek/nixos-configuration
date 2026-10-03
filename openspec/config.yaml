@@ -1,0 +1,105 @@
+# Template: copy to openspec/config.yaml.
+# Lines marked PROJECT are the ones every project must write for itself.
+
+schema: spec-driven
+
+# PROJECT: name the files an agent must read and the one constraint that
+# outranks everything else here. Do not restate their contents. The naming and
+# archive paragraphs are invariant -- copy them as-is.
+context: |
+  Read AGENTS.md for stack, structure, conventions and constraints, and
+  openspec/specs for what the project already promises. Do not restate them in
+  artifacts.
+  Name every change NNN-descriptive-name: a zero-padded running number (001,
+  002, ... 010, ... 100, widening past 999) then the name you would have used
+  anyway. NNN is one past the highest already used under openspec/changes and
+  openspec/changes/archive, where archived names carry a YYYY-MM-DD- prefix
+  ahead of the number.
+  A change is not ready to archive while "## Unreconciled" in its tasks.md still
+  has entries.
+  <the hard constraint that overrides convenience in this project>
+
+rules:
+  proposal:
+    - Under 300 words. Why, what changes, what is explicitly out of scope.
+    - 'A change with no spec-level behaviour change -- refactor, tooling, styling,
+      docs -- sets "skip_specs: true" in its .openspec.yaml. Never invent a
+      requirement to satisfy validation.'
+  design:
+    - Under 200 lines. Open with a Decisions list readable in 60 seconds.
+    - Decisions and their rationale only. No restating the proposal, no code listings,
+      no alternatives already rejected in conversation.
+    # PROJECT: add what a design must state to be checkable in this domain --
+    # e.g. the formulation implemented and the properties that make it correct,
+    # which then become the tests.
+  tasks:
+    - One focused, independently verifiable unit per task. Split anything longer than
+      ~15 lines of description. Every task changes code; verifying another task is
+      part of that task, not a task of its own.
+    # PROJECT: name the narrowest real command, and any suite that cannot stand
+    # alone (needs hardware, a service, a fixture that skips).
+    - 'Each task ends with a line "Validation: <exact runnable command>" or
+      "Validation: none". Choose the narrowest check that catches a real bug.'
+    - 'tasks.md ends with an "## Unreconciled" section: one line per change made to
+      the code outside the task list, each marked "Visual only." or "Behaviour --
+      spec." The section always exists; empty is the normal state.'
+
+# Invariant. Copy as-is.
+operations:
+  apply:
+    guidance:
+      - 'This guidance governs tasks drawn from tasks.md. A fix the user asks for
+        directly is not a task: make it, run the narrowest validation that covers it,
+        and stop. No reviewer, no artifact updates; append one line to
+        "## Unreconciled" instead. Asking for a fix is not asking for a review.'
+      - 'The unit of work is whatever the user named -- one section, several, or the
+        whole task list -- and one numbered section of tasks.md when they named none.
+        Implement the whole unit before any review, then stop and report; do not start
+        the next unit until the user says to continue.'
+      - 'Run each task''s Validation command and show the real output; run nothing where
+        it says none. A task whose validation fails is not done. What you hand to a
+        review must describe the final state of the unit, so re-run any command whose
+        code a later task touched.'
+      - 'One review per unit, not one after each task inside it. Record "git rev-parse
+        HEAD" before starting the unit: the diff to review is "git diff <that sha>",
+        which covers commits, staged and unstaged work alike. Hand the reviewer the
+        change name, the sections and tasks covered, that diff, and each task''s
+        validation output -- never a summary of what you believe you changed, which is
+        your story about the diff and the one thing an independent reviewer exists not
+        to hear.'
+      - 'Review is the default. Skip it only for a unit the user said "no review" for,
+        writing "(no review)" beside its sections in tasks.md so the audit knows to look
+        harder. A unit containing a task whose Validation is none is never waived
+        silently -- nothing would then have checked that task at all -- so say so, and
+        waive it only if the user confirms. A review can also be asked for on its own,
+        over a range or a base the user names; it then judges only the tasks in that
+        range, since later work may have touched the same files.'
+      - 'Review is a loop, not a step: fixes made in response to a review are themselves
+        unreviewed, so send them back for a verification round unless every fix was
+        cosmetic. At most three rounds per unit -- review loops do not terminate on
+        their own, they just get politer -- then stop and report what is outstanding.
+        Run further rounds only if the user asks for them.'
+      - 'A task is done when its Validation command passed -- where it has one -- and the
+        review covering its unit either returned Approved or was waived by the user.
+        Mark "- [x]" then, reporting the rounds and verdicts, or the waiver. Green
+        validation with findings outstanding is not done.'
+      - 'Within a task, a fix that changes behaviour is not done until the artifacts say
+        so: update the spec, design or tasks in the same step, so the verification round
+        judges code and artifacts together.'
+      - Never commit yourself; leave that to the user.
+  archive:
+    guidance:
+      - 'Before reconciling anything, invoke the auditor subagent once, with the change
+        name, the whole change''s diff, and tasks.md with "## Unreconciled" still
+        populated. That diff is "git diff" where nothing was committed during the
+        change; otherwise it is against the branch point ("git merge-base HEAD
+        <default-branch>") when the branch carries only this change, or a base the user
+        names. Say which base you used.'
+      - 'Then reconcile from the audit rather than your own recollection of what was
+        behavioural: fold every entry the auditor treats as a behaviour change into the
+        specs, design or tasks, and clear "## Unreconciled". Archiving over a non-empty
+        section is exactly the drift this workflow exists to prevent.'
+      - 'Fixes made for audit findings go back to the auditor, at most two rounds; if
+        findings remain after the second, stop and report. A fix that adds behaviour is
+        not a fix: it means the task list was incomplete, so stop and report rather than
+        implementing it here.'
