@@ -17,7 +17,15 @@ context: |
   ahead of the number.
   A change is not ready to archive while "## Unreconciled" in its tasks.md still
   has entries.
-  <the hard constraint that overrides convenience in this project>
+  Artifacts in this repository are published. No proposal, design, spec or task
+  may name a client, a client project, a person's name or address, or a network
+  identifier such as an SSID. The operator's username, which a NixOS
+  configuration must declare, is not what this forbids.
+  A limitation may be stated only together with the reason it is accepted, which
+  is what lets a spec say where a boundary stops. A gap that is not accepted but
+  merely unfixed is named and pointed to, never described here -- and where no
+  record outside this repository is reachable, stop and ask rather than
+  describing it.
 
 rules:
   proposal:

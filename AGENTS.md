@@ -12,6 +12,10 @@
 - **Nothing leaves the machine unasked.** No new network calls, no installs from a
   registry, no posting project content to an external service unless the task
   asked for it.
+- **A known gap is a thing to fix, not a baseline.** Never cite an existing
+  weakness as grounds for introducing another, and do not design down to the
+  level an existing gap has set. That a gap is already public makes it no more
+  acceptable. If one blocks the task, say so and stop.
 - **Keep exploration compact.** Present findings as at most five bullets, then
   one question. Flag the bullet you are least confident in. Detail on request —
   a wall of text costs more to read than it saves to write.

@@ -4,3 +4,9 @@ result
 
 # Local backups taken before destructive git operations. Never published.
 backups/
+
+# An installed opencode agent can still write a plans/NNN-name/ folder into
+# whichever repository it runs in. The ones this replaced documented this
+# machine's threat model and named an external client, so a folder of this
+# shape must never enter a published history. Removing this line re-opens that.
+plans/
