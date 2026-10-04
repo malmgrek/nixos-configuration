@@ -68,7 +68,12 @@
 
 ## 4. History rewrite
 
-- [x] 4.1 Commit any outstanding artifact edits, then run
+- [x] 4.1 Confirm the branch carrying this work is the one to be published:
+  where the work sits on a feature branch while the default branch is behind,
+  fast-forward the default branch onto it first. `filter-repo` rewrites
+  whatever the refs point at, and this task's validation only tests ancestry of
+  the recorded SHA, so it passes just as well with the work stranded on a
+  branch and the goal unmet. Then commit any outstanding artifact edits and run
   `nix-shell -p git-filter-repo --run 'git filter-repo --path plans/ --invert-paths --force'`,
   then re-add `origin` at `git@github.com:malmgrek/nixos-configuration.git`.
   `--path plans/` and nothing else: `resources/screenshot.png` lives in pushed
@@ -95,18 +100,19 @@
 - [x] 5.1 Add `plans/` to `.gitignore` with a comment stating that an
   installed opencode agent can still produce such a folder and that it must
   never enter a published history, then write the project's hard constraint
-  over the unfilled placeholder in `openspec/config.yaml`. Keep that constraint
-  to disclosure: no client, no client project, no personal name, address or
-  network identifier, and a limitation stated only with the reason it is
-  accepted, a merely-unfixed gap named rather than described. Name the
+  over the unfilled placeholder in `openspec/config.yaml`. Keep that
+  constraint to disclosure: no client, no client project, no personal name,
+  address or network identifier, and a limitation stated only with the reason
+  it is accepted, a merely-unfixed gap named rather than described. Name the
   identifiers meant and exclude the operator's username, which a NixOS
   configuration must declare, or the rule reads as forbidding this
-  repository's own remote URL. Give the gap clause a reachable fallback -- stop and ask --
-  since no path outside this repository is writable. Do not let it also rule on
-  whether a gap is acceptable -- that is posture, not publication, and a
-  publication rule phrased as "already public, therefore fine" ratchets the
-  accepted security level downward. Put the posture rule in `AGENTS.md`
-  instead: a known gap is a thing to fix, never a baseline to design against.
+  repository's own remote URL. Give the gap clause a reachable fallback --
+  stop and ask -- since no path outside this repository is writable. Do not
+  let it also rule on whether a gap is acceptable -- that is posture, not
+  publication, and a publication rule phrased as "already public, therefore
+  fine" ratchets the accepted security level downward. Put the posture rule in
+  `AGENTS.md` instead: a known gap is a thing to fix, never a baseline to
+  design against.
   Validation: `cd ~/NixOS && grep -q '^plans/$' .gitignore && ! grep -q 'the hard constraint that overrides' openspec/config.yaml && echo CONTROLS-OK`
 
 - [x] 5.2 Verify the whole change end to end, across every ref rather than the
@@ -120,17 +126,3 @@
   Validation: `cd ~/NixOS && test "$(git log --all -p -- plans/ | wc -l)" = 0 && test -z "$(git status --short | grep plans)" && nix-instantiate '<nixpkgs/nixos>' -A system -I nixos-config=/etc/nixos/configuration.nix >/dev/null && echo VERIFIED`
 
 ## Unreconciled
-
-- Two artifact edits were made during section 4 that no task asked for, both
-  aligning the plan with what the rewrite actually did: `design.md`'s pre-push
-  control was respelled `git log -p 321a591..master`, since `filter-repo` drops
-  `refs/remotes/*` and the `origin/master..master` form needs a working fetch;
-  and Task 4.1 gained a guard against being run twice, because
-  `.git/filter-repo/already_ran` is bypassed by `--force`. Visual only.
-- `master` was fast-forwarded to the `010-publishable-history` branch before
-  Task 4.1 ran. The work had been committed on that branch while `master` sat
-  four commits behind, and the change's goal is a publishable `master`. Not
-  required by 4.1's validation, which would have passed either way. Visual only.
-- `README.md`: made the retained AI-tools sentence accurate. It named two of the
-  six packages `home/ai.nix` installs, and its "vanilla" contrasted with the
-  `config/ai/` sentence Task 3.2 removed. Visual only.

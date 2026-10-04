@@ -15,7 +15,8 @@
 
 `origin/master` is a January 2025 commit; everything since is local. The full
 jail boundary is already public in `home/agent-jail.nix` -- every bind, the
-tmpfs over `$HOME`, the refusal to bind the Docker socket. `openspec/specs/` is
+state directory bound over `$HOME`, the refusal to bind the Docker
+socket. `openspec/specs/` is
 empty, so the project currently promises nothing in writing. See
 `proposal.md` for why this change exists.
 
@@ -42,12 +43,13 @@ tracking ref: the remote has not moved since January 2025 and this is the only
 developer, so a fetch adds nothing and would make the check depend on working
 network credentials. Abort on any hit rather than widening scope.
 
-**Scope the rewrite to `plans/`.** `resources/screenshot.png` is the other
-privacy defect in this repository's history, and it is tempting to strip it in
-the same pass. It must not be: that history *is* pushed, so rewriting it
-converts a fast-forward into a force-push. It has also been served publicly
-since 2022 and is beyond recall. The SSID it exposes is fixed by renaming the
-network, not by git.
+**Scope the rewrite to `plans/`.** One other privacy defect exists in this
+repository's pushed history and is tempting to strip in the same pass. It must
+not be: that history *is* pushed, so rewriting it converts a fast-forward into
+a force-push, and its remedy is not a git operation in any case. The detail is
+deliberately not written here, and no record outside this repository is yet
+reachable to hold it -- so it is named and left for a decision rather than
+described.
 
 **Delete the plans; do not keep them.** They were written as one-time working
 documents for a workflow that OpenSpec now replaces. A nested second
@@ -69,7 +71,8 @@ requirements. So it is written straight into `openspec/specs/` and this change
 sets `skip_specs: true`.
 
 **No leak-detection gate.** A pre-push denylist would have to contain the
-client name, the client project name, a surname and the SSID -- three of which
+client name, the client project name, a surname and a network identifier
+-- three of which
 are exactly the secrets. Tracked, the gate publishes what it guards; untracked,
 it dies with the clone and fails open, which is worse than nothing because it
 looks like a control. What replaces it: the hard constraint in

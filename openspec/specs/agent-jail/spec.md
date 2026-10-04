@@ -8,6 +8,12 @@ of the operator's home directory. The confinement is a property of the session
 process rather than of any individual command, so every child process inherits
 it.
 
+These requirements were imported from a shipped implementation rather than
+agreed before it: they record behaviour observed in the running configuration,
+and the verification transcripts behind them were deleted with the planning
+documents they lived in. Treat the configuration as the authority where the two
+disagree, and correct the spec rather than the code.
+
 ## Requirements
 
 ### Requirement: Opt-in jailed commands
@@ -119,8 +125,27 @@ one project's agent history from every other project's.
 
 #### Scenario: The operator's home is still absent
 - **WHEN** a jailed session lists its home directory
-- **THEN** it MUST contain only agent state and the empty mount points the
-  session mechanism creates, and no directory of the operator's real home
+- **THEN** it MUST contain only agent state, the read-only tool-profile paths
+  that keep `PATH` working, and the empty mount points the session mechanism
+  creates -- and no directory of the operator's real home
+
+### Requirement: System configuration is present and read-only
+
+A jailed session SHALL have the host's system configuration directory
+available, whole and read-only, rather than an enumerated subset of it. On this
+system that directory is almost entirely links into the shared store, and one
+bind is auditable where several that must stay in sync are not. This is the
+broadest thing inside a session that is not the store itself, so a change
+narrowing or widening it is a change to this capability.
+
+#### Scenario: Name resolution and certificate validation work
+- **WHEN** a jailed session resolves a hostname or validates a TLS certificate
+- **THEN** it MUST succeed, because the system configuration those need is
+  present inside the session
+
+#### Scenario: The system configuration cannot be modified
+- **WHEN** a jailed session attempts to write into that directory
+- **THEN** the write MUST be refused
 
 ### Requirement: Declarative dependency resolution inside the jail
 
@@ -128,7 +153,10 @@ A jailed session SHALL be able to resolve ad-hoc and project dependencies
 through Nix, so that dependency fetching does not get redirected to unpinned,
 unreviewable alternatives. The build service MUST remain unable to read the
 operator's home: it SHALL only build sandboxed derivations into the shared
-store, and the calling user is not a trusted user of it.
+store. This depends on the calling user not being a trusted user of that
+service -- a configuration granting that trust would let a session request an
+unsandboxed build and read the home directory this capability withholds, so
+granting it is a change to this capability and not a convenience.
 
 #### Scenario: An ad-hoc dependency resolves
 - **WHEN** a jailed session asks for a package that is not installed and runs a
@@ -227,25 +255,15 @@ this capability.
   jailed session from that directory
 - **THEN** the tools that environment provided MUST resolve inside the session
 
-### Requirement: Containment is verified against bait
+### Requirement: A session's own state may shadow a sensitive name
 
-Verification of this capability SHALL use a canary: a decoy directory created
-outside the jail and asserted absent inside it, so that a failing check exposes
-bait rather than a real secret. Absence checks SHALL be existence-only and MUST
-NOT print the names of any files they find.
-
-Absence checks SHALL only be placed on paths that the jail must never contain
-*and* that no session would ever create. A path an agent may plausibly create
-inside its own state directory will eventually alias against the agent's own
-files and report a leak where none exists.
-
-#### Scenario: A leak exposes a decoy
-- **WHEN** containment is verified and the jail is broken
-- **THEN** the failing assertion MUST reveal the canary rather than the contents
-  of any real secret directory
+A session writes freely into its own state directory, so that directory may
+come to hold a path whose name matches one of the operator's sensitive
+directories. Such a path SHALL NOT be taken as evidence that the jail leaks:
+the two are different directories, and the operator's is still absent.
 
 #### Scenario: An agent's own file does not read as a leak
 - **WHEN** a session has created, inside its own state directory, a directory
   whose name matches one of the operator's sensitive directories
-- **THEN** that path existing inside the jail MUST NOT be treated as a leak, and
-  the check MUST be re-placed on a path no session can create
+- **THEN** that path existing inside the jail MUST NOT be treated as a leak,
+  and whatever asserts absence MUST do so on a path no session can create

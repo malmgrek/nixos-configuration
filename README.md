@@ -51,10 +51,9 @@ executables, together with the Playwright tooling and `rtk`.
 
 Currently I use an i3 based desktop environment that is included in the configuration as a module.
 
-<!-- TODO: add a new screenshot as resources/screenshot.png and restore the image
-     link below. Before committing one, check what the i3 status bar shows: the
-     previous screenshot exposed the WiFi SSID, which public wardriving databases
-     can map to a physical address. -->
+<!-- TODO: add a new screenshot as resources/screenshot.png and restore the
+     image link below. Check what the i3 status bar is showing before committing
+     one: it can carry identifying details. -->
 
 _Screenshot to be added._
 

@@ -16,6 +16,19 @@
   weakness as grounds for introducing another, and do not design down to the
   level an existing gap has set. That a gap is already public makes it no more
   acceptable. If one blocks the task, say so and stop.
+- **Verify the agent jail against bait, not against real secrets.** When you
+  check that the jail still confines a session, create a decoy directory
+  outside it and assert that one absent inside, so a broken jail exposes bait.
+  Keep absence checks existence-only -- never list a directory, which prints
+  real filenames at exactly the moment the jail has failed -- and place them
+  only on paths no session could itself create. No such check exists in this
+  repository yet; this is how to write one when it is needed.
+- **Read the diff before this repository is pushed.** It is published, and
+  pushes are rare enough that a push covers months of work. Read
+  `git log -p 321a591..master` -- `321a591` is the published tip -- against the
+  publication rule in `openspec/config.yaml` before pushing. Use the literal
+  SHA, not `origin/master..master`: the remote-tracking form needs a working
+  fetch and the history rewrite dropped those refs.
 - **Keep exploration compact.** Present findings as at most five bullets, then
   one question. Flag the bullet you are least confident in. Detail on request —
   a wall of text costs more to read than it saves to write.

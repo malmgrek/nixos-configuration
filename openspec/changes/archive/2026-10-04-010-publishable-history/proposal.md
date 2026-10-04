@@ -33,7 +33,8 @@ it is a baseline import, not a delta.
 
 ## Impact
 
-`.gitignore`, `README.md`, `openspec/config.yaml`, `openspec/specs/`,
-`config/ai/` (removed), `plans/` (removed), and every commit from the first
-plan commit onward. Nothing is pushed. `config/opencode/` and `home/` are
-untouched apart from the above.
+`.gitignore`, `README.md`, `AGENTS.md`, `openspec/` (its config, the
+`agent-jail` spec, this change and `011`) and the `.claude/` workflow tooling,
+which this change is also what first publishes; `config/ai/` and `plans/`
+removed; and every commit from the first plan commit onward. Nothing is pushed.
+`config/opencode/` and `home/` are untouched.
