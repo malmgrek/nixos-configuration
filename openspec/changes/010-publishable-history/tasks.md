@@ -68,7 +68,7 @@
 
 ## 4. History rewrite
 
-- [ ] 4.1 Commit any outstanding artifact edits, then run
+- [x] 4.1 Commit any outstanding artifact edits, then run
   `nix-shell -p git-filter-repo --run 'git filter-repo --path plans/ --invert-paths --force'`,
   then re-add `origin` at `git@github.com:malmgrek/nixos-configuration.git`.
   `--path plans/` and nothing else: `resources/screenshot.png` lives in pushed
@@ -85,20 +85,31 @@
   proceeds on a dirty tree and the reset then discards whatever was
   uncommitted, checkbox edits included. The rewrite also removes a tenth plan
   folder that exists in history but in no index.
+  Once this has run, do not run it again. `.git/filter-repo/already_ran`
+  records that it did, but `--force` bypasses that check, so a second run
+  would rewrite an already-rewritten repository.
   Validation: `cd ~/NixOS && test "$(git log --all --oneline -- plans/ | wc -l)" = 0 && test "$(git ls-files | grep -c '^plans/')" = 0 && git merge-base --is-ancestor 321a591 master && test -n "$(ls backups/nixos-backup-*.zip 2>/dev/null)" && echo FF-OK`
 
 ## 5. Durable controls and verification
 
-- [ ] 5.1 Add `plans/` to `.gitignore` with a comment stating that an
+- [x] 5.1 Add `plans/` to `.gitignore` with a comment stating that an
   installed opencode agent can still produce such a folder and that it must
-  never enter a published history, and replace the unfilled placeholder on
-  `openspec/config.yaml:19` with this project's hard constraint: artifacts here
-  are published, so none may name a client, a personal identifier, or a
-  weakness that is known and not yet fixed; detail of that kind belongs
-  outside this repository.
+  never enter a published history, then write the project's hard constraint
+  over the unfilled placeholder in `openspec/config.yaml`. Keep that constraint
+  to disclosure: no client, no client project, no personal name, address or
+  network identifier, and a limitation stated only with the reason it is
+  accepted, a merely-unfixed gap named rather than described. Name the
+  identifiers meant and exclude the operator's username, which a NixOS
+  configuration must declare, or the rule reads as forbidding this
+  repository's own remote URL. Give the gap clause a reachable fallback -- stop and ask --
+  since no path outside this repository is writable. Do not let it also rule on
+  whether a gap is acceptable -- that is posture, not publication, and a
+  publication rule phrased as "already public, therefore fine" ratchets the
+  accepted security level downward. Put the posture rule in `AGENTS.md`
+  instead: a known gap is a thing to fix, never a baseline to design against.
   Validation: `cd ~/NixOS && grep -q '^plans/$' .gitignore && ! grep -q 'the hard constraint that overrides' openspec/config.yaml && echo CONTROLS-OK`
 
-- [ ] 5.2 Verify the whole change end to end, across every ref rather than the
+- [x] 5.2 Verify the whole change end to end, across every ref rather than the
   current tree: no `plans/` path and no plan content on any ref; the tracked
   file count down from the 135 Task 1.1 recorded to 78, being 135 less the 45
   files under `plans/` and the 16 under `config/ai/`, plus the four that
@@ -110,6 +121,16 @@
 
 ## Unreconciled
 
+- Two artifact edits were made during section 4 that no task asked for, both
+  aligning the plan with what the rewrite actually did: `design.md`'s pre-push
+  control was respelled `git log -p 321a591..master`, since `filter-repo` drops
+  `refs/remotes/*` and the `origin/master..master` form needs a working fetch;
+  and Task 4.1 gained a guard against being run twice, because
+  `.git/filter-repo/already_ran` is bypassed by `--force`. Visual only.
+- `master` was fast-forwarded to the `010-publishable-history` branch before
+  Task 4.1 ran. The work had been committed on that branch while `master` sat
+  four commits behind, and the change's goal is a publishable `master`. Not
+  required by 4.1's validation, which would have passed either way. Visual only.
 - `README.md`: made the retained AI-tools sentence accurate. It named two of the
   six packages `home/ai.nix` installs, and its "vanilla" contrasted with the
   `config/ai/` sentence Task 3.2 removed. Visual only.

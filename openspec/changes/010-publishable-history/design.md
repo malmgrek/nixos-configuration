@@ -74,8 +74,11 @@ are exactly the secrets. Tracked, the gate publishes what it guards; untracked,
 it dies with the clone and fails open, which is worse than nothing because it
 looks like a control. What replaces it: the hard constraint in
 `openspec/config.yaml`, which is agent-facing and costs nothing, and one read
-of `git log -p origin/master..master` before the first push. Pushes here are
-roughly annual and there is one developer.
+of the diff against the published tip before the first push. Spell that
+`git log -p 321a591..master`, not `origin/master..master`: Task 4.1 leaves
+`refs/remotes/*` dropped, so the remote-tracking form needs a working fetch
+while the literal SHA needs nothing. Pushes here are roughly annual and there
+is one developer.
 
 **Keep `plans/` in `.gitignore`.** The directory is being deleted, but
 `config/opencode/agents/spar-and-plan.md` and `build-orchestrator.md` stay

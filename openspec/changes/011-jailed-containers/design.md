@@ -130,8 +130,9 @@ about what an *agent* can reach.
   inside a container rather than trust the unit text.
 - A second image store is unbounded and duplicates images the operator has
   already pulled -- roughly 0.5 GB for four images during investigation. No
-  quota is applied; the reclaim procedure is to stop the daemon and delete its
-  state directory.
+  quota is applied, because resource limits are out of scope for this change;
+  the cost is recoverable in one step, the reclaim procedure being to stop the
+  daemon and delete its state directory.
 - Adding a project root later means both appending to the option and applying
   the group and setgid change to that tree. The setgid bit does not propagate to
   a root that did not exist when it was set.
