@@ -1,11 +1,5 @@
-# Template: copy to openspec/config.yaml.
-# Lines marked PROJECT are the ones every project must write for itself.
-
 schema: spec-driven
 
-# PROJECT: name the files an agent must read and the one constraint that
-# outranks everything else here. Do not restate their contents. The naming and
-# archive paragraphs are invariant -- copy them as-is.
 context: |
   Read AGENTS.md for stack, structure, conventions and constraints, and
   openspec/specs for what the project already promises. Do not restate them in
@@ -19,8 +13,9 @@ context: |
   has entries.
   Artifacts in this repository are published. No proposal, design, spec or task
   may name a client, a client project, a person's name or address, or a network
-  identifier such as an SSID. The operator's username, which a NixOS
-  configuration must declare, is not what this forbids.
+  identifier such as an SSID. The operator's username and this machine's
+  hostname, which a NixOS configuration must declare and which its directory
+  layout already publishes, are not what this forbids.
   A limitation may be stated only together with the reason it is accepted, which
   is what lets a spec say where a boundary stops. A gap that is not accepted but
   merely unfixed is named and pointed to, never described here -- and where no
@@ -37,15 +32,24 @@ rules:
     - Under 200 lines. Open with a Decisions list readable in 60 seconds.
     - Decisions and their rationale only. No restating the proposal, no code listings,
       no alternatives already rejected in conversation.
-    # PROJECT: add what a design must state to be checkable in this domain --
-    # e.g. the formulation implemented and the properties that make it correct,
-    # which then become the tests.
+    - 'Where the change reaches the built system, state what it makes true of
+      it and not only of the files: which option or module declares it, what a
+      reader would grep for, and what would still hold if the module were
+      removed. Where it does not -- tooling, config, docs -- say which file
+      carries the decision and what would read wrong without it.'
   tasks:
     - One focused, independently verifiable unit per task. Split anything longer than
       ~15 lines of description. Every task changes code; verifying another task is
       part of that task, not a task of its own.
-    # PROJECT: name the narrowest real command, and any suite that cannot stand
-    # alone (needs hardware, a service, a fixture that skips).
+    - 'The narrowest real check is evaluating the system derivation:
+      "nix-instantiate ''<nixpkgs/nixos>'' -A system -I
+      nixos-config=./hosts/<host>". Name the host directory in the repository
+      rather than the /etc/nixos symlink, so the command runs for anyone who
+      clones it. Use "nixos-rebuild build" when
+      the change only shows up once something is built, and the narrowest
+      grep when it is a file''s content rather than its evaluation. Checks
+      needing hardware, a display or a running service cannot stand alone --
+      say so in the task rather than leaving them to fail.'
     - 'Each task ends with a line "Validation: <exact runnable command>" or
       "Validation: none". Choose the narrowest check that catches a real bug.'
     - 'tasks.md ends with an "## Unreconciled" section: one line per change made to

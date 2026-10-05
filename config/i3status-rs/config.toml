@@ -79,4 +79,7 @@ format = " $icon $timestamp.datetime(f:'%a %Y-%m-%d %R %Z', l:en_US) "
 
 [[block]]
 block = "net"
-format = " $icon {$signal_strength $ssid $frequency|Wired connection} via $device "
+format = " $icon {$signal_strength $frequency|Wired connection} via $device "
+# Click to reveal the network name: a screenshot of the bar at rest
+# cannot carry it, and a fresh bar always starts in this state.
+format_alt = " $icon {$signal_strength $ssid $frequency|Wired connection} via $device "

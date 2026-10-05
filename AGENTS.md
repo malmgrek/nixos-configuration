@@ -1,5 +1,3 @@
-<!-- Append into the project's AGENTS.md (CLAUDE.md symlinks to it). -->
-
 ## Guidance for AI Assistants
 
 - **Stay inside the project directory.** Read and write nothing above it, and run
@@ -44,7 +42,6 @@ exceptions: the project directory is the whole world.
 
 | Path | Access | Why |
 | ---- | ------ | --- |
-|      |        |     |
 
 `Access` is `read` or `read+write`. A path absent from this table is forbidden
 even if a similar one is present.

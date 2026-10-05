@@ -68,6 +68,57 @@ in
 
 {
 
+  # Declared here, beside the daemon-socket bind it protects: a trusted caller
+  # can make the root daemon act for it, so trusting this user would undo the
+  # jail. Duplicating the nixpkgs default is deliberate -- a grep now lands on
+  # this comment. Neither mkDefault (filtered out by the default) nor mkForce
+  # (blocks a legitimate unrelated trusted user) belongs here.
+  nix.settings.trusted-users = [ "root" ];
+
+  # The declaration documents the premise; this enforces it. Both settings are
+  # lists that merge rather than conflict, so a grant added elsewhere would
+  # otherwise be silent. Scoped to this user, so an unrelated trusted user
+  # stays possible.
+  assertions = [
+    {
+      assertion =
+        let
+          # extra-trusted-users appends without touching trusted-users, so
+          # count both. nix.settings is freeform and nix.conf splits these
+          # values on whitespace, so a single string may name several users:
+          # compare words, not elements.
+          words = v: lib.filter (w: w != "") (lib.concatMap
+            (e: if lib.isString e
+                then lib.filter lib.isString (builtins.split "[[:space:]]+" e)
+                else [ ])
+            (lib.toList v));
+          trusted = words config.nix.settings.trusted-users
+            ++ words (config.nix.settings.extra-trusted-users or [ ]);
+          user = config.users.users.${userName};
+          # Group membership is grantable from either side -- the user's
+          # extraGroups or a group's members list (see home/virtualbox.nix) --
+          # and neither covers the other, so read both.
+          groups = [ user.group ] ++ user.extraGroups
+            ++ lib.attrNames
+              (lib.filterAttrs (_: g: lib.elem userName g.members)
+                config.users.groups);
+        in
+        !(lib.elem userName trusted)
+        && !(lib.any (g: lib.elem "@${g}" trusted) groups);
+      message = ''
+        ${userName} is a trusted user of the Nix daemon -- named directly,
+        through a group, or through a setting that appends to the trusted set.
+        That removes the protection home/agent-jail.nix depends on: the jail
+        binds the daemon socket, and a trusted caller can make the root daemon
+        act for it -- which Nix documents as equivalent to root access.
+
+        This is a change to the agent-jail capability, not a convenience. If you
+        need it, decide in openspec/specs/agent-jail what replaces the
+        guarantee -- do not reach for this assertion first.
+      '';
+    }
+  ];
+
   # Additive: `claude`, `copilot` and `opencode` keep their current behaviour,
   # and the jail is opted into per invocation by typing a different name.
   #

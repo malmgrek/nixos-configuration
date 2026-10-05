@@ -52,8 +52,9 @@ executables, together with the Playwright tooling and `rtk`.
 Currently I use an i3 based desktop environment that is included in the configuration as a module.
 
 <!-- TODO: add a new screenshot as resources/screenshot.png and restore the
-     image link below. Check what the i3 status bar is showing before committing
-     one: it can carry identifying details. -->
+     image link below. The network block hides the network name until clicked,
+     so capture it in that resting state -- and check the rest of the bar, the
+     tray and any notification on screen before committing an image. -->
 
 _Screenshot to be added._
 
