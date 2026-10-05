@@ -57,9 +57,12 @@ convention to join.
 
 ## Risks / Trade-offs
 
-- Each case is a full system evaluation, so the script takes seconds rather
-  than milliseconds. Acceptable for something run when the predicate is
-  touched, not on every save.
+- Each case is a full system evaluation of the real configuration, so a run is
+  about a minute warm and longer cold -- not seconds. Acceptable for something
+  run when the predicate is touched, not on every save. Evaluating
+  `config.assertions` alone would be several times faster, and is rejected: it
+  would re-implement from outside the enforcement path the check exists to
+  test.
 - The check can only cover routes the configuration can express. A group
   granted outside this configuration, or a trusted-user line in free-form Nix
   options, stays uncovered -- both are already named as accepted gaps in the

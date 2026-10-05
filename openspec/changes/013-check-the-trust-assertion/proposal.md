@@ -18,7 +18,7 @@ one-time manual act, so whoever touches the predicate next inherits nothing.
   configuration with an extra module that grants the trust by one route, and
   requiring the evaluation to fail.
 - It covers every route the configuration can express -- the user named
-  directly, group membership from either side, the appending setting, and both
+  directly, group membership by any route, the appending setting, and both
   string forms -- plus the negative controls that keep the assertion from being
   a blanket rule: an unrelated trusted user, and a group membership whose group
   is not trusted.
