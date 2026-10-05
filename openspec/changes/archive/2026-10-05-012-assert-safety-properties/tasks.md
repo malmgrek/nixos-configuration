@@ -30,9 +30,9 @@
   - a group named only in `extraGroups` with no matching `users.groups`
     declaration, which nothing requires to exist -- the case that distinguishes
     reading both membership routes from reading only one;
-  - a setting that appends to the trusted set, as a list and as a single-name
-    string; a whitespace-separated string naming several users is not split
-    before the comparison and is named as an accepted gap in the design;
+  - a setting that appends to the trusted set, as a list, as a single-name
+    string, and as a whitespace-separated string naming several users, since
+    the values are compared as words rather than as elements;
   - an unrelated trusted user, which must still evaluate;
   - a group membership whose group is not trusted, which must also still
     evaluate -- otherwise the assertion is a blanket rule wearing a scope.
@@ -79,6 +79,3 @@
   Validation: `cd ~/NixOS && test -z "$(git branch --list 010-publishable-history)" && echo BRANCH-GONE`
 
 ## Unreconciled
-- `home/agent-jail.nix`: the trusted-user assertion now compares whitespace-
-  separated words rather than list elements, so a single string naming several
-  users no longer passes it. Behaviour -- spec.

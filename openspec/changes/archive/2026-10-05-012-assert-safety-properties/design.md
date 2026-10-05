@@ -57,7 +57,9 @@ list. It also fails when the trust arrives through a setting that appends to
 the trusted set rather than replacing it, which is the first thing anyone
 reaches for precisely because it does not clobber a declared list. Those are
 the grants that turn the bound daemon socket into root-equivalent access, and
-they are the only ones this capability has an opinion about.
+they are the only ones this capability has an opinion about. Both settings are
+compared as words rather than as list elements, because nix.conf splits these
+values on whitespace and a single string may therefore name several users.
 
 **The assertion's message carries the reasoning, not just the rule.** Anyone who
 trips it is mid-task and trying to make a flake or a substituter work. A message
@@ -118,11 +120,6 @@ the next change inventing its own convention.
   covers the desktop and the grep that checks it lives in this change's task
   list, which archives. Accepted rather than fixed: inventing a desktop
   capability for one field would cost more than it guards.
-- A whitespace-separated string in the appending trusted-user setting is not
-  split before the assertion compares names, so a value naming two users in one
-  string would pass. Named here rather than fixed, the same way the free-form
-  options hole is: both are reachable only by writing the setting in an unusual
-  form, and the common case is covered.
 - The declaration merges with the nixpkgs default, so the generated nix.conf
   reads the safe value twice. Harmless, and the comment beside the declaration
   says so, but the generated file does change.

@@ -59,3 +59,12 @@ change to this capability and not a convenience.
 - **THEN** that declaration MUST be present, so that an edit granting the trust
   has to overwrite a statement of what depends on it rather than fill a silent
   default
+
+#### Scenario: Granting the trust fails the build
+- **WHEN** the configuration is changed so that the user a session runs as
+  becomes a trusted user of the build service, by any route the configuration
+  can express -- named directly, through a group from either side, or through a
+  setting that appends to the trusted set, in list or whitespace-separated form
+- **THEN** the configuration MUST fail to evaluate, and the failure MUST name
+  what depends on the premise
+

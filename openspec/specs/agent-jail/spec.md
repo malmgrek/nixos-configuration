@@ -193,6 +193,15 @@ change to this capability and not a convenience.
   has to overwrite a statement of what depends on it rather than fill a silent
   default
 
+#### Scenario: Granting the trust fails the build
+- **WHEN** the configuration is changed so that the user a session runs as
+  becomes a trusted user of the build service, by any route the configuration
+  can express -- named directly, through a group from either side, or through a
+  setting that appends to the trusted set, in list or whitespace-separated form
+- **THEN** the configuration MUST fail to evaluate, and the failure MUST name
+  what depends on the premise
+
+
 ### Requirement: No container daemon socket
 
 A jailed session SHALL NOT be given access to a container daemon socket. Any
