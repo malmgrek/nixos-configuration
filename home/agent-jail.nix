@@ -75,8 +75,8 @@ in
   # (blocks a legitimate unrelated trusted user) belongs here.
   nix.settings.trusted-users = [ "root" ];
 
-  # Checked by tests/trusted-users.nix, which grants the trust by each route and
-  # requires the build to fail.
+  # Checked by tests/trusted-users.nix, which grants the trust by each route
+  # this reads and requires this assertion to be the one that fails.
   #
   # The declaration documents the premise; this enforces it. Both settings are
   # lists that merge rather than conflict, so a grant added elsewhere would

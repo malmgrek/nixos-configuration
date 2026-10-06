@@ -7,7 +7,7 @@
 # failure. The two controls at the end must grant nothing, so a predicate that
 # rejected everything would not read as correct.
 #
-#   nix-instantiate --eval --strict tests/trusted-users.nix
+#   ! (nix-instantiate --eval --strict tests/trusted-users.nix | grep -q false)
 #
 # Every attribute must be true. Pure evaluation: nothing is written to the
 # store.

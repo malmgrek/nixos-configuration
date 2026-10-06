@@ -23,7 +23,8 @@
   repository yet; this is how to write one when it is needed. What does have a
   check is the premise the jail rests on, not its containment:
   tests/trusted-users.nix grants the Nix daemon's trust by each route that
-  assertion reads, and requires the build to fail.
+  assertion reads, and requires it to be the one assertion that fails. It is a
+  Nix expression, evaluated by hand; every attribute must be true.
 - **Read the diff before this repository is pushed.** It is published, and
   pushes are rare enough that a push covers months of work. Read
   `git log -p 321a591..master` -- `321a591` is the published tip -- against the

@@ -14,16 +14,15 @@ one-time manual act, so whoever touches the predicate next inherits nothing.
 
 ## What Changes
 
-- A script asserts the predicate from outside, by evaluating this
-  configuration with an extra module that grants the trust by one route, and
-  requiring the evaluation to fail.
+- A Nix expression asserts the predicate from outside, evaluating this
+  configuration with a module that grants the trust by one route and requiring
+  that assertion to be the one failure.
 - It covers every route the configuration can express -- the user named
   directly, group membership by any route, the appending setting, and both
   string forms -- plus the negative controls that keep the assertion from being
   a blanket rule: an unrelated trusted user, and a group membership whose group
   is not trusted.
-- Being the first tracked executable here, it also settles where such a thing
-  lives and how it runs.
+- Being the first check of any kind here, it also settles where one lives.
 
 ## Capabilities
 
@@ -34,7 +33,7 @@ is guidance rather than a requirement. `.openspec.yaml` sets
 
 ## Impact
 
-One new script and one new directory. No module, option or spec change, and
+One new Nix file and one new directory. No module, option or spec change, and
 nothing a rebuild would notice. Out of scope: VM-based containment checks for
 the jail, checks of the other conditionals here, and wiring this into a hook
 or CI.
