@@ -70,6 +70,21 @@ and suffix trimmed yields exactly the relative paths `pass -c` accepts. The
 prefix comes from `PASSWORD_STORE_DIR` where set, falling back to
 `$HOME/.password-store`, which is the same precedence `pass` itself uses.
 
+Three limitations of this listing were raised in review and left in
+deliberately:
+
+- Symlinked entries are skipped, since `find -type f` does not follow them
+  while `pass` resolves them and treats them as ordinary entries. Accepted
+  because the hand-run pipeline this replaces behaved the same way, so nothing
+  regresses; `find -L` is the fix if aliases ever enter the store.
+- Entries come out in directory-traversal order rather than sorted, so their
+  order shifts as the store changes. Accepted because an entry is reached here
+  by typing at a fuzzy matcher, not by its position in a list.
+- A trailing slash in `PASSWORD_STORE_DIR` defeats `s|^$store/||`, leaving an
+  absolute path that `pass -c` rejects — for every entry, not just some.
+  Accepted because nothing in this configuration sets that variable, so the
+  case is unreachable until someone sets it by hand.
+
 ### 5. Empty selection and failure reporting
 
 Dismissing rofi prints nothing, so the selection must be tested before `pass` is
@@ -106,6 +121,10 @@ package are declared in `home/default.nix` and owe nothing to this change.
   `programs.gnupg.agent.pinentryPackage = pkgs.pinentry-gtk2`, which draws
   directly and needs no session bus. This cannot be settled by evaluating the
   configuration; it needs a display, so the task that covers it says so.
+  Not encountered in practice: decryption succeeded on the switched-to system, so
+  the fallback stayed unused. Whether a prompt was painted or `gpg-agent`
+  already held the key unlocked was not distinguished, so the fallback is kept
+  on record rather than deleted.
 
 - **The entry names are shown full-screen** → `config/rofi/config.rasi` sets
   `fullscreen: true`, so the matching entry names fill the screen while the

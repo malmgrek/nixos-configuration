@@ -67,6 +67,28 @@ let
       ${rofiCmd} -show run -modi run
     ''
   );
+  rofi-pass-menu = pkgs.writeScriptBin "rofi-pass-menu" (
+    ''
+      #!/bin/sh
+
+      store="''${PASSWORD_STORE_DIR:-$HOME/.password-store}"
+
+      entry=$(
+        find "$store" -type f -name '*.gpg' \
+          | sed "s|^$store/||;s|\.gpg$||" \
+          | ${rofiCmd} -dmenu -p pass
+      )
+
+      # Dismissing rofi selects nothing, and `pass -c` with no argument prints
+      # the store tree rather than doing nothing.
+      [ -n "$entry" ] || exit 0
+
+      # i3 gives a spawned process nowhere to put stderr, so a failing `pass`
+      # would be indistinguishable from a working one.
+      ${pkgs.pass}/bin/pass -c "$entry" ||
+        ${pkgs.libnotify}/bin/notify-send 'pass' "Could not copy $entry"
+    ''
+  );
   rofi-window-menu = pkgs.writeScriptBin "rofi-window-menu" (
     ''
       !/bin/sh
@@ -100,6 +122,7 @@ in {
         # Custom wrappers
         rofi-app-menu
         rofi-dmenu
+        rofi-pass-menu
         rofi-power-menu
         rofi-window-menu
         xsecurelock-dimmer

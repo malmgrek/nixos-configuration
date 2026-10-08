@@ -75,6 +75,7 @@ bindsym $mod+b exec --no-startup-id rofi-power-menu
 bindsym $mod+Tab exec --no-startup-id rofi-window-menu
 bindsym $mod+Shift+period exec --no-startup-id rofi-app-menu
 bindsym $mod+d exec --no-startup-id rofi-dmenu
+bindsym $mod+p exec --no-startup-id rofi-pass-menu
 
 # Network manager
 exec --no-startup-id nm-applet
