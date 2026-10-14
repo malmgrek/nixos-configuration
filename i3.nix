@@ -9,20 +9,38 @@ let
     toString
       (if config.hidpiHacks.enable then config.customParams.dpi else 0)
   )}";
+  # Shared by every lock mode, so the prompt a mode shows cannot drift from the
+  # one the other modes show.
+  xsecurelock-prompt = ''
+    export XSECURELOCK_PASSWORD_PROMPT=asterisks
+    export XSECURELOCK_FONT='JetBrains Mono'
+    export XSECURELOCK_AUTH_BACKGROUND_COLOR='#1d2021'
+
+    # When connected on dual monitor, a minor incompatibility issue between
+    # Picom and xsecurelock may cause flickering error message on screen.
+    # Hides the message.
+    export XSECURELOCK_COMPOSITE_OBSCURER=0
+  '';
   xsecurelock-xscreensaver = pkgs.writeScriptBin "xsecurelock-xscreensaver" (
     ''
       #!/bin/sh
 
       export XSECURELOCK_SAVER=saver_xscreensaver
-      export XSECURELOCK_PASSWORD_PROMPT=asterisks
-      export XSECURELOCK_FONT='JetBrains Mono'
-      export XSECURELOCK_AUTH_BACKGROUND_COLOR='#1d2021'
+      ${xsecurelock-prompt}
+      exec ${pkgs.xsecurelock}/bin/xsecurelock
+    ''
+  );
+  # Away mode's locker. The blank timeout and DPMS state are set explicitly
+  # rather than inherited: drawing nothing is the point of the mode, so an
+  # upstream default change must not be able to take it away silently.
+  xsecurelock-blank = pkgs.writeScriptBin "xsecurelock-blank" (
+    ''
+      #!/bin/sh
 
-      # When connected on dual monitor, a minor incompatibility issue between
-      # Picom and xsecurelock may cause flickering error message on screen.
-      # Hides the message.
-      export XSECURELOCK_COMPOSITE_OBSCURER=0
-
+      export XSECURELOCK_SAVER=saver_blank
+      export XSECURELOCK_BLANK_TIMEOUT=0
+      export XSECURELOCK_BLANK_DPMS_STATE=off
+      ${xsecurelock-prompt}
       exec ${pkgs.xsecurelock}/bin/xsecurelock
     ''
   );
@@ -40,10 +58,54 @@ let
       $until_nonidle $dimmer
     ''
   );
+  away-mode = pkgs.writeScriptBin "away-mode" (
+    ''
+      #!/bin/sh
+
+      # Anything `timeout` accepts can be typed instead of picking one of these.
+      limit=$(
+        printf '30m\n1h\n2h\n4h\n8h\nnever\n' |
+          ${rofiCmd} -dmenu -p 'Stay awake for'
+      )
+
+      # Dismissing rofi selects nothing, which must leave the session unlocked.
+      [ -n "$limit" ] || exit 0
+
+      # `timeout 0` runs without a limit.
+      [ "$limit" = never ] && limit=0
+
+      # Checked before anything locks: timeout takes one number and one suffix,
+      # so `1h30m` fails, and a refusal under a blank screen could not be seen.
+      if ! ${pkgs.coreutils}/bin/timeout "$limit" true 2>/dev/null; then
+        ${pkgs.libnotify}/bin/notify-send 'away mode' "Not a usable duration: $limit"
+        exit 1
+      fi
+
+      # Otherwise the idle chain dims and draws its screensaver over the blank
+      # lock. 300 10 is the value config/i3/config sets.
+      ${pkgs.xset}/bin/xset s off
+      trap '${pkgs.xset}/bin/xset s 300 10' EXIT INT TERM HUP
+
+      ${xsecurelock-blank}/bin/xsecurelock-blank &
+      locker=$!
+
+      # The inhibitor is this process's, so the lid is live again the moment the
+      # mode ends. Returns when the locker exits, or at the deadline.
+      ${pkgs.systemd}/bin/systemd-inhibit --what=handle-lid-switch --why='away mode' \
+        ${pkgs.coreutils}/bin/timeout "$limit" \
+        ${pkgs.coreutils}/bin/tail --pid="$locker" -f /dev/null
+      reached_deadline=$?
+
+      # 124 means timeout killed the wait, so only the deadline suspends. Any
+      # other failure leaves a plain lock rather than away mode.
+      [ "$reached_deadline" -eq 124 ] && ${pkgs.systemd}/bin/systemctl suspend
+    ''
+  );
   rofi-power-menu = pkgs.writeScriptBin "rofi-power-menu" (
     import ./utils/rofi-power-menu.nix {
       cmds = {
         rofi = rofiCmd;
+        away = "${away-mode}/bin/away-mode";
         hibernate = "systemctl hibernate";
         lock = "loginctl lock-session";
         logout = "i3-msg exit";
@@ -127,12 +189,14 @@ in {
         xss-lock
 
         # Custom wrappers
+        away-mode
         rofi-app-menu
         rofi-dmenu
         rofi-file-menu
         rofi-pass-menu
         rofi-power-menu
         rofi-window-menu
+        xsecurelock-blank
         xsecurelock-dimmer
         xsecurelock-xscreensaver
       ];
