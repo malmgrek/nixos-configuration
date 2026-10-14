@@ -28,10 +28,9 @@
 
     # Custom declarations
     customParams = {
-      dpi = 150;
+      dpi = 96;  # Pinned, not raised -- see options.nix
       userName = "malmgrek";
     };
-    hidpiHacks.enable = false;
     lightMode.enable = false;
 
     # Use the systemd-boot EFI boot loader

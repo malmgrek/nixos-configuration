@@ -123,7 +123,8 @@ in {
               family = "monospace";
               style = "Regular";
             };
-            size = if config.hidpiHacks.enable then 6.0 else 9.0;
+            # Points, scaled by the pinned dpi.
+            size = 9.0;
           };
           window = {
             padding = {

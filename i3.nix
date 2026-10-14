@@ -5,9 +5,11 @@
 { config, options, pkgs, lib, ...}:
 
 let
+  # rofi's own `-dpi 0` detects from screen size, not Xft.dpi, so pass the
+  # number explicitly.
   rofiCmd = "${pkgs.rofi}/bin/rofi -theme /etc/rofi/config.rasi -dpi ${(
     toString
-      (if config.hidpiHacks.enable then config.customParams.dpi else 0)
+      (if config.customParams.dpi != null then config.customParams.dpi else 0)
   )}";
   # Shared by every lock mode, so the prompt a mode shows cannot drift from the
   # one the other modes show.
@@ -211,10 +213,8 @@ in {
           text = (
             builtins.replaceStrings
               [ "# GEOMETRY" ]
-              [ "geometry = \"${
-                if config.hidpiHacks.enable then "600x10-30+40"
-                else "300x5-30+24"
-              }\"" ]
+              # Pixels, so this only matches a pinned 96.
+              [ "geometry = \"300x5-30+24\"" ]
               (builtins.readFile ./config/dunst/dunstrc)
           );
         };

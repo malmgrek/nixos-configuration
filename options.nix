@@ -3,7 +3,6 @@
 with lib; {
 
   options = {
-    hidpiHacks.enable = mkEnableOption "Hacking better HiDPI experience";
     lightMode.enable = mkEnableOption "Light colorscheme in old school tools";
     customParams = {
       userName = mkOption {
@@ -13,45 +12,35 @@ with lib; {
       };
       dpi = mkOption {
         type = types.nullOr types.int;
-        default = 150;
+        default = null;
+        description = ''
+          Display density to pin for the whole X session. Left unset, GTK and
+          Firefox fall back to 96 while Alacritty and Emacs derive theirs from
+          the current mode, so the two drift apart when the resolution changes.
+
+          X11 has one global dpi and no per-output override, so a value above 96
+          is wrong for any connected monitor that is not the dense one.
+        '';
       };
     };
   };
 
-  config = mkIf config.hidpiHacks.enable {
-    # Taken from deprecated module nixos/modules/hardware/video/hidpi.nix
-    # Resolution of the console
-    boot.loader.systemd-boot.consoleMode = mkDefault "1";
-    console = {
-      # Bigger tty fonts, TODO: Why this is needed?
-      font = mkDefault "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
-      earlySetup = mkDefault true;
+  # Nothing here about the tty or boot menu: those follow the panel's pixel
+  # count, not anything X reports.
+  config = mkIf (config.customParams.dpi != null) {
+
+    services.xserver = {
+      # Two separate reads: the server's value (Emacs, the JDK) and the Xft.dpi
+      # resource below (GTK, Qt, Firefox, Alacritty).
+      dpi = config.customParams.dpi;
+      # Merged after ~/.Xresources, so this value wins.
+      displayManager.sessionCommands = ''
+        ${pkgs.xrdb}/bin/xrdb -merge <<EOF
+          Xft.dpi: ${toString config.customParams.dpi}
+        EOF
+      '';
     };
-    environment = {
-      # The effect of the below environment variables shows e.g. in how
-      # Firefox inflates the tab boxes vs. font size.
-      variables = {
-        # Scale UI elements by integer factor
-        GDK_SCALE = mkDefault "2";
-        # Undo scaling of text
-        GDK_DPI_SCALE = mkDefault "0.5";
-        # Scale Java elements, should be unnecessary since Java 9
-        _JAVA_OPTIONS = mkDefault "-Dsun.java2d.uiScale=2";
-      };
-    };
-    services = {
-      xserver = {
-        dpi = config.customParams.dpi;
-        displayManager = {
-          # Fix font size in XTerm
-          sessionCommands = mkDefault ''
-            ${pkgs.xrdb}/bin/xrdb -merge <<EOF
-              XTerm*faceName: xft:Dejavu Sans Mono:size=12
-            EOF
-          '';
-        };
-      };
-    };
+
   };
 
 }

@@ -20,11 +20,8 @@
     xdg.configFile."doom/config.el" = {
       source = pkgs.replaceVars ../config/doom/config.el {
         theme = if config.lightMode.enable then "doom-one-light" else "doom-vibrant";
-        font =
-          if config.hidpiHacks.enable then
-            ''(font-spec :family "monospace" :size 12.0)''
-          else
-            ''(font-spec :family "monospace" :size 10.5)'';
+        # Points, scaled by the pinned dpi.
+        font = ''(font-spec :family "monospace" :size 10.5)'';
       };
     };
     xdg.configFile."doom/init.el" = {
