@@ -67,6 +67,13 @@ let
       ${rofiCmd} -show run -modi run
     ''
   );
+  rofi-file-menu = pkgs.writeScriptBin "rofi-file-menu" (
+    ''
+      #!/bin/sh
+
+      ${rofiCmd} -modi filebrowser,recursivebrowser -show filebrowser
+    ''
+  );
   rofi-pass-menu = pkgs.writeScriptBin "rofi-pass-menu" (
     ''
       #!/bin/sh
@@ -91,7 +98,7 @@ let
   );
   rofi-window-menu = pkgs.writeScriptBin "rofi-window-menu" (
     ''
-      !/bin/sh
+      #!/bin/sh
 
       ${rofiCmd} -show window -show-icons
     ''
@@ -122,6 +129,7 @@ in {
         # Custom wrappers
         rofi-app-menu
         rofi-dmenu
+        rofi-file-menu
         rofi-pass-menu
         rofi-power-menu
         rofi-window-menu

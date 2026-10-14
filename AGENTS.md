@@ -31,6 +31,11 @@
   publication rule in `openspec/config.yaml` before pushing. Use the literal
   SHA, not `origin/master..master`: the remote-tracking form needs a working
   fetch and the history rewrite dropped those refs.
+- **Keep inline comments short.** One or two sentences, and only content the
+  code cannot show: why a decision went the way it did, or a detail whose
+  absence would mislead the next reader. Never restate what the line below
+  does. Reasoning that needs a paragraph belongs in the change's design
+  document, not beside the code.
 - **Keep exploration compact.** Present findings as at most five bullets, then
   one question. Flag the bullet you are least confident in. Detail on request —
   a wall of text costs more to read than it saves to write.

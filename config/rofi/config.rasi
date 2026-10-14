@@ -1,10 +1,13 @@
 /* -*- mode: css; -*- */
 configuration {
-  /* Vim-esque C-j/C-k as up/down in rofi */
+  /* Vim-esque keys. Each displaced default is emptied, not rebound: Return
+     still accepts and C-u still deletes to start of line. */
   kb-accept-entry: "Return,Control+m,KP_Enter";
   kb-row-down: "Down,Control+n,Control+j";
   kb-remove-to-eol: "";
   kb-row-up: "Up,Control+p,Control+k";
+  kb-remove-word-back: "Control+w,Control+Alt+h,Control+BackSpace";
+  kb-clear-line: "";
   matching: "fuzzy";
   terminal: "alacritty";
 }

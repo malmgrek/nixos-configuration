@@ -8,17 +8,17 @@ in a reproducible way.
 
 The most important sources of inspiration have been
 
-- jluttine's [Nixos configuration](https://github.com/jluttine/nixos-configuration "Link to GitHub repo") 
-- hlissner's [Dotfiles](https://github.com/hlissner/dotfiles "Link to GitHub repo") 
+- jluttine's [Nixos configuration](https://github.com/jluttine/nixos-configuration "Link to GitHub repo")
+- hlissner's [Dotfiles](https://github.com/hlissner/dotfiles "Link to GitHub repo")
 
 ## Summary
 
 I installed NixOS through USB. The installer doesn't do any disk partitioning or formatting, so one needs to do that by oneself, e.g. according to the official manual instructions.
 
 After installing NixOS on a machine, symlink the file
-`./hosts/awesomename/configuration.nix` at `/etc/nixos/configuration.nix`, and run 
+`./hosts/awesomename/configuration.nix` at `/etc/nixos/configuration.nix`, and run
 
-``` shell
+```shell
 sudo nixos-rebuild switch
 ```
 
@@ -28,11 +28,11 @@ defined anywhere on the hard disk, as long it is symlinked to
 
 ## Description
 
-I have tried to compose the configurations so that it is 
+I have tried to compose the configurations so that it is
 
-- _modular_, 
+- _modular_,
 - _reasonably
-simple_, and that 
+  simple_, and that
 - _I can configure my work laptop with it_.
 
 While "developing" the configuration, at the same time I took a shot at
@@ -61,13 +61,21 @@ _Screenshot to be added._
 ## Installation alongside Windows
 
 This [Stian Lågstad's
-blogpost](https://stianlagstad.no/2020/09/dual-booting-nixos-and-windows-10-a-step-by-step-guide/
-"Link to blog") was a useful reference when configuring an encrypted partition
+blogpost](https://stianlagstad.no/2020/09/dual-booting-nixos-and-windows-10-a-step-by-step-guide/ "Link to blog") was a useful reference when configuring an encrypted partition
 for NixOS on a machine with an existing Windows installation.
 
 TODO: Write an own version for reference.
 
 ## TODO
+
+- [ ] Notification on shell agent sessions
+- [ ] Suspend after a given time of inactivity (configurable)
+      also other good features for remote agentic work that saves display energy
+      - Screen saver is quite heavy. Would be nice to have more options in the
+        power menu. Lock with screen saver and lock in power save mode (that
+        still enable running agents + remote claude session)
+- [ ] Running a wake laptop with the lid closed
+- [ ] Get rid of Home Manager
 - [ ] VirtualBox
 - [ ] Color switching
 - [ ] Installation instructions

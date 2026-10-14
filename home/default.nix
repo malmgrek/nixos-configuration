@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   nixosConfig = config;
 in
@@ -130,6 +130,36 @@ in
       #   };
       # };
     };
+    # Each type is named because xdg-open does not walk shared-mime-info's
+    # subclass chain: text/x-python would not inherit text/plain's entry.
+    xdg.mimeApps = {
+      enable = true;
+      defaultApplications =
+        lib.genAttrs [
+          "application/json"
+          "application/toml"
+          "application/x-shellscript"
+          "application/yaml"
+          "text/css"
+          "text/markdown"
+          "text/plain"
+          "text/x-csrc"
+          "text/x-emacs-lisp"
+          "text/x-lua"
+          "text/x-python"
+          "text/x-tex"
+        ] (_: "gvim.desktop")
+        // lib.genAttrs [
+          "image/gif"
+          "image/jpeg"
+          "image/png"
+        ] (_: "feh.desktop")
+        // {
+          "application/pdf" = "mupdf.desktop";
+          "inode/directory" = "pcmanfm.desktop";
+        };
+    };
+
     # Nixpkgs config file, enables e.g. `allowUnfree` globally
     xdg.configFile."nixpkgs/config.nix" = {
       source = ../config/nixpkgs/config.nix;
