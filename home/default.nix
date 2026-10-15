@@ -11,7 +11,7 @@ in
     ./ai.nix
     ./docker.nix
     ./doom-emacs.nix
-    ./ipython.nix
+    ./dotfiles.nix
     ./neovim.nix
     ./opencode.nix
     ./tmux.nix
@@ -158,11 +158,6 @@ in
           "application/pdf" = "mupdf.desktop";
           "inode/directory" = "pcmanfm.desktop";
         };
-    };
-
-    # Nixpkgs config file, enables e.g. `allowUnfree` globally
-    xdg.configFile."nixpkgs/config.nix" = {
-      source = ../config/nixpkgs/config.nix;
     };
   };
 

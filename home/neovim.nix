@@ -10,9 +10,9 @@
 
     programs.neovim = {
       enable = true;
-      viAlias = true;
-      vimAlias = true;
-      vimdiffAlias = true;
+      # No aliases: neovim is `nvim` only, so `vi`, `vim` and `vimdiff` stay
+      # vim's own symlinks and the live vimrc in vim.nix is actually read.
+      # Neovim's diff mode is `nvim -d`, which is all vimdiffAlias wrapped.
       withNodeJs = true;
       withPython3 = true;
       withRuby = true;
@@ -81,16 +81,9 @@
       ];
     };
 
-    # LazyVim configuration directory
-    xdg.configFile."nvim" = {
-      recursive = true;
-      source = ../config/nvim;
-    };
-
     # Set EDITOR if not using Emacs
     home.sessionVariables = {
       EDITOR = lib.mkDefault "nvim"; # mkDefault allows Emacs to override
-      LIGHT_MODE = if config.lightMode.enable then "1" else "0";
     };
   };
 }

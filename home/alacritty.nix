@@ -117,6 +117,8 @@ in {
       alacritty = {
         enable = true;
         settings = {
+          # Generated, not live: the format has no conditional, so the mode
+          # cannot be chosen when alacritty reads this.
           colors = if config.lightMode.enable then doomOne.light else doomOne.dark;
           font = {
             normal = {

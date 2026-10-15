@@ -68,6 +68,8 @@ in
         #     # { name = "romkatv/powerlevel10k"; tags = [ "as:theme" "depth:1" ]; }
         #   ];
         # };
+        # Generated, not live: each plugin resolves to a store path, which
+        # exists only once the system is built.
         plugins = with pkgs; [
           {
             name = "zsh-autosuggestions";

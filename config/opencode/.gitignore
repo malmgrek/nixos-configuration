@@ -1,0 +1,4 @@
+# auth.json is joined with opencode's data directory rather than this one, so no
+# credential reaches here today. Excluded anyway, because this repository is
+# published and that join is a property of one version of one binary.
+/auth.json

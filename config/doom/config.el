@@ -12,14 +12,18 @@
       user-mail-address (or (getenv "EMAIL") ""))
 
 ;; Fonts
-(setq doom-font @font@)
+;; Points, scaled by the pinned dpi.
+(setq doom-font (font-spec :family "monospace" :size 10.5))
 
 ;; Add custom themes directory to load path
 (add-to-list 'custom-theme-load-path
              (expand-file-name "my/themes" doom-user-dir))
 
 ;; Theme
-(setq doom-theme '@theme@)
+;; Read at startup rather than interpolated, so editing this file needs no
+;; rebuild. LIGHT_MODE is set from `lightMode.enable` in options.nix.
+(setq doom-theme
+      (if (equal (getenv "LIGHT_MODE") "1") 'doom-one-light 'doom-vibrant))
 
 ;; Markdown beautification
 (load! "my/markdown-beautify")

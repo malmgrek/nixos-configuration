@@ -16,7 +16,13 @@ endif
 syntax on
 
 colorscheme one
-set background=@background@
+" Read at startup rather than interpolated, so editing this file needs no
+" rebuild. LIGHT_MODE is set from lightMode.enable in options.nix.
+if $LIGHT_MODE ==# "1"
+  set background=light
+else
+  set background=dark
+endif
 
 " Vim airline
 let g:airline_powerline_fonts=1

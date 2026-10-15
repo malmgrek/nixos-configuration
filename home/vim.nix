@@ -1,5 +1,10 @@
 { config, lib, pkgs, ... }:
 let
+  # Sourced from the working tree, not copied into the store, so editing the
+  # vimrc takes effect at the next vim start rather than at the next rebuild.
+  # A moved repository makes vim report the missing file instead of silently
+  # dropping the configuration.
+  inherit (config.customParams) repoPath;
 in {
   home-manager.users.${config.customParams.userName} = {
     programs.vim = {
@@ -17,10 +22,7 @@ in {
         vim-orgmode
         vim-speeddating  # Used by vim-orgmode
       ];
-      extraConfig = builtins.readFile (pkgs.replaceVars ../config/vim/extra.vimrc {
-        background = if config.lightMode.enable then "light"
-                     else "dark";
-      });
+      extraConfig = "source ${repoPath}/config/vim/extra.vimrc";
     };
   };
 }

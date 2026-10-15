@@ -74,6 +74,8 @@ in {
         #   '';
         # }
       ];
+      # Generated, not live: reading the mode at startup would mean splitting
+      # the theme into two sourced files, for no gain.
       extraConfig = ''
         # Enable true colors in tmux
         set -ga terminal-overrides ",*256col*:Tc"

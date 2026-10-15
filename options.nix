@@ -10,6 +10,16 @@ with lib; {
         default = "malmgrek";
         description = "username of the main user";
       };
+      repoPath = mkOption {
+        type = types.str;
+        default = "/home/${config.customParams.userName}/NixOS";
+        description = ''
+          Where this repository is checked out. Live dotfiles are read from here
+          at runtime instead of being copied into the store, so a checkout
+          anywhere else leaves them unresolvable and the applications concerned
+          start on their own defaults.
+        '';
+      };
       dpi = mkOption {
         type = types.nullOr types.int;
         default = null;
@@ -25,22 +35,33 @@ with lib; {
     };
   };
 
-  # Nothing here about the tty or boot menu: those follow the panel's pixel
-  # count, not anything X reports.
-  config = mkIf (config.customParams.dpi != null) {
+  config = mkMerge [
 
-    services.xserver = {
-      # Two separate reads: the server's value (Emacs, the JDK) and the Xft.dpi
-      # resource below (GTK, Qt, Firefox, Alacritty).
-      dpi = config.customParams.dpi;
-      # Merged after ~/.Xresources, so this value wins.
-      displayManager.sessionCommands = ''
-        ${pkgs.xrdb}/bin/xrdb -merge <<EOF
-          Xft.dpi: ${toString config.customParams.dpi}
-        EOF
-      '';
-    };
+    {
+      # pam_environment rather than a shell file: the tools that read this start
+      # from the X session, which sources none.
+      environment.sessionVariables.LIGHT_MODE =
+        if config.lightMode.enable then "1" else "0";
+    }
 
-  };
+    # Nothing here about the tty or boot menu: those follow the panel's pixel
+    # count, not anything X reports.
+    (mkIf (config.customParams.dpi != null) {
+
+      services.xserver = {
+        # Two separate reads: the server's value (Emacs, the JDK) and the Xft.dpi
+        # resource below (GTK, Qt, Firefox, Alacritty).
+        dpi = config.customParams.dpi;
+        # Merged after ~/.Xresources, so this value wins.
+        displayManager.sessionCommands = ''
+          ${pkgs.xrdb}/bin/xrdb -merge <<EOF
+            Xft.dpi: ${toString config.customParams.dpi}
+          EOF
+        '';
+      };
+
+    })
+
+  ];
 
 }

@@ -17,24 +17,6 @@
 
   home-manager.users.${config.customParams.userName} = {
 
-    xdg.configFile."doom/config.el" = {
-      source = pkgs.replaceVars ../config/doom/config.el {
-        theme = if config.lightMode.enable then "doom-one-light" else "doom-vibrant";
-        # Points, scaled by the pinned dpi.
-        font = ''(font-spec :family "monospace" :size 10.5)'';
-      };
-    };
-    xdg.configFile."doom/init.el" = {
-      source = ../config/doom/init.el;
-    };
-    xdg.configFile."doom/packages.el" = {
-      source = ../config/doom/packages.el;
-    };
-    xdg.configFile."doom/my" = {
-      source = ../config/doom/my;
-      recursive = true;
-    };
-
     home.sessionPath = [ "$XDG_CONFIG_HOME/emacs/bin" ];
 
     # Doom dependencies

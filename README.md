@@ -22,9 +22,15 @@ After installing NixOS on a machine, symlink the file
 sudo nixos-rebuild switch
 ```
 
-If all went well, boot to the system. Obviously the configuration could be
-defined anywhere on the hard disk, as long it is symlinked to
-`etc/nixos/configuration.nix`. This is just how I have organized it.
+If all went well, boot to the system.
+
+Where the repository itself sits is no longer free, though. Some dotfiles are
+read from the working tree at runtime instead of being copied into the Nix
+store, and the links that do that name an absolute path: `/home/<user>/NixOS`,
+unless `customParams.repoPath` says otherwise. Check the repository out there or
+set that option to match, or the applications concerned lose their
+configuration -- most falling back to their own defaults, vim instead reporting
+the file as missing.
 
 ## Description
 
@@ -41,6 +47,32 @@ Manager](https://github.com/nix-community/home-manager "Link to Home Manager
 GitHub project") which is a system for managing a Linux user environment (e.g.
 Emacs/Vim configurations). All related configs are defined under `./home/` and
 can be disabled completely from the configuration.
+
+### Dotfiles
+
+Four directories under `./config/` reach `~/.config` as symlinks into this
+repository, declared in `home/dotfiles.nix`: `doom`, `nixpkgs`, `nvim` and
+`opencode`. Editing a file in one of them takes effect when its application next
+reads it, with no rebuild in between. `config/vim/extra.vimrc` is live as well,
+sourced by path from the generated vimrc rather than linked.
+
+Everything else under `./config/` still needs a rebuild. `config/i3`,
+`config/rofi`, `config/i3status-rs` and `config/dunst` are copied into the store
+and delivered through `/etc` rather than the home directory, dunst's with its
+notification geometry substituted in as a pixel constant. Alacritty's, tmux's
+and zsh's configurations are generated outright -- the first two embed the
+colour mode, the third paths into the store.
+
+What the live arrangement costs is worth knowing. A successful `nixos-rebuild
+build` no longer proves the desktop is configured correctly, and a rollback does
+not revert a dotfile: the working tree is the only copy, so git holds the
+history instead of the store. An application writing its own settings writes
+them here, which is intended -- the choice shows up as a change to commit or
+discard rather than being overwritten on the next rebuild. And a link replaces
+whatever occupies its path, recursively, every time the configuration is
+activated, `nixos-rebuild test` included. Dropping a directory from
+`home/dotfiles.nix` does not undo that: tmpfiles creates links and never
+retracts them, so the leftover has to be deleted by hand.
 
 ### AI development tools
 
