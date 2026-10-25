@@ -79,11 +79,19 @@ are applied by `systemd-tmpfiles --user` in `system.userActivationScripts`,
 which `switch-to-configuration` restarts on every switch, so a link appears on
 the rebuild that declares it rather than at the next login.
 
-One live file is reached by a second route that grep does not find: home-manager
-generates `~/.vimrc` itself and there is no directory to link, so `home/vim.nix`
-emits a `source` line naming the vimrc's path in the working tree. It is the one
-live file outside `~/.config`. A reader looking for every live file must grep
-the repository path as well as the tmpfiles rules.
+One live file is reached by a second route that grep does not find. There is no
+`~/.vimrc` to link: home-manager feeds `programs.vim.extraConfig` into
+`vim-full.customize`, so the vimrc lives inside the wrapped package in the store
+and arrives through `-u`. `home/vim.nix` therefore makes its single line a
+`source` naming the real vimrc's path in the working tree, which is the one live
+file outside `~/.config`. A reader looking for every live file must grep the
+repository path as well as the tmpfiles rules.
+
+Which binaries read it is a consequence of `programs.neovim`'s aliases all being
+off: `vi`, `vim` and `vimdiff` come from the vim package, which `customize`
+wraps with `-u` pointing at that vimrc, and neovim is reached as `nvim`, its
+diff mode as `nvim -d`. With any of those aliases on, the live vimrc is read by
+nothing.
 
 If the module were removed, the system would still evaluate and build, and
 already-created links would remain on disk pointing at the working tree --
@@ -116,6 +124,14 @@ conclude wrongly that the module does nothing.
   and a file whose classification is unverified is left tracked, since a
   wrongly ignored decision defeats the requirement silently while a tracked
   churn file merely annoys.
+
+  **This set cannot be closed by one audit.** Churn appears when an application
+  is first exercised, not when its directory goes live: opencode's directory
+  held nothing but its configuration until a theme was changed in its interface,
+  which produced a 63 MB dependency tree, a generated package manifest and a
+  migration backup in one session. The audit in task 3.1 therefore establishes
+  the rules for what has run, and `git status` on a published repository is the
+  standing check for what has not.
 - **The link target is an absolute path** -> derived from
   `customParams.userName` rather than written out. `home/vim.nix` derives it
   locally, being the only caller so far; task 2.1 adds the second and should

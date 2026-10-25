@@ -2,3 +2,16 @@
 # credential reaches here today. Excluded anyway, because this repository is
 # published and that join is a property of one version of one binary.
 /auth.json
+
+# A plugin dependency tree opencode installs here on first run: 63 MB, and this
+# repository is published.
+/node_modules/
+
+# Generated from the opencode version Nix pins, so tracking them would churn on
+# every upgrade and record nothing a reader decided.
+/package.json
+/package-lock.json
+
+# One-time backup opencode leaves when it migrates a setting out of
+# opencode.jsonc. The pre-migration file is already in this repository's history.
+/*.tui-migration.bak

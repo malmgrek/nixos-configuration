@@ -17,9 +17,6 @@
     }
   },
 
-  // "theme": "tokyonight",
-  "theme": "one-dark",
-
   "compaction": {
     "auto": true,
     "prune": true

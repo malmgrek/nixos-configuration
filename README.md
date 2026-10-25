@@ -109,6 +109,12 @@ TODO: Write an own version for reference.
 - [ ] Running a wake laptop with the lid closed
 - [ ] Get rid of Home Manager
 - [ ] VirtualBox
-- [ ] Color switching
+- [ ] Color switching without a rebuild: the mode is still a NixOS option, so
+      flipping it costs a rebuild and a re-login even though the dotfiles that
+      follow it are live
+- [ ] Move alacritty and tmux to live dotfiles, once colour switching no longer
+      needs interpolating -- that is the only reason either is generated
+- [ ] Review the Firefox setup: two preferences and a profile path, written
+      years ago and never revisited
 - [ ] Installation instructions
 - [ ] CUDA

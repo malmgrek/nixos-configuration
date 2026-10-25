@@ -1,10 +1,11 @@
-## Purpose
+# dotfiles Specification
 
+## Purpose
 States how this configuration's dotfiles reach the operator's home directory:
 which of them take effect the moment they are saved, which are built and need a
 rebuild, and what the repository stops guaranteeing in exchange.
 
-## ADDED Requirements
+## Requirements
 
 ### Requirement: Editing a live dotfile needs no rebuild
 
@@ -87,16 +88,35 @@ SHALL land in the repository working tree, so that a choice made in the
 application's interface becomes a reviewable change rather than something
 discarded at the next rebuild.
 
-An application that keeps its settings outside its configuration directory, in a
-state directory of its own, is beyond that reach; no rebuild SHALL delete those
-settings to reassert a declared default. The limitation is accepted because
-linking a state directory would drag caches and history into the repository to
-capture the few decisions among them, and a state directory is not what this
-capability governs.
+An application may rewrite a file the operator authored in order to record such a
+choice, and SHALL be allowed to -- that rewrite is the change the operator
+reviews. Comments and commented-out alternatives in that file are not protected
+from it.
 
-Churn written into a live directory -- caches, cursor positions, recency
-lists -- SHALL be excluded from the repository, because it carries no decision
-worth reviewing.
+A setting an application keeps outside its configuration directory, in a state or
+data directory of its own, is beyond this reach, and no rebuild SHALL delete it
+to reassert a declared default. The limitation is accepted because linking such a
+directory would drag caches, conversation history and credentials into a
+published repository to capture the few decisions among them.
+
+Churn written into a live directory -- caches, dependency trees, migration
+backups, recency lists -- SHALL be excluded from the repository, because it
+carries no decision worth reviewing.
+
+A file that carries a decision and churn together, or whose classification
+cannot be confirmed, SHALL stay tracked instead: a wrongly excluded decision
+fails silently, where tracked churn only shows as noise in a diff.
+
+#### Scenario: A theme is chosen in an application's interface
+- **WHEN** the operator selects a theme inside opencode and quits
+- **THEN** the selection appears as a change in the repository, to commit or
+  discard, and a later rebuild does not revert it
+
+#### Scenario: Recording a choice rewrites an authored file
+- **WHEN** an application moves a setting out of a file the operator wrote, to
+  record it in a file of its own
+- **THEN** both edits appear in the repository, the operator's file having lost
+  what it said about that setting
 
 #### Scenario: A plugin set is resolved and pinned
 - **WHEN** an editor resolves its plugins and writes the versions it pinned into
@@ -104,14 +124,14 @@ worth reviewing.
 - **THEN** the pin file appears as a change in the repository, to commit or
   discard
 
-#### Scenario: A choice is recorded outside the configuration directory
-- **WHEN** an application records a choice in a state directory of its own
-- **THEN** the choice survives the next rebuild, and the repository does not
-  show it
+#### Scenario: A credential is kept outside the configuration directory
+- **WHEN** an application stores a credential in a data directory of its own
+- **THEN** nothing of it reaches the working tree, and a rule naming it is a
+  guard against a later version moving it rather than a record of churn
 
-#### Scenario: A cache is written next to a setting
-- **WHEN** an application writes a cache into a live directory
-- **THEN** the repository ignores it
+#### Scenario: A dependency tree is installed beside the configuration
+- **WHEN** an application installs its own dependencies into a live directory
+- **THEN** the repository ignores them
 
 ### Requirement: A successful build no longer proves the desktop
 

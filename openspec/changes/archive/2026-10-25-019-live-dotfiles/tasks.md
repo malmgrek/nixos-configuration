@@ -75,6 +75,11 @@
       `L+` removes each path recursively; an accidental `nixos-rebuild test` got
       there first, so what occupied the four paths beforehand is gone unexamined
       and the audit reports only on the link targets.
+
+      Its finding of no churn was true when measured and not durable: exercising
+      opencode's interface afterwards produced a dependency tree, a generated
+      manifest and a migration backup, which the rules here now exclude. The
+      design records why one audit cannot close this set.
       Validation: `git status --porcelain config/ | grep -v '^ M' | head` -- expect no untracked application churn
 
 ## 4. Documentation
@@ -89,12 +94,3 @@
       prose.
 
 ## Unreconciled
-
-- `programs.neovim`'s `viAlias`, `vimAlias` and `vimdiffAlias` were all turned
-  off in `home/neovim.nix` at the operator's request, no task having asked for
-  it. Behaviour -- spec: this makes task 1.4 true rather than changing what it
-  claims. `vi` and `vim` resolved to neovim while those aliases and
-  `programs.vim` were all enabled, so the live `config/vim/extra.vimrc` the
-  task created was read by nothing. All three names come from the vim package's
-  own symlinks and now reach vim -- `EDITOR`, which `common.nix` sets to `vi`,
-  among them. Neovim is reached as `nvim`, and its diff mode as `nvim -d`.
