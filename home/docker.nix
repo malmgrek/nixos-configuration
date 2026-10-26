@@ -11,10 +11,8 @@ in {
     };
   };
 
-  home-manager.users.${userName} = {
-    home.packages = with pkgs; [
-      docker
-      docker-compose
-    ];
-  };
+  users.users.${userName}.packages = with pkgs; [
+    docker
+    docker-compose
+  ];
 }

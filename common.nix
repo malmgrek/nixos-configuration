@@ -18,8 +18,10 @@ with lib; {
   nixpkgs.overlays = import ./overlays.nix;
   nixpkgs.config.allowUnfree = true;
 
+  # The only declaration of EDITOR, and nothing layers over it. Plain vim on
+  # purpose: nvim is the configured editor here.
   environment.sessionVariables = {
-    EDITOR = "vi";
+    EDITOR = "vim";
   };
 
   networking = {
@@ -190,8 +192,9 @@ with lib; {
 
     # Text editors
     kakoune
-    neovim
-    vim
+    # vim-full for `gvim`, which home/default.nix's mime associations open, and
+    # for +clipboard. Plain vim has neither.
+    vim-full
     xclip
 
     # Office suite

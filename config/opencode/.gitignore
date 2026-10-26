@@ -1,7 +1,8 @@
-# auth.json is joined with opencode's data directory rather than this one, so no
-# credential reaches here today. Excluded anyway, because this repository is
-# published and that join is a property of one version of one binary.
+# Credentials opencode writes beside its configuration, in a published
+# repository: service.json holds its local server's port and password, and
+# auth.json lands in opencode's data directory today but need not stay there.
 /auth.json
+/service.json
 
 # A plugin dependency tree opencode installs here on first run: 63 MB, and this
 # repository is published.

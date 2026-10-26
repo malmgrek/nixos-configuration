@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, pkgs, ... }:
 
 let
   tokyonightMoon = {
@@ -111,31 +111,38 @@ let
       };
     };
   };
-in {
-  home-manager.users.${config.customParams.userName} = {
-    programs = {
-      alacritty = {
-        enable = true;
-        settings = {
-          # Generated, not live: the format has no conditional, so the mode
-          # cannot be chosen when alacritty reads this.
-          colors = if config.lightMode.enable then doomOne.light else doomOne.dark;
-          font = {
-            normal = {
-              family = "monospace";
-              style = "Regular";
-            };
-            # Points, scaled by the pinned dpi.
-            size = 9.0;
-          };
-          window = {
-            padding = {
-              x = 4;
-              y = 4;
-            };
-          };
-        };
+  # Generated, not live: the format has no conditional, so the mode cannot be
+  # chosen when alacritty reads this. Alacritty's search path is
+  # $XDG_CONFIG_HOME only, with no system layer to carry the generated half, so
+  # the home directory links at this built file rather than at the working
+  # tree -- the one file 020 leaves generated. See design decision 9.
+  settings = (pkgs.formats.toml { }).generate "alacritty.toml" {
+    colors = if config.lightMode.enable then doomOne.light else doomOne.dark;
+    font = {
+      normal = {
+        family = "monospace";
+        style = "Regular";
+      };
+      # Points, scaled by the pinned dpi.
+      size = 10.0;
+    };
+    window = {
+      padding = {
+        x = 4;
+        y = 4;
       };
     };
   };
+
+in
+
+{
+
+  # Declared here rather than in dotfiles.nix: the rule names a store path only
+  # this module can produce. `systemd.user.tmpfiles` still finds every link.
+  systemd.user.tmpfiles.users.${config.customParams.userName}.rules = [
+    "d %h/.config/alacritty 0755 - - -"
+    "L+ %h/.config/alacritty/alacritty.toml - - - - ${settings}"
+  ];
+
 }

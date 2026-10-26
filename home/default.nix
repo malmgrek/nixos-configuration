@@ -5,7 +5,6 @@ in
 {
 
   imports = [
-    <home-manager/nixos>
     ./agent-jail.nix
     ./alacritty.nix
     ./ai.nix
@@ -13,9 +12,7 @@ in
     ./doom-emacs.nix
     ./dotfiles.nix
     ./neovim.nix
-    ./opencode.nix
     ./tmux.nix
-    ./vim.nix
     # ./virtualbox.nix
     ./xsession.nix
     ./zsh.nix
@@ -26,139 +23,105 @@ in
   # environment.sessionVariables (pam-environment) are set earlier in the login
   # process than environment.variables which are shell specific.
   environment.sessionVariables = {
-    # These are the defaults, and xdg.enable does set them, but due to load
-    # order, they're not set before environment.variables are set, which could
-    # cause race conditions.
+    # These are the XDG defaults, declared because nothing else sets them now
+    # that home-manager's xdg.enable is gone, and because pam_environment is
+    # read before any shell file -- so an X-launched process sees them too.
     XDG_CONFIG_HOME = "$HOME/.config";
     XDG_CACHE_HOME = "$HOME/.cache";
     XDG_DATA_HOME = "$HOME/.local/share";
+    XDG_STATE_HOME = "$HOME/.local/state";
     XDG_BIN_HOME = "$HOME/.local/bin";
 
     # Enables installing with `npm install -g` and the sources go to $HOME/.npm-global
     NPM_CONFIG_PREFIX = "$HOME/.npm-global";
   };
 
-  # By default, Home Manager uses a private pkgs instance that is configured via
-  # the home-manager.users.<name>.nixpkgs options. To instead use the global pkgs
-  # that is configured via the system level nixpkgs options, set
+  users.users.${nixosConfig.customParams.userName}.packages =
+    with pkgs;
+    let
+      tex = (
+        texlive.combine {
+          inherit (texlive)
+            scheme-medium
+            wrapfig
+            ulem
+            amsmath
+            hyperref
+            capt-of
+            metafont
+            beamer
+            ;
+        }
+      );
+    in
+    [
+      # AI tools
+      unstable.copilot-language-server
+      unstable.llm
 
-  home-manager.useGlobalPkgs = true;
+      azure-cli # Azure CLI
+      awscli2 # AWS CLI
+      broot # Directory tree viewer
+      chromium # MS Teams works better in chromium
+      firefox # Second engine, for testing local services
+      dbeaver-bin # Database client
+      pass # Password store
+      age  # Encryption tool
+      spotify
+      tex
+      tor-browser # Tor browser
+      # unstable.code-cursor      # AI powered code editor
+      unstable.signal-desktop # Signal messaging app desktop client
+    ];
 
-  # Setting above to `true` saves an extra Nixpkgs evaluation, adds consistency,
-  # and removes the dependency on NIX_PATH, which is otherwise used for
-  # importing Nixpkgs.
-
-  home-manager.users.${nixosConfig.customParams.userName} = { config, ... }: {
-    xdg.enable = true;
-
-    home.sessionPath = [ "$HOME/.npm-global/bin" ];
-    # Handles .npm-global creation if it doesn't exist yet
-    home.file.".npm-global/.keep".text = ""; 
-
-    # This value determines the Home Manager release that your
-    # configuration is compatible with. This helps avoid breakage
-    # when a new Home Manager release introduces backwards
-    # incompatible changes.
-    #
-    # You can update Home Manager without changing this value. See
-    # the Home Manager release notes for a list of state version
-    # changes in each release.
-    home.stateVersion = nixosConfig.system.stateVersion;
-    home.packages =
-      with pkgs;
-      let
-        tex = (
-          texlive.combine {
-            inherit (texlive)
-              scheme-medium
-              wrapfig
-              ulem
-              amsmath
-              hyperref
-              capt-of
-              metafont
-              beamer
-              ;
-          }
-        );
-      in
-      [
-        # AI tools
-        unstable.copilot-language-server
-        unstable.llm
-
-        azure-cli # Azure CLI
-        awscli2 # AWS CLI
-        broot # Directory tree viewer
-        chromium # MS Teams works better in chromium
-        dbeaver-bin # Database client
-        pass # Password store
-        age  # Encryption tool
-        spotify
-        tex
-        tor-browser # Tor browser
-        # unstable.code-cursor      # AI powered code editor
-        unstable.signal-desktop # Signal messaging app desktop client
-      ];
-    programs = {
-      firefox = {
-        enable = true;
-        configPath = "${config.xdg.configHome}/mozilla/firefox";
-        profiles."${nixosConfig.customParams.userName}.default" = {
-          isDefault = true;
-          name = "${nixosConfig.customParams.userName}.default";
-          settings = {
-            "browser.startup.homepage" = "https://nixos.org";
-            "browser.uidensity" = 1;
-          };
-        };
-      };
-      # vscode = {
-      #   enable = true;
-      #   profiles.default.extensions = with pkgs.unstable.vscode-extensions; [
-      #     github.copilot
-      #     github.copilot-chat
-      #     ms-azuretools.vscode-containers
-      #     enkia.tokyo-night
-      #   ];
-      #   profiles.default.userSettings = {
-      #     "workbench.colorTheme" = "Tokyo Night Storm";
-      #     "terminal.integrated.fontFamily" = "JetBrains Mono";
-      #     "editor.fontFamily" = "JetBrains Mono";
-      #     "chat.fontFamily" = "JetBrains Mono";
-      #     "chat.customAgentInSubagent.enabled" = "true";
-      #   };
-      # };
+  # Each type is named because xdg-open does not walk shared-mime-info's
+  # subclass chain: text/x-python would not inherit text/plain's entry.
+  # These land in /etc/xdg/mimeapps.list. A ~/.config/mimeapps.list overrides it
+  # per MIME type, not wholesale, and any such file is one an application wrote
+  # in place rather than a home-manager leftover -- so it may hold live
+  # associations and is to be read, not deleted.
+  xdg.mime.defaultApplications =
+    lib.genAttrs [
+      "application/json"
+      "application/toml"
+      "application/x-shellscript"
+      "application/yaml"
+      "text/css"
+      "text/markdown"
+      "text/plain"
+      "text/x-csrc"
+      "text/x-emacs-lisp"
+      "text/x-lua"
+      "text/x-python"
+      "text/x-tex"
+    ] (_: "gvim.desktop")
+    // lib.genAttrs [
+      "image/gif"
+      "image/jpeg"
+      "image/png"
+    ] (_: "feh.desktop")
+    // {
+      "application/pdf" = "mupdf.desktop";
+      "inode/directory" = "pcmanfm.desktop";
     };
-    # Each type is named because xdg-open does not walk shared-mime-info's
-    # subclass chain: text/x-python would not inherit text/plain's entry.
-    xdg.mimeApps = {
-      enable = true;
-      defaultApplications =
-        lib.genAttrs [
-          "application/json"
-          "application/toml"
-          "application/x-shellscript"
-          "application/yaml"
-          "text/css"
-          "text/markdown"
-          "text/plain"
-          "text/x-csrc"
-          "text/x-emacs-lisp"
-          "text/x-lua"
-          "text/x-python"
-          "text/x-tex"
-        ] (_: "gvim.desktop")
-        // lib.genAttrs [
-          "image/gif"
-          "image/jpeg"
-          "image/png"
-        ] (_: "feh.desktop")
-        // {
-          "application/pdf" = "mupdf.desktop";
-          "inode/directory" = "pcmanfm.desktop";
-        };
-    };
-  };
+
+  # Kept as a placeholder: these are home-manager option names and would need
+  # rewriting for NixOS, or for a live dotfile, if vscode is ever enabled.
+  # programs.vscode = {
+  #   enable = true;
+  #   profiles.default.extensions = with pkgs.unstable.vscode-extensions; [
+  #     github.copilot
+  #     github.copilot-chat
+  #     ms-azuretools.vscode-containers
+  #     enkia.tokyo-night
+  #   ];
+  #   profiles.default.userSettings = {
+  #     "workbench.colorTheme" = "Tokyo Night Storm";
+  #     "terminal.integrated.fontFamily" = "JetBrains Mono";
+  #     "editor.fontFamily" = "JetBrains Mono";
+  #     "chat.fontFamily" = "JetBrains Mono";
+  #     "chat.customAgentInSubagent.enabled" = "true";
+  #   };
+  # };
 
 }

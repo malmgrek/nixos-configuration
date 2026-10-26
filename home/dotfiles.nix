@@ -6,6 +6,8 @@ let
 
   # A configuration directory reached by reference rather than by copy, so the
   # file an application opens and the file in the working tree are one file.
+  # Alacritty is the exception and declares its own rule in alacritty.nix: its
+  # file is generated, so the link points into the store instead.
   #
   # "L+" replaces whatever occupies the path, removing a directory recursively:
   # the first switch after a directory is listed here takes out whatever the
@@ -34,6 +36,13 @@ in
     "nixpkgs"
     "nvim"
     "opencode"
+    "tmux"
+    "zsh"
+  ]
+  ++ [
+    # NPM_CONFIG_PREFIX points `npm install -g` here, and nothing else creates
+    # it. A directory rather than a link: npm owns the contents.
+    "d %h/.npm-global 0755 - - -"
   ];
 
 }

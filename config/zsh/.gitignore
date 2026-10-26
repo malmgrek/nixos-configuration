@@ -1,0 +1,5 @@
+# ZDOTDIR is this directory, so zsh's completion dump lands here. It is a cache
+# keyed to the installed zsh and its fpath, regenerated on demand, and this
+# repository is published.
+/.zcompdump*
+/.zcompcache/

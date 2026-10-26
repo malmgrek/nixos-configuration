@@ -29,8 +29,7 @@ read from the working tree at runtime instead of being copied into the Nix
 store, and the links that do that name an absolute path: `/home/<user>/NixOS`,
 unless `customParams.repoPath` says otherwise. Check the repository out there or
 set that option to match, or the applications concerned lose their
-configuration -- most falling back to their own defaults, vim instead reporting
-the file as missing.
+configuration, falling back to their own defaults.
 
 ## Description
 
@@ -42,26 +41,32 @@ I have tried to compose the configurations so that it is
 - _I can configure my work laptop with it_.
 
 While "developing" the configuration, at the same time I took a shot at
-including all my dotfiles in it. I have used the [Home
+including all my dotfiles in it. This used to go through [Home
 Manager](https://github.com/nix-community/home-manager "Link to Home Manager
-GitHub project") which is a system for managing a Linux user environment (e.g.
-Emacs/Vim configurations). All related configs are defined under `./home/` and
-can be disabled completely from the configuration.
+GitHub project"), a system for managing a Linux user environment, but no longer:
+the per-user modules under `./home/` are plain NixOS modules now, and most of
+the dotfiles they used to generate are live files in `./config/`. Cloning this
+repository therefore needs no home-manager channel.
 
 ### Dotfiles
 
-Four directories under `./config/` reach `~/.config` as symlinks into this
-repository, declared in `home/dotfiles.nix`: `doom`, `nixpkgs`, `nvim` and
-`opencode`. Editing a file in one of them takes effect when its application next
-reads it, with no rebuild in between. `config/vim/extra.vimrc` is live as well,
-sourced by path from the generated vimrc rather than linked.
+Six directories under `./config/` reach `~/.config` as symlinks into this
+repository, declared in `home/dotfiles.nix`: `doom`, `nixpkgs`, `nvim`,
+`opencode`, `tmux` and `zsh`. Editing a file in one of them takes effect when
+its application next reads it, with no rebuild in between.
+
+For zsh and tmux the live file is the second of two layers: `/etc/zshrc` and
+`/etc/tmux.conf` carry what cannot be live -- the plugin paths, which exist
+only once the system is built -- and each tool reads them before the file in
+this repository.
 
 Everything else under `./config/` still needs a rebuild. `config/i3`,
 `config/rofi`, `config/i3status-rs` and `config/dunst` are copied into the store
 and delivered through `/etc` rather than the home directory, dunst's with its
-notification geometry substituted in as a pixel constant. Alacritty's, tmux's
-and zsh's configurations are generated outright -- the first two embed the
-colour mode, the third paths into the store.
+notification geometry substituted in as a pixel constant. Alacritty's is the
+one configuration still generated outright: it embeds the colour mode, and its
+search path offers no system layer to carry that, so the home directory links
+at the built file rather than at the working tree.
 
 What the live arrangement costs is worth knowing. A successful `nixos-rebuild
 build` no longer proves the desktop is configured correctly, and a rollback does
@@ -76,8 +81,8 @@ retracts them, so the leftover has to be deleted by hand.
 
 ### AI development tools
 
-`home/ai.nix` installs the Claude Code, Copilot CLI and OpenSpec
-executables, together with the Playwright tooling and `rtk`.
+`home/ai.nix` installs the Claude Code, Copilot CLI, opencode, OpenSpec and
+pi executables, together with the Playwright tooling and `rtk`.
 
 ### Desktop environment
 
@@ -107,12 +112,13 @@ TODO: Write an own version for reference.
         power menu. Lock with screen saver and lock in power save mode (that
         still enable running agents + remote claude session)
 - [ ] Running a wake laptop with the lid closed
-- [ ] Get rid of Home Manager
+- [x] Get rid of Home Manager
 - [ ] VirtualBox
 - [ ] Color switching without a rebuild: the mode is still a NixOS option, so
       flipping it costs a rebuild and a re-login even though the dotfiles that
       follow it are live
-- [ ] Move alacritty and tmux to live dotfiles, once colour switching no longer
-      needs interpolating -- that is the only reason either is generated
+- [ ] Move alacritty to a live dotfile, once colour switching no longer needs
+      interpolating -- that and the lack of a system layer are the two reasons
+      it is still generated
 - [ ] Installation instructions
 - [ ] CUDA

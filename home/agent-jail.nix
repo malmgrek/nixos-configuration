@@ -127,7 +127,7 @@ in
   #
   # Importing this module is the on switch; drop it from `home/default.nix` to
   # turn the feature off, as with the other optional modules there.
-  home-manager.users.${userName}.home.packages = [
+  users.users.${userName}.packages = [
 
     (mkJailedAgent {
       name = "jailed-claude";
