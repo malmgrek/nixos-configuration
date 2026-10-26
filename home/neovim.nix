@@ -17,6 +17,12 @@
       withPython3 = true;
       withRuby = true;
 
+      # The provider paths reach neovim as a wrapper `--cmd` argument instead of
+      # being written to ~/.config/nvim/init.lua, which is this repository's own
+      # file reached through the live link in dotfiles.nix. Without this,
+      # home-manager's activation refuses to clobber it and fails.
+      sideloadInitLua = true;
+
       extraPackages = with pkgs; [
         # Core build tools
         gcc

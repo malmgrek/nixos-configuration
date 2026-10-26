@@ -25,6 +25,15 @@
   tests/trusted-users.nix grants the Nix daemon's trust by each route that
   assertion reads, and requires it to be the one assertion that fails. It is a
   Nix expression, evaluated by hand; every attribute must be true.
+- **Check the running system rather than reasoning about it.** A successful
+  `nix-instantiate` proves the configuration evaluates, never that the machine
+  behaves: a value read at startup, a symlink's target and an application's own
+  write-back are all invisible to it and all one command away. Where a claim is
+  about runtime, name that command and ask for its output early rather than
+  verifying at the end. A conclusion drawn from module source or from a comment
+  in this repository is a guess with a citation -- comments here have outlived
+  the behaviour they described, and a check that runs is worth more than a
+  second reading of the diff.
 - **Read the diff before this repository is pushed.** It is published, and
   pushes are rare enough that a push covers months of work. Read
   `git log -p 321a591..master` -- `321a591` is the published tip -- against the

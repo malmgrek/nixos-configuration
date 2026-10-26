@@ -114,7 +114,5 @@ TODO: Write an own version for reference.
       follow it are live
 - [ ] Move alacritty and tmux to live dotfiles, once colour switching no longer
       needs interpolating -- that is the only reason either is generated
-- [ ] Review the Firefox setup: two preferences and a profile path, written
-      years ago and never revisited
 - [ ] Installation instructions
 - [ ] CUDA
