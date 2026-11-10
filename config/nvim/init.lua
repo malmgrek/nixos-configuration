@@ -20,3 +20,6 @@ vim.g.maplocalleader = "\\"
 require("config.lazy")
 require("config.options")
 -- require("config.keymaps")
+
+-- Exit terminal mode easily with Escape
+vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { desc = 'Exit terminal mode' })
