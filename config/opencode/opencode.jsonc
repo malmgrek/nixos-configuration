@@ -1,7 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "default_agent": "spar-and-plan",
-  "model": "github-copilot/claude-sonnet-4.5",
+  "model": "herostratos/qwen3.6-35b-a3b",
   "share": "disabled",
 
   "permission": {
@@ -20,5 +19,62 @@
   "compaction": {
     "auto": true,
     "prune": true
+  },
+
+  "provider": {
+    // Required. A provider id of your choosing. It prefixes every model id on
+    // the command line: `opencode run --model herostratos/qwen3.6-35b-a3b`.
+    "herostratos": {
+      // Optional. A label for OpenCode's own provider list.
+      "name": "herostratos",
+      // Required. The AI SDK package OpenCode loads to speak to the runner.
+      // Which package depends on the wire shape, not on the runner's name:
+      // this one speaks the OpenAI Responses API, which is what the base URL
+      // below points at. `@ai-sdk/openai-compatible` speaks chat completions,
+      // which this runner also serves.
+      "npm": "@ai-sdk/openai",
+      "options": {
+        // Required. This machine's own end of the SSH forward -- not the
+        // host's address, which nothing answers on. The package appends the
+        // endpoint path to it, so the `/v1` belongs here.
+        "baseURL": "http://127.0.0.1:8000/v1",
+        // "apiKey": "<your-api-key-here>"
+      },
+      // Required. One entry per model, written down rather than discovered:
+      // the runner's listing also names models it is not serving and has not
+      // downloaded, so a client left to choose can pick one that cannot
+      // answer. All three below are downloaded; the runner serves one at a
+      // time, and switching which needs no edit here.
+      "models": {
+        "qwen3.6-35b-a3b": {
+          // Optional. A readable label; the key above is the id that matters.
+          "name": "Qwen3.6-35B-A3B 4-bit (herostratos)",
+          "limit": {
+            // Optional but wanted. The context the runner was started with
+            // for this model. Omit it and OpenCode falls back to 200000,
+            // which its own docs call a fallback rather than detection.
+            "context": 262144,
+            // Optional. A ceiling of the client's own: no output cap from the
+            // runner is known.
+            "output": 32768
+          }
+        },
+        "qwen3.8-27b:4bit": {
+          "name": "Qwen3.8-27B 4-bit (herostratos)",
+          "limit": {
+            "context": 172032,
+            "output": 32768
+          }
+        },
+        "flint:4bit": {
+          "name": "Flint 40B-A2.5B 4-bit (herostratos)",
+          "limit": {
+            "context": 262144,
+            "output": 32768
+          }
+        }
+      }
+    }
   }
+
 }

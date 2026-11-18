@@ -81,7 +81,7 @@
 (use-package! gptel
   :config
   (setq gptel-default-mode 'markdown-mode
-        gptel-use-tools t
+        gptel-use-tools nil ; gptel defaults to t; nil keeps the model from calling any tool
         gptel-api-key (my/read-openai-api-key)
         gptel-model 'claude-haiku-4.5
         gptel-backend (gptel-make-gh-copilot "Copilot"))
@@ -91,24 +91,49 @@
     :models '(qwen2.5-coder:3b deepseek-coder-v2:16b))
   )
 
-(use-package! gptel-agent  ;; Agentic features for gptel
-  :config
-  (gptel-agent-update))  ;Read files from agents directories
-
-;; Github Copilot completion
+;; Github Copilot completion: off everywhere, opted into per buffer with `SPC t C'.
 ;; NOTE: Requires `copilot-language-server` to be installed on system
+(defvar my/copilot-secret-file-regexp
+  (rx (or "/.env" "authinfo" "netrc" "secret" "credential" "npmrc" "pypirc"
+          "/.ssh/" "/.gnupg/" "/.password-store/" "/.aws/" "/.kube/" "/.docker/" "/gh/hosts"
+          "/id_rsa" "/id_ed25519" "/id_ecdsa" "/id_dsa"
+          (seq "." (or "gpg" "age" "pem" "key" "p12" "pfx" "kdbx") eos)))
+  "Files Copilot must never see, even on explicit opt-in.")
+
+(defun my/copilot-refuse-secrets (orig &optional arg)
+  "Refuse to enable `copilot-mode' in files that look like secrets.
+Enabling sends the whole buffer to the server, so the guard sits on the mode
+itself: M-x, `SPC t C' and `global-copilot-mode' all pass through it."
+  (let ((enable (cond ((eq arg 'toggle) (not (bound-and-true-p copilot-mode)))
+                      ((and (numberp arg) (< arg 1)) nil)
+                      (t t)))
+        (file (buffer-file-name (buffer-base-buffer)))
+        (case-fold-search t))
+    (when (and enable file
+               (string-match-p my/copilot-secret-file-regexp (file-truename file)))
+      (user-error "Copilot refused: %s looks like a secret file" file))
+    (funcall orig arg)))
+
+(advice-add 'copilot-mode :around #'my/copilot-refuse-secrets)
+
+(defun my/copilot-require-mode (&rest _)
+  "Refuse Copilot's manual commands unless `copilot-mode' is on.
+They talk to the server without the mode, which would skip the guard above."
+  (unless (bound-and-true-p copilot-mode)
+    (user-error "Copilot is off in this buffer; turn it on with SPC t C")))
+
+(dolist (cmd '(copilot-complete copilot-panel-complete))
+  (advice-add cmd :before #'my/copilot-require-mode))
+
+(map! :leader :desc "Copilot in this buffer" "t C" #'copilot-mode)
+
 (use-package! copilot
-  :hook ((prog-mode
-          markdown-mode
-          org-mode
-          text-mode) . copilot-mode)
   :bind (:map copilot-completion-map
               ("<backtab>" . 'copilot-accept-completion)
               ("C-<iso-lefttab>" . 'copilot-accept-completion-by-word)
               ("C-n" . 'copilot-next-completion)
               ("C-p" . 'copilot-previous-completion))
   :config
-  ;; Disable company-mode auto-completion in text modes (prevent fallback)
   (add-to-list 'copilot-indentation-alist '(org-mode 2))
   (add-to-list 'copilot-indentation-alist '(markdown-mode 2))
   (add-to-list 'copilot-indentation-alist '(text-mode 2))

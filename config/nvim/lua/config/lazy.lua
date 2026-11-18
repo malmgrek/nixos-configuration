@@ -11,7 +11,7 @@ require("lazy").setup({
 		{ import = "lazyvim.plugins.extras.util.project" },
 		-- AI tools (the reason for switching!)
 		-- { import = "lazyvim.plugins.extras.ai.avante" },
-		{ import = "lazyvim.plugins.extras.ai.copilot" },
+		-- ai.copilot extra dropped: it loads copilot.lua on every file open; see plugins/copilot.lua
 		{ import = "lazyvim.plugins.extras.ai.copilot-chat" },
 		-- { import = "lazyvim.plugins.extras.ai.codeium" },  -- Alternative to Copilot
 		{ import = "lazyvim.plugins.extras.coding.blink" },

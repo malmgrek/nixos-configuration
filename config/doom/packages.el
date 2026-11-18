@@ -1,12 +1,11 @@
 ;; packages.el -*- lexical-binding: t; -*-
 
-;; GitHub Copilot
+;; GitHub Copilot (opt-in per buffer, see config.el)
 (package! copilot
   :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el")))
 
 ;; gptel
 (package! gptel :recipe (:nonrecursive t))
-(package! gptel-agent)
 
 ;; Ruff
 (package! lazy-ruff
