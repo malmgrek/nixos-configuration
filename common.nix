@@ -9,6 +9,8 @@
 
 with lib; {
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   imports = [
     # Introduces options that are assumed
     # available in all Nix modules

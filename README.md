@@ -103,22 +103,6 @@ for NixOS on a machine with an existing Windows installation.
 
 TODO: Write an own version for reference.
 
-## TODO
+## Roadmap
 
-- [ ] Notification on shell agent sessions
-- [ ] Suspend after a given time of inactivity (configurable)
-      also other good features for remote agentic work that saves display energy
-      - Screen saver is quite heavy. Would be nice to have more options in the
-        power menu. Lock with screen saver and lock in power save mode (that
-        still enable running agents + remote claude session)
-- [ ] Running a wake laptop with the lid closed
-- [x] Get rid of Home Manager
-- [ ] VirtualBox
-- [ ] Color switching without a rebuild: the mode is still a NixOS option, so
-      flipping it costs a rebuild and a re-login even though the dotfiles that
-      follow it are live
-- [ ] Move alacritty to a live dotfile, once colour switching no longer needs
-      interpolating -- that and the lack of a system layer are the two reasons
-      it is still generated
-- [ ] Installation instructions
-- [ ] CUDA
+See [ROADMAP.md](ROADMAP.md).
