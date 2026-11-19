@@ -76,9 +76,9 @@ goes in Purpose rather than in a requirement because it qualifies the whole
 capability, and it is written directly rather than through this change's delta
 because a delta carries requirements and not prose sections.
 
-**Put the SSID behind a click.** Another screenshot-time check is what
-already failed: the control was a comment asking a human to look at the bar,
-and a screenshot was committed anyway. Deleting the field would fix that but
+**Put the SSID behind a click.** Another screenshot-time check would rest on
+the same footing as the current control, a comment asking a human to look at
+the bar, which nothing enforces. Deleting the field would fix that but
 lose information the operator wants. The net block's `format_alt` toggles on
 every left click, so the field lives there instead: the bar at rest cannot be
 captured with it, and a freshly started bar is always at rest, which makes the

@@ -15,7 +15,8 @@ context: |
   may name a client, a client project, a person's name or address, or a network
   identifier such as an SSID. The operator's username and this machine's
   hostname, which a NixOS configuration must declare and which its directory
-  layout already publishes, are not what this forbids.
+  layout already publishes, are not what this forbids; nor is `herostratos`,
+  the operator's other machine and the local-LLM project named after it.
   A limitation may be stated only together with the reason it is accepted, which
   is what lets a spec say where a boundary stops. A gap that is not accepted but
   merely unfixed is named and pointed to, never described here -- and where no

@@ -169,7 +169,7 @@ file does not.
   `set-environment` keeps it ahead of `/etc/profiles/per-user/<name>` in PATH --
   pre-020 copies of every moved package shadow the new ones until
   `nix-env -e home-manager-path` removes it. Deleting the files home-manager
-  wrote does not.
+  wrote does not. Since removed: `nix-env -q` no longer lists it (2026-11-19).
 - **`programs.direnv` enables `nix-direnv` where home-manager's did not** ->
   accepted and desirable, though no task asked for it: `use nix` and `use flake`
   take the caching implementation and write `.direnv` gcroots into project

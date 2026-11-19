@@ -6,9 +6,8 @@ being a trusted user of it -- otherwise a session could make the root daemon
 act on its behalf, which Nix documents as root-equivalent. That premise is
 asserted nowhere: it is NixOS's default, and the operator is in `wheel`, so
 the usual `trusted-users = [ "@wheel" ]` would remove it silently. Separately,
-the status bar renders the WiFi SSID, which is why a committed screenshot once
-leaked it; the only control is a comment asking a human to check the bar
-before committing one.
+the status bar renders the WiFi SSID, and the only control is a comment asking
+a human to check the bar before committing a screenshot.
 
 ## What Changes
 

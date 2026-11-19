@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Check all tracked files are publishable in Github. Add to AGENTS.md.
+- [x] Check all tracked files are publishable in Github. Add to AGENTS.md.
 - [ ] VirtualBox
 - [ ] Color switching without a rebuild: the mode is still a NixOS option, so
       flipping it costs a rebuild and a re-login even though the dotfiles that

@@ -39,7 +39,11 @@
   `git log -p 321a591..master` -- `321a591` is the published tip -- against the
   publication rule in `openspec/config.yaml` before pushing. Use the literal
   SHA, not `origin/master..master`: the remote-tracking form needs a working
-  fetch and the history rewrite dropped those refs.
+  fetch and the history rewrite dropped those refs. Before that read, run
+  `tests/publishable.sh` over the whole tracked tree and judge each location it
+  prints. It never prints matched text; keep it that way. Text that refers to
+  something already public must not say where it is: name a defect in pushed
+  history, never its file or what it shows.
 - **Keep inline comments short.** One or two sentences, and only content the
   code cannot show: why a decision went the way it did, or a detail whose
   absence would mislead the next reader. Never restate what the line below

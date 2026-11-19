@@ -76,8 +76,8 @@
   branch and the goal unmet. Then commit any outstanding artifact edits and run
   `nix-shell -p git-filter-repo --run 'git filter-repo --path plans/ --invert-paths --force'`,
   then re-add `origin` at `git@github.com:malmgrek/nixos-configuration.git`.
-  `--path plans/` and nothing else: `resources/screenshot.png` lives in pushed
-  history and rewriting it would turn a fast-forward into a force-push.
+  `--path plans/` and nothing else: rewriting anything already in pushed
+  history would turn a fast-forward into a force-push.
   `--force` is required because this is not a fresh clone, and Task 1.1's
   backup is what makes overriding that check reasonable -- do not run this if
   that task was skipped. `filter-repo` removes the remote on purpose; its
