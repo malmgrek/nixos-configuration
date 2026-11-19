@@ -19,7 +19,7 @@ let
     { name, package, exe, state }:
     pkgs.writeShellApplication {
       inherit name;
-      runtimeInputs = [ pkgs.bubblewrap ];
+      runtimeInputs = [ pkgs.bubblewrap pkgs.coreutils ];
       text = ''
         stateDir="$HOME/.local/state/agent-jail/${state}"
         mkdir -p "$stateDir"
@@ -33,6 +33,51 @@ let
         if [ -d "$uvPythonDir" ]; then
           uvPythonBind=(--ro-bind "$uvPythonDir" "$uvPythonDir")
         fi
+
+        # Leading --reveal/--reveal-rw flags bind further directories. Each is
+        # judged and bound through one open descriptor, so a path swapped for a
+        # symlink after the check cannot change what gets bound.
+        refuse() { echo "''${0##*/}: refusing to reveal $1: $2" >&2; exit 1; }
+        home=$(realpath -e "$HOME")
+        project=$(pwd -P)
+        revealFds=(); revealModes=(); revealPaths=(); revealDepths=()
+        while [ $# -gt 0 ]; do
+          case "$1" in
+            --reveal) mode=--ro-bind-fd ;;
+            --reveal-rw) mode=--bind-fd ;;
+            *) break ;;
+          esac
+          [ $# -ge 2 ] || refuse "(nothing)" "$1 needs a directory"
+          [ -d "$2" ] || refuse "$2" "not an existing directory"
+          exec {fd}<"$2"
+          path=$(readlink "/proc/$$/fd/$fd")
+          [ -d "/proc/$$/fd/$fd" ] || refuse "$2" "not a directory"
+          case "$path" in
+            "$home"/*) ;;
+            *) refuse "$2" "resolves to $path, not inside $home" ;;
+          esac
+          case "/''${path#"$home"/}" in
+            */.*) refuse "$2" "resolves to $path, which has a hidden component" ;;
+          esac
+          case "$path/" in
+            "$project"/*) refuse "$2" "resolves to $path, inside the project" ;;
+          esac
+          slashes=''${path//[!\/]/}
+          revealFds+=("$fd"); revealModes+=("$mode"); revealPaths+=("$path")
+          revealDepths+=("''${#slashes}")
+          shift 2
+        done
+
+        # Shallowest first, so the most specific reveal wins; the project is
+        # bound after all of them so it stays writable under a revealed parent.
+        revealBinds=()
+        for depth in $(printf '%s\n' "''${revealDepths[@]}" | sort -nu); do
+          for i in "''${!revealFds[@]}"; do
+            if [ "''${revealDepths[$i]}" = "$depth" ]; then
+              revealBinds+=("''${revealModes[$i]}" "''${revealFds[$i]}" "''${revealPaths[$i]}")
+            fi
+          done
+        done
 
         # /bin, /usr and /lib64 are NixOS's FHS shims, which imperative projects
         # need: `#!/usr/bin/env` and `#!/bin/sh` shebangs, and the nix-ld loader
@@ -58,6 +103,7 @@ let
           --ro-bind "$HOME/.local/state/nix/profile" "$HOME/.local/state/nix/profile" \
           "''${uvPythonBind[@]}" \
           --setenv NIX_REMOTE daemon \
+          "''${revealBinds[@]}" \
           --bind "$PWD" "$PWD" \
           --chdir "$PWD" \
           -- ${lib.getExe' package exe} "$@"

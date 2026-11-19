@@ -84,6 +84,15 @@ retracts them, so the leftover has to be deleted by hand.
 `home/ai.nix` installs the Claude Code, Copilot CLI, opencode, OpenSpec and
 pi executables, together with the Playwright tooling and `rtk`.
 
+`home/agent-jail.nix` adds `jailed-*` variants that confine a session to the
+directory it was launched from. Leading flags show it further directories at
+their real paths: `--reveal <dir>` read-only, `--reveal-rw <dir>` writable, as
+in `jailed-claude --reveal ~/Code/my/lib`. A revealed path, after resolving
+symlinks, must be a directory under the home directory, not the home directory
+itself, with no hidden component, and outside the project; anything else aborts
+the launch. The jail only makes the directory present -- add it to the agent
+yourself, e.g. with Claude Code's `/add-dir`.
+
 ### Desktop environment
 
 Currently I use an i3 based desktop environment that is included in the configuration as a module.

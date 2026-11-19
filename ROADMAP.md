@@ -1,13 +1,6 @@
 # Roadmap
 
-- [ ] Notification on shell agent sessions
-- [ ] Suspend after a given time of inactivity (configurable)
-      also other good features for remote agentic work that saves display energy
-      - Screen saver is quite heavy. Would be nice to have more options in the
-        power menu. Lock with screen saver and lock in power save mode (that
-        still enable running agents + remote claude session)
-- [ ] Running a wake laptop with the lid closed
-- [x] Get rid of Home Manager
+- [ ] Check all tracked files are publishable in Github. Add to AGENTS.md.
 - [ ] VirtualBox
 - [ ] Color switching without a rebuild: the mode is still a NixOS option, so
       flipping it costs a rebuild and a re-login even though the dotfiles that

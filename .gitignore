@@ -10,3 +10,6 @@ backups/
 # machine's threat model and named an external client, so a folder of this
 # shape must never enter a published history. Removing this line re-opens that.
 plans/
+
+# Left behind only if tests/reveal.sh is killed before its cleanup runs.
+tests/reveal-fixture/
