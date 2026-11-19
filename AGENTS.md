@@ -36,10 +36,10 @@
   second reading of the diff.
 - **Read the diff before this repository is pushed.** It is published, and
   pushes are rare enough that a push covers months of work. Read
-  `git log -p 321a591..master` -- `321a591` is the published tip -- against the
-  publication rule in `openspec/config.yaml` before pushing. Use the literal
-  SHA, not `origin/master..master`: the remote-tracking form needs a working
-  fetch and the history rewrite dropped those refs. Before that read, run
+  `git log -p origin/master..master` against the publication rule in
+  `openspec/config.yaml` before pushing. A push updates `origin/master`
+  locally, so it stays current without a fetch; if it is missing, the command
+  fails rather than showing an empty diff. Before that read, run
   `tests/publishable.sh` over the whole tracked tree and judge each location it
   prints. It never prints matched text; keep it that way. Text that refers to
   something already public must not say where it is: name a defect in pushed

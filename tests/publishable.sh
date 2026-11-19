@@ -11,7 +11,7 @@ hits=0
 scan() {
   local name=$1 pattern=$2 out status
   # The matched lines stay in the variable; only path:line reaches the terminal.
-  out=$(git grep -nIP -e "$pattern" -- . ':!config/nvim/lazy-lock.json')
+  out=$(git grep -nIP -e "$pattern" -- . ':!config/nvim/lazy-lock.json' ':!tests/publishable.sh')
   status=$?
   # git grep exits 1 for no match; anything above that is an error, which must
   # not read as a clean result.
